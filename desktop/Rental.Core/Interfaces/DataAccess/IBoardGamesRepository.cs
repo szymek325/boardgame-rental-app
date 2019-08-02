@@ -7,9 +7,9 @@ namespace Rental.Core.Interfaces.DataAccess
 {
     public interface IBoardGamesRepository
     {
-        IQueryable<BoardGame> GetAll();
+        IEnumerable<BoardGame> GetAll();
         IEnumerable<BoardGame> GetAllAvailableForRental();
-        BoardGame Get(int? id);
+        Task<BoardGame> GetAsync(int? id);
         Task AddAsync(BoardGame entity);
         void Remove(BoardGame entity);
         void Update(BoardGame entity);

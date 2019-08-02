@@ -7,7 +7,7 @@ namespace Rental.Core.Interfaces.DataAccess
     public interface IClientsRepository
     {
         IEnumerable<Client> GetAll();
-        Client Get(int? id);
+        Task<Client> GetAsync(int? id);
         Task AddAsync(Client entity);
         void Remove(Client entity);
         void Update(Client entity);
