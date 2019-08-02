@@ -10,6 +10,6 @@ namespace Rental.Core.Entities
         public BoardGame BoardGame { get; set; }
         public Client Client { get; set; }
         public Status Status { get; set; }
-        public float PaymentAmount { get; set; }
+        public float PaidMoney { get; set; }
     }
 }
