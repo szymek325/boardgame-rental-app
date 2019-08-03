@@ -22,6 +22,10 @@ namespace Rental.DataAccess.Context
                 modelBuilder.Entity(
                     entityType.Name,
                     x => { x.Property(nameof(BaseEntity.CreationTime)).HasDefaultValue(DateTime.UtcNow); });
+
+            modelBuilder.Entity<BoardGame>().HasKey(x => x.Id);
+            modelBuilder.Entity<GameRental>().HasKey(x => x.Id);
+            modelBuilder.Entity<Client>().HasKey(x => x.Id);
         }
     }
 }
