@@ -26,6 +26,11 @@ namespace Rental.DataAccess.Context
             modelBuilder.Entity<BoardGame>().HasKey(x => x.Id);
             modelBuilder.Entity<GameRental>().HasKey(x => x.Id);
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<Client>().HasData(
+                new Client {Id = 1, FirstName = "mat"},
+                new Client {Id = 2, FirstName = "test2"}
+            );
         }
     }
 }

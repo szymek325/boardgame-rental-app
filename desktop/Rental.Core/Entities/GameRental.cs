@@ -1,4 +1,5 @@
-﻿using Rental.Core.Models;
+﻿using System;
+using Rental.Core.Models;
 
 namespace Rental.Core.Entities
 {
@@ -11,5 +12,14 @@ namespace Rental.Core.Entities
         public Client Client { get; set; }
         public Status Status { get; set; }
         public float PaidMoney { get; set; }
+
+        public float GetMoneyToPay()
+        {
+            if (BoardGame == null)
+                throw new ArgumentException(nameof(BoardGame));
+            var rentDays = (DateTime.UtcNow - CreationTime).Days;
+            var payment = rentDays * BoardGame.PricePerDay;
+            return payment;
+        }
     }
 }
