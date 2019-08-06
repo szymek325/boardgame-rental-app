@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.VisualBasic.ApplicationServices;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.WPF.View;
 
 namespace Rental.WPF
 {
@@ -16,9 +17,10 @@ namespace Rental.WPF
         public MainWindow(IUnitOfWork unitOfWork)
         {
             InitializeComponent();
-            _unitOfWork = unitOfWork;
-            var users = _unitOfWork.ClientsRepository.GetAll().ToList();
-            Users.ItemsSource = users;
+            //_unitOfWork = unitOfWork;
+            //var users = _unitOfWork.ClientsRepository.GetAll().ToList();
+            //Users.ItemsSource = users;
+            //this.Content = new ClientsPage();
         }
 
         public MainWindow()
@@ -28,7 +30,7 @@ namespace Rental.WPF
 
         private void RandomNumber_Click(object sender, RoutedEventArgs e)
         {
-            MyTextBox.Text = "dsadsadsa";
+            //MyTextBox.Text = "dsadsadsa";
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -38,7 +40,7 @@ namespace Rental.WPF
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var users = _unitOfWork.ClientsRepository.GetAll().ToList();
-            Users.ItemsSource = users;
+            //Users.ItemsSource = users;
         }
     }
 }

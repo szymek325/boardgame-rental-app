@@ -6,17 +6,5 @@
         xmlns:local="clr-namespace:Rental.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button x:Name="MyButton" Content="Button" HorizontalAlignment="Left" Margin="45,72,0,0"
-                VerticalAlignment="Top" Click="RandomNumber_Click" />
-        <TextBox x:Name="MyTextBox" HorizontalAlignment="Left" Height="23" Margin="378,111,0,0" Text="TextBox"
-                 TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged" />
-        <ListView x:Name="Users" Margin="86,196,86,53.04" SelectionChanged="ListView_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="FirstName" Width="120" DisplayMemberBinding="{Binding FirstName}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+    <Frame Source="ClientsPage.xaml"/>
 </Window>
