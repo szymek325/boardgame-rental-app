@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.View.Clients
@@ -8,18 +9,11 @@ namespace Rental.WPF.View.Clients
     /// </summary>
     public partial class AddClientWindow : Window
     {
-        private readonly AddClientViewModel _viewModel;
-
         public AddClientWindow(AddClientViewModel viewModel)
         {
+            if (viewModel == null) throw new ArgumentNullException(nameof(viewModel));
             InitializeComponent();
             DataContext = viewModel;
-        }
-
-        public AddClientWindow()
-        {
-            InitializeComponent();
-            DataContext = new AddClientViewModel();
         }
     }
 }

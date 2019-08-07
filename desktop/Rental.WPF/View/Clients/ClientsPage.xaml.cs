@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
-using Rental.WPF.ViewModel;
+using Rental.WPF.ViewModel.Clients;
 
-namespace Rental.WPF.View
+namespace Rental.WPF.View.Clients
 {
     /// <summary>
     ///     Interaction logic for ClientsPage.xaml

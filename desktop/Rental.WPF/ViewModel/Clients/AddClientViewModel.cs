@@ -1,4 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using Rental.Core.Entities;
+using Rental.Core.Interfaces.DataAccess;
+using Rental.WPF.View.Clients;
 
 namespace Rental.WPF.ViewModel.Clients
 {
@@ -8,11 +11,18 @@ namespace Rental.WPF.ViewModel.Clients
 
         private string _lastName;
 
-        public AddClientViewModel()
+
+        public AddClientViewModel(IUnitOfWork unitOfWork, ObservableCollection<Client> clients) // clients should be moved
         {
             ButtonClickCommand = new DelegateCommand<string>(
-                s => { Trace.WriteLine(FirstName); }, //Execute
-                s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) //CanExecute
+                s =>
+                {
+                    var user = new Client(FirstName, LastName, ContactNumber, EmailAddress);
+                    unitOfWork.ClientsRepository.Add(user);
+                    unitOfWork.SaveChanges();
+                    clients.Add(user); //should be moved
+                },
+                s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName)
             );
             ButtonClickCommand.RaiseCanExecuteChanged();
         }

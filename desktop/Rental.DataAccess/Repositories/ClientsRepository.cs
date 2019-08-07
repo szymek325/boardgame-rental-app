@@ -41,5 +41,10 @@ namespace Rental.DataAccess.Repositories
         {
             _rentalContext.Clients.Update(entity);
         }
+
+        public void Add(Client entity)
+        {
+            _rentalContext.Clients.Add(entity);
+        }
     }
 }

@@ -9,7 +9,7 @@ using Rental.Core.Entities;
 using Rental.Core.Interfaces.DataAccess;
 using Rental.WPF.View.Clients;
 
-namespace Rental.WPF.ViewModel
+namespace Rental.WPF.ViewModel.Clients
 {
     public class ClientsViewModel
     {
@@ -22,7 +22,8 @@ namespace Rental.WPF.ViewModel
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            Clients = new ObservableCollection<Client>(GetEmployees());
+            var b = GetEmployees();
+            Clients = new ObservableCollection<Client>(b);
             _clientsView = CollectionViewSource.GetDefaultView(Clients);
             _clientsView.Filter = o =>
             {
@@ -40,8 +41,12 @@ namespace Rental.WPF.ViewModel
             ButtonClickCommand = new DelegateCommand<string>(
                 s =>
                 {
-                    var subWindow = new AddClientWindow();
+                    var subWindow = new AddClientWindow(new AddClientViewModel(unitOfWork, Clients));
                     subWindow.Show();
+                    subWindow.Closed += delegate
+                    {
+                        _clientsView.Refresh();
+                    };
                 },
                 s => true
             );

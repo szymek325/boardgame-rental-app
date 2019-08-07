@@ -9,6 +9,7 @@ namespace Rental.Core.Interfaces.DataAccess
         IEnumerable<Client> GetAll();
         Task<Client> GetAsync(int? id);
         Task AddAsync(Client entity);
+        void Add(Client entity);
         void Remove(Client entity);
         void Update(Client entity);
     }
