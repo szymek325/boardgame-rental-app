@@ -19,15 +19,18 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label>First Name:</Label>
-            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,10" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,10"
+                     Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" />
             <Label Grid.Row="1" Grid.Column="0">Last Name:</Label>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"
+                     Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" />
             <Label Grid.Row="2" Grid.Column="0">E-mail:</Label>
             <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,10" />
             <Label Grid.Row="3" Grid.Column="0">ContactNumber:</Label>
             <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,10" />
         </Grid>
-        <Button Content="Confirm" HorizontalAlignment="Center" Margin="0,144,0,0" VerticalAlignment="Top" Command="{Binding ButtonClickCommand}"/>
+        <Button Content="Confirm" HorizontalAlignment="Center" Margin="0,144,0,0" VerticalAlignment="Top"
+                Command="{Binding ButtonClickCommand}" />
 
     </Grid>
 </Window>

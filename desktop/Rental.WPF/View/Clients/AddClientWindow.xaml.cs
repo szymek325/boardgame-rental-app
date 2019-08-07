@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Rental.WPF.ViewModel;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.View.Clients

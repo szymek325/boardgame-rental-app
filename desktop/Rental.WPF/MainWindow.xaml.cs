@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Navigation;
-using Rental.WPF.View;
 using Rental.WPF.View.Base;
 
 namespace Rental.WPF
@@ -16,7 +14,7 @@ namespace Rental.WPF
         {
             InitializeComponent();
             _menuPage = menuPage;
-            this.MyFrame.Content = menuPage;
+            MyFrame.Content = menuPage;
         }
     }
 }
