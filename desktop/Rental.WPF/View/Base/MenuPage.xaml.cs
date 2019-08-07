@@ -1,6 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.WPF.View.Clients;
+using Rental.WPF.View.Games;
+using Rental.WPF.View.Rentals;
 
 namespace Rental.WPF.View.Base
 {

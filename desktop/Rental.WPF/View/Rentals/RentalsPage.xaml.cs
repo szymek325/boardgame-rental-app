@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Rental.WPF.View
+namespace Rental.WPF.View.Rentals
 {
     /// <summary>
     ///     Interaction logic for RentalsPage.xaml

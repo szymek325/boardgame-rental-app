@@ -9,7 +9,11 @@ using Rental.Core.Configuration;
 using Rental.DataAccess;
 using Rental.WPF.View;
 using Rental.WPF.View.Base;
+using Rental.WPF.View.Clients;
+using Rental.WPF.View.Games;
+using Rental.WPF.View.Rentals;
 using Rental.WPF.ViewModel;
+using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF
 {
