@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using AutoMapper;
 using Rental.Core.Entities;
 using Rental.Core.Interfaces.DataAccess;
@@ -49,6 +53,9 @@ namespace Rental.WPF.ViewModel.Clients
                 s => true
             );
             ButtonClickCommand.RaiseCanExecuteChanged();
+
+            OnRowDoubleClick = new DelegateCommand<Client>(s => { Trace.WriteLine($"test row {s.FirstName}"); });
+
         }
 
         public DelegateCommand<string> ButtonClickCommand { get; }
@@ -80,5 +87,16 @@ namespace Rental.WPF.ViewModel.Clients
             var clients = _unitOfWork.ClientsRepository.GetAll();
             return clients.ToList();
         }
+        public DelegateCommand<Client> OnRowDoubleClick { get; }
+
+        //public void OnRowDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    var item = ((FrameworkElement)e.OriginalSource).DataContext as Client;
+        //    if (item != null)
+        //    {
+        //        MessageBox.Show("Item's Double Click handled!");
+        //    }
+        //}
+
     }
 }
