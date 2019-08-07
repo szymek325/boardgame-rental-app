@@ -15,17 +15,19 @@
         <ListView x:Name="ClientsGrid" Margin="19,78,19,10" ItemsSource="{Binding Clients}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="30"/>
-                    <GridViewColumn Header="FirstName" DisplayMemberBinding="{Binding FirstName}" Width="150"/>
-                    <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding LastName}" Width="150"/>
-                    <GridViewColumn Header="ContactNumber" DisplayMemberBinding="{Binding ContactNumber}" Width="150"/>
-                    <GridViewColumn Header="ContactNumber" DisplayMemberBinding="{Binding EmailAddress}" Width="150"/>
-                    <GridViewColumn Header="CreationTime" DisplayMemberBinding="{Binding CreationTime}" Width="100"/>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="30" />
+                    <GridViewColumn Header="FirstName" DisplayMemberBinding="{Binding FirstName}" Width="150" />
+                    <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding LastName}" Width="150" />
+                    <GridViewColumn Header="ContactNumber" DisplayMemberBinding="{Binding ContactNumber}" Width="150" />
+                    <GridViewColumn Header="ContactNumber" DisplayMemberBinding="{Binding EmailAddress}" Width="150" />
+                    <GridViewColumn Header="CreationTime" DisplayMemberBinding="{Binding CreationTime}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox HorizontalAlignment="Left" Margin="19,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="20" Text="{Binding Path=Filter, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox HorizontalAlignment="Left" Margin="19,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="230"
+                 Height="20" Text="{Binding Path=Filter, UpdateSourceTrigger=PropertyChanged}" />
         <Label HorizontalAlignment="Left" Margin="19,34,0,0" VerticalAlignment="Top">Filter</Label>
-        <Button x:Name="AddClientButton" Content="Add Client" HorizontalAlignment="Left" Margin="671,58,0,0" VerticalAlignment="Top" Command="{Binding ButtonClickCommand}"/>
+        <Button x:Name="AddClientButton" Content="Add Client" HorizontalAlignment="Left" Margin="671,58,0,0"
+                VerticalAlignment="Top" Command="{Binding ButtonClickCommand}" />
     </Grid>
 </Page>
