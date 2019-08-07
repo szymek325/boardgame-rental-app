@@ -54,7 +54,13 @@ namespace Rental.WPF.ViewModel.Clients
             );
             ButtonClickCommand.RaiseCanExecuteChanged();
 
-            OnRowDoubleClick = new DelegateCommand<Client>(s => { Trace.WriteLine($"test row {s.FirstName}"); });
+            OnRowDoubleClick = new DelegateCommand<Client>(s =>
+            {
+                //TODO new page should not be created here
+                Trace.WriteLine($"test row {s.FirstName}");
+                var p= new ClientPage(s);
+                p.Show();
+            });
 
         }
 
