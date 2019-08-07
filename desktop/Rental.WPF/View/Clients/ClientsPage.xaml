@@ -19,7 +19,7 @@
                     <GridViewColumn Header="FirstName" DisplayMemberBinding="{Binding FirstName}" Width="150" />
                     <GridViewColumn Header="LastName" DisplayMemberBinding="{Binding LastName}" Width="150" />
                     <GridViewColumn Header="ContactNumber" DisplayMemberBinding="{Binding ContactNumber}" Width="150" />
-                    <GridViewColumn Header="ContactNumber" DisplayMemberBinding="{Binding EmailAddress}" Width="150" />
+                    <GridViewColumn Header="EmailAddress" DisplayMemberBinding="{Binding EmailAddress}" Width="150" />
                     <GridViewColumn Header="CreationTime" DisplayMemberBinding="{Binding CreationTime}" Width="100" />
                 </GridView>
             </ListView.View>
