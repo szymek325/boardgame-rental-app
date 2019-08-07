@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Rental.Core.Interfaces.DataAccess;
 
 namespace Rental.WPF.View
 {
@@ -9,19 +12,15 @@ namespace Rental.WPF.View
     /// </summary>
     public partial class ClientsPage : Page
     {
-        public ClientsPage()
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ClientsPage(IUnitOfWork unitOfWork)
         {
             InitializeComponent();
+            _unitOfWork = unitOfWork;
+            this.ClientsGrid.Items.Add(_unitOfWork.ClientsRepository.GetAll().ToList());
         }
 
-        void NavigationService_Navigating(object sender, NavigatingCancelEventArgs e)
-        {
-            // Don't allow refreshing of a static page
-            if ((e.NavigationMode == NavigationMode.Refresh) &&
-                (e.Uri.OriginalString == "StaticPage.xaml"))
-            {
-                e.Cancel = true;
-            }
-        }
+
     }
 }

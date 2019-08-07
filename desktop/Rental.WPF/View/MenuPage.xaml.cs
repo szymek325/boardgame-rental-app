@@ -28,7 +28,7 @@ namespace Rental.WPF.View
 
         private void GoToClients(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new ClientsPage());
+            MainFrame.NavigationService.Navigate(_clientsPage);
         }
 
         private void GoToGames(object sender, RoutedEventArgs e)
