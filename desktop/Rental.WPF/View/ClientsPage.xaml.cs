@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using Microsoft.VisualBasic.ApplicationServices;
 using Rental.Core.Entities;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.WPF.View.Clients;
+using static System.String;
 
 namespace Rental.WPF.View
 {
@@ -21,27 +23,38 @@ namespace Rental.WPF.View
             InitializeComponent();
             _unitOfWork = unitOfWork;
             ClientsGrid.ItemsSource = _unitOfWork.ClientsRepository.GetAll().ToList();
-
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ClientsGrid.ItemsSource);
-            view.Filter = UserFilter;
+            var view = (CollectionView) CollectionViewSource.GetDefaultView(ClientsGrid.ItemsSource);
+            view.Filter = ClientFilter;
         }
 
-        private bool UserFilter(object item)
+        private bool ClientFilter(object item)
         {
-            if (String.IsNullOrEmpty(ClientFilterBox.Text))
+            if (IsNullOrEmpty(ClientFilterBox.Text))
                 return true;
-            else
-                return ((item as Client).FirstName.IndexOf(ClientFilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            var client = (Client) item;
+            if (client.FirstName.IndexOf(ClientFilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+            if (client.LastName.IndexOf(ClientFilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+            if (client.ContactNumber.IndexOf(ClientFilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+            return client.EmailAddress.IndexOf(ClientFilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        private void txtFilter_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        private void Filter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(ClientsGrid.ItemsSource).Refresh();
         }
 
         private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        private void AddClientButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            AddClientWindow subWindow = new AddClientWindow();
+            subWindow.Show();
         }
     }
 }

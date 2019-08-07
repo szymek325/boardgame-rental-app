@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Data;
 using AutoMapper;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.ViewModel
 {
@@ -17,15 +18,15 @@ namespace Rental.WPF.ViewModel
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            ClientsList = new ObservableCollection<ClientViewModel>(GetEmployees());
+            ClientsList = new ObservableCollection<AddClientViewModel>(GetEmployees());
             _view = new ListCollectionView(_clientsList);
         }
 
         //created for testing
-        private List<ClientViewModel> GetEmployees()
+        private List<AddClientViewModel> GetEmployees()
         {
             var clients = _unitOfWork.ClientsRepository.GetAll();
-            var mapped = _mapper.Map<IEnumerable<ClientViewModel>>(clients);
+            var mapped = _mapper.Map<IEnumerable<AddClientViewModel>>(clients);
             return mapped.ToList();
         }
 
@@ -47,9 +48,9 @@ namespace Rental.WPF.ViewModel
 
         public ICollectionView ClientsCollection => _clientsCol;
 
-        private ObservableCollection<ClientViewModel> _clientsList;
+        private ObservableCollection<AddClientViewModel> _clientsList;
 
-        public ObservableCollection<ClientViewModel> ClientsList
+        public ObservableCollection<AddClientViewModel> ClientsList
         {
             get => _clientsList;
             set
@@ -76,7 +77,7 @@ namespace Rental.WPF.ViewModel
                 if (string.IsNullOrEmpty(value))
                     View.Filter = null;
                 else
-                    View.Filter = o => ((ClientViewModel) o).FirstName == value;
+                    View.Filter = o => ((AddClientViewModel) o).FirstName == value;
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Rental.Core.Entities;
 using Rental.WPF.ViewModel;
+using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.Mapping
 {
@@ -8,8 +9,8 @@ namespace Rental.WPF.Mapping
     {
         public EntitiesMapping()
         {
-            CreateMap<Client, ClientViewModel>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            CreateMap<Client, AddClientViewModel>()
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.ContactNumber, opt => opt.MapFrom(src => src.ContactNumber))
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
