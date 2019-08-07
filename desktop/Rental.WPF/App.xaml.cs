@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Rental.Core;
 using Rental.Core.Configuration;
 using Rental.DataAccess;
+using Rental.WPF.View;
 
 namespace Rental.WPF
 {
@@ -30,6 +31,7 @@ namespace Rental.WPF
 
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
+            serviceCollection.AddTransient<ClientsPage>();
 
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
