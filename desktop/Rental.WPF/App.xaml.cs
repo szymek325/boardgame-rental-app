@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rental.Core;
@@ -32,11 +33,6 @@ namespace Rental.WPF
 
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
-            serviceCollection.AddTransient<ClientsPage>();
-            serviceCollection.AddTransient<GamesPage>();
-            serviceCollection.AddTransient<RentalsPage>();
-            serviceCollection.AddTransient<MenuPage>();
-
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
@@ -45,12 +41,17 @@ namespace Rental.WPF
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient(typeof(MainWindow));
-
+            services.AddAutoMapper(typeof(App));
             var connectionStrings = new ConnectionStrings();
             Configuration.GetSection(nameof(ConnectionStrings)).Bind(connectionStrings);
             services.AddCoreModule();
             services.AddDataAccessModule(connectionStrings);
+
+            services.AddTransient(typeof(MainWindow));
+            services.AddTransient<ClientsPage>();
+            services.AddTransient<GamesPage>();
+            services.AddTransient<RentalsPage>();
+            services.AddTransient<MenuPage>();
         }
     }
 }
