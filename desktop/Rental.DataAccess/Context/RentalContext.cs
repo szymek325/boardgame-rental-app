@@ -1,4 +1,7 @@
 ﻿using System;
+using Bogus;
+using Faker;
+using FizzWare.NBuilder;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Entities;
 
@@ -27,10 +30,20 @@ namespace Rental.DataAccess.Context
             modelBuilder.Entity<GameRental>().HasKey(x => x.Id);
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
 
-            modelBuilder.Entity<Client>().HasData(
-                new Client {Id = 1, FirstName = "mat"},
-                new Client {Id = 2, FirstName = "test2"}
-            );
+            //FillData(modelBuilder);
+        }
+
+        private static void FillData(ModelBuilder modelBuilder)
+        {
+            var customers = Builder<Client>.CreateListOfSize(100)
+                .All()
+                .With(c => c.FirstName = Faker.Name.First())
+                .With(c => c.LastName = Faker.Name.Last())
+                .With(c => c.ContactNumber = Faker.Phone.Number())
+                .With(c => c.EmailAddress = Faker.Internet.Email())
+                .Build();
+
+            modelBuilder.Entity<Client>().HasData(customers);
         }
     }
 }
