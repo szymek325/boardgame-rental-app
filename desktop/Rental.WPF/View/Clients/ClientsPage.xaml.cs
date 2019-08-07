@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using Rental.Core.Entities;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.View.Clients
@@ -12,6 +15,13 @@ namespace Rental.WPF.View.Clients
         {
             InitializeComponent();
             DataContext = viewModel;
+        }
+
+        private void OnRowDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var item = ((FrameworkElement) e.OriginalSource).DataContext as Client;
+            ((ClientsViewModel) DataContext)
+                .OnRowDoubleClick.Execute(item);
         }
     }
 }
