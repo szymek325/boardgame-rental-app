@@ -2,7 +2,14 @@
 
 namespace Rental.WPF.View
 {
-    internal class ClientsPage : Page
+    /// <summary>
+    ///     Interaction logic for ClientsPage.xaml
+    /// </summary>
+    public partial class ClientsPage : Page
     {
+        public ClientsPage()
+        {
+            InitializeComponent();
+        }
     }
 }
