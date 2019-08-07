@@ -10,6 +10,7 @@ using Rental.DataAccess;
 using Rental.WPF.View;
 using Rental.WPF.View.Base;
 using Rental.WPF.View.Clients;
+using Rental.WPF.ViewModel;
 
 namespace Rental.WPF
 {
@@ -54,7 +55,7 @@ namespace Rental.WPF
             services.AddTransient<RentalsPage>();
             services.AddTransient<MenuPage>();
 //
-//            services.AddTransient()
+            services.AddTransient<ClientListViewModel>();
 //            services.AddTransient<AddClientWindow>();
         }
     }
