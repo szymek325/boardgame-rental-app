@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:Rental.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Frame Source="ClientsPage.xaml"/>
+    <Frame Source="ClientsPage.xaml" />
 </Window>
