@@ -7,23 +7,24 @@ using System.Windows.Data;
 using AutoMapper;
 using Rental.Core.Entities;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.WPF.View.Clients;
 
 namespace Rental.WPF.ViewModel
 {
-    public class ClientListViewModel
+    public class ClientsViewModel
     {
+        private readonly ICollectionView _clientsView;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ICollectionView clientsView;
-        private string filter;
+        private string _filter;
 
-        public ClientListViewModel(IUnitOfWork unitOfWork, IMapper mapper)
+        public ClientsViewModel(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             Clients = new ObservableCollection<Client>(GetEmployees());
-            clientsView = CollectionViewSource.GetDefaultView(Clients);
-            clientsView.Filter = o =>
+            _clientsView = CollectionViewSource.GetDefaultView(Clients);
+            _clientsView.Filter = o =>
             {
                 if (string.IsNullOrEmpty(Filter))
                     return true;
@@ -36,24 +37,34 @@ namespace Rental.WPF.ViewModel
                     return true;
                 return client.EmailAddress.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0;
             };
+            ButtonClickCommand = new DelegateCommand<string>(
+                s =>
+                {
+                    var subWindow = new AddClientWindow();
+                    subWindow.Show();
+                },
+                s => true
+            );
+            ButtonClickCommand.RaiseCanExecuteChanged();
         }
+
+        public DelegateCommand<string> ButtonClickCommand { get; }
 
         public ObservableCollection<Client> Clients { get; }
 
         public string Filter
         {
-            get => filter;
+            get => _filter;
             set
             {
-                if (value != filter)
+                if (value != _filter)
                 {
-                    filter = value;
-                    clientsView.Refresh();
+                    _filter = value;
+                    _clientsView.Refresh();
                 }
             }
         }
 
-        //created for testing
         private List<Client> GetEmployees()
         {
             var clients = _unitOfWork.ClientsRepository.GetAll();

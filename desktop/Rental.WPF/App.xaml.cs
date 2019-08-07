@@ -55,7 +55,7 @@ namespace Rental.WPF
             services.AddTransient<RentalsPage>();
             services.AddTransient<MenuPage>();
 //
-            services.AddTransient<ClientListViewModel>();
+            services.AddTransient<ClientsViewModel>();
 //            services.AddTransient<AddClientWindow>();
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using Rental.WPF.View.Clients;
+﻿using System.Windows.Controls;
 using Rental.WPF.ViewModel;
 
 namespace Rental.WPF.View
@@ -10,16 +8,10 @@ namespace Rental.WPF.View
     /// </summary>
     public partial class ClientsPage : Page
     {
-        public ClientsPage(ClientListViewModel viewModel)
+        public ClientsPage(ClientsViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
-        }
-
-        private void AddClientButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var subWindow = new AddClientWindow();
-            subWindow.Show();
         }
     }
 }
