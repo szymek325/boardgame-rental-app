@@ -18,7 +18,7 @@ namespace Rental.WPF.View
         {
             InitializeComponent();
             _unitOfWork = unitOfWork;
-            this.ClientsGrid.Items.Add(_unitOfWork.ClientsRepository.GetAll().ToList());
+            this.ClientsGrid.ItemsSource = _unitOfWork.ClientsRepository.GetAll().ToList();
         }
 
 
