@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using Rental.Core.Interfaces.DataAccess;
 
-namespace Rental.WPF.View
+namespace Rental.WPF.View.Base
 {
     /// <summary>
     ///     Interaction logic for MenuPage.xaml
@@ -11,19 +10,23 @@ namespace Rental.WPF.View
     public partial class MenuPage : Page
     {
         private readonly ClientsPage _clientsPage;
+        private readonly GamesPage _gamesPage;
+        private readonly RentalsPage _rentalsPage;
         private readonly IUnitOfWork _unitOfWork;
 
-        public MenuPage(ClientsPage clientsPage, IUnitOfWork unitOfWork)
+        public MenuPage(ClientsPage clientsPage, GamesPage gamesPage, RentalsPage rentalsPage, IUnitOfWork unitOfWork)
         {
             InitializeComponent();
             _clientsPage = clientsPage;
+            _gamesPage = gamesPage;
+            _rentalsPage = rentalsPage;
             _unitOfWork = unitOfWork;
         }
 
 
         private void GoToRentals(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MainFrame.NavigationService.Navigate(_rentalsPage);
         }
 
         private void GoToClients(object sender, RoutedEventArgs e)
@@ -33,8 +36,7 @@ namespace Rental.WPF.View
 
         private void GoToGames(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            MainFrame.NavigationService.Navigate(_gamesPage);
         }
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Navigation;
 using Rental.WPF.View;
+using Rental.WPF.View.Base;
 
 namespace Rental.WPF
 {

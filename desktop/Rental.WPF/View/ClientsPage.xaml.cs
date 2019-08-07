@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Rental.Core.Interfaces.DataAccess;
@@ -22,5 +23,9 @@ namespace Rental.WPF.View
         }
 
 
+        private void ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

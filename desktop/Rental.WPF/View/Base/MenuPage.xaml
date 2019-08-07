@@ -1,4 +1,4 @@
-﻿<Page x:Class="Rental.WPF.View.MenuPage"
+﻿<Page x:Class="Rental.WPF.View.Base.MenuPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -15,7 +15,7 @@
                 <MenuItem Header="_Home" />
                 <MenuItem Header="Clients" Click="GoToClients" />
                 <MenuItem Header="Games" Click="GoToGames" />
-                <MenuItem Header="Rentals" Click="GoToGames" />
+                <MenuItem Header="Rentals" Click="GoToRentals" />
             </Menu>
             <Frame x:Name="MainFrame" />
         </DockPanel>

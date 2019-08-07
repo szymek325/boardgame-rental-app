@@ -6,12 +6,13 @@
       xmlns:local="clr-namespace:Rental.WPF.View"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ClientsPage">
+      Title="ClientsPage"
+      ShowsNavigationUI="False">
     <Grid>
         <TextBlock x:Name="PageName" HorizontalAlignment="Center" Margin="0,10,0,0" Text="Clients" TextWrapping="Wrap"
                    VerticalAlignment="Top" Height="40" Width="364" RenderTransformOrigin="0.5,0.414"
                    TextAlignment="Center" FontSize="36" />
-        <ListView x:Name="ClientsGrid" Margin="19,78,19,10">
+        <ListView x:Name="ClientsGrid" Margin="19,78,19,10" MouseDoubleClick="ListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
