@@ -7,6 +7,7 @@ using System.Windows.Data;
 using AutoMapper;
 using Rental.Core.Entities;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.WPF.Events;
 using Rental.WPF.View.Clients;
 
 namespace Rental.WPF.ViewModel.Clients
@@ -21,7 +22,7 @@ namespace Rental.WPF.ViewModel.Clients
 
         public ClientsViewModel(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            AddClientViewModel.ClientAddedToDb += UpdateClientIfNewUserWasAdded;
+            ClientEvents.OnNewClientAdded += UpdateClientIfNewUserWasAdded;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             Clients = new ObservableCollection<Client>(GetEmployees());
