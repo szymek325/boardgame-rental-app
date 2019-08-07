@@ -23,6 +23,8 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox x:Name="ClientFilterBox" HorizontalAlignment="Left" Margin="19,58,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="20" TextChanged="txtFilter_TextChanged" />
+        <TextBox x:Name="ClientFilterBox" HorizontalAlignment="Left" Margin="19,58,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="230" Height="20" TextChanged="Filter_TextChanged" />
+        <TextBlock HorizontalAlignment="Left" Margin="19,42,0,0" Text="Filter" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button x:Name="AddClientButton" Content="Add Client" HorizontalAlignment="Left" Margin="671,58,0,0" VerticalAlignment="Top" Click="AddClientButton_OnClick"/>
     </Grid>
 </Page>
