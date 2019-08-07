@@ -12,7 +12,15 @@ namespace Rental.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainWindow(IUnitOfWork unitOfWork, ClientsPage clientsPage)
+        {
+            InitializeComponent();
+            _unitOfWork = unitOfWork;
+            _clientsPage = clientsPage;
+        }
+
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ClientsPage _clientsPage;
 
         public MainWindow(IUnitOfWork unitOfWork)
         {
@@ -41,6 +49,26 @@ namespace Rental.WPF
         {
             var users = _unitOfWork.ClientsRepository.GetAll().ToList();
             //Users.ItemsSource = users;
+        }
+
+        private void GoToRentals(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void GoToClients(object sender, RoutedEventArgs e)
+        {
+            this.Content = _clientsPage;
+        }
+
+        private void GoToGames(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -6,5 +6,26 @@
         xmlns:local="clr-namespace:Rental.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Frame Source="ClientsPage.xaml" />
+    <Grid>
+        <Frame></Frame>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_Home">
+                </MenuItem>
+                <MenuItem Header="Clients" Click="GoToClients">
+                </MenuItem>
+                <MenuItem Header="Games" Click="GoToGames">
+                </MenuItem>
+                <MenuItem Header="Rentals" Click="GoToGames">
+                </MenuItem>
+            </Menu>
+            <TextBox AcceptsReturn="True" TextChanged="TextBox_TextChanged_1" />
+        </DockPanel>
+        <Button x:Name="RentalsButton" Content="Rentals" HorizontalAlignment="Left" Margin="507,202,0,0"
+                VerticalAlignment="Top" Click="GoToRentals" />
+        <Button x:Name="ClientsButton" Content="Clients" HorizontalAlignment="Left" Margin="273,202,0,0"
+                VerticalAlignment="Top" Click="GoToClients" />
+        <Button x:Name="GamesButton" Content="Games" HorizontalAlignment="Center" Margin="0,202,0,0"
+                VerticalAlignment="Top" Click="GoToGames" />
+    </Grid>
 </Window>
