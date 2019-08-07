@@ -16,14 +16,15 @@ namespace Rental.WPF.ViewModel.Clients
         private readonly ICollectionView _clientsView;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private AddClientWindow _addClientWindow;
         private string _filter;
 
         public ClientsViewModel(IUnitOfWork unitOfWork, IMapper mapper)
         {
+            AddClientViewModel.ClientAddedToDb += UpdateClientIfNewUserWasAdded;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            var b = GetEmployees();
-            Clients = new ObservableCollection<Client>(b);
+            Clients = new ObservableCollection<Client>(GetEmployees());
             _clientsView = CollectionViewSource.GetDefaultView(Clients);
             _clientsView.Filter = o =>
             {
@@ -41,12 +42,8 @@ namespace Rental.WPF.ViewModel.Clients
             ButtonClickCommand = new DelegateCommand<string>(
                 s =>
                 {
-                    var subWindow = new AddClientWindow(new AddClientViewModel(unitOfWork, Clients));
-                    subWindow.Show();
-                    subWindow.Closed += delegate
-                    {
-                        _clientsView.Refresh();
-                    };
+                    _addClientWindow = new AddClientWindow(new AddClientViewModel(unitOfWork));
+                    _addClientWindow.Show();
                 },
                 s => true
             );
@@ -68,6 +65,13 @@ namespace Rental.WPF.ViewModel.Clients
                     _clientsView.Refresh();
                 }
             }
+        }
+
+        private void UpdateClientIfNewUserWasAdded(object sender, Client e)
+        {
+            Clients.Add(e);
+            _clientsView.Refresh();
+            _addClientWindow.Close();
         }
 
         private List<Client> GetEmployees()
