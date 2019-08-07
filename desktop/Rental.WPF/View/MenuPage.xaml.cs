@@ -20,10 +20,6 @@ namespace Rental.WPF.View
             _unitOfWork = unitOfWork;
         }
 
-        public MenuPage()
-        {
-            InitializeComponent();
-        }
 
         private void GoToRentals(object sender, RoutedEventArgs e)
         {

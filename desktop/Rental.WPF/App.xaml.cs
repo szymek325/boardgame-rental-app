@@ -32,6 +32,7 @@ namespace Rental.WPF
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             serviceCollection.AddTransient<ClientsPage>();
+            serviceCollection.AddTransient<MenuPage>();
 
             ServiceProvider = serviceCollection.BuildServiceProvider();
 
