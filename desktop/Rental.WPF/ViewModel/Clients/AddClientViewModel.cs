@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Rental.Core.MediatR;
+﻿using Rental.Core.MediatR;
 using Rental.Core.Models;
-using Rental.Core.Notifications;
+using Rental.Core.Requests;
 using Rental.WPF.Command;
 using Rental.WPF.Events;
 
@@ -21,7 +19,7 @@ namespace Rental.WPF.ViewModel.Clients
             ButtonClickCommand = new AsyncCommand<string>(async s =>
                 {
                     var user = new Client(FirstName, LastName, ContactNumber, EmailAddress);
-                    await mediatorService.Notify(new AddClientRequest(user));
+                    await mediatorService.Request(new AddClientRequest(user));
                     ClientEvents.RaiseOnNewClientAdded(this, user);
                 },
                 s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) &&
@@ -69,6 +67,6 @@ namespace Rental.WPF.ViewModel.Clients
             }
         }
 
-        public IAsyncCommand<string> ButtonClickCommand { get; private set; }
+        public IAsyncCommand<string> ButtonClickCommand { get; }
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace Rental.Core.Models
+﻿using System;
+
+namespace Rental.Core.Models
 {
     public class GameRental
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int ClientId { get; set; }
         public int BoardGameId { get; set; }
         public float ChargedDeposit { get; set; }
