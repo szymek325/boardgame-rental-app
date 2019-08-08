@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Rental.Core.Models;
 
-namespace Rental.DataAccess.NewFolder
+namespace Rental.DataAccess.Mapping
 {
     internal class EntitiesMapping : Profile
     {
