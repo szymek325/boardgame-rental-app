@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Rental.Core.Models;
 
-namespace Rental.Core.Notifications
+namespace Rental.Core.Requests
 {
-    public class AddClientRequest : INotification
+    public class AddClientRequest : IRequest<Client>
     {
         public AddClientRequest(Client client)
         {

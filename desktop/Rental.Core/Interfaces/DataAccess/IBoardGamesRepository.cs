@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Rental.Core.Models;
 
@@ -8,7 +9,7 @@ namespace Rental.Core.Interfaces.DataAccess
     {
         IEnumerable<BoardGame> GetAll();
         IEnumerable<BoardGame> GetAllAvailableForRental();
-        Task<BoardGame> GetAsync(int? id);
+        Task<BoardGame> GetAsync(Guid? id);
         Task AddAsync(BoardGame model);
         void Remove(BoardGame model);
         void Update(BoardGame model);
