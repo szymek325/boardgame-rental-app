@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Rental.WPF.View.Clients"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
+      Height="450" Width="800"
       Title="ClientPage">
 
     <Grid>
-        <Grid Margin="10,10,10,348">
+        <Grid Margin="10,10,10,295">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100" />
                 <ColumnDefinition Width="200" />
@@ -24,22 +24,22 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Label>Id:</Label>
-            <TextBlock Grid.Row="0" Grid.Column="1" Margin="0,0,0,10"
+            <TextBlock Grid.Row="0" Grid.Column="1"
                      Text="{Binding Id}" />
             <Label Grid.Row="1" Grid.Column="0">First Name:</Label>
-            <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0,0,10"
+            <TextBlock Grid.Row="1" Grid.Column="1"
                      Text="{Binding FirstName}" />
             <Label Grid.Row="2" Grid.Column="0">Last Name:</Label>
-            <TextBlock Grid.Row="2" Grid.Column="1" Margin="0,0,0,10"
+            <TextBlock Grid.Row="2" Grid.Column="1"
                      Text="{Binding LastName}" />
             <Label Grid.Row="0" Grid.Column="3">ContactNumber:</Label>
-            <TextBlock Grid.Row="0" Grid.Column="4" Margin="0,0,0,10"
+            <TextBlock Grid.Row="0" Grid.Column="4"
                      Text="{Binding ContactNumber}" />
             <Label Grid.Row="1" Grid.Column="3">E-mail:</Label>
-            <TextBlock Grid.Row="1" Grid.Column="4" Margin="0,0,0,10"
+            <TextBlock Grid.Row="1" Grid.Column="4"
                      Text="{Binding EmailAddress}" />
             <Label Grid.Row="2" Grid.Column="3">CreationTime</Label>
-            <TextBlock Grid.Row="2" Grid.Column="4" Margin="0,0,0,10"
+            <TextBlock Grid.Row="2" Grid.Column="4"
                      Text="{Binding CreationTime}" />
         </Grid>
         <ListView Margin="0,144,0,0">
@@ -49,6 +49,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock Margin="0,107,0,0" Text="Rented Games" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="32" FontSize="20"/>
+        <TextBlock Margin="0,107,0,0" Text="Rented Games" TextWrapping="Wrap" VerticalAlignment="Top" Width="Auto" Height="32" FontSize="20" TextAlignment="Center"/>
     </Grid>
 </Window>
