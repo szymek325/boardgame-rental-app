@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Rental.Core.Entities;
+using Rental.DataAccess.Entities;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.Mapping

@@ -9,8 +9,8 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using AutoMapper;
-using Rental.Core.Entities;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.DataAccess.Entities;
 using Rental.WPF.Events;
 using Rental.WPF.View.Clients;
 

@@ -1,49 +1,59 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Entities;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.Models;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.Repositories
 {
     internal class ClientsRepository : IClientsRepository
     {
+        private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
 
-        public ClientsRepository(RentalContext rentalContext)
+        public ClientsRepository(IMapper mapper, RentalContext rentalContext)
         {
+            _mapper = mapper;
             _rentalContext = rentalContext;
         }
 
         public IEnumerable<Client> GetAll()
         {
-            return _rentalContext.Clients.ToList();
+            var entities = _rentalContext.Clients;
+            var result = _mapper.Map<IEnumerable<Client>>(entities);
+            return result;
         }
 
         public async Task<Client> GetAsync(int? id)
         {
-            return await _rentalContext.Clients.SingleOrDefaultAsync(x => x.Id == id);
+            var entity = await _rentalContext.Clients.SingleOrDefaultAsync(x => x.Id == id);
+            var result = _mapper.Map<Client>(entity);
+            return result;
         }
 
-        public async Task AddAsync(Client entity)
+        public async Task AddAsync(Client model)
         {
+            var entity = _mapper.Map<Entities.Client>(model);
             await _rentalContext.Clients.AddAsync(entity);
         }
 
-        public void Remove(Client entity)
+        public void Remove(Client model)
         {
+            var entity = _mapper.Map<Entities.Client>(model);
             _rentalContext.Clients.Remove(entity);
         }
 
-        public void Update(Client entity)
+        public void Update(Client model)
         {
+            var entity = _mapper.Map<Entities.Client>(model);
             _rentalContext.Clients.Update(entity);
         }
 
-        public void Add(Client entity)
+        public void Add(Client model)
         {
+            var entity = _mapper.Map<Entities.Client>(model);
             _rentalContext.Clients.Add(entity);
         }
     }

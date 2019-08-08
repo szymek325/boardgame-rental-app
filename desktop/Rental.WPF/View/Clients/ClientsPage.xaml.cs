@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Rental.Core.Entities;
+using Rental.DataAccess.Entities;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.View.Clients

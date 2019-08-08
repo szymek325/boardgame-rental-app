@@ -1,5 +1,5 @@
-﻿using Rental.Core.Entities;
-using Rental.Core.Interfaces.DataAccess;
+﻿using Rental.Core.Interfaces.DataAccess;
+using Rental.DataAccess.Entities;
 using Rental.WPF.Events;
 
 namespace Rental.WPF.ViewModel.Clients

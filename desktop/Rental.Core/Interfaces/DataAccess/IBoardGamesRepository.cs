@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Rental.Core.Entities;
+using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess
 {
@@ -10,8 +9,8 @@ namespace Rental.Core.Interfaces.DataAccess
         IEnumerable<BoardGame> GetAll();
         IEnumerable<BoardGame> GetAllAvailableForRental();
         Task<BoardGame> GetAsync(int? id);
-        Task AddAsync(BoardGame entity);
-        void Remove(BoardGame entity);
-        void Update(BoardGame entity);
+        Task AddAsync(BoardGame model);
+        void Remove(BoardGame model);
+        void Update(BoardGame model);
     }
 }
