@@ -4,6 +4,18 @@ namespace Rental.Core.Models
 {
     public class Client
     {
+        public Client(string firstName, string lastName, string contactNumber, string emailAddress)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            ContactNumber = contactNumber;
+            EmailAddress = emailAddress;
+        }
+
+        public Client()
+        {
+        }
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

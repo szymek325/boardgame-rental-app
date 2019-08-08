@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using Rental.DataAccess.Entities;
+using Rental.Core.Models;
 
 namespace Rental.WPF.View.Clients
 {

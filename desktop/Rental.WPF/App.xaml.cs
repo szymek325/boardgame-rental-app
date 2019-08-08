@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,7 +47,7 @@ namespace Rental.WPF
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(App));
+            services.AddAutoMapper(typeof(App),typeof(CoreModule),typeof(EntityFrameworkModule));
             var connectionStrings = new ConnectionStrings();
             Configuration.GetSection(nameof(ConnectionStrings)).Bind(connectionStrings);
             services.AddCoreModule();

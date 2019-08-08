@@ -4,13 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Input;
 using AutoMapper;
 using Rental.Core.Interfaces.DataAccess;
-using Rental.DataAccess.Entities;
+using Rental.Core.Models;
 using Rental.WPF.Events;
 using Rental.WPF.View.Clients;
 
@@ -58,10 +55,9 @@ namespace Rental.WPF.ViewModel.Clients
             {
                 //TODO new page should not be created here
                 Trace.WriteLine($"test row {s.FirstName}");
-                var p= new ClientPage(s);
+                var p = new ClientPage(s);
                 p.Show();
             });
-
         }
 
         public DelegateCommand<string> ButtonClickCommand { get; }
@@ -81,6 +77,8 @@ namespace Rental.WPF.ViewModel.Clients
             }
         }
 
+        public DelegateCommand<Client> OnRowDoubleClick { get; }
+
         private void UpdateClientIfNewUserWasAdded(object sender, Client e)
         {
             Clients.Add(e);
@@ -93,7 +91,6 @@ namespace Rental.WPF.ViewModel.Clients
             var clients = _unitOfWork.ClientsRepository.GetAll();
             return clients.ToList();
         }
-        public DelegateCommand<Client> OnRowDoubleClick { get; }
 
         //public void OnRowDoubleClick(object sender, MouseButtonEventArgs e)
         //{
@@ -103,6 +100,5 @@ namespace Rental.WPF.ViewModel.Clients
         //        MessageBox.Show("Item's Double Click handled!");
         //    }
         //}
-
     }
 }

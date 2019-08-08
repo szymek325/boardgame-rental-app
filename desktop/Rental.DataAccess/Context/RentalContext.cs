@@ -6,10 +6,11 @@ using Rental.DataAccess.Entities;
 
 namespace Rental.DataAccess.Context
 {
-    internal class RentalContext : DbContext
+    internal sealed class RentalContext : DbContext
     {
         public RentalContext(DbContextOptions options) : base(options)
         {
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public DbSet<BoardGame> BoardGames { get; set; }
