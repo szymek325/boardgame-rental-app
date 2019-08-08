@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rental.Core;
@@ -48,6 +49,8 @@ namespace Rental.WPF
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(App),typeof(CoreModule),typeof(EntityFrameworkModule));
+            services.AddMediatR(typeof(App), typeof(CoreModule));
+
             var connectionStrings = new ConnectionStrings();
             Configuration.GetSection(nameof(ConnectionStrings)).Bind(connectionStrings);
             services.AddCoreModule();

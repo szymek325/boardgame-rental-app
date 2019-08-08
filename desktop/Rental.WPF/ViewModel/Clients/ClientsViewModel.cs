@@ -9,6 +9,7 @@ using AutoMapper;
 using Rental.Core.Interfaces.DataAccess;
 using Rental.Core.MediatR;
 using Rental.Core.Models;
+using Rental.WPF.Command;
 using Rental.WPF.Events;
 using Rental.WPF.View.Clients;
 
@@ -18,10 +19,10 @@ namespace Rental.WPF.ViewModel.Clients
     {
         private readonly ICollectionView _clientsView;
         private readonly IMapper _mapper;
-        private AddClientWindow _addClientWindow;
-        private string _filter;
         private readonly IMediatorService _mediatorService;
         private readonly IUnitOfWork _unitOfWork;
+        private AddClientWindow _addClientWindow;
+        private string _filter;
 
         public ClientsViewModel(IMapper mapper, IMediatorService mediatorService, IUnitOfWork unitOfWork)
         {
@@ -54,7 +55,7 @@ namespace Rental.WPF.ViewModel.Clients
             );
             ButtonClickCommand.RaiseCanExecuteChanged();
 
-            OnRowDoubleClick = new DelegateCommand<Client>(s =>
+            OnRowDoubleClick = new AsyncCommand<Client>(async s =>
             {
                 //TODO new page should not be created here
                 Trace.WriteLine($"test row {s.FirstName}");
@@ -80,7 +81,7 @@ namespace Rental.WPF.ViewModel.Clients
             }
         }
 
-        public DelegateCommand<Client> OnRowDoubleClick { get; }
+        public IAsyncCommand<Client> OnRowDoubleClick { get; }
 
         private void UpdateClientIfNewUserWasAdded(object sender, Client e)
         {
