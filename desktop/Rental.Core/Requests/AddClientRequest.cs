@@ -1,9 +1,10 @@
-﻿using MediatR;
+﻿using System;
+using MediatR;
 using Rental.Core.Models;
 
 namespace Rental.Core.Requests
 {
-    public class AddClientRequest : IRequest<Client>
+    public class AddClientRequest : IRequest<Guid>
     {
         public AddClientRequest(Client client)
         {
