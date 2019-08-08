@@ -1,7 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MediatR;
 using Rental.Core.Models;
+using Rental.Core.Notifications;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF.View.Clients
@@ -11,7 +13,7 @@ namespace Rental.WPF.View.Clients
     /// </summary>
     public partial class ClientsPage : Page
     {
-        public ClientsPage(ClientsViewModel viewModel)
+        public ClientsPage(INotificationHandler<NewClientAddedNotification> viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

@@ -3,48 +3,34 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Data;
-using AutoMapper;
-using Rental.Core.Interfaces.DataAccess;
+using MediatR;
 using Rental.Core.MediatR;
 using Rental.Core.Models;
+using Rental.Core.Notifications;
+using Rental.Core.Requests;
 using Rental.WPF.Command;
-using Rental.WPF.Events;
 using Rental.WPF.View.Clients;
 
 namespace Rental.WPF.ViewModel.Clients
 {
-    public class ClientsViewModel
+    public class ClientsViewModel : INotificationHandler<NewClientAddedNotification>
     {
         private readonly ICollectionView _clientsView;
-        private readonly IMapper _mapper;
         private readonly IMediatorService _mediatorService;
-        private readonly IUnitOfWork _unitOfWork;
         private AddClientWindow _addClientWindow;
         private string _filter;
 
-        public ClientsViewModel(IMapper mapper, IMediatorService mediatorService, IUnitOfWork unitOfWork)
+        public ClientsViewModel(IMediatorService mediatorService)
         {
-            _unitOfWork = unitOfWork;
-            ClientEvents.OnNewClientAdded += UpdateClientIfNewUserWasAdded;
             _mediatorService = mediatorService;
-            _mapper = mapper;
-            Clients = new ObservableCollection<Client>(GetEmployees());
+
+            Clients = new ObservableCollection<Client>(_mediatorService
+                .Request<IList<Client>>(new GetAllClientsRequest()).Result);
             _clientsView = CollectionViewSource.GetDefaultView(Clients);
-            _clientsView.Filter = o =>
-            {
-                if (string.IsNullOrEmpty(Filter))
-                    return true;
-                var client = (Client) o;
-                if (client.FirstName.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0)
-                    return true;
-                if (client.LastName.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0)
-                    return true;
-                if (client.ContactNumber.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0)
-                    return true;
-                return client.EmailAddress.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0;
-            };
+            _clientsView.Filter = FilterClients;
             ButtonClickCommand = new DelegateCommand<string>(
                 s =>
                 {
@@ -73,36 +59,35 @@ namespace Rental.WPF.ViewModel.Clients
             get => _filter;
             set
             {
-                if (value != _filter)
-                {
-                    _filter = value;
-                    _clientsView.Refresh();
-                }
+                if (value == _filter) return;
+                _filter = value;
+                _clientsView.Refresh();
             }
         }
 
         public IAsyncCommand<Client> OnRowDoubleClick { get; }
 
-        private void UpdateClientIfNewUserWasAdded(object sender, Client e)
+        public Task Handle(NewClientAddedNotification notification, CancellationToken cancellationToken)
         {
-            Clients.Add(e);
+            Trace.WriteLine("test");
+            Clients.Add(notification.Client);
             _clientsView.Refresh();
             _addClientWindow.Close();
+            return Task.CompletedTask;
         }
 
-        private List<Client> GetEmployees()
+        private bool FilterClients(object o)
         {
-            var clients = _unitOfWork.ClientsRepository.GetAll();
-            return clients.ToList();
+            if (string.IsNullOrEmpty(Filter))
+                return true;
+            var client = (Client) o;
+            if (client.FirstName.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+            if (client.LastName.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+            if (client.ContactNumber.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+            return client.EmailAddress.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
-
-        //public void OnRowDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    var item = ((FrameworkElement)e.OriginalSource).DataContext as Client;
-        //    if (item != null)
-        //    {
-        //        MessageBox.Show("Item's Double Click handled!");
-        //    }
-        //}
     }
 }

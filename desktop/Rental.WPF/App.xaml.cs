@@ -1,20 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rental.Core;
 using Rental.Core.Configuration;
+using Rental.Core.Notifications;
 using Rental.DataAccess;
-using Rental.WPF.View;
 using Rental.WPF.View.Base;
 using Rental.WPF.View.Clients;
 using Rental.WPF.View.Games;
 using Rental.WPF.View.Rentals;
-using Rental.WPF.ViewModel;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF
@@ -49,7 +47,8 @@ namespace Rental.WPF
         private void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(App),typeof(CoreModule),typeof(EntityFrameworkModule));
-            services.AddMediatR(typeof(App), typeof(CoreModule));
+            //services.AddMediatR(typeof(App), typeof(CoreModule));
+            services.AddMediatR(typeof(CoreModule));
 
             var connectionStrings = new ConnectionStrings();
             Configuration.GetSection(nameof(ConnectionStrings)).Bind(connectionStrings);
@@ -62,7 +61,8 @@ namespace Rental.WPF
             services.AddTransient<RentalsPage>();
             services.AddTransient<MenuPage>();
 //
-            services.AddTransient<ClientsViewModel>();
+
+            services.AddSingleton<INotificationHandler<NewClientAddedNotification>, ClientsViewModel>();
 //            services.AddTransient<AddClientWindow>();
         }
     }
