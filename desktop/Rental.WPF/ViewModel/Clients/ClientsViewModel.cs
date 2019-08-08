@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows.Data;
 using AutoMapper;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.MediatR;
 using Rental.Core.Models;
 using Rental.WPF.Events;
 using Rental.WPF.View.Clients;
@@ -17,14 +18,16 @@ namespace Rental.WPF.ViewModel.Clients
     {
         private readonly ICollectionView _clientsView;
         private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
         private AddClientWindow _addClientWindow;
         private string _filter;
+        private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ClientsViewModel(IUnitOfWork unitOfWork, IMapper mapper)
+        public ClientsViewModel(IMapper mapper, IMediatorService mediatorService, IUnitOfWork unitOfWork)
         {
-            ClientEvents.OnNewClientAdded += UpdateClientIfNewUserWasAdded;
             _unitOfWork = unitOfWork;
+            ClientEvents.OnNewClientAdded += UpdateClientIfNewUserWasAdded;
+            _mediatorService = mediatorService;
             _mapper = mapper;
             Clients = new ObservableCollection<Client>(GetEmployees());
             _clientsView = CollectionViewSource.GetDefaultView(Clients);
@@ -44,7 +47,7 @@ namespace Rental.WPF.ViewModel.Clients
             ButtonClickCommand = new DelegateCommand<string>(
                 s =>
                 {
-                    _addClientWindow = new AddClientWindow(new AddClientViewModel(unitOfWork));
+                    _addClientWindow = new AddClientWindow(new AddClientViewModel(_mediatorService));
                     _addClientWindow.Show();
                 },
                 s => true
