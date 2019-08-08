@@ -1,5 +1,5 @@
 ﻿using System;
-using Rental.DataAccess.Entities;
+using Rental.Core.Models;
 
 namespace Rental.WPF.Events
 {
