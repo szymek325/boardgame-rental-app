@@ -1,5 +1,7 @@
 ﻿using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.MediatR;
 using Rental.Core.Models;
+using Rental.Core.Notifications;
 using Rental.WPF.Events;
 
 namespace Rental.WPF.ViewModel.Clients
@@ -12,14 +14,13 @@ namespace Rental.WPF.ViewModel.Clients
 
         private string _lastName;
 
-        public AddClientViewModel(IUnitOfWork unitOfWork)
+        public AddClientViewModel(IMediatorService _mediatorService)
         {
             ButtonClickCommand = new DelegateCommand<string>(
                 s =>
                 {
                     var user = new Client(FirstName, LastName, ContactNumber, EmailAddress);
-                    unitOfWork.ClientsRepository.Add(user);
-                    unitOfWork.SaveChanges();
+                    _mediatorService.Notify(new AddClientRequest(user)).GetAwaiter().GetResult();
                     ClientEvents.RaiseOnNewClientAdded(this, user);
                 },
                 s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) &&

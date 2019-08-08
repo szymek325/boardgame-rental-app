@@ -1,5 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Rental.Core.MediatR;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
@@ -9,6 +12,9 @@ namespace Rental.Core
     {
         public static IServiceCollection AddCoreModule(this IServiceCollection services)
         {
+            services.AddMediatR(typeof(CoreModule));
+            services.AddTransient<IMediatorService, MediatorService>();
+
             return services;
         }
     }
