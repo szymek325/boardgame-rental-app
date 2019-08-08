@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Rental.Core.Entities;
+using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess
 {
@@ -8,7 +8,7 @@ namespace Rental.Core.Interfaces.DataAccess
     {
         IEnumerable<GameRental> GetAll();
         Task<GameRental> GetAsync(int? id);
-        Task AddAsync(GameRental entity);
-        void Update(GameRental entity);
+        Task AddAsync(GameRental model);
+        void Update(GameRental model);
     }
 }

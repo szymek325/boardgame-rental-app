@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Rental.Core.Entities;
+using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess
 {

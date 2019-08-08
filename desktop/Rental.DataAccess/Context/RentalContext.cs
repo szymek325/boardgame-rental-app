@@ -1,9 +1,8 @@
 ﻿using System;
-using Bogus;
 using Faker;
 using FizzWare.NBuilder;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Entities;
+using Rental.DataAccess.Entities;
 
 namespace Rental.DataAccess.Context
 {
@@ -21,14 +20,14 @@ namespace Rental.DataAccess.Context
         {
             modelBuilder.HasDefaultSchema("r");
 
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-                modelBuilder.Entity(
-                    entityType.Name,
-                    x => { x.Property(nameof(BaseEntity.CreationTime)).HasDefaultValue(DateTime.UtcNow); });
-
             modelBuilder.Entity<BoardGame>().HasKey(x => x.Id);
+            modelBuilder.Entity<BoardGame>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
+
             modelBuilder.Entity<GameRental>().HasKey(x => x.Id);
+            modelBuilder.Entity<GameRental>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
+
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
+            modelBuilder.Entity<Client>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
             //FillData(modelBuilder);
         }
@@ -37,10 +36,10 @@ namespace Rental.DataAccess.Context
         {
             var customers = Builder<Client>.CreateListOfSize(100)
                 .All()
-                .With(c => c.FirstName = Faker.Name.First())
-                .With(c => c.LastName = Faker.Name.Last())
-                .With(c => c.ContactNumber = Faker.Phone.Number())
-                .With(c => c.EmailAddress = Faker.Internet.Email())
+                .With(c => c.FirstName = Name.First())
+                .With(c => c.LastName = Name.Last())
+                .With(c => c.ContactNumber = Phone.Number())
+                .With(c => c.EmailAddress = Internet.Email())
                 .Build();
 
             modelBuilder.Entity<Client>().HasData(customers);
