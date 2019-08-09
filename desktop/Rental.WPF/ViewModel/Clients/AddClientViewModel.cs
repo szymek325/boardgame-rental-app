@@ -1,7 +1,7 @@
-﻿using Rental.Core.Interfaces.DataAccess;
-using Rental.Core.MediatR;
+﻿using Rental.Core.MediatR;
 using Rental.Core.Models;
-using Rental.Core.Notifications;
+using Rental.Core.Requests;
+using Rental.WPF.Command;
 using Rental.WPF.Events;
 
 namespace Rental.WPF.ViewModel.Clients
@@ -14,19 +14,17 @@ namespace Rental.WPF.ViewModel.Clients
 
         private string _lastName;
 
-        public AddClientViewModel(IMediatorService _mediatorService)
+        public AddClientViewModel(IMediatorService mediatorService)
         {
-            ButtonClickCommand = new DelegateCommand<string>(
-                s =>
+            ButtonClickCommand = new AsyncCommand<string>(async s =>
                 {
                     var user = new Client(FirstName, LastName, ContactNumber, EmailAddress);
-                    _mediatorService.Notify(new AddClientRequest(user)).GetAwaiter().GetResult();
+                    await mediatorService.Request(new AddClientRequest(user));
                     ClientEvents.RaiseOnNewClientAdded(this, user);
                 },
                 s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) &&
                      !string.IsNullOrEmpty(ContactNumber) && !string.IsNullOrEmpty(EmailAddress)
             );
-            ButtonClickCommand.RaiseCanExecuteChanged();
         }
 
         public string FirstName
@@ -69,6 +67,6 @@ namespace Rental.WPF.ViewModel.Clients
             }
         }
 
-        public DelegateCommand<string> ButtonClickCommand { get; }
+        public IAsyncCommand<string> ButtonClickCommand { get; }
     }
 }

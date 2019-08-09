@@ -1,19 +1,17 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
 using AutoMapper;
+using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rental.Core;
 using Rental.Core.Configuration;
 using Rental.DataAccess;
-using Rental.WPF.View;
 using Rental.WPF.View.Base;
 using Rental.WPF.View.Clients;
 using Rental.WPF.View.Games;
 using Rental.WPF.View.Rentals;
-using Rental.WPF.ViewModel;
 using Rental.WPF.ViewModel.Clients;
 
 namespace Rental.WPF
@@ -47,20 +45,20 @@ namespace Rental.WPF
 
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(App),typeof(CoreModule),typeof(EntityFrameworkModule));
+            services.AddAutoMapper(typeof(App), typeof(CoreModule), typeof(EntityFrameworkModule));
+            services.AddMediatR(typeof(App), typeof(CoreModule), typeof(EntityFrameworkModule));
+
             var connectionStrings = new ConnectionStrings();
             Configuration.GetSection(nameof(ConnectionStrings)).Bind(connectionStrings);
             services.AddCoreModule();
             services.AddDataAccessModule(connectionStrings);
 
             services.AddTransient(typeof(MainWindow));
+            services.AddTransient<ClientsViewModel>();
             services.AddTransient<ClientsPage>();
             services.AddTransient<GamesPage>();
             services.AddTransient<RentalsPage>();
             services.AddTransient<MenuPage>();
-//
-            services.AddTransient<ClientsViewModel>();
-//            services.AddTransient<AddClientWindow>();
         }
     }
 }

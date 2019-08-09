@@ -9,6 +9,7 @@ using AutoMapper;
 using Rental.Core.Interfaces.DataAccess.Repositories;
 using Rental.Core.MediatR;
 using Rental.Core.Models;
+using Rental.WPF.Command;
 using Rental.WPF.Events;
 using Rental.WPF.View.Clients;
 

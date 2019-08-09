@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -34,7 +35,7 @@ namespace Rental.DataAccess.Repositories
             return result;
         }
 
-        public async Task<BoardGame> GetAsync(int? id)
+        public async Task<BoardGame> GetAsync(Guid? id)
         {
             var entity = await _rentalContext.BoardGames.SingleOrDefaultAsync(x => x.Id == id);
             var result = _mapper.Map<BoardGame>(entity);

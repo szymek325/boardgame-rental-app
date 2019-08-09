@@ -12,7 +12,6 @@ namespace Rental.Core
     {
         public static IServiceCollection AddCoreModule(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(CoreModule));
             services.AddTransient<IMediatorService, MediatorService>();
 
             return services;

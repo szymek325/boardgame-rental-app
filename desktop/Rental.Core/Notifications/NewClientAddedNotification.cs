@@ -3,9 +3,9 @@ using Rental.Core.Models;
 
 namespace Rental.Core.Notifications
 {
-    public class AddClientRequest : INotification
+    public class NewClientAddedNotification : INotification
     {
-        public AddClientRequest(Client client)
+        public NewClientAddedNotification(Client client)
         {
             Client = client;
         }
