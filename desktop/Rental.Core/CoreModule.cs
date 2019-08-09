@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
-using Rental.Core.MediatR;
+using Rental.Core.Helpers;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 

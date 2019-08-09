@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.Interfaces.DataAccess.Client;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
 
-namespace Rental.DataAccess.Handlers
+namespace Rental.DataAccess.Handlers.Client
 {
     internal class CheckIfClientCanBeRemovedRequestHandler : IRequestHandler<CheckIfClientCanBeRemovedRequest, bool>
     {
