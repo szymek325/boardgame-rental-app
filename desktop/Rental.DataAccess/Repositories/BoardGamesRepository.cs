@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.Interfaces.DataAccess.Repositories;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
 

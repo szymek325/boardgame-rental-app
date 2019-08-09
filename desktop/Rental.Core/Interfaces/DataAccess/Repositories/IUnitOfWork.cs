@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
-namespace Rental.Core.Interfaces.DataAccess
+namespace Rental.Core.Interfaces.DataAccess.Repositories
 {
+    [Obsolete("not supported, will be deleted")]
     public interface IUnitOfWork
     {
         IBoardGamesRepository BoardGamesRepository { get; }

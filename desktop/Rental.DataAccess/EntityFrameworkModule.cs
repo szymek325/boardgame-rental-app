@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Rental.Core.Configuration;
-using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.Interfaces.DataAccess.Repositories;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Repositories;
 
