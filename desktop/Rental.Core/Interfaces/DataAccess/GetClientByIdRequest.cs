@@ -2,7 +2,7 @@
 using MediatR;
 using Rental.Core.Models;
 
-namespace Rental.Core.Requests.Handlers
+namespace Rental.Core.Interfaces.DataAccess
 {
     public class GetClientByIdRequest : IRequest<Client>
     {

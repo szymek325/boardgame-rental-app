@@ -9,8 +9,8 @@ namespace Rental.DataAccess.Entities
         [Key]
         public Guid Id { get; set; }
 
-        public int ClientId { get; set; }
-        public int BoardGameId { get; set; }
+        public Guid ClientId { get; set; }
+        public Guid BoardGameId { get; set; }
         public float ChargedDeposit { get; set; }
         public float PaidMoney { get; set; }
         public DateTime CreationTime { get; set; }

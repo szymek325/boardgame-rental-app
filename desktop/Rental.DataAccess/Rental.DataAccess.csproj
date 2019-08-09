@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Rental.Core\Rental.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-  </ItemGroup>
-
 </Project>
