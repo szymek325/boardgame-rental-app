@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Rental.Core.Interfaces.DataAccess;
 using Rental.Core.Interfaces.DataAccess.Repositories;
 using Rental.Core.MediatR;
 using Rental.Core.Models.Validation;

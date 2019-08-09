@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Rental.Core.Interfaces.DataAccess;
 using Rental.Core.Interfaces.DataAccess.Repositories;
 
 namespace Rental.Core.Requests.Handlers
