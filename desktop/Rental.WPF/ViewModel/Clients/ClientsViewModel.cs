@@ -19,10 +19,10 @@ namespace Rental.WPF.ViewModel.Clients
     {
         private readonly ICollectionView _clientsView;
         private readonly IMapper _mapper;
-        private AddClientWindow _addClientWindow;
-        private string _filter;
         private readonly IMediatorService _mediatorService;
         private readonly IUnitOfWork _unitOfWork;
+        private AddClientWindow _addClientWindow;
+        private string _filter;
 
         public ClientsViewModel(IMapper mapper, IMediatorService mediatorService, IUnitOfWork unitOfWork)
         {

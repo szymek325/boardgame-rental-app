@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
@@ -19,7 +18,8 @@ namespace Rental.Core.Requests.Handlers
             var client = await _mediator.Send(new GetClientByIdRequest(request.Id), cancellationToken);
             //var anyOpen
             //TODO
-            return String.Empty;;
+            return string.Empty;
+            ;
         }
     }
 }
