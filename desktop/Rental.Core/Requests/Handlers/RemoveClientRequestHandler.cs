@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Rental.Core.Interfaces.DataAccess;
 
 namespace Rental.Core.Requests.Handlers
 {
@@ -15,11 +16,14 @@ namespace Rental.Core.Requests.Handlers
 
         public async Task<string> Handle(RemoveClientRequest request, CancellationToken cancellationToken)
         {
-            var client = await _mediator.Send(new GetClientByIdRequest(request.Id), cancellationToken);
-            //var anyOpen
-            //TODO
-            return string.Empty;
-            ;
+            var canBeRemoved = await _mediator.Send(new CheckIfClientCanBeRemovedRequest(request.Id), cancellationToken);
+            if (canBeRemoved)
+            {
+                await _mediator.Publish(new RemoveAndSaveClientNotification(request.Id), cancellationToken);
+                return $"Client with id {request.Id} was removed successfully";
+            }
+
+            return $"Client with id {request.Id} can't be removed because of open rentals";
         }
     }
 }
