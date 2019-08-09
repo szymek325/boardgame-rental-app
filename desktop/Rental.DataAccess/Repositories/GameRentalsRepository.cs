@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ namespace Rental.DataAccess.Repositories
             return result;
         }
 
-        public async Task<GameRental> GetAsync(int? id)
+        public async Task<GameRental> GetAsync(Guid? id)
         {
             var entity = await _rentalContext.GameRentals
                 .Include(x => x.BoardGame)

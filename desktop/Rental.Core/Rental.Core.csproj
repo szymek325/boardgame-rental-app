@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Requests\" />
+    <Folder Include="Notifications\Handlers\" />
   </ItemGroup>
 
 </Project>

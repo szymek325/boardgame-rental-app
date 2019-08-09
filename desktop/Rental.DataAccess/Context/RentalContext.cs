@@ -30,13 +30,14 @@ namespace Rental.DataAccess.Context
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
             modelBuilder.Entity<Client>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
-            //FillData(modelBuilder);
+            FillData(modelBuilder);
         }
 
         private static void FillData(ModelBuilder modelBuilder)
         {
             var customers = Builder<Client>.CreateListOfSize(100)
                 .All()
+                .With(c=>c.Id=Guid.NewGuid())
                 .With(c => c.FirstName = Name.First())
                 .With(c => c.LastName = Name.Last())
                 .With(c => c.ContactNumber = Phone.Number())

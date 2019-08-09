@@ -10,7 +10,7 @@ namespace Rental.Core.Interfaces.DataAccess.Repositories
     {
         IEnumerable<BoardGame> GetAll();
         IEnumerable<BoardGame> GetAllAvailableForRental();
-        Task<BoardGame> GetAsync(int? id);
+        Task<BoardGame> GetAsync(Guid? id);
         Task AddAsync(BoardGame model);
         void Remove(BoardGame model);
         void Update(BoardGame model);

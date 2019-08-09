@@ -9,7 +9,7 @@ namespace Rental.Core.Interfaces.DataAccess.Repositories
     public interface IGameRentalsRepository
     {
         IEnumerable<GameRental> GetAll();
-        Task<GameRental> GetAsync(int? id);
+        Task<GameRental> GetAsync(Guid? id);
         Task AddAsync(GameRental model);
         void Update(GameRental model);
     }
