@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Rental.Core.Models;
 
-namespace Rental.Core.Interfaces.DataAccess
+namespace Rental.Core.Interfaces.DataAccess.Repositories
 {
+    [Obsolete("not supported, will be deleted")]
     public interface IClientsRepository
     {
         IEnumerable<Client> GetAll();

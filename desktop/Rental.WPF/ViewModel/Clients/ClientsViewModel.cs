@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Data;
 using AutoMapper;
-using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.Interfaces.DataAccess.Repositories;
 using Rental.Core.MediatR;
 using Rental.Core.Models;
 using Rental.WPF.Events;

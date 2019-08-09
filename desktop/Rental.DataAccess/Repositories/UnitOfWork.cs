@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using Rental.Core.Interfaces.DataAccess;
+using Rental.Core.Interfaces.DataAccess.Repositories;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.Repositories
