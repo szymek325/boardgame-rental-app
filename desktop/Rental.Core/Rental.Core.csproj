@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Interfaces\DataAccess\BoardGame\" />
+    <Folder Include="Interfaces\DataAccess\GameRental\" />
+    <Folder Include="MediatR\" />
     <Folder Include="Notifications\Handlers\" />
   </ItemGroup>
 

@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Rental.Core.Interfaces.DataAccess;
-using Rental.Core.Models;
+using Rental.Core.Interfaces.DataAccess.Client;
 using Rental.DataAccess.Context;
 
-namespace Rental.DataAccess.Handlers
+namespace Rental.DataAccess.Handlers.Client
 {
-    internal class AddAndSaveClientRequestHandler : IRequestHandler<AddAndSaveClientRequest, Client>
+    internal class AddAndSaveClientRequestHandler : IRequestHandler<AddAndSaveClientRequest, Core.Models.Client>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -19,11 +19,11 @@ namespace Rental.DataAccess.Handlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<Client> Handle(AddAndSaveClientRequest request, CancellationToken cancellationToken)
+        public async Task<Core.Models.Client> Handle(AddAndSaveClientRequest request, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<Entities.Client>(request.Client);
             await _rentalContext.Clients.AddAsync(entity, cancellationToken);
-            var result = _mapper.Map<Client>(entity);
+            var result = _mapper.Map<Core.Models.Client>(entity);
             return result;
         }
     }

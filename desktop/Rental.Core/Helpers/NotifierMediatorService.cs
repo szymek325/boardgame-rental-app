@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 
-namespace Rental.Core.MediatR
+namespace Rental.Core.Helpers
 {
     public interface IMediatorService
     {

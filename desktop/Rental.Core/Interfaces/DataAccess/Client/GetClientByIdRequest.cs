@@ -1,10 +1,9 @@
 ﻿using System;
 using MediatR;
-using Rental.Core.Models;
 
-namespace Rental.Core.Interfaces.DataAccess
+namespace Rental.Core.Interfaces.DataAccess.Client
 {
-    public class GetClientByIdRequest : IRequest<Client>
+    public class GetClientByIdRequest : IRequest<Models.Client>
     {
         public GetClientByIdRequest(Guid id)
         {
