@@ -10,4 +10,12 @@ namespace Rental.Core.Models.Validation
             RuleFor(x => x.Price).GreaterThan(0);
         }
     }
+
+    internal class UpdateBoardGameValidator : BoardGameValidator
+    {
+        public UpdateBoardGameValidator()
+        {
+            RuleFor(x => x.Id).NotEmpty().NotNull();
+        }
+    }
 }
