@@ -3,9 +3,9 @@ using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.ClientRequests
 {
-    public class AddAndSaveClientRequest : IRequest<Client>
+    public class AddAndSaveClientNotification : INotification
     {
-        public AddAndSaveClientRequest(Client client)
+        public AddAndSaveClientNotification(Client client)
         {
             Client = client;
         }

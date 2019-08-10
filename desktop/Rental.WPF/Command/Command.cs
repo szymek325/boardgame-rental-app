@@ -3,17 +3,17 @@ using System.Windows.Input;
 
 namespace Rental.WPF.Command
 {
-    public class DelegateCommand<T> : ICommand where T : class
+    public class Command<T> : ICommand where T : class
     {
         private readonly Predicate<T> _canExecute;
         private readonly Action<T> _execute;
 
-        public DelegateCommand(Action<T> execute)
+        public Command(Action<T> execute)
             : this(execute, null)
         {
         }
 
-        public DelegateCommand(Action<T> execute, Predicate<T> canExecute)
+        public Command(Action<T> execute, Predicate<T> canExecute)
         {
             _execute = execute;
             _canExecute = canExecute;

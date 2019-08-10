@@ -3,9 +3,9 @@ using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.BoardGameRequests
 {
-    public class AddAndSaveBoardGameRequest : IRequest<BoardGame>
+    public class AddAndSaveBoardGameNotification : INotification
     {
-        public AddAndSaveBoardGameRequest(BoardGame boardGame)
+        public AddAndSaveBoardGameNotification(BoardGame boardGame)
         {
             BoardGame = boardGame;
         }
