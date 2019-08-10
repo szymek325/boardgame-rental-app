@@ -1,7 +1,7 @@
-﻿using Rental.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.Repositories
 {

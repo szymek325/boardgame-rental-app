@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Rental.Core.Interfaces.DataAccess.BoardGameRequests
 {
-    public class RemoveAndSaveGameBoardNotification : INotification
+    public class RemoveAndSaveBoardGameNotification : INotification
     {
-        public RemoveAndSaveGameBoardNotification(Guid id)
+        public RemoveAndSaveBoardGameNotification(Guid id)
         {
             Id = id;
         }

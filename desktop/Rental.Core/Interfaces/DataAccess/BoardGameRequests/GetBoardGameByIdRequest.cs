@@ -1,11 +1,12 @@
 ﻿using System;
 using MediatR;
+using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.BoardGameRequests
 {
-    public class GetGameBoardByIdRequest : IRequest<Models.Client>
+    public class GetBoardGameByIdRequest : IRequest<BoardGame>
     {
-        public GetGameBoardByIdRequest(Guid id)
+        public GetBoardGameByIdRequest(Guid id)
         {
             Id = id;
         }

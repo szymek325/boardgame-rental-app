@@ -18,7 +18,8 @@ namespace Rental.DataAccess.Handlers.ClientHandlers
 
         public async Task Handle(RemoveAndSaveClientNotification notification, CancellationToken cancellationToken)
         {
-            var client = await _rentalContext.Clients.SingleOrDefaultAsync(x => x.Id == notification.Id, cancellationToken);
+            var client =
+                await _rentalContext.Clients.SingleOrDefaultAsync(x => x.Id == notification.Id, cancellationToken);
             _rentalContext.Clients.Remove(client);
             await _rentalContext.SaveChangesAsync(cancellationToken);
         }

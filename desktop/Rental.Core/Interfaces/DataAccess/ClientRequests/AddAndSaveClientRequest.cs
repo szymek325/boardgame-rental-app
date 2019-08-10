@@ -1,14 +1,15 @@
 ﻿using MediatR;
+using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.ClientRequests
 {
-    public class AddAndSaveClientRequest : IRequest<Models.Client>
+    public class AddAndSaveClientRequest : IRequest<Client>
     {
-        public AddAndSaveClientRequest(Models.Client client)
+        public AddAndSaveClientRequest(Client client)
         {
             Client = client;
         }
 
-        public Models.Client Client { get; }
+        public Client Client { get; }
     }
 }

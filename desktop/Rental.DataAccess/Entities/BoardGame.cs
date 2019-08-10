@@ -6,8 +6,7 @@ namespace Rental.DataAccess.Entities
 {
     internal class BoardGame
     {
-        [Key]
-        public Guid Id { get; set; }
+        [Key] public Guid Id { get; set; }
 
         public string Name { get; set; }
         public float Price { get; set; }
