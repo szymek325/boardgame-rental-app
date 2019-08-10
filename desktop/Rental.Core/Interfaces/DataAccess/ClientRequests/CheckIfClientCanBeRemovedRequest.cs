@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Rental.Core.Interfaces.DataAccess.Client
+namespace Rental.Core.Interfaces.DataAccess.ClientRequests
 {
     public class CheckIfClientCanBeRemovedRequest : IRequest<bool>
     {

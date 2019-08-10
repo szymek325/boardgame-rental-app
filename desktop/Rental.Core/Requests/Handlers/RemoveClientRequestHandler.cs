@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Interfaces.DataAccess;
-using Rental.Core.Interfaces.DataAccess.Client;
+using Rental.Core.Interfaces.DataAccess.ClientRequests;
 
 namespace Rental.Core.Requests.Handlers
 {
