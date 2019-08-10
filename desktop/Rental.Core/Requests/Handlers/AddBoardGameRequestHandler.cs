@@ -5,29 +5,28 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
 using Rental.Core.Models.Validation;
-using Rental.Core.Notifications;
 
 namespace Rental.Core.Requests.Handlers
 {
-    internal class AddClientRequestHandler : IRequestHandler<AddClientRequest, Guid>
+    internal class AddBoardGameRequestHandler : IRequestHandler<AddBoardGameRequest, Guid>
     {
         private readonly IMediatorService _mediatorService;
 
-        public AddClientRequestHandler(IMediatorService mediatorService)
+        public AddBoardGameRequestHandler(IMediatorService mediatorService)
         {
             _mediatorService = mediatorService;
         }
 
-        public async Task<Guid> Handle(AddClientRequest request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(AddBoardGameRequest request, CancellationToken cancellationToken)
         {
-            var validator = new ClientValidator();
-            var validationResult = validator.Validate(request.Client);
+            var validator = new BoardGameValidator();
+            var validationResult = validator.Validate(request.BoardGame);
             if (validationResult.IsValid)
             {
-                var response = await _mediatorService.Request(new AddAndSaveClientRequest(request.Client), cancellationToken);
-                await _mediatorService.Notify(new NewClientAddedNotification(request.Client), cancellationToken);
+                var response = await _mediatorService.Request(new AddAndSaveBoardGameRequest(request.BoardGame), cancellationToken);
+                //await _mediatorService.Notify(new NewClientAddedNotification(request.Client));
                 return response.Id;
             }
 
