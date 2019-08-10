@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess;
-using Rental.Core.Interfaces.DataAccess.Client;
+using Rental.Core.Interfaces.DataAccess.ClientRequests;
 using Rental.Core.Models.Validation;
 using Rental.Core.Notifications;
 

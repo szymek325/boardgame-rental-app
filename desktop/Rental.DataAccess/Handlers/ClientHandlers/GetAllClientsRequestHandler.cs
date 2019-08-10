@@ -4,11 +4,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess;
-using Rental.Core.Interfaces.DataAccess.Client;
+using Rental.Core.Interfaces.DataAccess.ClientRequests;
 using Rental.DataAccess.Context;
 
-namespace Rental.DataAccess.Handlers.Client
+namespace Rental.DataAccess.Handlers.ClientHandlers
 {
     internal class GetAllClientsRequestHandler : IRequestHandler<GetAllClientsRequest, IList<Core.Models.Client>>
     {
