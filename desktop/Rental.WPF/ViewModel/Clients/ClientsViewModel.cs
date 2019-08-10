@@ -45,7 +45,7 @@ namespace Rental.WPF.ViewModel.Clients
                     return true;
                 return client.EmailAddress.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0;
             };
-            ButtonClickCommand = new DelegateCommand<string>(
+            ButtonClickCommand = new Command<string>(
                 s =>
                 {
                     _addClientWindow = new AddClientWindow(new AddClientViewModel(_mediatorService));
@@ -55,7 +55,7 @@ namespace Rental.WPF.ViewModel.Clients
             );
             ButtonClickCommand.RaiseCanExecuteChanged();
 
-            OnRowDoubleClick = new DelegateCommand<Client>(s =>
+            OnRowDoubleClick = new Command<Client>(s =>
             {
                 //TODO new page should not be created here
                 Trace.WriteLine($"test row {s.FirstName}");
@@ -64,7 +64,7 @@ namespace Rental.WPF.ViewModel.Clients
             });
         }
 
-        public DelegateCommand<string> ButtonClickCommand { get; }
+        public Command<string> ButtonClickCommand { get; }
 
         public ObservableCollection<Client> Clients { get; }
 
@@ -81,7 +81,7 @@ namespace Rental.WPF.ViewModel.Clients
             }
         }
 
-        public DelegateCommand<Client> OnRowDoubleClick { get; }
+        public Command<Client> OnRowDoubleClick { get; }
 
         private void UpdateClientIfNewUserWasAdded(object sender, Client e)
         {

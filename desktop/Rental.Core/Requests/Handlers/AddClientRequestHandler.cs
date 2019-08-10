@@ -8,7 +8,6 @@ using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.ClientRequests;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
-using Rental.Core.Notifications;
 
 namespace Rental.Core.Requests.Handlers
 {
@@ -29,10 +28,10 @@ namespace Rental.Core.Requests.Handlers
             var validationResult = validator.Validate(newClient);
             if (validationResult.IsValid)
             {
-                var response =
-                    await _mediatorService.Request(new AddAndSaveClientRequest(newClient), cancellationToken);
-                await _mediatorService.Notify(new NewClientAddedNotification(newClient), cancellationToken);
-                return response.Id;
+                newClient.Id = Guid.NewGuid();
+                await _mediatorService.Notify(new AddAndSaveClientNotification(newClient), cancellationToken);
+                //await _mediatorService.Notify(new NewClientAddedNotification(newClient), cancellationToken);
+                return newClient.Id;
             }
 
             var builder = new StringBuilder();
