@@ -35,7 +35,7 @@ namespace Rental.DataAccess.Context
 
         private static void FillData(ModelBuilder modelBuilder)
         {
-            var customers = Builder<Client>.CreateListOfSize(100)
+            var client = Builder<Client>.CreateListOfSize(100)
                 .All()
                 .With(c => c.Id = Guid.NewGuid())
                 .With(c => c.FirstName = Name.First())
@@ -43,8 +43,15 @@ namespace Rental.DataAccess.Context
                 .With(c => c.ContactNumber = Phone.Number())
                 .With(c => c.EmailAddress = Internet.Email())
                 .Build();
+            modelBuilder.Entity<Client>().HasData(client);
 
-            modelBuilder.Entity<Client>().HasData(customers);
+            var boardGames = Builder<BoardGame>.CreateListOfSize(100)
+                .All()
+                .With(c => c.Id = Guid.NewGuid())
+                .With(c => c.Name = Lorem.GetFirstWord())
+                .With(c => c.Price = RandomNumber.Next(50, 250))
+                .Build();
+            modelBuilder.Entity<BoardGame>().HasData(boardGames);
         }
     }
 }
