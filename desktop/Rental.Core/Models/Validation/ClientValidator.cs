@@ -13,4 +13,12 @@ namespace Rental.Core.Models.Validation
             RuleFor(x => x.ContactNumber).ContactNumber();
         }
     }
+
+    internal class UpdateClientValidator : ClientValidator
+    {
+        public UpdateClientValidator()
+        {
+            RuleFor(x => x.Id).NotEmpty().NotEmpty();
+        }
+    }
 }
