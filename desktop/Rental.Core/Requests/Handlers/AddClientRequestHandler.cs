@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Models;
 using Rental.Core.Models.Validation;
 using Rental.Core.Notifications;
 
@@ -23,11 +24,14 @@ namespace Rental.Core.Requests.Handlers
         public async Task<Guid> Handle(AddClientRequest request, CancellationToken cancellationToken)
         {
             var validator = new ClientValidator();
-            var validationResult = validator.Validate(request.Client);
+            var newClient = new Client(request.FirstName, request.LastName, request.ContactNumber,
+                request.EmailAddress);
+            var validationResult = validator.Validate(newClient);
             if (validationResult.IsValid)
             {
-                var response = await _mediatorService.Request(new AddAndSaveClientRequest(request.Client), cancellationToken);
-                await _mediatorService.Notify(new NewClientAddedNotification(request.Client), cancellationToken);
+                var response =
+                    await _mediatorService.Request(new AddAndSaveClientRequest(newClient), cancellationToken);
+                await _mediatorService.Notify(new NewClientAddedNotification(newClient), cancellationToken);
                 return response.Id;
             }
 

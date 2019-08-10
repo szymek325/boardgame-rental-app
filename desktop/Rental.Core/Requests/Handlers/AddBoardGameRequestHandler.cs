@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Models;
 using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.Handlers
@@ -22,10 +23,11 @@ namespace Rental.Core.Requests.Handlers
         public async Task<Guid> Handle(AddBoardGameRequest request, CancellationToken cancellationToken)
         {
             var validator = new BoardGameValidator();
-            var validationResult = validator.Validate(request.BoardGame);
+            var newBoardGame = new BoardGame(request.Name, request.Price);
+            var validationResult = validator.Validate(newBoardGame);
             if (validationResult.IsValid)
             {
-                var response = await _mediatorService.Request(new AddAndSaveBoardGameRequest(request.BoardGame), cancellationToken);
+                var response = await _mediatorService.Request(new AddAndSaveBoardGameRequest(newBoardGame), cancellationToken);
                 //await _mediatorService.Notify(new NewClientAddedNotification(request.Client));
                 return response.Id;
             }

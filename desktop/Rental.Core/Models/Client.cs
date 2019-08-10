@@ -11,6 +11,7 @@ namespace Rental.Core.Models
             LastName = lastName;
             ContactNumber = contactNumber;
             EmailAddress = emailAddress;
+            CreationTime = DateTime.UtcNow;
         }
 
         public Client()

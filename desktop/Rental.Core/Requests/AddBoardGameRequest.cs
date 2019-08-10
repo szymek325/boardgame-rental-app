@@ -1,16 +1,17 @@
 ﻿using System;
 using MediatR;
-using Rental.Core.Models;
 
 namespace Rental.Core.Requests
 {
     public class AddBoardGameRequest : IRequest<Guid>
     {
-        public AddBoardGameRequest(BoardGame boardGame)
+        public AddBoardGameRequest(string name, float price)
         {
-            BoardGame = boardGame;
+            Name = name;
+            Price = price;
         }
 
-        public BoardGame BoardGame { get; set; }
+        public string Name { get; set; }
+        public float Price { get; set; }
     }
 }
