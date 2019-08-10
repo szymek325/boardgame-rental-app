@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.8.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Rental.Core\Rental.Core.csproj" />
+    <ProjectReference Include="..\Rental.DataAccess\Rental.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>
