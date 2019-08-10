@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Rental.Core.Models
 {
@@ -22,5 +23,6 @@ namespace Rental.Core.Models
         public string ContactNumber { get; set; }
         public string EmailAddress { get; set; }
         public DateTime CreationTime { get; set; }
+        public ICollection<GameRental> GameRentals { get; set; }
     }
 }

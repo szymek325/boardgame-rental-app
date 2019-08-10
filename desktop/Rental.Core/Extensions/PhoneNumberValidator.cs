@@ -8,7 +8,8 @@ namespace Rental.Core.Extensions
     {
     }
 
-    public class PhoneNumberValidator : PropertyValidator, IRegularExpressionValidator, IPropertyValidator, IPhoneNumberValidator
+    public class PhoneNumberValidator : PropertyValidator, IRegularExpressionValidator, IPropertyValidator,
+        IPhoneNumberValidator
     {
         private readonly Regex _regex;
 
