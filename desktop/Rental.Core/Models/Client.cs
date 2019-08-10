@@ -18,6 +18,15 @@ namespace Rental.Core.Models
         {
         }
 
+        public Client(Guid id, string firstName, string lastName, string contactNumber, string emailAddress)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            ContactNumber = contactNumber;
+            EmailAddress = emailAddress;
+        }
+
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
