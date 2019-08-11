@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Rental.DataAccess\Rental.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dto\" />
+  </ItemGroup>
+
 </Project>
