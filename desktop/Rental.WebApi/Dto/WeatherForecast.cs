@@ -1,6 +1,6 @@
 using System;
 
-namespace Rental.WebApi
+namespace Rental.WebApi.Dto
 {
     public class WeatherForecast
     {
