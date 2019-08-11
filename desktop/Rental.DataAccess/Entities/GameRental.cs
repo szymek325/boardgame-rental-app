@@ -25,6 +25,8 @@ namespace Rental.DataAccess.Entities
         [Required]
         public DateTime CreationTime { get; set; }
 
+        public DateTime? FinishTime { get; set; }
+
         public BoardGame BoardGame { get; set; }
         public Client Client { get; set; }
 
