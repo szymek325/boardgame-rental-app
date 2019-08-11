@@ -12,5 +12,7 @@ namespace Rental.Core.Models
         public BoardGame BoardGame { get; set; }
         public Client Client { get; set; }
         public Status Status { get; set; }
+        public DateTime CreationTime { get; set; }
+        public DateTime? FinishTime { get; set; }
     }
 }
