@@ -19,10 +19,10 @@ namespace Rental.Core.Requests.Handlers
         {
             var canBeRemoved =
                 await _mediatorService.Request(new CheckIfBoardGameCanBeRemovedRequest(request.Id), cancellationToken);
-            if (!canBeRemoved) return $"Client with id {request.Id} can't be removed because of open rentals";
+            if (!canBeRemoved) return $"BoardGame with id {request.Id} can't be removed because of open rentals";
 
             await _mediatorService.Notify(new RemoveAndSaveBoardGameNotification(request.Id), cancellationToken);
-            return $"Client with id {request.Id} was removed successfully";
+            return $"BoardGame with id {request.Id} was removed successfully";
         }
     }
 }
