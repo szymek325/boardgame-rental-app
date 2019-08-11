@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +10,7 @@ using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.Handlers
 {
-    internal class AddBoardGameRequestHandler : IRequestHandler<AddBoardGameRequest, Guid>
+    internal class AddBoardGameRequestHandler : IRequestHandler<AddBoardGameRequest, AddBoardGameRequestResult>
     {
         private readonly IMediatorService _mediatorService;
 
@@ -20,7 +19,8 @@ namespace Rental.Core.Requests.Handlers
             _mediatorService = mediatorService;
         }
 
-        public async Task<Guid> Handle(AddBoardGameRequest request, CancellationToken cancellationToken)
+        public async Task<AddBoardGameRequestResult> Handle(AddBoardGameRequest request,
+            CancellationToken cancellationToken)
         {
             var validator = new BoardGameValidator();
             var newBoardGame = new BoardGame(request.Name, request.Price);
@@ -30,14 +30,14 @@ namespace Rental.Core.Requests.Handlers
                 newBoardGame.Id = Guid.NewGuid();
                 await _mediatorService.Notify(new AddAndSaveBoardGameNotification(newBoardGame), cancellationToken);
                 //await _mediatorService.Notify(new NewClientAddedNotification(request.Client));
-                return newBoardGame.Id;
+                return new AddBoardGameRequestResult(newBoardGame.Id);
             }
 
             var builder = new StringBuilder();
             foreach (var validationFailure in validationResult.Errors)
                 builder.AppendLine($"{validationFailure.PropertyName}- {validationFailure.ErrorMessage}");
-            Trace.WriteLine(builder.ToString());
-            return Guid.Empty;
+
+            return new AddBoardGameRequestResult(builder.ToString());
         }
     }
 }
