@@ -23,7 +23,7 @@ namespace Rental.DataAccess.Handlers.BoardGameHandlers
 
         public async Task<IList<BoardGame>> Handle(GetAllBoardGamesRequest request, CancellationToken cancellationToken)
         {
-            var boardGames = await _rentalContext.Clients.ToListAsync(cancellationToken);
+            var boardGames = await _rentalContext.BoardGames.ToListAsync(cancellationToken);
             var mappedBoardGames = _mapper.Map<IList<BoardGame>>(boardGames);
             return mappedBoardGames;
         }

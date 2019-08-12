@@ -1,6 +1,7 @@
 ﻿using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.ClientRequests;
 using Rental.Core.Requests;
+using Rental.Core.Requests.Clients;
 using Rental.WPF.Command;
 using Rental.WPF.Events;
 

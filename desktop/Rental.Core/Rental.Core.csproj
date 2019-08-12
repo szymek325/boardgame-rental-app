@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
     <PackageReference Include="FluentValidation" Version="8.4.0" />
     <PackageReference Include="MediatR" Version="7.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -20,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\DataAccess\GameRentalRequests\" />
     <Folder Include="Notifications\Handlers\" />
+    <Folder Include="Requests\Rentals\" />
   </ItemGroup>
 
 </Project>
