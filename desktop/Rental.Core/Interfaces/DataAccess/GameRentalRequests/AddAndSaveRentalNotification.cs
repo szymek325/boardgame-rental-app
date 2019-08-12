@@ -3,7 +3,7 @@ using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.GameRentalRequests
 {
-    internal class AddAndSaveRentalNotification : INotification
+    public class AddAndSaveRentalNotification : INotification
     {
         public AddAndSaveRentalNotification(GameRental gameRental)
         {
