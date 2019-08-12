@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows.Data;
 using AutoMapper;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.Repositories;
+using Rental.Core.Interfaces.DataAccess.ClientRequests;
 using Rental.Core.Models;
 using Rental.WPF.Command;
 using Rental.WPF.Events;
@@ -20,17 +20,15 @@ namespace Rental.WPF.ViewModel.Clients
         private readonly ICollectionView _clientsView;
         private readonly IMapper _mapper;
         private readonly IMediatorService _mediatorService;
-        private readonly IUnitOfWork _unitOfWork;
         private AddClientWindow _addClientWindow;
         private string _filter;
 
-        public ClientsViewModel(IMapper mapper, IMediatorService mediatorService, IUnitOfWork unitOfWork)
+        public ClientsViewModel(IMapper mapper, IMediatorService mediatorService)
         {
-            _unitOfWork = unitOfWork;
             ClientEvents.OnNewClientAdded += UpdateClientIfNewUserWasAdded;
             _mediatorService = mediatorService;
             _mapper = mapper;
-            Clients = new ObservableCollection<Client>(GetEmployees());
+            Clients = new ObservableCollection<Client>(GetClients());
             _clientsView = CollectionViewSource.GetDefaultView(Clients);
             _clientsView.Filter = o =>
             {
@@ -45,7 +43,7 @@ namespace Rental.WPF.ViewModel.Clients
                     return true;
                 return client.EmailAddress.IndexOf(Filter, StringComparison.OrdinalIgnoreCase) >= 0;
             };
-            ButtonClickCommand = new DelegateCommand<string>(
+            ButtonClickCommand = new Command<string>(
                 s =>
                 {
                     _addClientWindow = new AddClientWindow(new AddClientViewModel(_mediatorService));
@@ -55,7 +53,7 @@ namespace Rental.WPF.ViewModel.Clients
             );
             ButtonClickCommand.RaiseCanExecuteChanged();
 
-            OnRowDoubleClick = new DelegateCommand<Client>(s =>
+            OnRowDoubleClick = new Command<Client>(s =>
             {
                 //TODO new page should not be created here
                 Trace.WriteLine($"test row {s.FirstName}");
@@ -64,7 +62,7 @@ namespace Rental.WPF.ViewModel.Clients
             });
         }
 
-        public DelegateCommand<string> ButtonClickCommand { get; }
+        public Command<string> ButtonClickCommand { get; }
 
         public ObservableCollection<Client> Clients { get; }
 
@@ -81,7 +79,7 @@ namespace Rental.WPF.ViewModel.Clients
             }
         }
 
-        public DelegateCommand<Client> OnRowDoubleClick { get; }
+        public Command<Client> OnRowDoubleClick { get; }
 
         private void UpdateClientIfNewUserWasAdded(object sender, Client e)
         {
@@ -90,9 +88,9 @@ namespace Rental.WPF.ViewModel.Clients
             _addClientWindow.Close();
         }
 
-        private List<Client> GetEmployees()
+        private List<Client> GetClients()
         {
-            var clients = _unitOfWork.ClientsRepository.GetAll();
+            var clients = _mediatorService.Request(new GetAllClientsRequest()).Result;
             return clients.ToList();
         }
 

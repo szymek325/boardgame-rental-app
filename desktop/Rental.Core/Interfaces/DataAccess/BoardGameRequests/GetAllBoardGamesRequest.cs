@@ -4,7 +4,7 @@ using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.BoardGameRequests
 {
-    public class GetAllBoardGamesRequest : IRequest, IRequest<IList<BoardGame>>
+    public class GetAllBoardGamesRequest : IRequest<IList<BoardGame>>
     {
     }
 }

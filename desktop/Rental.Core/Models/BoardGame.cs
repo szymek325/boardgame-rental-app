@@ -12,7 +12,7 @@ namespace Rental.Core.Models
         {
             Name = name;
             Price = price;
-            CreationTime=DateTime.UtcNow;
+            CreationTime = DateTime.UtcNow;
         }
 
         public Guid Id { get; set; }
