@@ -5,7 +5,7 @@ using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.ClientRequests;
 using Rental.Core.Models.Validation;
 
-namespace Rental.Core.Requests.Handlers
+namespace Rental.Core.Requests.Clients
 {
     internal class UpdateClientRequestHandler : IRequestHandler<UpdateClientRequest, string>
     {

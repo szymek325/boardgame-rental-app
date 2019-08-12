@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
-using Rental.Core.Requests;
+using Rental.Core.Requests.BoardGames;
 
 namespace Rental.WebApi.Controllers
 {

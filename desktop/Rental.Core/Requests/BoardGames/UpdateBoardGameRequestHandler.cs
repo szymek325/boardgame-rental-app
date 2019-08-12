@@ -1,13 +1,11 @@
-﻿using System.Diagnostics;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
 using Rental.Core.Models.Validation;
 
-namespace Rental.Core.Requests.Handlers
+namespace Rental.Core.Requests.BoardGames
 {
     internal class UpdateBoardGameRequestHandler : IRequestHandler<UpdateBoardGameRequest, string>
     {

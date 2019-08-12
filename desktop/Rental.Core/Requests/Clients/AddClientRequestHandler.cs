@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -9,7 +7,7 @@ using Rental.Core.Interfaces.DataAccess.ClientRequests;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
 
-namespace Rental.Core.Requests.Handlers
+namespace Rental.Core.Requests.Clients
 {
     internal class AddClientRequestHandler : IRequestHandler<AddClientRequest, Guid>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Rental.Core.Requests
+namespace Rental.Core.Requests.BoardGames
 {
     internal class UpdateBoardGameRequest : IRequest<string>
     {
