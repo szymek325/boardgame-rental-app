@@ -23,6 +23,7 @@ namespace Rental.DataAccess.Handlers.BoardGameHandlers
         {
             var entity = _mapper.Map<BoardGame>(notification.BoardGame);
             await _rentalContext.BoardGames.AddAsync(entity, cancellationToken);
+            await _rentalContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -6,6 +6,7 @@ using Rental.Core.Configuration;
 using Rental.DataAccess.Context;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("Rental.DataAccess.Tests")]
 
 namespace Rental.DataAccess
 {
