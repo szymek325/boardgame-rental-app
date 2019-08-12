@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
@@ -34,10 +32,9 @@ namespace Rental.Core.Requests.Handlers
                 return $"Client {client.Id} was successfully updated";
             }
 
-            var builder = new StringBuilder();
-            foreach (var validationFailure in validationResult.Errors)
-                builder.AppendLine($"{validationFailure.PropertyName}- {validationFailure.ErrorMessage}");
-            Trace.WriteLine(builder.ToString());
+            var validationMessage =
+                await _mediatorService.Request(new GetFormattedValidationMessageRequest(validationResult.Errors),
+                    cancellationToken);
             return $"Client {client.Id} was not successfully updated";
         }
     }
