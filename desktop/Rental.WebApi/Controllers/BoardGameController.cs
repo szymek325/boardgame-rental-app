@@ -22,7 +22,7 @@ namespace Rental.WebApi.Controllers
         public async Task<IActionResult> Create(CreateInput input)
         {
             var result = await _mediatorService.Request(new AddBoardGameRequest(input.Name, input.Price));
-            return new OkObjectResult(new CreateOutput(result.NewGameBoardGuid, result.Message));
+            return new OkObjectResult(new CreateOutput(result.NewGuid, result.Message));
         }
 
         [HttpPut]

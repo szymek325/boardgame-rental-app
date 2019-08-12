@@ -1,6 +1,5 @@
 ﻿using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.ClientRequests;
-using Rental.Core.Requests;
 using Rental.Core.Requests.Clients;
 using Rental.WPF.Command;
 using Rental.WPF.Events;
@@ -21,7 +20,7 @@ namespace Rental.WPF.ViewModel.Clients
                 {
                     var guid = await mediatorService.Request(new AddClientRequest(FirstName, LastName, ContactNumber,
                         EmailAddress));
-                    var client = await mediatorService.Request(new GetClientByIdRequest(guid));
+                    var client = await mediatorService.Request(new GetClientByIdRequest(guid.NewGuid));
                     ClientEvents.RaiseOnNewClientAdded(this, client);
                 },
                 s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) &&

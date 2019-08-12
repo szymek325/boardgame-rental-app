@@ -9,7 +9,7 @@ using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.BoardGames
 {
-    internal class AddBoardGameRequestHandler : IRequestHandler<AddBoardGameRequest, AddBoardGameRequestResult>
+    internal class AddBoardGameRequestHandler : IRequestHandler<AddBoardGameRequest, AddRequestResult>
     {
         private readonly IMediatorService _mediatorService;
 
@@ -18,7 +18,7 @@ namespace Rental.Core.Requests.BoardGames
             _mediatorService = mediatorService;
         }
 
-        public async Task<AddBoardGameRequestResult> Handle(AddBoardGameRequest request,
+        public async Task<AddRequestResult> Handle(AddBoardGameRequest request,
             CancellationToken cancellationToken)
         {
             var validator = new BoardGameValidator();
@@ -29,13 +29,13 @@ namespace Rental.Core.Requests.BoardGames
                 newBoardGame.Id = Guid.NewGuid();
                 await _mediatorService.Notify(new AddAndSaveBoardGameNotification(newBoardGame), cancellationToken);
                 //await _mediatorService.Notify(new NewClientAddedNotification(request.Client));
-                return new AddBoardGameRequestResult(newBoardGame.Id);
+                return new AddRequestResult(newBoardGame.Id);
             }
 
             var validationMessage =
                 await _mediatorService.Request(new GetFormattedValidationMessageRequest(validationResult.Errors),
                     cancellationToken);
-            return new AddBoardGameRequestResult(validationMessage);
+            return new AddRequestResult(validationMessage);
         }
     }
 }
