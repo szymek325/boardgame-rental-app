@@ -7,7 +7,7 @@ using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
 
-namespace Rental.Core.Requests.Handlers
+namespace Rental.Core.Requests.BoardGames
 {
     internal class AddBoardGameRequestHandler : IRequestHandler<AddBoardGameRequest, AddBoardGameRequestResult>
     {

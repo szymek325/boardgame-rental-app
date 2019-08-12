@@ -4,7 +4,7 @@ using MediatR;
 using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
 using Rental.Core.Interfaces.DataAccess.ClientRequests;
 
-namespace Rental.Core.Requests.Handlers
+namespace Rental.Core.Requests.Clients
 {
     internal class RemoveClientRequestHandler : IRequestHandler<RemoveClientRequest, string>
     {

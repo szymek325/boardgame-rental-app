@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Rental.Core.Requests.Handlers
+namespace Rental.Core.Requests
 {
     internal class
         GetFormattedValidationMessageRequestHandler : IRequestHandler<GetFormattedValidationMessageRequest, string>
