@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Rental.Core.Interfaces.DataAccess.Repositories;
 using Rental.WPF.View.Clients;
 using Rental.WPF.View.Games;
 using Rental.WPF.View.Rentals;
@@ -15,15 +14,13 @@ namespace Rental.WPF.View.Base
         private readonly ClientsPage _clientsPage;
         private readonly GamesPage _gamesPage;
         private readonly RentalsPage _rentalsPage;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public MenuPage(ClientsPage clientsPage, GamesPage gamesPage, RentalsPage rentalsPage, IUnitOfWork unitOfWork)
+        public MenuPage(ClientsPage clientsPage, GamesPage gamesPage, RentalsPage rentalsPage)
         {
             InitializeComponent();
             _clientsPage = clientsPage;
             _gamesPage = gamesPage;
             _rentalsPage = rentalsPage;
-            _unitOfWork = unitOfWork;
         }
 
 
