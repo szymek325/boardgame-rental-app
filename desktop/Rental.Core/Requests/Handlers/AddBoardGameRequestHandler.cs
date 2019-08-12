@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -33,11 +32,10 @@ namespace Rental.Core.Requests.Handlers
                 return new AddBoardGameRequestResult(newBoardGame.Id);
             }
 
-            var builder = new StringBuilder();
-            foreach (var validationFailure in validationResult.Errors)
-                builder.AppendLine($"{validationFailure.PropertyName}- {validationFailure.ErrorMessage}");
-
-            return new AddBoardGameRequestResult(builder.ToString());
+            var validationMessage =
+                await _mediatorService.Request(new GetFormattedValidationMessageRequest(validationResult.Errors),
+                    cancellationToken);
+            return new AddBoardGameRequestResult(validationMessage);
         }
     }
 }
