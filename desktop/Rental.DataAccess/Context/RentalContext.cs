@@ -6,7 +6,7 @@ using Rental.DataAccess.Entities;
 
 namespace Rental.DataAccess.Context
 {
-    internal sealed class RentalContext : DbContext
+    internal class RentalContext : DbContext
     {
         public RentalContext(DbContextOptions options) : base(options)
         {
