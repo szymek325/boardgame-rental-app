@@ -26,9 +26,7 @@ namespace Rental.Core.Requests.BoardGames
             var validationResult = validator.Validate(newBoardGame);
             if (validationResult.IsValid)
             {
-                newBoardGame.Id = Guid.NewGuid();
                 await _mediatorService.Notify(new AddAndSaveBoardGameNotification(newBoardGame), cancellationToken);
-                //await _mediatorService.Notify(new NewClientAddedNotification(request.Client));
                 return new AddRequestResult(newBoardGame.Id);
             }
 

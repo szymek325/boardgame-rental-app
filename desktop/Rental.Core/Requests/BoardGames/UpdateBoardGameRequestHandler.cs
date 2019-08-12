@@ -21,7 +21,7 @@ namespace Rental.Core.Requests.BoardGames
             var boardGame = await _mediatorService.Request(new GetBoardGameByIdRequest(request.Id), cancellationToken);
             boardGame.Name = request.Name;
             boardGame.Price = request.Price;
-            var validator = new UpdateBoardGameValidator();
+            var validator = new BoardGameValidator();
             var validationResult = validator.Validate(boardGame);
 
             if (validationResult.IsValid)

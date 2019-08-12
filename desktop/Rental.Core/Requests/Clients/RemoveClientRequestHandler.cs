@@ -18,7 +18,7 @@ namespace Rental.Core.Requests.Clients
         public async Task<string> Handle(RemoveClientRequest request, CancellationToken cancellationToken)
         {
             var canBeRemoved =
-                await _mediator.Send(new CheckIfBoardGameCanBeRemovedRequest(request.Id), cancellationToken);
+                await _mediator.Send(new CheckIfBoardGameHasOnlyCompletedRentalsRequest(request.Id), cancellationToken);
             if (!canBeRemoved) return $"Client with id {request.Id} can't be removed because of open rentals";
 
             await _mediator.Publish(new RemoveAndSaveClientNotification(request.Id), cancellationToken);
