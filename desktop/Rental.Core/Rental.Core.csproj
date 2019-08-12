@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Notifications\Handlers\" />
-    <Folder Include="Requests\Rentals\" />
   </ItemGroup>
 
 </Project>

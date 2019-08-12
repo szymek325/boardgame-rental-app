@@ -9,7 +9,7 @@ using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.Clients
 {
-    internal class AddClientRequestHandler : IRequestHandler<AddClientRequest, Guid>
+    internal class AddClientRequestHandler : IRequestHandler<AddClientRequest, AddRequestResult>
     {
         private readonly IMediatorService _mediatorService;
 
@@ -18,7 +18,7 @@ namespace Rental.Core.Requests.Clients
             _mediatorService = mediatorService;
         }
 
-        public async Task<Guid> Handle(AddClientRequest request, CancellationToken cancellationToken)
+        public async Task<AddRequestResult> Handle(AddClientRequest request, CancellationToken cancellationToken)
         {
             var validator = new ClientValidator();
             var newClient = new Client(request.FirstName, request.LastName, request.ContactNumber,
@@ -29,13 +29,13 @@ namespace Rental.Core.Requests.Clients
                 newClient.Id = Guid.NewGuid();
                 await _mediatorService.Notify(new AddAndSaveClientNotification(newClient), cancellationToken);
                 //await _mediatorService.Notify(new NewClientAddedNotification(newClient), cancellationToken);
-                return newClient.Id;
+                return new AddRequestResult(newClient.Id);
             }
 
             var validationMessage =
                 await _mediatorService.Request(new GetFormattedValidationMessageRequest(validationResult.Errors),
                     cancellationToken);
-            return Guid.Empty;
+            return new AddRequestResult(validationMessage);
         }
     }
 }

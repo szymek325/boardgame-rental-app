@@ -1,9 +1,8 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 
 namespace Rental.Core.Requests.Clients
 {
-    public class AddClientRequest : IRequest<Guid>
+    public class AddClientRequest : IRequest<AddRequestResult>
     {
         public AddClientRequest(string firstName, string lastName, string contactNumber, string emailAddress)
         {
