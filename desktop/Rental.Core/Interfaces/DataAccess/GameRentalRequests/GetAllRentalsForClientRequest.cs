@@ -11,6 +11,7 @@ namespace Rental.Core.Interfaces.DataAccess.GameRentalRequests
         {
             ClientId = clientId;
         }
+
         public Guid ClientId { get; set; }
     }
 }
