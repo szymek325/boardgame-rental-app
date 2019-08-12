@@ -6,11 +6,11 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Handlers.BoardGameHandlers;
+using Rental.DataAccess.Mapping;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.BoardGameHandlers
@@ -22,11 +22,11 @@ namespace Rental.DataAccess.Tests.BoardGameHandlers
             _rentalContext = new RentalContext(new DbContextOptionsBuilder<RentalContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options);
-            _mapper = new Mock<IMapper>(MockBehavior.Strict);
-            _sut = new AddAndSaveBoardGameNotificationHandler(_mapper.Object, _rentalContext);
+            _mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
+            _sut = new AddAndSaveBoardGameNotificationHandler(_mapper, _rentalContext);
         }
 
-        private readonly Mock<IMapper> _mapper;
+        private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
         private readonly INotificationHandler<AddAndSaveBoardGameNotification> _sut;
 
@@ -42,24 +42,10 @@ namespace Rental.DataAccess.Tests.BoardGameHandlers
                 Price = boardGame.Price,
                 CreationTime = boardGame.CreationTime
             };
-            _mapper.Setup(x => x.Map<Entities.BoardGame>(boardGame)).Returns(entity);
 
             await _sut.Handle(input, new CancellationToken());
 
             _rentalContext.BoardGames.SingleOrDefault(x => x.Id == entity.Id).Should().BeEquivalentTo(entity);
-        }
-
-        [Fact]
-        public void Handle_Should_ThrowException_When_MapperThrows()
-        {
-            var boardGame = new BoardGame("test", 15);
-            var input = new AddAndSaveBoardGameNotification(boardGame);
-            _mapper.Setup(x => x.Map<Entities.BoardGame>(boardGame)).Throws<ArgumentException>();
-
-            Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
-
-            act.Should().Throw<ArgumentException>();
-            _rentalContext.BoardGames.Should().BeEmpty();
         }
     }
 }
