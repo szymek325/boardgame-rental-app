@@ -7,24 +7,12 @@ namespace Rental.Core.Models
     {
         public Client(string firstName, string lastName, string contactNumber, string emailAddress)
         {
+            Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             ContactNumber = contactNumber;
             EmailAddress = emailAddress;
             CreationTime = DateTime.UtcNow;
-        }
-
-        public Client()
-        {
-        }
-
-        public Client(Guid id, string firstName, string lastName, string contactNumber, string emailAddress)
-        {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            ContactNumber = contactNumber;
-            EmailAddress = emailAddress;
         }
 
         public Guid Id { get; set; }

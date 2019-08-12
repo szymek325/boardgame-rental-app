@@ -10,16 +10,16 @@ using Rental.DataAccess.Context;
 namespace Rental.DataAccess.Handlers.BoardGameHandlers
 {
     internal class
-        CheckIfBoardGameCanBeRemovedRequestHandler : IRequestHandler<CheckIfBoardGameCanBeRemovedRequest, bool>
+        CheckIfBoardGameHasOnlyCompletedRentalsRequestHandler : IRequestHandler<CheckIfBoardGameHasOnlyCompletedRentalsRequest, bool>
     {
         private readonly RentalContext _rentalContext;
 
-        public CheckIfBoardGameCanBeRemovedRequestHandler(RentalContext rentalContext)
+        public CheckIfBoardGameHasOnlyCompletedRentalsRequestHandler(RentalContext rentalContext)
         {
             _rentalContext = rentalContext;
         }
 
-        public async Task<bool> Handle(CheckIfBoardGameCanBeRemovedRequest request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CheckIfBoardGameHasOnlyCompletedRentalsRequest request, CancellationToken cancellationToken)
         {
             var canBeRemoved = await _rentalContext.GameRentals.Where(x => x.BoardGameId == request.Id)
                 .AllAsync(x => x.Status == Status.Completed, cancellationToken);

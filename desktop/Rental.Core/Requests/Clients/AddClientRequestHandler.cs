@@ -26,7 +26,6 @@ namespace Rental.Core.Requests.Clients
             var validationResult = validator.Validate(newClient);
             if (validationResult.IsValid)
             {
-                newClient.Id = Guid.NewGuid();
                 await _mediatorService.Notify(new AddAndSaveClientNotification(newClient), cancellationToken);
                 //await _mediatorService.Notify(new NewClientAddedNotification(newClient), cancellationToken);
                 return new AddRequestResult(newClient.Id);

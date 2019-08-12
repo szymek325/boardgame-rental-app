@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Rental.Core.Requests.Rentals
 {
-    internal class AddGameRentalRequest : IRequest<Guid>
+    internal class AddGameRentalRequest : IRequest<AddRequestResult>
     {
         public AddGameRentalRequest(Guid clientGuid, Guid boardGameGuid, float chargedDeposit)
         {

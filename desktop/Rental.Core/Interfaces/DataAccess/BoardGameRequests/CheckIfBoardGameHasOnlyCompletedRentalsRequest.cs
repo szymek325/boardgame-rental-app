@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Rental.Core.Interfaces.DataAccess.BoardGameRequests
 {
-    public class CheckIfBoardGameCanBeRemovedRequest : IRequest<bool>
+    public class CheckIfBoardGameHasOnlyCompletedRentalsRequest : IRequest<bool>
     {
-        public CheckIfBoardGameCanBeRemovedRequest(Guid id)
+        public CheckIfBoardGameHasOnlyCompletedRentalsRequest(Guid id)
         {
             Id = id;
         }

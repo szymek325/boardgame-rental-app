@@ -23,7 +23,7 @@ namespace Rental.Core.Requests.Clients
             client.LastName = request.LastName;
             client.EmailAddress = request.EmailAddress;
             client.ContactNumber = request.ContactNumber;
-            var validator = new UpdateClientValidator();
+            var validator = new ClientValidator();
             var validationResult = validator.Validate(client);
 
             if (validationResult.IsValid)

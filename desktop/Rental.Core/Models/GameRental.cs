@@ -4,6 +4,14 @@ namespace Rental.Core.Models
 {
     public class GameRental
     {
+        public GameRental(Guid clientId, Guid boardGameId, float chargedDeposit)
+        {
+            Id = Guid.NewGuid();
+            ClientId = clientId;
+            BoardGameId = boardGameId;
+            ChargedDeposit = chargedDeposit;
+        }
+
         public Guid Id { get; set; }
         public Guid ClientId { get; set; }
         public Guid BoardGameId { get; set; }
