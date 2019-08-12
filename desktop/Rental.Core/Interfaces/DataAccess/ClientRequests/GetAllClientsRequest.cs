@@ -4,7 +4,7 @@ using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.ClientRequests
 {
-    public class GetAllClientsRequest : IRequest, IRequest<IList<Client>>
+    public class GetAllClientsRequest : IRequest<IList<Client>>
     {
     }
 }
