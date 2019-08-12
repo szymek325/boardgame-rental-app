@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\DataAccess\GameRentalRequests\" />
     <Folder Include="Notifications\Handlers\" />
     <Folder Include="Requests\Rentals\" />
   </ItemGroup>
