@@ -36,7 +36,8 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
         {
             var input = new BoardGame("Test Updated", 20);
 
-            Func<Task> act = async () => await _sut.Handle(new UpdateAndSaveBoardGameNotification(input), new CancellationToken());
+            Func<Task> act = async () =>
+                await _sut.Handle(new UpdateAndSaveBoardGameNotification(input), new CancellationToken());
 
             act.Should().Throw<DbUpdateConcurrencyException>();
         }

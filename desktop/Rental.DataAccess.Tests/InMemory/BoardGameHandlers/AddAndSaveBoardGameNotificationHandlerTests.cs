@@ -46,7 +46,24 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
 
             await _sut.Handle(input, new CancellationToken());
 
-            _rentalContext.BoardGames.SingleOrDefault(x => x.Id == entity.Id).Should().BeEquivalentTo(entity);
+            _rentalContext.BoardGames.SingleOrDefault(x => x.Id == boardGame.Id).Should().BeEquivalentTo(entity);
+        }
+
+        [Fact]
+        public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
+        {
+            var boardGame = new BoardGame("test", 15);
+            var input = new AddAndSaveBoardGameNotification(boardGame);
+            var existingEntity = new Entities.BoardGame
+            {
+                Id = boardGame.Id
+            };
+            _rentalContext.BoardGames.Add(existingEntity);
+            _rentalContext.SaveChanges();
+
+            Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
+
+            act.Should().Throw<ArgumentException>();
         }
     }
 }

@@ -36,7 +36,8 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
         {
             var input = new Client("mat", "szym", "123456", "test@test.pl");
 
-            Func<Task> act = async () => await _sut.Handle(new UpdateAndSaveClientNotification(input), new CancellationToken());
+            Func<Task> act = async () =>
+                await _sut.Handle(new UpdateAndSaveClientNotification(input), new CancellationToken());
 
             act.Should().Throw<DbUpdateConcurrencyException>();
         }

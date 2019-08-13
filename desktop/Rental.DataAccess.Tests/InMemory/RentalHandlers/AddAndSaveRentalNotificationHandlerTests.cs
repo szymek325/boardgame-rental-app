@@ -6,55 +6,53 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.GameRentalRequests;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.ClientHandlers;
+using Rental.DataAccess.Handlers.RentalHandlers;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
-namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
+namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
 {
-    public class AddAndSaveClientNotificationHandlerTests
+    public class AddAndSaveRentalNotificationHandlerTests
     {
-        public AddAndSaveClientNotificationHandlerTests()
+        public AddAndSaveRentalNotificationHandlerTests()
         {
             var contextOptions = new DbContextOptionsBuilder<RentalContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new AddAndSaveClientNotificationHandler(mapper, new RentalContext(contextOptions));
+            _sut = new AddAndSaveRentalNotificationHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<AddAndSaveClientNotification> _sut;
+        private readonly INotificationHandler<AddAndSaveRentalNotification> _sut;
 
         [Fact]
         public async Task Handle_Should_AddClientToDb_When_MethodCalled()
         {
-            var client = new Client("mat", "szym", "123456", "test@test.pl");
-            var input = new AddAndSaveClientNotification(client);
+            var rental = new GameRental(Guid.NewGuid(), Guid.NewGuid(), 15);
+            var input = new AddAndSaveRentalNotification(rental);
 
             await _sut.Handle(input, new CancellationToken());
 
-            var result = _rentalContext.Clients.FirstOrDefault(x => x.Id == client.Id);
-            result.ContactNumber.Should().Be(client.ContactNumber);
-            result.EmailAddress.Should().Be(client.EmailAddress);
-            result.FirstName.Should().Be(client.FirstName);
-            result.LastName.Should().Be(client.LastName);
+            var result = _rentalContext.GameRentals.FirstOrDefault(x => x.Id == rental.Id);
+            result.BoardGameId.Should().Be(rental.BoardGameId);
+            result.ClientId.Should().Be(rental.ClientId);
         }
 
         [Fact]
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
-            var client = new Client("mat", "szym", "123456", "test@test.pl");
-            var input = new AddAndSaveClientNotification(client);
-            var existingEntity = new Entities.Client
+            var rental = new GameRental(Guid.NewGuid(), Guid.NewGuid(), 15);
+            var input = new AddAndSaveRentalNotification(rental);
+            var existingEntity = new Entities.GameRental
             {
-                Id = client.Id
+                Id = rental.Id
             };
-            _rentalContext.Clients.Add(existingEntity);
+            _rentalContext.GameRentals.Add(existingEntity);
             _rentalContext.SaveChanges();
 
             Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
