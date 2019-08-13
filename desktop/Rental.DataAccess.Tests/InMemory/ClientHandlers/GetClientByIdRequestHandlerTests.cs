@@ -19,11 +19,12 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
     {
         public GetClientByIdRequestHandlerTests()
         {
-            _rentalContext = new RentalContext(new DbContextOptionsBuilder<RentalContext>()
+            var contextOptions = new DbContextOptionsBuilder<RentalContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options);
+                .Options;
+            _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new GetClientByIdRequestHandler(mapper, _rentalContext);
+            _sut = new GetClientByIdRequestHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;

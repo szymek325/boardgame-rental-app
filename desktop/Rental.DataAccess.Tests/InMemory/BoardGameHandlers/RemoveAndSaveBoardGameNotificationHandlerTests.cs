@@ -58,7 +58,8 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
         {
             var input = Guid.NewGuid();
 
-            Func<Task> act = async () => await _sut.Handle(new RemoveAndSaveBoardGameNotification(input), new CancellationToken());
+            Func<Task> act = async () =>
+                await _sut.Handle(new RemoveAndSaveBoardGameNotification(input), new CancellationToken());
 
             act.Should().Throw<DbUpdateConcurrencyException>();
         }
