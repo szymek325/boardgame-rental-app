@@ -18,10 +18,11 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
     {
         public CheckIfBoardGameHasOnlyCompletedRentalsRequestHandlerTests()
         {
-            _rentalContext = new RentalContext(new DbContextOptionsBuilder<RentalContext>()
+            var contextOptions = new DbContextOptionsBuilder<RentalContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options);
-            _sut = new CheckIfBoardGameHasOnlyCompletedRentalsRequestHandler(_rentalContext);
+                .Options;
+            _rentalContext = new RentalContext(contextOptions);
+            _sut = new CheckIfBoardGameHasOnlyCompletedRentalsRequestHandler(new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
