@@ -24,11 +24,10 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
-            _mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new UpdateAndSaveBoardGameNotificationHandler(_mapper, new RentalContext(contextOptions));
+            IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
+            _sut = new UpdateAndSaveBoardGameNotificationHandler(mapper, new RentalContext(contextOptions));
         }
 
-        private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
         private readonly INotificationHandler<UpdateAndSaveBoardGameNotification> _sut;
 
