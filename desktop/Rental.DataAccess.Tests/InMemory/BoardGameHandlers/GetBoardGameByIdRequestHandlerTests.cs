@@ -13,7 +13,7 @@ using Rental.DataAccess.Handlers.BoardGameHandlers;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
-namespace Rental.DataAccess.Tests.BoardGameHandlers
+namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
 {
     public class GetBoardGameByIdRequestHandlerTests
     {

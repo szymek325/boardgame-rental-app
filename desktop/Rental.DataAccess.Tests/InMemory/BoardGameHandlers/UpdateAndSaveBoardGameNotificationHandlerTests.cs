@@ -14,7 +14,7 @@ using Rental.DataAccess.Handlers.BoardGameHandlers;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
-namespace Rental.DataAccess.Tests.BoardGameHandlers
+namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
 {
     public class UpdateAndSaveBoardGameNotificationHandlerTests
     {
@@ -30,6 +30,16 @@ namespace Rental.DataAccess.Tests.BoardGameHandlers
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
         private readonly INotificationHandler<UpdateAndSaveBoardGameNotification> _sut;
+
+        [Fact]
+        public void Handle_Should_Throw_When_EntityDoesNotExist()
+        {
+            var input = new BoardGame("Test Updated", 20);
+
+            Func<Task> act = async () => await _sut.Handle(new UpdateAndSaveBoardGameNotification(input), new CancellationToken());
+
+            act.Should().Throw<DbUpdateConcurrencyException>();
+        }
 
         [Fact]
         public async Task Handle_Should_UpdateEntity_When_ItExists()
