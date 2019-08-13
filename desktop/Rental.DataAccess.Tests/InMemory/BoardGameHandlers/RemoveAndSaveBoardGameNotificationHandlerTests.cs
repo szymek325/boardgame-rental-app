@@ -18,11 +18,13 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
     {
         public RemoveAndSaveBoardGameNotificationHandlerTests()
         {
-            _rentalContext = new RentalContext(new DbContextOptionsBuilder<RentalContext>()
+            var contextOptions = new DbContextOptionsBuilder<RentalContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options);
-            _sut = new RemoveAndSaveBoardGameNotificationHandler(_rentalContext);
+                .Options;
+            _rentalContext = new RentalContext(contextOptions);
+            _sut = new RemoveAndSaveBoardGameNotificationHandler(new RentalContext(contextOptions));
         }
+
 
         private readonly RentalContext _rentalContext;
         private readonly INotificationHandler<RemoveAndSaveBoardGameNotification> _sut;

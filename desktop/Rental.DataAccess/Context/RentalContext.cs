@@ -11,8 +11,8 @@ namespace Rental.DataAccess.Context
         // required for Mock of context
         internal RentalContext()
         {
-            
         }
+
         public RentalContext(DbContextOptions options) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
