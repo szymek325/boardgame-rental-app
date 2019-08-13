@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Models;
 using Rental.Core.Requests.BoardGames;
 
 namespace Rental.WebApi.Controllers
@@ -26,15 +27,17 @@ namespace Rental.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update()
+        public async Task<IActionResult> Update(BoardGame input)
         {
-            throw new NotImplementedException();
+            await _mediatorService.Notify(new UpdateAndSaveBoardGameNotification(input));
+            return new OkResult();
         }
 
         [HttpDelete]
-        public async Task<IActionResult> Remove()
+        public async Task<IActionResult> Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await _mediatorService.Request(new RemoveBoardGameRequest(id));
+            return new OkObjectResult(result);
         }
 
         [HttpGet("{id}")]
