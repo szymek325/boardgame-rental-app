@@ -23,8 +23,8 @@ namespace Rental.DataAccess.Handlers.ClientHandlers
         public async Task Handle(AddAndSaveClientNotification notification, CancellationToken cancellationToken)
         {
             var entity = _mapper.Map<Client>(notification.Client);
-            entity.CreationTime = DateTime.UtcNow;
             await _rentalContext.Clients.AddAsync(entity, cancellationToken);
+            await _rentalContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

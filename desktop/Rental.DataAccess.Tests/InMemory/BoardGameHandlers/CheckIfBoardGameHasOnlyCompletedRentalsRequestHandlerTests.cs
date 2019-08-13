@@ -12,7 +12,7 @@ using Rental.DataAccess.Handlers.BoardGameHandlers;
 using Xunit;
 using GameRental = Rental.DataAccess.Entities.GameRental;
 
-namespace Rental.DataAccess.Tests.BoardGameHandlers
+namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
 {
     public class CheckIfBoardGameHasOnlyCompletedRentalsRequestHandlerTests
     {
