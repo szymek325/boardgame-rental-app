@@ -22,11 +22,10 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
             _rentalContext = new RentalContext(new DbContextOptionsBuilder<RentalContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options);
-            _mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new GetBoardGameByIdRequestHandler(_mapper, _rentalContext);
+            IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
+            _sut = new GetBoardGameByIdRequestHandler(mapper, _rentalContext);
         }
 
-        private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
         private readonly IRequestHandler<GetBoardGameByIdRequest, BoardGame> _sut;
 

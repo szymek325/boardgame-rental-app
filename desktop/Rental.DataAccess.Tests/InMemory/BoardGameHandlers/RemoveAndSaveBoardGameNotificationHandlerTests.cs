@@ -25,7 +25,6 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
             _sut = new RemoveAndSaveBoardGameNotificationHandler(new RentalContext(contextOptions));
         }
 
-
         private readonly RentalContext _rentalContext;
         private readonly INotificationHandler<RemoveAndSaveBoardGameNotification> _sut;
 
