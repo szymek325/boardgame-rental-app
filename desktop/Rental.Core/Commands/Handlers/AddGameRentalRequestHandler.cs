@@ -8,8 +8,9 @@ using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
+using Rental.Core.Queries;
 
-namespace Rental.Core.Requests.Rentals
+namespace Rental.Core.Commands.Handlers
 {
     internal class AddGameRentalRequestHandler : AsyncRequestHandler<AddGameRentalRequest>
     {

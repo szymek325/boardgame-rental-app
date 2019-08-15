@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Rental.Core.Requests.Rentals
+namespace Rental.Core.Commands
 {
     internal class CompleteGameRentalRequest : IRequest
     {
