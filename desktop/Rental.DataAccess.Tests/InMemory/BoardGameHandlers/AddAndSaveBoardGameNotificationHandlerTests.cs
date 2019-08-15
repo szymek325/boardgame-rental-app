@@ -6,10 +6,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.BoardGameHandlers;
+using Rental.DataAccess.Handlers.Commands;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -24,18 +24,18 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             _mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new AddAndSaveBoardGameNotificationHandler(_mapper, new RentalContext(contextOptions));
+            _sut = new AddAndSaveBoardGameCommandHandler(_mapper, new RentalContext(contextOptions));
         }
 
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<AddAndSaveBoardGameNotification> _sut;
+        private readonly INotificationHandler<AddAndSaveBoardGameCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_AddBoardGameToDb_When_MethodCalled()
         {
             var boardGame = new BoardGame("test", 15);
-            var input = new AddAndSaveBoardGameNotification(boardGame);
+            var input = new AddAndSaveBoardGameCommand(boardGame);
             var entity = new Entities.BoardGame
             {
                 Id = boardGame.Id,
@@ -53,7 +53,7 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
             var boardGame = new BoardGame("test", 15);
-            var input = new AddAndSaveBoardGameNotification(boardGame);
+            var input = new AddAndSaveBoardGameCommand(boardGame);
             var existingEntity = new Entities.BoardGame
             {
                 Id = boardGame.Id

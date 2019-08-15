@@ -6,10 +6,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.GameRentalRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.RentalHandlers;
+using Rental.DataAccess.Handlers.Commands;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -24,17 +24,17 @@ namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new AddAndSaveRentalNotificationHandler(mapper, new RentalContext(contextOptions));
+            _sut = new AddAndSaveRentalCommandHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<AddAndSaveRentalNotification> _sut;
+        private readonly INotificationHandler<AddAndSaveRentalCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_AddClientToDb_When_MethodCalled()
         {
             var rental = new GameRental(Guid.NewGuid(), Guid.NewGuid(), 15);
-            var input = new AddAndSaveRentalNotification(rental);
+            var input = new AddAndSaveRentalCommand(rental);
 
             await _sut.Handle(input, new CancellationToken());
 
@@ -47,7 +47,7 @@ namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
             var rental = new GameRental(Guid.NewGuid(), Guid.NewGuid(), 15);
-            var input = new AddAndSaveRentalNotification(rental);
+            var input = new AddAndSaveRentalCommand(rental);
             var existingEntity = new Entities.GameRental
             {
                 Id = rental.Id

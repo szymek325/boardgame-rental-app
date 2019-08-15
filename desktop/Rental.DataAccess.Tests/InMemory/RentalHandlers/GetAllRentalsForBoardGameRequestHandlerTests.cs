@@ -6,10 +6,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.GameRentalRequests;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.RentalHandlers;
+using Rental.DataAccess.Handlers.Queries;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -24,18 +24,18 @@ namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new GetAllRentalsForBoardGameRequestHandler(mapper, new RentalContext(contextOptions));
+            _sut = new GetAllRentalsForBoardGameQueryHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<GetAllRentalsForBoardGameRequest, IList<GameRental>> _sut;
+        private readonly IRequestHandler<GetAllRentalsForBoardGameQuery, IList<GameRental>> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnEmptyListOfGameRentals_When_TableIsEmpty()
         {
             var input = Guid.NewGuid();
 
-            var result = await _sut.Handle(new GetAllRentalsForBoardGameRequest(input), new CancellationToken());
+            var result = await _sut.Handle(new GetAllRentalsForBoardGameQuery(input), new CancellationToken());
 
             result.Should().BeEmpty();
         }
@@ -58,7 +58,7 @@ namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
             await _rentalContext.GameRentals.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            var result = await _sut.Handle(new GetAllRentalsForBoardGameRequest(inputBoardGameIdGuid),
+            var result = await _sut.Handle(new GetAllRentalsForBoardGameQuery(inputBoardGameIdGuid),
                 new CancellationToken());
 
             result.Should().BeOfType<List<GameRental>>();

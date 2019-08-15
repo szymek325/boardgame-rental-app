@@ -7,10 +7,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.ClientHandlers;
+using Rental.DataAccess.Handlers.Commands;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -25,11 +25,11 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new UpdateAndSaveClientNotificationHandler(mapper, new RentalContext(contextOptions));
+            _sut = new UpdateAndSaveClientCommandHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<UpdateAndSaveClientNotification> _sut;
+        private readonly INotificationHandler<UpdateAndSaveClientCommand> _sut;
 
         [Fact]
         public void Handle_Should_Throw_When_EntityDoesNotExist()
@@ -37,7 +37,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
             var input = new Client("mat", "szym", "123456", "test@test.pl");
 
             Func<Task> act = async () =>
-                await _sut.Handle(new UpdateAndSaveClientNotification(input), new CancellationToken());
+                await _sut.Handle(new UpdateAndSaveClientCommand(input), new CancellationToken());
 
             act.Should().Throw<DbUpdateConcurrencyException>();
         }
@@ -62,7 +62,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
             await _rentalContext.Clients.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            await _sut.Handle(new UpdateAndSaveClientNotification(input), new CancellationToken());
+            await _sut.Handle(new UpdateAndSaveClientCommand(input), new CancellationToken());
 
             _rentalContext.Clients.Count().Should().Be(entities.Count);
             var result = _rentalContext.Clients.FirstOrDefault(x => x.Id == input.Id);

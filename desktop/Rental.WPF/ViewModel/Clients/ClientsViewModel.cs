@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows.Data;
 using AutoMapper;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.WPF.Command;
 using Rental.WPF.Events;
@@ -90,7 +90,7 @@ namespace Rental.WPF.ViewModel.Clients
 
         private List<Client> GetClients()
         {
-            var clients = _mediatorService.Request(new GetAllClientsRequest()).Result;
+            var clients = _mediatorService.Request(new GetAllClientsQuery()).Result;
             return clients.ToList();
         }
 

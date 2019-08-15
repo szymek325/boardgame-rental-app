@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
 
@@ -25,7 +25,7 @@ namespace Rental.Core.Requests.Clients
             var validationResult = validator.Validate(newClient);
             if (validationResult.IsValid)
             {
-                await _mediatorService.Notify(new AddAndSaveClientNotification(newClient), cancellationToken);
+                await _mediatorService.Notify(new AddAndSaveClientCommand(newClient), cancellationToken);
                 //await _mediatorService.Notify(new NewClientAddedNotification(newClient), cancellationToken);
                 return new AddRequestResult(newClient.Id);
             }

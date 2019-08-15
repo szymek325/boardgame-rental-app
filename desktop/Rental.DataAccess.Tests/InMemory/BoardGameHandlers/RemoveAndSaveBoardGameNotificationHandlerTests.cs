@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Entities;
-using Rental.DataAccess.Handlers.BoardGameHandlers;
+using Rental.DataAccess.Handlers.Commands;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
@@ -22,11 +22,11 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
-            _sut = new RemoveAndSaveBoardGameNotificationHandler(new RentalContext(contextOptions));
+            _sut = new RemoveAndSaveBoardGameCommandHandler(new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<RemoveAndSaveBoardGameNotification> _sut;
+        private readonly INotificationHandler<RemoveAndSaveBoardGameCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_RemoveClientFromDb_When_ClientExists()
@@ -48,7 +48,7 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
             await _rentalContext.BoardGames.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            await _sut.Handle(new RemoveAndSaveBoardGameNotification(inputId), new CancellationToken());
+            await _sut.Handle(new RemoveAndSaveBoardGameCommand(inputId), new CancellationToken());
 
             _rentalContext.BoardGames.FirstOrDefault(x => x.Id == inputId).Should().BeNull();
         }
@@ -59,7 +59,7 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
             var input = Guid.NewGuid();
 
             Func<Task> act = async () =>
-                await _sut.Handle(new RemoveAndSaveBoardGameNotification(input), new CancellationToken());
+                await _sut.Handle(new RemoveAndSaveBoardGameCommand(input), new CancellationToken());
 
             act.Should().Throw<DbUpdateConcurrencyException>();
         }

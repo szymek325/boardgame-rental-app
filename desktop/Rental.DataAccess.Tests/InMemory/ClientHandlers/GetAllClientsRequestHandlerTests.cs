@@ -6,10 +6,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.ClientHandlers;
+using Rental.DataAccess.Handlers.Queries;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -24,16 +24,16 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new GetAllClientsRequestHandler(mapper, new RentalContext(contextOptions));
+            _sut = new GetAllClientsQueryHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<GetAllClientsRequest, IList<Client>> _sut;
+        private readonly IRequestHandler<GetAllClientsQuery, IList<Client>> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnEmptyListOfClients_When_ClientsTableIsEmpty()
         {
-            var result = await _sut.Handle(new GetAllClientsRequest(), new CancellationToken());
+            var result = await _sut.Handle(new GetAllClientsQuery(), new CancellationToken());
 
             result.Should().BeEmpty();
         }
@@ -53,7 +53,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
             await _rentalContext.Clients.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            var result = await _sut.Handle(new GetAllClientsRequest(), new CancellationToken());
+            var result = await _sut.Handle(new GetAllClientsQuery(), new CancellationToken());
 
             result.Should().Contain(x => x.Id == entity1.Id);
             result.Should().Contain(x => x.Id == entity2.Id);

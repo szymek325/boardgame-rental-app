@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.BoardGameHandlers;
+using Rental.DataAccess.Handlers.Queries;
 using Xunit;
 using GameRental = Rental.DataAccess.Entities.GameRental;
 
@@ -22,17 +22,17 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
-            _sut = new CheckIfBoardGameHasOnlyCompletedRentalsRequestHandler(new RentalContext(contextOptions));
+            _sut = new CheckIfBoardGameHasOnlyCompletedRentalsQueryHandler(new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<CheckIfBoardGameHasOnlyCompletedRentalsRequest, bool> _sut;
+        private readonly IRequestHandler<CheckIfBoardGameHasOnlyCompletedRentalsQuery, bool> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnFalse_When_ThereIsAnInProgressRental()
         {
             var boardGameId = Guid.NewGuid();
-            var input = new CheckIfBoardGameHasOnlyCompletedRentalsRequest(boardGameId);
+            var input = new CheckIfBoardGameHasOnlyCompletedRentalsQuery(boardGameId);
             var rentals = new List<GameRental>
             {
                 new GameRental
@@ -58,7 +58,7 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
         public async Task Handle_Should_ReturnTrue_When_RentalsTableIsEmpty()
         {
             var boardGameId = Guid.NewGuid();
-            var input = new CheckIfBoardGameHasOnlyCompletedRentalsRequest(boardGameId);
+            var input = new CheckIfBoardGameHasOnlyCompletedRentalsQuery(boardGameId);
 
             var response = await _sut.Handle(input, new CancellationToken());
 
@@ -69,7 +69,7 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
         public async Task Handle_Should_ReturnTrue_When_ThereAreOnlyCompletedRentals()
         {
             var boardGameId = Guid.NewGuid();
-            var input = new CheckIfBoardGameHasOnlyCompletedRentalsRequest(boardGameId);
+            var input = new CheckIfBoardGameHasOnlyCompletedRentalsQuery(boardGameId);
             var rentals = new List<GameRental>
             {
                 new GameRental

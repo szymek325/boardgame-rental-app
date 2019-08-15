@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using FluentValidation.Results;
 using MediatR;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
-using Rental.Core.Interfaces.DataAccess.GameRentalRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
 
@@ -27,11 +27,11 @@ namespace Rental.Core.Requests.Rentals
             if (validationResult.IsValid)
             {
                 var gameCanBeRented =
-                    await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsRequest(request.BoardGameGuid),
+                    await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.BoardGameGuid),
                         cancellationToken);
                 if (gameCanBeRented)
                 {
-                    await _mediatorService.Notify(new AddAndSaveRentalNotification(newGameRental), cancellationToken);
+                    await _mediatorService.Notify(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
                     return new AddRequestResult(newGameRental.Id);
                 }
 
