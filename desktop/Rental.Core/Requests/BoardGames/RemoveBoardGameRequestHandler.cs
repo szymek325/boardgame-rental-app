@@ -19,7 +19,8 @@ namespace Rental.Core.Requests.BoardGames
         public async Task<string> Handle(RemoveBoardGameRequest request, CancellationToken cancellationToken)
         {
             var canBeRemoved =
-                await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.Id), cancellationToken);
+                await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.Id),
+                    cancellationToken);
             if (!canBeRemoved) return $"BoardGame with id {request.Id} can't be removed because of open rentals";
 
             await _mediatorService.Notify(new RemoveAndSaveBoardGameCommand(request.Id), cancellationToken);

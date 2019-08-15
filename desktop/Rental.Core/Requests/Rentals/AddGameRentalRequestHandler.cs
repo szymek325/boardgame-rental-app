@@ -27,7 +27,8 @@ namespace Rental.Core.Requests.Rentals
             if (validationResult.IsValid)
             {
                 var gameCanBeRented =
-                    await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.BoardGameGuid),
+                    await _mediatorService.Request(
+                        new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.BoardGameGuid),
                         cancellationToken);
                 if (gameCanBeRented)
                 {

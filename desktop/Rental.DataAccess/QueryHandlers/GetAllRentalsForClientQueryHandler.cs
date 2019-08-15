@@ -22,9 +22,11 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<IList<GameRental>> Handle(GetAllRentalsForClientQuery query, CancellationToken cancellationToken)
+        public async Task<IList<GameRental>> Handle(GetAllRentalsForClientQuery query,
+            CancellationToken cancellationToken)
         {
-            var entities = await _rentalContext.GameRentals.Where(x => x.ClientId == query.ClientId).ToListAsync(cancellationToken);
+            var entities = await _rentalContext.GameRentals.Where(x => x.ClientId == query.ClientId)
+                .ToListAsync(cancellationToken);
             var mappedRentals = _mapper.Map<IList<GameRental>>(entities);
             return mappedRentals;
         }

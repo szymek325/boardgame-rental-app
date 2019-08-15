@@ -22,7 +22,8 @@ namespace Rental.DataAccess.QueryHandlers
 
         public async Task<GameRental> Handle(GetRentalByIdQuery query, CancellationToken cancellationToken)
         {
-            var entity = await _rentalContext.GameRentals.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
+            var entity =
+                await _rentalContext.GameRentals.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
             var mappedEntity = _mapper.Map<GameRental>(entity);
             return mappedEntity;
         }
