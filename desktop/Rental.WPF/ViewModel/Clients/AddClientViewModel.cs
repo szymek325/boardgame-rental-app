@@ -20,9 +20,9 @@ namespace Rental.WPF.ViewModel.Clients
             ButtonClickCommand = new AsyncCommand<string>(async s =>
                 {
                     var newGuid = Guid.NewGuid();
-                    var guid = await mediatorService.Request(new AddClientRequest(newGuid,FirstName, LastName, ContactNumber,
+                    var guid = await mediatorService.SendQuery(new AddClientRequest(newGuid,FirstName, LastName, ContactNumber,
                         EmailAddress));
-                    var client = await mediatorService.Request(new GetClientByIdQuery(newGuid));
+                    var client = await mediatorService.SendQuery(new GetClientByIdQuery(newGuid));
                     ClientEvents.RaiseOnNewClientAdded(this, client);
                 },
                 s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) &&

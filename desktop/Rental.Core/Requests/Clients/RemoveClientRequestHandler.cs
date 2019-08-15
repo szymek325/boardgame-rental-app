@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Interfaces.DataAccess.Commands;
@@ -6,7 +7,7 @@ using Rental.Core.Interfaces.DataAccess.Queries;
 
 namespace Rental.Core.Requests.Clients
 {
-    internal class RemoveClientRequestHandler : IRequestHandler<RemoveClientRequest, string>
+    internal class RemoveClientRequestHandler : AsyncRequestHandler<RemoveClientRequest>
     {
         private readonly IMediator _mediator;
 
@@ -15,14 +16,14 @@ namespace Rental.Core.Requests.Clients
             _mediator = mediator;
         }
 
-        public async Task<string> Handle(RemoveClientRequest request, CancellationToken cancellationToken)
+        protected override async Task Handle(RemoveClientRequest request, CancellationToken cancellationToken)
         {
             var canBeRemoved =
                 await _mediator.Send(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.Id), cancellationToken);
-            if (!canBeRemoved) return $"Client with id {request.Id} can't be removed because of open rentals";
+            if (!canBeRemoved)
+                throw new ValidationException($"Client with id {request.Id} can't be removed because of open rentals");
 
             await _mediator.Publish(new RemoveAndSaveClientCommand(request.Id), cancellationToken);
-            return $"Client with id {request.Id} was removed successfully";
         }
     }
 }

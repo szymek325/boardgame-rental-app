@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
@@ -8,7 +9,7 @@ using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.Clients
 {
-    internal class AddClientRequestHandler : IRequestHandler<AddClientRequest, AddRequestResult>
+    internal class AddClientRequestHandler : AsyncRequestHandler<AddClientRequest>
     {
         private readonly IMediatorService _mediatorService;
 
@@ -17,23 +18,21 @@ namespace Rental.Core.Requests.Clients
             _mediatorService = mediatorService;
         }
 
-        public async Task<AddRequestResult> Handle(AddClientRequest request, CancellationToken cancellationToken)
+        protected override async Task Handle(AddClientRequest request, CancellationToken cancellationToken)
         {
             var validator = new ClientValidator();
-            var newClient = new Client(request.ClientGuid, request.FirstName, request.LastName, request.ContactNumber,
+            var newClient = new Client(request.NewClientGuid, request.FirstName, request.LastName,
+                request.ContactNumber,
                 request.EmailAddress);
             var validationResult = validator.Validate(newClient);
+
             if (validationResult.IsValid)
-            {
-                await _mediatorService.Notify(new AddAndSaveClientCommand(newClient), cancellationToken);
-                //await _mediatorService.Notify(new NewClientAddedNotification(newClient), cancellationToken);
-                return new AddRequestResult(newClient.Id);
-            }
+                await _mediatorService.SendCommand(new AddAndSaveClientCommand(newClient), cancellationToken);
 
             var validationMessage =
-                await _mediatorService.Request(new GetFormattedValidationMessageRequest(validationResult.Errors),
+                await _mediatorService.SendQuery(new GetFormattedValidationMessageRequest(validationResult.Errors),
                     cancellationToken);
-            return new AddRequestResult(validationMessage);
+            throw new ValidationException(validationMessage);
         }
     }
 }

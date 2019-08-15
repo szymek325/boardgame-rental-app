@@ -3,16 +3,16 @@ using MediatR;
 
 namespace Rental.Core.Requests.BoardGames
 {
-    public class AddBoardGameRequest : IRequest<AddRequestResult>
+    public class AddBoardGameRequest : IRequest
     {
-        public AddBoardGameRequest(Guid boardGameGuid, string name, float price)
+        public AddBoardGameRequest(Guid newBoardGameGuid, string name, float price)
         {
-            BoardGameGuid = boardGameGuid;
+            NewBoardGameGuid = newBoardGameGuid;
             Name = name;
             Price = price;
         }
 
-        public Guid BoardGameGuid { get; set; }
+        public Guid NewBoardGameGuid { get; set; }
         public string Name { get; set; }
         public float Price { get; set; }
     }

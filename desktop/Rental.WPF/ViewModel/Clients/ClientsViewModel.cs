@@ -90,7 +90,7 @@ namespace Rental.WPF.ViewModel.Clients
 
         private List<Client> GetClients()
         {
-            var clients = _mediatorService.Request(new GetAllClientsQuery()).Result;
+            var clients = _mediatorService.SendQuery(new GetAllClientsQuery()).Result;
             return clients.ToList();
         }
 

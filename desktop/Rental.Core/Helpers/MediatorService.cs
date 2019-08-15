@@ -6,8 +6,11 @@ namespace Rental.Core.Helpers
 {
     public interface IMediatorService
     {
-        Task Notify<T>(T notification, CancellationToken cancellationToken = default) where T : INotification;
-        Task<T1> Request<T1>(IRequest<T1> request, CancellationToken cancellationToken = default);
+        Task SendCommand(INotification command, CancellationToken cancellationToken = default);
+
+        Task SendCommand(IRequest command, CancellationToken cancellationToken = default);
+
+        Task<T1> SendQuery<T1>(IRequest<T1> query, CancellationToken cancellationToken = default);
     }
 
     public class MediatorService : IMediatorService
@@ -19,15 +22,19 @@ namespace Rental.Core.Helpers
             _mediator = mediator;
         }
 
-        public async Task Notify<T>(T notification, CancellationToken cancellationToken = default)
-            where T : INotification
+        public async Task SendCommand(INotification command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Publish(notification, cancellationToken);
+            await _mediator.Publish(command, cancellationToken);
         }
 
-        public async Task<T1> Request<T1>(IRequest<T1> request, CancellationToken cancellationToken = default)
+        public async Task SendCommand(IRequest command, CancellationToken cancellationToken = default)
         {
-            var requestResult = await _mediator.Send(request, cancellationToken);
+            await _mediator.Send(command, cancellationToken);
+        }
+
+        public async Task<T1> SendQuery<T1>(IRequest<T1> query, CancellationToken cancellationToken = default)
+        {
+            var requestResult = await _mediator.Send(query, cancellationToken);
             return requestResult;
         }
     }
