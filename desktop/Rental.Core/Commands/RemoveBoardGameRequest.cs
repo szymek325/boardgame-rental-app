@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Rental.Core.Requests.BoardGames
+namespace Rental.Core.Commands
 {
     public class RemoveBoardGameRequest : IRequest
     {

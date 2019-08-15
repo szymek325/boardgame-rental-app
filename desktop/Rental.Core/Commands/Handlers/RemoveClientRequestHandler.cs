@@ -5,7 +5,7 @@ using MediatR;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 
-namespace Rental.Core.Requests.Clients
+namespace Rental.Core.Commands.Handlers
 {
     internal class RemoveClientRequestHandler : AsyncRequestHandler<RemoveClientRequest>
     {

@@ -6,8 +6,9 @@ using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
+using Rental.Core.Queries;
 
-namespace Rental.Core.Requests.BoardGames
+namespace Rental.Core.Commands.Handlers
 {
     internal class AddBoardGameRequestHandler : AsyncRequestHandler<AddBoardGameRequest>
     {

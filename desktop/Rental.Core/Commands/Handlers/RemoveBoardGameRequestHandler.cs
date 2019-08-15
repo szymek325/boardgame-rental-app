@@ -6,7 +6,7 @@ using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 
-namespace Rental.Core.Requests.BoardGames
+namespace Rental.Core.Commands.Handlers
 {
     internal class RemoveBoardGameRequestHandler : AsyncRequestHandler<RemoveBoardGameRequest>
     {

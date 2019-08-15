@@ -1,7 +1,7 @@
 ﻿using System;
 using MediatR;
 
-namespace Rental.Core.Requests.Clients
+namespace Rental.Core.Commands
 {
     public class AddClientRequest : IRequest
     {

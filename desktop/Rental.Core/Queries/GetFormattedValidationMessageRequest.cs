@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using MediatR;
 
-namespace Rental.Core.Requests
+namespace Rental.Core.Queries
 {
     internal class GetFormattedValidationMessageRequest : IRequest<string>
     {
