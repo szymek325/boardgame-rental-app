@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.CommandHandlers;
@@ -29,7 +29,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<UpdateAndSaveBoardGameCommand> _sut;
+        private readonly ICommandHandler<UpdateAndSaveBoardGameCommand> _sut;
 
         [Fact]
         public void Handle_Should_Throw_When_EntityDoesNotExist()

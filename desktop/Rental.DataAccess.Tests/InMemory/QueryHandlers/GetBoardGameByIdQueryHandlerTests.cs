@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
@@ -27,7 +27,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<GetBoardGameByIdQuery, BoardGame> _sut;
+        private readonly IQueryHandler<GetBoardGameByIdQuery, BoardGame> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnElementWithSpecificId()

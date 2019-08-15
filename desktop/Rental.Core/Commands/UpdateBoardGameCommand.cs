@@ -1,9 +1,9 @@
 ﻿using System;
-using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Commands
 {
-    internal class UpdateBoardGameCommand : IRequest
+    internal class UpdateBoardGameCommand : ICommand
     {
         public UpdateBoardGameCommand(Guid id, string name, float price)
         {

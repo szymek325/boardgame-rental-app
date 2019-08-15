@@ -1,9 +1,9 @@
 ﻿using System;
-using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Commands
 {
-    public class RemoveClientCommand : IRequest
+    public class RemoveClientCommand : ICommand
     {
         public RemoveClientCommand(Guid id)
         {

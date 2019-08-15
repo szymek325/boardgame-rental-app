@@ -1,12 +1,12 @@
 ﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Queries.Handlers
 {
     internal class
-        GetFormattedValidationMessageQueryHandler : IRequestHandler<GetFormattedValidationMessageQuery, string>
+        GetFormattedValidationMessageQueryHandler : IQueryHandler<GetFormattedValidationMessageQuery, string>
     {
         public Task<string> Handle(GetFormattedValidationMessageQuery query, CancellationToken cancellationToken)
         {

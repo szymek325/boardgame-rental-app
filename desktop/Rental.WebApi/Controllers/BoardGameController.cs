@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Rental.Common;
 using Rental.Core.Commands;
-using Rental.Core.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
@@ -24,35 +24,35 @@ namespace Rental.WebApi.Controllers
         public async Task<IActionResult> Create(CreateInput input)
         {
             var newGuid = Guid.NewGuid();
-            await _mediatorService.SendCommand(new AddBoardGameCommand(newGuid, input.Name, input.Price));
+            await _mediatorService.Send(new AddBoardGameCommand(newGuid, input.Name, input.Price));
             return new OkObjectResult(new CreateOutput(newGuid));
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(BoardGame input)
         {
-            await _mediatorService.SendCommand(new UpdateAndSaveBoardGameCommand(input));
+            await _mediatorService.Send(new UpdateAndSaveBoardGameCommand(input));
             return new OkResult();
         }
 
         [HttpDelete]
         public async Task<IActionResult> Remove(Guid id)
         {
-            var result = await _mediatorService.SendQuery(new RemoveBoardGameCommand(id));
-            return new OkObjectResult(result);
+            await _mediatorService.Send(new RemoveBoardGameCommand(id));
+            return new OkResult();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediatorService.SendQuery(new GetBoardGameByIdQuery(id));
+            var result = await _mediatorService.Send(new GetBoardGameByIdQuery(id));
             return new OkObjectResult(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediatorService.SendQuery(new GetAllBoardGamesQuery());
+            var result = await _mediatorService.Send(new GetAllBoardGamesQuery());
             return new OkObjectResult(result);
         }
     }

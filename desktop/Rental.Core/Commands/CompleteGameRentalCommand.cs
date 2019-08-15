@@ -1,9 +1,9 @@
 ﻿using System;
-using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Commands
 {
-    internal class CompleteGameRentalCommand : IRequest
+    internal class CompleteGameRentalCommand : ICommand
     {
         public CompleteGameRentalCommand(Guid gameRentalId, float paidMoney)
         {
