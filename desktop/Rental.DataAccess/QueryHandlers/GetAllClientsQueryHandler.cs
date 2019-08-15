@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;

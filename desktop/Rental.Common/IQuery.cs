@@ -2,7 +2,7 @@
 
 namespace Rental.Common
 {
-    public interface ICommand : INotification
+    public interface IQuery<out T> : IRequest<T>
     {
     }
 }

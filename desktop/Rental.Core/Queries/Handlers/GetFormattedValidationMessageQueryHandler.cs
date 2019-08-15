@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using Rental.Common;
 
 namespace Rental.Core.Queries.Handlers

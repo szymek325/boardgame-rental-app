@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using Rental.Common;
-using Rental.Core.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.Validation;
@@ -20,7 +18,7 @@ namespace Rental.Core.Commands.Handlers
             _mediatorService = mediatorService;
         }
 
-        public  async Task Handle(UpdateClientCommand command, CancellationToken cancellationToken)
+        public async Task Handle(UpdateClientCommand command, CancellationToken cancellationToken)
         {
             var client = await _mediatorService.Send(new GetClientByIdQuery(command.Id), cancellationToken);
             client.FirstName = command.FirstName;
@@ -31,7 +29,9 @@ namespace Rental.Core.Commands.Handlers
             var validationResult = validator.Validate(client);
 
             if (validationResult.IsValid)
+            {
                 await _mediatorService.Send(new UpdateAndSaveClientCommand(client), cancellationToken);
+            }
             else
             {
                 var validationMessage =

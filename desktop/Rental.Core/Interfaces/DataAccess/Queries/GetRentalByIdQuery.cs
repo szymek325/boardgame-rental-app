@@ -1,5 +1,4 @@
 ﻿using System;
-using MediatR;
 using Rental.Common;
 using Rental.Core.Models;
 
