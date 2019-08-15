@@ -10,7 +10,8 @@ using Rental.DataAccess.Context;
 namespace Rental.DataAccess.QueryHandlers
 {
     internal class
-        CheckIfBoardGameHasOnlyCompletedRentalsQueryHandler : IRequestHandler<CheckIfBoardGameHasOnlyCompletedRentalsQuery, bool>
+        CheckIfBoardGameHasOnlyCompletedRentalsQueryHandler : IRequestHandler<
+            CheckIfBoardGameHasOnlyCompletedRentalsQuery, bool>
     {
         private readonly RentalContext _rentalContext;
 
@@ -19,7 +20,8 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<bool> Handle(CheckIfBoardGameHasOnlyCompletedRentalsQuery query, CancellationToken cancellationToken)
+        public async Task<bool> Handle(CheckIfBoardGameHasOnlyCompletedRentalsQuery query,
+            CancellationToken cancellationToken)
         {
             var canBeRemoved = await _rentalContext.GameRentals.Where(x => x.BoardGameId == query.Id)
                 .AllAsync(x => x.Status == Status.Completed, cancellationToken);

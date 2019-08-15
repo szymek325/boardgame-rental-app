@@ -11,7 +11,8 @@ using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
-    internal class GetAllRentalsForBoardGameQueryHandler : IRequestHandler<GetAllRentalsForBoardGameQuery, IList<GameRental>>
+    internal class
+        GetAllRentalsForBoardGameQueryHandler : IRequestHandler<GetAllRentalsForBoardGameQuery, IList<GameRental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -22,9 +23,11 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<IList<GameRental>> Handle(GetAllRentalsForBoardGameQuery query, CancellationToken cancellationToken)
+        public async Task<IList<GameRental>> Handle(GetAllRentalsForBoardGameQuery query,
+            CancellationToken cancellationToken)
         {
-            var entities = await _rentalContext.GameRentals.Where(x => x.BoardGameId == query.BoardGameId).ToListAsync(cancellationToken);
+            var entities = await _rentalContext.GameRentals.Where(x => x.BoardGameId == query.BoardGameId)
+                .ToListAsync(cancellationToken);
             var mappedRentals = _mapper.Map<IList<GameRental>>(entities);
             return mappedRentals;
         }
