@@ -34,7 +34,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_Throw_When_EntityDoesNotExist()
         {
-            var input = new GameRental(Guid.NewGuid(), Guid.NewGuid(), 10);
+            var input = new GameRental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
 
             Func<Task> act = async () =>
                 await _sut.Handle(new UpdateAndSaveGameRentalCommand(input), new CancellationToken());
@@ -45,7 +45,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_UpdateEntity_When_ItExists()
         {
-            var input = new GameRental(Guid.NewGuid(), Guid.NewGuid(), 10);
+            var input = new GameRental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
             var entities = new List<Entities.GameRental>
             {
                 new Entities.GameRental

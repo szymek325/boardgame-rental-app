@@ -5,9 +5,9 @@ namespace Rental.Core.Models
 {
     public class Client
     {
-        public Client(string firstName, string lastName, string contactNumber, string emailAddress)
+        public Client(Guid id, string firstName, string lastName, string contactNumber, string emailAddress)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             ContactNumber = contactNumber;

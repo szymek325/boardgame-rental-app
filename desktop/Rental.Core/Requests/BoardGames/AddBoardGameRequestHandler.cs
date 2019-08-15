@@ -21,7 +21,7 @@ namespace Rental.Core.Requests.BoardGames
             CancellationToken cancellationToken)
         {
             var validator = new BoardGameValidator();
-            var newBoardGame = new BoardGame(request.Name, request.Price);
+            var newBoardGame = new BoardGame(request.BoardGameGuid, request.Name, request.Price);
             var validationResult = validator.Validate(newBoardGame);
             if (validationResult.IsValid)
             {
