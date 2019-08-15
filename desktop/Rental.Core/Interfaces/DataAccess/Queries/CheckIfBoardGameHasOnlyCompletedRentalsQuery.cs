@@ -1,9 +1,10 @@
 ﻿using System;
 using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class CheckIfBoardGameHasOnlyCompletedRentalsQuery : IRequest<bool>
+    public class CheckIfBoardGameHasOnlyCompletedRentalsQuery : IQuery<bool>
     {
         public CheckIfBoardGameHasOnlyCompletedRentalsQuery(Guid id)
         {

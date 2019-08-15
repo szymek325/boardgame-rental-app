@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using Rental.Common;
 using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.Commands
 {
-    public class AddAndSaveClientCommand : INotification
+    public class AddAndSaveClientCommand : ICommand
     {
         public AddAndSaveClientCommand(Client client)
         {

@@ -6,6 +6,7 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.CommandHandlers;
@@ -29,7 +30,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
 
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<AddAndSaveBoardGameCommand> _sut;
+        private readonly ICommandHandler<AddAndSaveBoardGameCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_AddBoardGameToDb_When_MethodCalled()
