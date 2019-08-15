@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Rental.Core.Extensions
+namespace Rental.Core.Common.Extensions
 {
     public static class FluentValidationExtension
     {

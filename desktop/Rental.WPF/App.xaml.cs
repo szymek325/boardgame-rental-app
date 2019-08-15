@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rental.Core;
-using Rental.Core.Configuration;
+using Rental.Core.Common.Configuration;
 using Rental.DataAccess;
 using Rental.WPF.View.Base;
 using Rental.WPF.View.Clients;

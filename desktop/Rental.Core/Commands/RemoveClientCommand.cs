@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Rental.Core.Commands
 {
-    public class RemoveClientRequest : IRequest
+    public class RemoveClientCommand : IRequest
     {
-        public RemoveClientRequest(Guid id)
+        public RemoveClientCommand(Guid id)
         {
             Id = id;
         }

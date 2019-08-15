@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Rental.Core.Commands
 {
-    public class RemoveBoardGameRequest : IRequest
+    public class RemoveBoardGameCommand : IRequest
     {
-        public RemoveBoardGameRequest(Guid id)
+        public RemoveBoardGameCommand(Guid id)
         {
             Id = id;
         }

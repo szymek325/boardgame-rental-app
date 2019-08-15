@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Rental.Core.Queries
 {
-    internal class GetFormattedValidationMessageRequest : IRequest<string>
+    internal class GetFormattedValidationMessageQuery : IRequest<string>
     {
-        public GetFormattedValidationMessageRequest(IList<ValidationFailure> validationErrors)
+        public GetFormattedValidationMessageQuery(IList<ValidationFailure> validationErrors)
         {
             ValidationErrors = validationErrors;
         }

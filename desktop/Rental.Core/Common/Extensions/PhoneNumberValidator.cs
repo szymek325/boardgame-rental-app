@@ -2,7 +2,7 @@
 using FluentValidation.Resources;
 using FluentValidation.Validators;
 
-namespace Rental.Core.Extensions
+namespace Rental.Core.Common.Extensions
 {
     public interface IPhoneNumberValidator : IRegularExpressionValidator, IPropertyValidator
     {

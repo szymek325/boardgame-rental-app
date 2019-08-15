@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Rental.Core.Commands
 {
-    internal class CompleteGameRentalRequest : IRequest
+    internal class CompleteGameRentalCommand : IRequest
     {
-        public CompleteGameRentalRequest(Guid gameRentalId, float paidMoney)
+        public CompleteGameRentalCommand(Guid gameRentalId, float paidMoney)
         {
             GameRentalId = gameRentalId;
             PaidMoney = paidMoney;

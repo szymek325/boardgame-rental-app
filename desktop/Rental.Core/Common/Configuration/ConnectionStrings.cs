@@ -1,4 +1,4 @@
-﻿namespace Rental.Core.Configuration
+﻿namespace Rental.Core.Common.Configuration
 {
     public class ConnectionStrings
     {

@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Rental.Core.Helpers;
+using Rental.Core.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.Validation;
@@ -10,22 +10,22 @@ using Rental.Core.Queries;
 
 namespace Rental.Core.Commands.Handlers
 {
-    internal class UpdateClientRequestHandler : AsyncRequestHandler<UpdateClientRequest>
+    internal class UpdateClientCommandHandler : AsyncRequestHandler<UpdateClientCommand>
     {
         private readonly IMediatorService _mediatorService;
 
-        public UpdateClientRequestHandler(IMediatorService mediatorService)
+        public UpdateClientCommandHandler(IMediatorService mediatorService)
         {
             _mediatorService = mediatorService;
         }
 
-        protected override async Task Handle(UpdateClientRequest request, CancellationToken cancellationToken)
+        protected override async Task Handle(UpdateClientCommand command, CancellationToken cancellationToken)
         {
-            var client = await _mediatorService.SendQuery(new GetClientByIdQuery(request.Id), cancellationToken);
-            client.FirstName = request.FirstName;
-            client.LastName = request.LastName;
-            client.EmailAddress = request.EmailAddress;
-            client.ContactNumber = request.ContactNumber;
+            var client = await _mediatorService.SendQuery(new GetClientByIdQuery(command.Id), cancellationToken);
+            client.FirstName = command.FirstName;
+            client.LastName = command.LastName;
+            client.EmailAddress = command.EmailAddress;
+            client.ContactNumber = command.ContactNumber;
             var validator = new ClientValidator();
             var validationResult = validator.Validate(client);
 
@@ -33,7 +33,7 @@ namespace Rental.Core.Commands.Handlers
                 await _mediatorService.SendCommand(new UpdateAndSaveClientCommand(client), cancellationToken);
 
             var validationMessage =
-                await _mediatorService.SendQuery(new GetFormattedValidationMessageRequest(validationResult.Errors),
+                await _mediatorService.SendQuery(new GetFormattedValidationMessageQuery(validationResult.Errors),
                     cancellationToken);
             throw new ValidationException(validationMessage);
         }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Rental.Core;
-using Rental.Core.Configuration;
+using Rental.Core.Common.Configuration;
 using Rental.DataAccess;
 
 namespace Rental.WebApi
