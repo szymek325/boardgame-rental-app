@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Rental.Common;
+﻿using Rental.Common;
 using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.Commands

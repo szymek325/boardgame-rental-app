@@ -2,9 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation.Results;
-using MediatR;
 using Rental.Common;
-using Rental.Core.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
@@ -22,7 +20,7 @@ namespace Rental.Core.Commands.Handlers
             _mediatorService = mediatorService;
         }
 
-        public  async Task Handle(AddGameRentalCommand command, CancellationToken cancellationToken)
+        public async Task Handle(AddGameRentalCommand command, CancellationToken cancellationToken)
         {
             var validator = new RentalValidation();
             var newGameRental = new GameRental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,

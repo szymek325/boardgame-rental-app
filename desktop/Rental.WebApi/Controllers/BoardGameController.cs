@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Common;
 using Rental.Core.Commands;
-using Rental.Core.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
@@ -39,7 +38,7 @@ namespace Rental.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> Remove(Guid id)
         {
-             await _mediatorService.Send(new RemoveBoardGameCommand(id));
+            await _mediatorService.Send(new RemoveBoardGameCommand(id));
             return new OkResult();
         }
 

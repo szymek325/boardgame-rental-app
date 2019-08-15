@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;

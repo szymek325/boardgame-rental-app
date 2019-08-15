@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MediatR;
 using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.DataAccess.Context;

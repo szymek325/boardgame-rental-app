@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using FluentValidation.Results;
-using MediatR;
 using Rental.Common;
 
 namespace Rental.Core.Queries
