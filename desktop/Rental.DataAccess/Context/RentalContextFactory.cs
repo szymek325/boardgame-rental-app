@@ -3,7 +3,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Rental.Core.Configuration;
+using Rental.Core.Common.Configuration;
 
 namespace Rental.DataAccess.Context
 {

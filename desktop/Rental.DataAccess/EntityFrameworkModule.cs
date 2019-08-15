@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Rental.Core.Configuration;
+using Rental.Core.Common.Configuration;
 using Rental.DataAccess.Context;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]

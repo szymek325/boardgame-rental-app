@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Rental.Core.Commands
 {
-    public class AddClientRequest : IRequest
+    public class AddClientCommand : IRequest
     {
-        public AddClientRequest(Guid newClientGuid, string firstName, string lastName, string contactNumber,
+        public AddClientCommand(Guid newClientGuid, string firstName, string lastName, string contactNumber,
             string emailAddress)
         {
             NewClientGuid = newClientGuid;

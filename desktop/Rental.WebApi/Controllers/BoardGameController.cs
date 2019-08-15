@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Commands;
-using Rental.Core.Helpers;
+using Rental.Core.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
@@ -24,8 +24,8 @@ namespace Rental.WebApi.Controllers
         public async Task<IActionResult> Create(CreateInput input)
         {
             var newGuid = Guid.NewGuid();
-            var result = await _mediatorService.SendQuery(new AddBoardGameRequest(newGuid, input.Name, input.Price));
-            return new OkObjectResult(new CreateOutput(newGuid, result.Message));
+            await _mediatorService.SendCommand(new AddBoardGameCommand(newGuid, input.Name, input.Price));
+            return new OkObjectResult(new CreateOutput(newGuid));
         }
 
         [HttpPut]
@@ -38,7 +38,7 @@ namespace Rental.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> Remove(Guid id)
         {
-            var result = await _mediatorService.SendQuery(new RemoveBoardGameRequest(id));
+            var result = await _mediatorService.SendQuery(new RemoveBoardGameCommand(id));
             return new OkObjectResult(result);
         }
 

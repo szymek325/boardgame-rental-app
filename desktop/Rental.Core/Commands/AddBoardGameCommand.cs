@@ -3,9 +3,9 @@ using MediatR;
 
 namespace Rental.Core.Commands
 {
-    public class AddBoardGameRequest : IRequest
+    public class AddBoardGameCommand : IRequest
     {
-        public AddBoardGameRequest(Guid newBoardGameGuid, string name, float price)
+        public AddBoardGameCommand(Guid newBoardGameGuid, string name, float price)
         {
             NewBoardGameGuid = newBoardGameGuid;
             Name = name;

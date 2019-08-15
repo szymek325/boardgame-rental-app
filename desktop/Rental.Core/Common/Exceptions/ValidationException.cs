@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rental.Core.Extensions
+namespace Rental.Core.Common.Exceptions
 {
     internal class ValidationException : Exception
     {

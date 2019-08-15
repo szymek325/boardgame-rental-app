@@ -6,12 +6,12 @@ using MediatR;
 namespace Rental.Core.Queries.Handlers
 {
     internal class
-        GetFormattedValidationMessageRequestHandler : IRequestHandler<GetFormattedValidationMessageRequest, string>
+        GetFormattedValidationMessageQueryHandler : IRequestHandler<GetFormattedValidationMessageQuery, string>
     {
-        public Task<string> Handle(GetFormattedValidationMessageRequest request, CancellationToken cancellationToken)
+        public Task<string> Handle(GetFormattedValidationMessageQuery query, CancellationToken cancellationToken)
         {
             var builder = new StringBuilder();
-            foreach (var validationFailure in request.ValidationErrors)
+            foreach (var validationFailure in query.ValidationErrors)
                 builder.AppendLine($"{validationFailure.PropertyName}- {validationFailure.ErrorMessage}");
             return Task.FromResult(builder.ToString());
         }

@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows.Data;
 using AutoMapper;
-using Rental.Core.Helpers;
+using Rental.Core.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.WPF.Command;

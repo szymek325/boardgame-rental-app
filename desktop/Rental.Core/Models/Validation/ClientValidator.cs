@@ -1,6 +1,6 @@
 ﻿using System;
 using FluentValidation;
-using Rental.Core.Extensions;
+using Rental.Core.Common.Extensions;
 
 namespace Rental.Core.Models.Validation
 {
