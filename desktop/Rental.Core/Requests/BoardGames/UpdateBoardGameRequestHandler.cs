@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.BoardGames
@@ -18,7 +19,7 @@ namespace Rental.Core.Requests.BoardGames
 
         public async Task<string> Handle(UpdateBoardGameRequest request, CancellationToken cancellationToken)
         {
-            var boardGame = await _mediatorService.Request(new GetBoardGameByIdRequest(request.Id), cancellationToken);
+            var boardGame = await _mediatorService.Request(new GetBoardGameByIdQuery(request.Id), cancellationToken);
             boardGame.Name = request.Name;
             boardGame.Price = request.Price;
             var validator = new BoardGameValidator();
@@ -26,7 +27,7 @@ namespace Rental.Core.Requests.BoardGames
 
             if (validationResult.IsValid)
             {
-                await _mediatorService.Notify(new UpdateAndSaveBoardGameNotification(boardGame), cancellationToken);
+                await _mediatorService.Notify(new UpdateAndSaveBoardGameCommand(boardGame), cancellationToken);
                 return $"BoardGame {boardGame.Id} was successfully updated";
             }
 

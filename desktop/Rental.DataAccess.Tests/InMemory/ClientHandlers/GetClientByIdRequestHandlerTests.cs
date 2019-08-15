@@ -6,10 +6,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.ClientHandlers;
+using Rental.DataAccess.Handlers.Queries;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -24,11 +24,11 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new GetClientByIdRequestHandler(mapper, new RentalContext(contextOptions));
+            _sut = new GetClientByIdQueryHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<GetClientByIdRequest, Client> _sut;
+        private readonly IRequestHandler<GetClientByIdQuery, Client> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnElementWithSpecificId()
@@ -48,7 +48,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
             await _rentalContext.Clients.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            var result = await _sut.Handle(new GetClientByIdRequest(inputId), new CancellationToken());
+            var result = await _sut.Handle(new GetClientByIdQuery(inputId), new CancellationToken());
 
             result.Id.Should().Be(inputId);
             result.FirstName.Should().Be(entity1.FirstName);
@@ -73,7 +73,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
             await _rentalContext.Clients.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            var response = await _sut.Handle(new GetClientByIdRequest(Guid.NewGuid()), new CancellationToken());
+            var response = await _sut.Handle(new GetClientByIdQuery(Guid.NewGuid()), new CancellationToken());
 
             response.Should().BeNull();
         }

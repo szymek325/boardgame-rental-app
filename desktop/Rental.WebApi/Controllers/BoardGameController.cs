@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.Core.Requests.BoardGames;
 
@@ -29,7 +30,7 @@ namespace Rental.WebApi.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(BoardGame input)
         {
-            await _mediatorService.Notify(new UpdateAndSaveBoardGameNotification(input));
+            await _mediatorService.Notify(new UpdateAndSaveBoardGameCommand(input));
             return new OkResult();
         }
 
@@ -43,14 +44,14 @@ namespace Rental.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediatorService.Request(new GetBoardGameByIdRequest(id));
+            var result = await _mediatorService.Request(new GetBoardGameByIdQuery(id));
             return new OkObjectResult(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediatorService.Request(new GetAllBoardGamesRequest());
+            var result = await _mediatorService.Request(new GetAllBoardGamesQuery());
             return new OkObjectResult(result);
         }
     }

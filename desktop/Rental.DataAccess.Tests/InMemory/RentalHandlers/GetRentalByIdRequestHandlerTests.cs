@@ -6,10 +6,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.GameRentalRequests;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.RentalHandlers;
+using Rental.DataAccess.Handlers.Queries;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -23,11 +23,11 @@ namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new GetRentalByIdRequestHandler(mapper, _rentalContext);
+            _sut = new GetRentalByIdQueryHandler(mapper, _rentalContext);
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<GetRentalByIdRequest, GameRental> _sut;
+        private readonly IRequestHandler<GetRentalByIdQuery, GameRental> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnElementWithSpecificId()
@@ -47,7 +47,7 @@ namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
             await _rentalContext.GameRentals.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            var result = await _sut.Handle(new GetRentalByIdRequest(inputId), new CancellationToken());
+            var result = await _sut.Handle(new GetRentalByIdQuery(inputId), new CancellationToken());
 
             result.Id.Should().Be(inputId);
             result.PaidMoney.Should().Be(entity1.PaidMoney);
@@ -71,7 +71,7 @@ namespace Rental.DataAccess.Tests.InMemory.RentalHandlers
             await _rentalContext.GameRentals.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            var response = await _sut.Handle(new GetRentalByIdRequest(Guid.NewGuid()), new CancellationToken());
+            var response = await _sut.Handle(new GetRentalByIdQuery(Guid.NewGuid()), new CancellationToken());
 
             response.Should().BeNull();
         }

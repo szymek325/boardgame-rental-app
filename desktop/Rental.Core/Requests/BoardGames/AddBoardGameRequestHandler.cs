@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.Core.Models.Validation;
 
@@ -25,7 +25,7 @@ namespace Rental.Core.Requests.BoardGames
             var validationResult = validator.Validate(newBoardGame);
             if (validationResult.IsValid)
             {
-                await _mediatorService.Notify(new AddAndSaveBoardGameNotification(newBoardGame), cancellationToken);
+                await _mediatorService.Notify(new AddAndSaveBoardGameCommand(newBoardGame), cancellationToken);
                 return new AddRequestResult(newBoardGame.Id);
             }
 

@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
+using Rental.Core.Interfaces.DataAccess.Queries;
 
 namespace Rental.Core.Requests.BoardGames
 {
@@ -18,10 +19,10 @@ namespace Rental.Core.Requests.BoardGames
         public async Task<string> Handle(RemoveBoardGameRequest request, CancellationToken cancellationToken)
         {
             var canBeRemoved =
-                await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsRequest(request.Id), cancellationToken);
+                await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.Id), cancellationToken);
             if (!canBeRemoved) return $"BoardGame with id {request.Id} can't be removed because of open rentals";
 
-            await _mediatorService.Notify(new RemoveAndSaveBoardGameNotification(request.Id), cancellationToken);
+            await _mediatorService.Notify(new RemoveAndSaveBoardGameCommand(request.Id), cancellationToken);
             return $"BoardGame with id {request.Id} was removed successfully";
         }
     }

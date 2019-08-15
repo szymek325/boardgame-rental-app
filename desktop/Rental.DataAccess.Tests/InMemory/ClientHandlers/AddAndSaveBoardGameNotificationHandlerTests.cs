@@ -6,10 +6,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.ClientHandlers;
+using Rental.DataAccess.Handlers.Commands;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -24,17 +24,17 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new AddAndSaveClientNotificationHandler(mapper, new RentalContext(contextOptions));
+            _sut = new AddAndSaveClientCommandHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<AddAndSaveClientNotification> _sut;
+        private readonly INotificationHandler<AddAndSaveClientCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_AddClientToDb_When_MethodCalled()
         {
             var client = new Client("mat", "szym", "123456", "test@test.pl");
-            var input = new AddAndSaveClientNotification(client);
+            var input = new AddAndSaveClientCommand(client);
 
             await _sut.Handle(input, new CancellationToken());
 
@@ -49,7 +49,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
             var client = new Client("mat", "szym", "123456", "test@test.pl");
-            var input = new AddAndSaveClientNotification(client);
+            var input = new AddAndSaveClientCommand(client);
             var existingEntity = new Entities.Client
             {
                 Id = client.Id

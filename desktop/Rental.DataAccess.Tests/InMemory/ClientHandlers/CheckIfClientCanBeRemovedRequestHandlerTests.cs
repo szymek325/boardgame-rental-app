@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.ClientHandlers;
+using Rental.DataAccess.Handlers.Queries;
 using Xunit;
 using GameRental = Rental.DataAccess.Entities.GameRental;
 
@@ -22,17 +22,17 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
-            _sut = new CheckIfClientCanBeRemovedRequestHandler(new RentalContext(contextOptions));
+            _sut = new CheckIfClientCanBeRemovedQueryHandler(new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<CheckIfClientCanBeRemovedRequest, bool> _sut;
+        private readonly IRequestHandler<CheckIfClientCanBeRemovedQuery, bool> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnFalse_When_ClientHasInProgressRental()
         {
             var clientId = Guid.NewGuid();
-            var input = new CheckIfClientCanBeRemovedRequest(clientId);
+            var input = new CheckIfClientCanBeRemovedQuery(clientId);
             var rentals = new List<GameRental>
             {
                 new GameRental
@@ -58,7 +58,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
         public async Task Handle_Should_ReturnTrue_When_RentalsTableIsEmpty()
         {
             var clientId = Guid.NewGuid();
-            var input = new CheckIfClientCanBeRemovedRequest(clientId);
+            var input = new CheckIfClientCanBeRemovedQuery(clientId);
 
             var response = await _sut.Handle(input, new CancellationToken());
 
@@ -69,7 +69,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
         public async Task Handle_Should_ReturnTrue_When_ThereAreOnlyCompletedRentals()
         {
             var clientId = Guid.NewGuid();
-            var input = new CheckIfClientCanBeRemovedRequest(clientId);
+            var input = new CheckIfClientCanBeRemovedQuery(clientId);
             var rentals = new List<GameRental>
             {
                 new GameRental

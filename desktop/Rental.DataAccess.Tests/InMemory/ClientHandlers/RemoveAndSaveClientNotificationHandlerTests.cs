@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.ClientRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Entities;
-using Rental.DataAccess.Handlers.ClientHandlers;
+using Rental.DataAccess.Handlers.Commands;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
@@ -22,11 +22,11 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
-            _sut = new RemoveAndSaveClientNotificationHandler(new RentalContext(contextOptions));
+            _sut = new RemoveAndSaveClientCommandHandler(new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<RemoveAndSaveClientNotification> _sut;
+        private readonly INotificationHandler<RemoveAndSaveClientCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_RemoveClientFromDb_When_ClientExists()
@@ -48,7 +48,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
             await _rentalContext.Clients.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            await _sut.Handle(new RemoveAndSaveClientNotification(inputId), new CancellationToken());
+            await _sut.Handle(new RemoveAndSaveClientCommand(inputId), new CancellationToken());
 
             _rentalContext.Clients.FirstOrDefault(x => x.Id == inputId).Should().BeNull();
         }
@@ -59,7 +59,7 @@ namespace Rental.DataAccess.Tests.InMemory.ClientHandlers
             var input = Guid.NewGuid();
 
             Func<Task> act = async () =>
-                await _sut.Handle(new RemoveAndSaveClientNotification(input), new CancellationToken());
+                await _sut.Handle(new RemoveAndSaveClientCommand(input), new CancellationToken());
 
             act.Should().Throw<DbUpdateConcurrencyException>();
         }

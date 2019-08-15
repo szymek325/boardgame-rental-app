@@ -7,10 +7,10 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.BoardGameRequests;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Handlers.BoardGameHandlers;
+using Rental.DataAccess.Handlers.Commands;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -25,11 +25,11 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new UpdateAndSaveBoardGameNotificationHandler(mapper, new RentalContext(contextOptions));
+            _sut = new UpdateAndSaveBoardGameCommandHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<UpdateAndSaveBoardGameNotification> _sut;
+        private readonly INotificationHandler<UpdateAndSaveBoardGameCommand> _sut;
 
         [Fact]
         public void Handle_Should_Throw_When_EntityDoesNotExist()
@@ -37,7 +37,7 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
             var input = new BoardGame("Test Updated", 20);
 
             Func<Task> act = async () =>
-                await _sut.Handle(new UpdateAndSaveBoardGameNotification(input), new CancellationToken());
+                await _sut.Handle(new UpdateAndSaveBoardGameCommand(input), new CancellationToken());
 
             act.Should().Throw<DbUpdateConcurrencyException>();
         }
@@ -62,7 +62,7 @@ namespace Rental.DataAccess.Tests.InMemory.BoardGameHandlers
             await _rentalContext.BoardGames.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
-            await _sut.Handle(new UpdateAndSaveBoardGameNotification(input), new CancellationToken());
+            await _sut.Handle(new UpdateAndSaveBoardGameCommand(input), new CancellationToken());
 
             _rentalContext.BoardGames.Count().Should().Be(entities.Count);
             var result = _rentalContext.BoardGames.FirstOrDefault(x => x.Id == input.Id);
