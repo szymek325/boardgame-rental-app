@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation.Results;
 using MediatR;
@@ -10,7 +11,7 @@ using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.Rentals
 {
-    internal class AddGameRentalRequestHandler : IRequestHandler<AddGameRentalRequest, AddRequestResult>
+    internal class AddGameRentalRequestHandler : AsyncRequestHandler<AddGameRentalRequest>
     {
         private readonly IMediatorService _mediatorService;
 
@@ -19,32 +20,29 @@ namespace Rental.Core.Requests.Rentals
             _mediatorService = mediatorService;
         }
 
-        public async Task<AddRequestResult> Handle(AddGameRentalRequest request, CancellationToken cancellationToken)
+        protected override async Task Handle(AddGameRentalRequest request, CancellationToken cancellationToken)
         {
             var validator = new RentalValidation();
-            var newGameRental = new GameRental(request.GameRentalGuid, request.ClientGuid, request.BoardGameGuid,
+            var newGameRental = new GameRental(request.NewGameRentalGuid, request.ClientGuid, request.BoardGameGuid,
                 request.ChargedDeposit);
             var validationResult = validator.Validate(newGameRental);
             if (validationResult.IsValid)
             {
                 var gameCanBeRented =
-                    await _mediatorService.Request(
+                    await _mediatorService.SendQuery(
                         new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.BoardGameGuid),
                         cancellationToken);
                 if (gameCanBeRented)
-                {
-                    await _mediatorService.Notify(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
-                    return new AddRequestResult(newGameRental.Id);
-                }
-
-                validationResult.Errors.Add(new ValidationFailure(nameof(newGameRental.BoardGameId),
-                    $"BoardGame {request.BoardGameGuid} is not available for rental - already rented"));
+                    await _mediatorService.SendCommand(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
+                else
+                    validationResult.Errors.Add(new ValidationFailure(nameof(newGameRental.BoardGameId),
+                        $"BoardGame {request.BoardGameGuid} is not available for rental - already rented"));
             }
 
             var validationMessage =
-                await _mediatorService.Request(new GetFormattedValidationMessageRequest(validationResult.Errors),
+                await _mediatorService.SendQuery(new GetFormattedValidationMessageRequest(validationResult.Errors),
                     cancellationToken);
-            return new AddRequestResult(validationMessage);
+            throw new ValidationException(validationMessage);
         }
     }
 }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Rental.Core.Requests.BoardGames
 {
-    public class RemoveBoardGameRequest : IRequest<string>
+    public class RemoveBoardGameRequest : IRequest
     {
         public RemoveBoardGameRequest(Guid id)
         {

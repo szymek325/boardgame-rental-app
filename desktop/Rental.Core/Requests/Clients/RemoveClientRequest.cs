@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Rental.Core.Requests.Clients
 {
-    public class RemoveClientRequest : IRequest<string>
+    public class RemoveClientRequest : IRequest
     {
         public RemoveClientRequest(Guid id)
         {

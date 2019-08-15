@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
 using MediatR;
 using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.Commands;
@@ -8,7 +9,7 @@ using Rental.Core.Models.Validation;
 
 namespace Rental.Core.Requests.BoardGames
 {
-    internal class AddBoardGameRequestHandler : IRequestHandler<AddBoardGameRequest, AddRequestResult>
+    internal class AddBoardGameRequestHandler : AsyncRequestHandler<AddBoardGameRequest>
     {
         private readonly IMediatorService _mediatorService;
 
@@ -17,22 +18,20 @@ namespace Rental.Core.Requests.BoardGames
             _mediatorService = mediatorService;
         }
 
-        public async Task<AddRequestResult> Handle(AddBoardGameRequest request,
+        protected override async Task Handle(AddBoardGameRequest request,
             CancellationToken cancellationToken)
         {
             var validator = new BoardGameValidator();
-            var newBoardGame = new BoardGame(request.BoardGameGuid, request.Name, request.Price);
+            var newBoardGame = new BoardGame(request.NewBoardGameGuid, request.Name, request.Price);
             var validationResult = validator.Validate(newBoardGame);
+
             if (validationResult.IsValid)
-            {
-                await _mediatorService.Notify(new AddAndSaveBoardGameCommand(newBoardGame), cancellationToken);
-                return new AddRequestResult(newBoardGame.Id);
-            }
+                await _mediatorService.SendCommand(new AddAndSaveBoardGameCommand(newBoardGame), cancellationToken);
 
             var validationMessage =
-                await _mediatorService.Request(new GetFormattedValidationMessageRequest(validationResult.Errors),
+                await _mediatorService.SendQuery(new GetFormattedValidationMessageRequest(validationResult.Errors),
                     cancellationToken);
-            return new AddRequestResult(validationMessage);
+            throw new ValidationException(validationMessage);
         }
     }
 }

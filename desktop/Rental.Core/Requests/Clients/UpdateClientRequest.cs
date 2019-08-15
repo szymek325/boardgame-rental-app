@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Rental.Core.Requests.Clients
 {
-    public class UpdateClientRequest : IRequest<string>
+    public class UpdateClientRequest : IRequest
     {
         public UpdateClientRequest(Guid id, string firstName, string lastName, string contactNumber,
             string emailAddress)

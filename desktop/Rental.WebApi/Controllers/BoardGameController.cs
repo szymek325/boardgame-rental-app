@@ -24,35 +24,35 @@ namespace Rental.WebApi.Controllers
         public async Task<IActionResult> Create(CreateInput input)
         {
             var newGuid = Guid.NewGuid();
-            var result = await _mediatorService.Request(new AddBoardGameRequest(newGuid, input.Name, input.Price));
+            var result = await _mediatorService.SendQuery(new AddBoardGameRequest(newGuid, input.Name, input.Price));
             return new OkObjectResult(new CreateOutput(newGuid, result.Message));
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(BoardGame input)
         {
-            await _mediatorService.Notify(new UpdateAndSaveBoardGameCommand(input));
+            await _mediatorService.SendCommand(new UpdateAndSaveBoardGameCommand(input));
             return new OkResult();
         }
 
         [HttpDelete]
         public async Task<IActionResult> Remove(Guid id)
         {
-            var result = await _mediatorService.Request(new RemoveBoardGameRequest(id));
+            var result = await _mediatorService.SendQuery(new RemoveBoardGameRequest(id));
             return new OkObjectResult(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await _mediatorService.Request(new GetBoardGameByIdQuery(id));
+            var result = await _mediatorService.SendQuery(new GetBoardGameByIdQuery(id));
             return new OkObjectResult(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _mediatorService.Request(new GetAllBoardGamesQuery());
+            var result = await _mediatorService.SendQuery(new GetAllBoardGamesQuery());
             return new OkObjectResult(result);
         }
     }

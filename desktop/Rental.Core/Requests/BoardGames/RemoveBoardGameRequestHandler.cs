@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Rental.Core.Helpers;
@@ -7,7 +8,7 @@ using Rental.Core.Interfaces.DataAccess.Queries;
 
 namespace Rental.Core.Requests.BoardGames
 {
-    internal class RemoveBoardGameRequestHandler : IRequestHandler<RemoveBoardGameRequest, string>
+    internal class RemoveBoardGameRequestHandler : AsyncRequestHandler<RemoveBoardGameRequest>
     {
         private readonly IMediatorService _mediatorService;
 
@@ -16,15 +17,16 @@ namespace Rental.Core.Requests.BoardGames
             _mediatorService = mediatorService;
         }
 
-        public async Task<string> Handle(RemoveBoardGameRequest request, CancellationToken cancellationToken)
+        protected override async Task Handle(RemoveBoardGameRequest request, CancellationToken cancellationToken)
         {
             var canBeRemoved =
-                await _mediatorService.Request(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.Id),
+                await _mediatorService.SendQuery(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(request.Id),
                     cancellationToken);
-            if (!canBeRemoved) return $"BoardGame with id {request.Id} can't be removed because of open rentals";
+            if (!canBeRemoved)
+                throw new ValidationException(
+                    $"BoardGame with id {request.Id} can't be removed because of open rentals");
 
-            await _mediatorService.Notify(new RemoveAndSaveBoardGameCommand(request.Id), cancellationToken);
-            return $"BoardGame with id {request.Id} was removed successfully";
+            await _mediatorService.SendCommand(new RemoveAndSaveBoardGameCommand(request.Id), cancellationToken);
         }
     }
 }
