@@ -34,7 +34,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_Throw_When_EntityDoesNotExist()
         {
-            var input = new BoardGame("Test Updated", 20);
+            var input = new BoardGame(Guid.NewGuid(), "Test Updated", 20);
 
             Func<Task> act = async () =>
                 await _sut.Handle(new UpdateAndSaveBoardGameCommand(input), new CancellationToken());
@@ -45,7 +45,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_UpdateEntity_When_ItExists()
         {
-            var input = new BoardGame("Test Updated", 20);
+            var input = new BoardGame(Guid.NewGuid(), "Test Updated", 20);
             var entities = new List<Entities.BoardGame>
             {
                 new Entities.BoardGame

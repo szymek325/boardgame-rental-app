@@ -34,7 +34,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_AddBoardGameToDb_When_MethodCalled()
         {
-            var boardGame = new BoardGame("test", 15);
+            var boardGame = new BoardGame(Guid.NewGuid(), "test", 15);
             var input = new AddAndSaveBoardGameCommand(boardGame);
             var entity = new Entities.BoardGame
             {
@@ -52,7 +52,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
-            var boardGame = new BoardGame("test", 15);
+            var boardGame = new BoardGame(Guid.NewGuid(), "test", 15);
             var input = new AddAndSaveBoardGameCommand(boardGame);
             var existingEntity = new Entities.BoardGame
             {

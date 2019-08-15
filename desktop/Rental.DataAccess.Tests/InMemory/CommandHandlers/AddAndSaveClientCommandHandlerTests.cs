@@ -33,7 +33,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_AddClientToDb_When_MethodCalled()
         {
-            var client = new Client("mat", "szym", "123456", "test@test.pl");
+            var client = new Client(Guid.NewGuid(), "mat", "szym", "123456", "test@test.pl");
             var input = new AddAndSaveClientCommand(client);
 
             await _sut.Handle(input, new CancellationToken());
@@ -48,7 +48,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
-            var client = new Client("mat", "szym", "123456", "test@test.pl");
+            var client = new Client(Guid.NewGuid(), "mat", "szym", "123456", "test@test.pl");
             var input = new AddAndSaveClientCommand(client);
             var existingEntity = new Entities.Client
             {

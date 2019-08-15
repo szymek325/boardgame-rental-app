@@ -22,7 +22,8 @@ namespace Rental.Core.Requests.Rentals
         public async Task<AddRequestResult> Handle(AddGameRentalRequest request, CancellationToken cancellationToken)
         {
             var validator = new RentalValidation();
-            var newGameRental = new GameRental(request.ClientGuid, request.BoardGameGuid, request.ChargedDeposit);
+            var newGameRental = new GameRental(request.GameRentalGuid, request.ClientGuid, request.BoardGameGuid,
+                request.ChargedDeposit);
             var validationResult = validator.Validate(newGameRental);
             if (validationResult.IsValid)
             {

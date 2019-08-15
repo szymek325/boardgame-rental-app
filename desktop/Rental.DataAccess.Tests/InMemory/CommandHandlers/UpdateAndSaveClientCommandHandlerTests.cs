@@ -34,7 +34,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_Throw_When_EntityDoesNotExist()
         {
-            var input = new Client("mat", "szym", "123456", "test@test.pl");
+            var input = new Client(Guid.NewGuid(), "mat", "szym", "123456", "test@test.pl");
 
             Func<Task> act = async () =>
                 await _sut.Handle(new UpdateAndSaveClientCommand(input), new CancellationToken());
@@ -45,7 +45,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_UpdateEntity_When_ItExists()
         {
-            var input = new Client("mat", "szym", "123456", "test@test.pl");
+            var input = new Client(Guid.NewGuid(), "mat", "szym", "123456", "test@test.pl");
             var entities = new List<Entities.Client>
             {
                 new Entities.Client

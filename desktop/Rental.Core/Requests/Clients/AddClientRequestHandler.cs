@@ -20,7 +20,7 @@ namespace Rental.Core.Requests.Clients
         public async Task<AddRequestResult> Handle(AddClientRequest request, CancellationToken cancellationToken)
         {
             var validator = new ClientValidator();
-            var newClient = new Client(request.FirstName, request.LastName, request.ContactNumber,
+            var newClient = new Client(request.ClientGuid, request.FirstName, request.LastName, request.ContactNumber,
                 request.EmailAddress);
             var validationResult = validator.Validate(newClient);
             if (validationResult.IsValid)

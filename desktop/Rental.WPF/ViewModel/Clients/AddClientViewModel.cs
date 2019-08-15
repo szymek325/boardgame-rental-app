@@ -1,4 +1,5 @@
-﻿using Rental.Core.Helpers;
+﻿using System;
+using Rental.Core.Helpers;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Requests.Clients;
 using Rental.WPF.Command;
@@ -18,9 +19,10 @@ namespace Rental.WPF.ViewModel.Clients
         {
             ButtonClickCommand = new AsyncCommand<string>(async s =>
                 {
-                    var guid = await mediatorService.Request(new AddClientRequest(FirstName, LastName, ContactNumber,
+                    var newGuid = Guid.NewGuid();
+                    var guid = await mediatorService.Request(new AddClientRequest(newGuid,FirstName, LastName, ContactNumber,
                         EmailAddress));
-                    var client = await mediatorService.Request(new GetClientByIdQuery(guid.NewGuid));
+                    var client = await mediatorService.Request(new GetClientByIdQuery(newGuid));
                     ClientEvents.RaiseOnNewClientAdded(this, client);
                 },
                 s => !string.IsNullOrEmpty(FirstName) && !string.IsNullOrEmpty(LastName) &&

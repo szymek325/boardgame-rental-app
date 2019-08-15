@@ -4,13 +4,9 @@ namespace Rental.Core.Models
 {
     public class BoardGame
     {
-        public BoardGame()
+        public BoardGame(Guid id, string name, float price)
         {
-        }
-
-        public BoardGame(string name, float price)
-        {
-            Id = Guid.NewGuid();
+            Id = id;
             Name = name;
             Price = price;
             CreationTime = DateTime.UtcNow;

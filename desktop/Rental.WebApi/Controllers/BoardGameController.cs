@@ -23,8 +23,9 @@ namespace Rental.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateInput input)
         {
-            var result = await _mediatorService.Request(new AddBoardGameRequest(input.Name, input.Price));
-            return new OkObjectResult(new CreateOutput(result.NewGuid, result.Message));
+            var newGuid = Guid.NewGuid();
+            var result = await _mediatorService.Request(new AddBoardGameRequest(newGuid, input.Name, input.Price));
+            return new OkObjectResult(new CreateOutput(newGuid, result.Message));
         }
 
         [HttpPut]
