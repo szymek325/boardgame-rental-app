@@ -1,9 +1,9 @@
 ﻿using System;
-using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Commands
 {
-    public class AddBoardGameCommand : IRequest
+    public class AddBoardGameCommand : ICommand
     {
         public AddBoardGameCommand(Guid newBoardGameGuid, string name, float price)
         {

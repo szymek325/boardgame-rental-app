@@ -1,9 +1,9 @@
 ﻿using System;
-using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Commands
 {
-    public class RemoveBoardGameCommand : IRequest
+    public class RemoveBoardGameCommand : ICommand
     {
         public RemoveBoardGameCommand(Guid id)
         {

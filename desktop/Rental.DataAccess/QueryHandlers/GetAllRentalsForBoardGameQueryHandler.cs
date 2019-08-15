@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
@@ -12,7 +12,7 @@ using Rental.DataAccess.Context;
 namespace Rental.DataAccess.QueryHandlers
 {
     internal class
-        GetAllRentalsForBoardGameQueryHandler : IRequestHandler<GetAllRentalsForBoardGameQuery, IList<GameRental>>
+        GetAllRentalsForBoardGameQueryHandler : IQueryHandler<GetAllRentalsForBoardGameQuery, IList<GameRental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;

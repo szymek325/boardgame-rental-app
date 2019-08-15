@@ -1,10 +1,10 @@
 ﻿using System;
-using MediatR;
+using Rental.Common;
 using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class GetClientByIdQuery : IRequest<Client>
+    public class GetClientByIdQuery : IQuery<Client>
     {
         public GetClientByIdQuery(Guid id)
         {

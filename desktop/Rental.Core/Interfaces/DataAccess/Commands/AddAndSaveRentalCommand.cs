@@ -1,9 +1,9 @@
-﻿using MediatR;
+﻿using Rental.Common;
 using Rental.Core.Models;
 
 namespace Rental.Core.Interfaces.DataAccess.Commands
 {
-    public class AddAndSaveRentalCommand : INotification
+    public class AddAndSaveRentalCommand : ICommand
     {
         public AddAndSaveRentalCommand(GameRental gameRental)
         {

@@ -1,14 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MediatR;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Entities;
 
 namespace Rental.DataAccess.CommandHandlers
 {
-    internal class AddAndSaveRentalCommandHandler : INotificationHandler<AddAndSaveRentalCommand>
+    internal class AddAndSaveRentalCommandHandler : ICommandHandler<AddAndSaveRentalCommand>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;

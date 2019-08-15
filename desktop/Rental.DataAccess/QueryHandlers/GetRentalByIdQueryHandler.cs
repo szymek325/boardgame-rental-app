@@ -1,15 +1,15 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
-    internal class GetRentalByIdQueryHandler : IRequestHandler<GetRentalByIdQuery, GameRental>
+    internal class GetRentalByIdQueryHandler : IQueryHandler<GetRentalByIdQuery, GameRental>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
@@ -10,7 +10,7 @@ using Rental.DataAccess.Context;
 namespace Rental.DataAccess.QueryHandlers
 {
     internal class
-        CheckIfBoardGameHasOnlyCompletedRentalsQueryHandler : IRequestHandler<
+        CheckIfBoardGameHasOnlyCompletedRentalsQueryHandler : IQueryHandler<
             CheckIfBoardGameHasOnlyCompletedRentalsQuery, bool>
     {
         private readonly RentalContext _rentalContext;
