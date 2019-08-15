@@ -2,12 +2,13 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.CommandHandlers
 {
-    internal class RemoveAndSaveClientCommandHandler : INotificationHandler<RemoveAndSaveClientCommand>
+    internal class RemoveAndSaveClientCommandHandler : ICommandHandler<RemoveAndSaveClientCommand>
     {
         private readonly RentalContext _rentalContext;
 

@@ -1,9 +1,10 @@
 ﻿using System;
 using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Commands
 {
-    public class AddClientCommand : IRequest
+    public class AddClientCommand : ICommand
     {
         public AddClientCommand(Guid newClientGuid, string firstName, string lastName, string contactNumber,
             string emailAddress)

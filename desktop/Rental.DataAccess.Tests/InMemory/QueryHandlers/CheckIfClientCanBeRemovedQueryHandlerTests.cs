@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
@@ -26,7 +27,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IRequestHandler<CheckIfClientCanBeRemovedQuery, bool> _sut;
+        private readonly IQueryHandler<CheckIfClientCanBeRemovedQuery, bool> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnFalse_When_ClientHasInProgressRental()

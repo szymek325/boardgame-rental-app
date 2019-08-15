@@ -6,6 +6,7 @@ using AutoMapper;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.DataAccess.CommandHandlers;
@@ -28,7 +29,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<AddAndSaveClientCommand> _sut;
+        private readonly ICommandHandler<AddAndSaveClientCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_AddClientToDb_When_MethodCalled()

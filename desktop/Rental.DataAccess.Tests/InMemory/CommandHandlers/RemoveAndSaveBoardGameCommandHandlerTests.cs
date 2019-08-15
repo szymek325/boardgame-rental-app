@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.DataAccess.CommandHandlers;
 using Rental.DataAccess.Context;
@@ -26,7 +27,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly INotificationHandler<RemoveAndSaveBoardGameCommand> _sut;
+        private readonly ICommandHandler<RemoveAndSaveBoardGameCommand> _sut;
 
         [Fact]
         public async Task Handle_Should_RemoveClientFromDb_When_ClientExists()

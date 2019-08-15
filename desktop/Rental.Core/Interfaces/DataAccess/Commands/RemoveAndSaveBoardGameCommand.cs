@@ -1,9 +1,10 @@
 ﻿using System;
 using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Interfaces.DataAccess.Commands
 {
-    public class RemoveAndSaveBoardGameCommand : INotification
+    public class RemoveAndSaveBoardGameCommand : ICommand
     {
         public RemoveAndSaveBoardGameCommand(Guid id)
         {

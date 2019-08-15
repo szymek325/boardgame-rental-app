@@ -3,13 +3,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
-    internal class CheckIfClientCanBeRemovedQueryHandler : IRequestHandler<CheckIfClientCanBeRemovedQuery, bool>
+    internal class CheckIfClientCanBeRemovedQueryHandler : IQueryHandler<CheckIfClientCanBeRemovedQuery, bool>
     {
         private readonly RentalContext _rentalContext;
 

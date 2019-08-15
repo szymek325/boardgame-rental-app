@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using FluentValidation.Results;
 using MediatR;
+using Rental.Common;
 
 namespace Rental.Core.Queries
 {
-    internal class GetFormattedValidationMessageQuery : IRequest<string>
+    internal class GetFormattedValidationMessageQuery : IQuery<string>
     {
         public GetFormattedValidationMessageQuery(IList<ValidationFailure> validationErrors)
         {
