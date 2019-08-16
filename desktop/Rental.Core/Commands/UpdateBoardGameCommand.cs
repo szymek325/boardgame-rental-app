@@ -1,5 +1,5 @@
 ﻿using System;
-using Rental.Common;
+using Rental.CQRS;
 
 namespace Rental.Core.Commands
 {

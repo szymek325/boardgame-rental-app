@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading;
 using System.Threading.Tasks;
-using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.Validation;
 using Rental.Core.Queries;
+using Rental.CQRS;
 
 namespace Rental.Core.Commands.Handlers
 {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Rental.Common
+namespace Rental.CQRS
 {
     public interface ICommand : INotification
     {

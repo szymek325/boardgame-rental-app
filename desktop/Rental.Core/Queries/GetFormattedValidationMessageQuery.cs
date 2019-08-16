@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentValidation.Results;
-using Rental.Common;
+using Rental.CQRS;
 
 namespace Rental.Core.Queries
 {
