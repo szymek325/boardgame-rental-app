@@ -1,7 +1,7 @@
 ﻿using System;
-using Rental.Common;
 using Rental.Core.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
+using Rental.CQRS;
 using Rental.WPF.Command;
 using Rental.WPF.Events;
 

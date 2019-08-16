@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Rental.Common
+namespace Rental.CQRS
 {
     public interface ICommandHandler<in TRequest> : INotificationHandler<TRequest>
         where TRequest : ICommand

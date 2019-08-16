@@ -1,6 +1,6 @@
 ﻿using System;
-using Rental.Common;
 using Rental.Core.Models;
+using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {

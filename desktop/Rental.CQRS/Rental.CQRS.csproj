@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Rental.CQRS</AssemblyName>
+    <RootNamespace>Rental.CQRS</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

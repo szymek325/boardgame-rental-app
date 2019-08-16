@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Rental.Common;
 using Rental.Core.Interfaces.DataAccess.Commands;
+using Rental.CQRS;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Entities;
 

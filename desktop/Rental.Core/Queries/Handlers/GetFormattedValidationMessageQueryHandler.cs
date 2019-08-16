@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Rental.Common;
+using Rental.CQRS;
 
 namespace Rental.Core.Queries.Handlers
 {
