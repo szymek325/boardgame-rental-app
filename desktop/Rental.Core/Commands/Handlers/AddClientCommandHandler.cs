@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
+using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
-using Rental.Core.Models.Validation;
 using Rental.Core.Queries;
 using Rental.CQRS;
 
@@ -12,19 +12,20 @@ namespace Rental.Core.Commands.Handlers
     internal class AddClientCommandHandler : ICommandHandler<AddClientCommand>
     {
         private readonly IMediatorService _mediatorService;
+        private readonly IValidator<Client> _validator;
 
-        public AddClientCommandHandler(IMediatorService mediatorService)
+        public AddClientCommandHandler(IMediatorService mediatorService, IValidator<Client> validator)
         {
             _mediatorService = mediatorService;
+            _validator = validator;
         }
 
         public async Task Handle(AddClientCommand command, CancellationToken cancellationToken)
         {
-            var validator = new ClientValidator();
             var newClient = new Client(command.NewClientGuid, command.FirstName, command.LastName,
                 command.ContactNumber,
                 command.EmailAddress);
-            var validationResult = validator.Validate(newClient);
+            var validationResult = _validator.Validate(newClient);
 
             if (validationResult.IsValid)
             {
@@ -35,7 +36,7 @@ namespace Rental.Core.Commands.Handlers
                 var validationMessage =
                     await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
                         cancellationToken);
-                throw new ValidationException(validationMessage);
+                throw new CustomValidationException(validationMessage);
             }
         }
     }

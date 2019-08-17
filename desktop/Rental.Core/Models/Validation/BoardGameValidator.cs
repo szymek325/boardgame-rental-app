@@ -13,4 +13,8 @@ namespace Rental.Core.Models.Validation
             RuleFor(x => x.Price).GreaterThan(0);
         }
     }
+
+    internal interface IBoardGameValidator
+    {
+    }
 }

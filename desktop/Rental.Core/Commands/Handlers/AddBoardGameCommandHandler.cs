@@ -1,9 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
-using Rental.Core.Models.Validation;
 using Rental.Core.Queries;
 using Rental.CQRS;
 
@@ -12,18 +12,19 @@ namespace Rental.Core.Commands.Handlers
     internal class AddBoardGameCommandHandler : ICommandHandler<AddBoardGameCommand>
     {
         private readonly IMediatorService _mediatorService;
+        private readonly IValidator<BoardGame> _validator;
 
-        public AddBoardGameCommandHandler(IMediatorService mediatorService)
+        public AddBoardGameCommandHandler(IMediatorService mediatorService, IValidator<BoardGame> validator)
         {
             _mediatorService = mediatorService;
+            _validator = validator;
         }
 
         public async Task Handle(AddBoardGameCommand command,
             CancellationToken cancellationToken)
         {
-            var validator = new BoardGameValidator();
             var newBoardGame = new BoardGame(command.NewBoardGameGuid, command.Name, command.Price);
-            var validationResult = validator.Validate(newBoardGame);
+            var validationResult = _validator.Validate(newBoardGame);
 
             if (validationResult.IsValid)
             {
@@ -34,7 +35,7 @@ namespace Rental.Core.Commands.Handlers
                 var validationMessage =
                     await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
                         cancellationToken);
-                throw new ValidationException(validationMessage);
+                throw new CustomValidationException(validationMessage);
             }
         }
     }
