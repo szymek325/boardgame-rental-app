@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
 using FluentValidation.Results;
+using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
-using Rental.Core.Models.Validation;
 using Rental.Core.Queries;
 using Rental.CQRS;
 
@@ -14,18 +14,19 @@ namespace Rental.Core.Commands.Handlers
     internal class AddGameRentalCommandHandler : ICommandHandler<AddGameRentalCommand>
     {
         private readonly IMediatorService _mediatorService;
+        private readonly IValidator<GameRental> _validator;
 
-        public AddGameRentalCommandHandler(IMediatorService mediatorService)
+        public AddGameRentalCommandHandler(IMediatorService mediatorService, IValidator<GameRental> validator)
         {
             _mediatorService = mediatorService;
+            _validator = validator;
         }
 
         public async Task Handle(AddGameRentalCommand command, CancellationToken cancellationToken)
         {
-            var validator = new RentalValidation();
             var newGameRental = new GameRental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
                 command.ChargedDeposit);
-            var validationResult = validator.Validate(newGameRental);
+            var validationResult = _validator.Validate(newGameRental);
             if (validationResult.IsValid)
             {
                 var gameCanBeRented =
@@ -43,7 +44,7 @@ namespace Rental.Core.Commands.Handlers
                 var validationMessage =
                     await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
                         cancellationToken);
-                throw new ValidationException(validationMessage);
+                throw new CustomValidationException(validationMessage);
             }
         }
     }

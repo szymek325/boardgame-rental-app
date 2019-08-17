@@ -2,9 +2,9 @@
 
 namespace Rental.Core.Models.Validation
 {
-    internal class RentalValidation : AbstractValidator<GameRental>
+    internal class RentalValidator : AbstractValidator<GameRental>
     {
-        public RentalValidation()
+        public RentalValidator()
         {
             RuleFor(x => x.Id).NotEmpty().NotNull();
             RuleFor(x => x.ClientId).NotEmpty().NotNull();

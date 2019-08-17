@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
+using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models.Validation;
+using Rental.Core.Models;
 using Rental.Core.Queries;
 using Rental.CQRS;
 
@@ -12,22 +13,23 @@ namespace Rental.Core.Commands.Handlers
     internal class UpdateBoardGameCommandHandler : ICommandHandler<UpdateBoardGameCommand>
     {
         private readonly IMediatorService _mediatorService;
+        private readonly IValidator<BoardGame> _validator;
 
-        public UpdateBoardGameCommandHandler(IMediatorService mediatorService)
+        public UpdateBoardGameCommandHandler(IMediatorService mediatorService, IValidator<BoardGame> validator)
         {
             _mediatorService = mediatorService;
+            _validator = validator;
         }
 
         public async Task Handle(UpdateBoardGameCommand command, CancellationToken cancellationToken)
         {
             var boardGame = await _mediatorService.Send(new GetBoardGameByIdQuery(command.Id), cancellationToken);
             if (boardGame == null)
-                throw new ValidationException($"BoardGame with id {command.Id} doesn't exist");
+                throw new CustomValidationException($"BoardGame with id {command.Id} doesn't exist");
 
             boardGame.Name = command.Name;
             boardGame.Price = command.Price;
-            var validator = new BoardGameValidator();
-            var validationResult = validator.Validate(boardGame);
+            var validationResult = _validator.Validate(boardGame);
 
             if (validationResult.IsValid)
             {
