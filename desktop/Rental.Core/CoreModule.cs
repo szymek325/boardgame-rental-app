@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Rental.CQRS;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("Rental.Core.Tests")]
 
 namespace Rental.Core
 {
