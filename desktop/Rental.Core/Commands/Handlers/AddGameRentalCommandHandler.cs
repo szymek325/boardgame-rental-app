@@ -30,7 +30,7 @@ namespace Rental.Core.Commands.Handlers
             {
                 var gameCanBeRented =
                     await _mediatorService.Send(
-                        new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
+                        new CheckIfBoardGameCanBeRemovedQuery(command.BoardGameGuid),
                         cancellationToken);
                 if (gameCanBeRented)
                     await _mediatorService.Send(new AddAndSaveRentalCommand(newGameRental), cancellationToken);

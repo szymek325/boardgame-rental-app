@@ -20,8 +20,12 @@ namespace Rental.DataAccess.QueryHandlers
 
         public async Task<bool> Handle(CheckIfClientCanBeRemovedQuery query, CancellationToken cancellationToken)
         {
-            var canBeRemoved = await _rentalContext.GameRentals.Where(x => x.ClientId == query.Id)
-                .AllAsync(x => x.Status == Status.Completed, cancellationToken);
+            var canBeRemoved =
+                await _rentalContext.Clients.AnyAsync(x => x.Id == query.Id, cancellationToken) &&
+                await _rentalContext.GameRentals.Where(x => x.ClientId == query.Id)
+                    .AllAsync(x => x.Status == Status.Completed, cancellationToken);
+
+
             return canBeRemoved;
         }
     }

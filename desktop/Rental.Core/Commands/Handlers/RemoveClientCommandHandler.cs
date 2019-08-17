@@ -19,7 +19,7 @@ namespace Rental.Core.Commands.Handlers
         public async Task Handle(RemoveClientCommand command, CancellationToken cancellationToken)
         {
             var canBeRemoved =
-                await _mediatorService.Send(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.Id),
+                await _mediatorService.Send(new CheckIfBoardGameCanBeRemovedQuery(command.Id),
                     cancellationToken);
             if (!canBeRemoved)
                 throw new ValidationException($"Client with id {command.Id} can't be removed because of open rentals");

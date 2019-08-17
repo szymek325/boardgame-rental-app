@@ -10,6 +10,7 @@ using Rental.CQRS;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.QueryHandlers;
 using Xunit;
+using Client = Rental.DataAccess.Entities.Client;
 using GameRental = Rental.DataAccess.Entities.GameRental;
 
 namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
@@ -29,7 +30,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         private readonly IQueryHandler<CheckIfClientCanBeRemovedQuery, bool> _sut;
 
         [Fact]
-        public async Task Handle_Should_ReturnFalse_When_ClientHasInProgressRental()
+        public async Task Handle_Should_ReturnFalse_When_ClientDoesNotExist()
         {
             var clientId = Guid.NewGuid();
             var input = new CheckIfClientCanBeRemovedQuery(clientId);
@@ -38,7 +39,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
                 new GameRental
                 {
                     ClientId = clientId,
-                    Status = Status.InProgress
+                    Status = Status.Completed
                 },
                 new GameRental
                 {
@@ -55,10 +56,49 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         }
 
         [Fact]
+        public async Task Handle_Should_ReturnFalse_When_ClientHasInProgressRental()
+        {
+            var clientId = Guid.NewGuid();
+            var input = new CheckIfClientCanBeRemovedQuery(clientId);
+            var client = new Client
+            {
+                Id = clientId,
+                FirstName = "Name1"
+            };
+            var rentals = new List<GameRental>
+            {
+                new GameRental
+                {
+                    ClientId = clientId,
+                    Status = Status.InProgress
+                },
+                new GameRental
+                {
+                    ClientId = clientId,
+                    Status = Status.Completed
+                }
+            };
+            await _rentalContext.GameRentals.AddRangeAsync(rentals);
+            await _rentalContext.AddAsync(client);
+            await _rentalContext.SaveChangesAsync();
+
+            var response = await _sut.Handle(input, new CancellationToken());
+
+            response.Should().BeFalse();
+        }
+
+        [Fact]
         public async Task Handle_Should_ReturnTrue_When_RentalsTableIsEmpty()
         {
             var clientId = Guid.NewGuid();
             var input = new CheckIfClientCanBeRemovedQuery(clientId);
+            var client = new Client
+            {
+                Id = clientId,
+                FirstName = "Name1"
+            };
+            await _rentalContext.AddAsync(client);
+            await _rentalContext.SaveChangesAsync();
 
             var response = await _sut.Handle(input, new CancellationToken());
 
@@ -70,6 +110,11 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         {
             var clientId = Guid.NewGuid();
             var input = new CheckIfClientCanBeRemovedQuery(clientId);
+            var client = new Client
+            {
+                Id = clientId,
+                FirstName = "Name1"
+            };
             var rentals = new List<GameRental>
             {
                 new GameRental
@@ -84,6 +129,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
                 }
             };
             await _rentalContext.GameRentals.AddRangeAsync(rentals);
+            await _rentalContext.Clients.AddAsync(client);
             await _rentalContext.SaveChangesAsync();
 
             var response = await _sut.Handle(input, new CancellationToken());

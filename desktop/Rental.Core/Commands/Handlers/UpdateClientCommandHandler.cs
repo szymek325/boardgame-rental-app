@@ -21,6 +21,9 @@ namespace Rental.Core.Commands.Handlers
         public async Task Handle(UpdateClientCommand command, CancellationToken cancellationToken)
         {
             var client = await _mediatorService.Send(new GetClientByIdQuery(command.Id), cancellationToken);
+            if (client == null)
+                throw new ValidationException($"Client with id {command.Id} doesn't exist");
+
             client.FirstName = command.FirstName;
             client.LastName = command.LastName;
             client.EmailAddress = command.EmailAddress;

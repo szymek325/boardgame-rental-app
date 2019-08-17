@@ -19,7 +19,7 @@ namespace Rental.Core.Commands.Handlers
         public async Task Handle(RemoveBoardGameCommand command, CancellationToken cancellationToken)
         {
             var canBeRemoved =
-                await _mediatorService.Send(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.Id),
+                await _mediatorService.Send(new CheckIfBoardGameCanBeRemovedQuery(command.Id),
                     cancellationToken);
             if (!canBeRemoved)
                 throw new ValidationException(
