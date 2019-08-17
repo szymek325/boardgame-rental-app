@@ -3,9 +3,9 @@ using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class CheckIfBoardGameHasOnlyCompletedRentalsQuery : IQuery<bool>
+    public class CheckIfBoardGameCanBeRemovedQuery : IQuery<bool>
     {
-        public CheckIfBoardGameHasOnlyCompletedRentalsQuery(Guid id)
+        public CheckIfBoardGameCanBeRemovedQuery(Guid id)
         {
             Id = id;
         }

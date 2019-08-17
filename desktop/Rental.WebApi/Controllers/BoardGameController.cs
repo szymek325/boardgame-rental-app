@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Commands;
-using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
 using Rental.CQRS;
@@ -25,13 +24,13 @@ namespace Rental.WebApi.Controllers
         {
             var newGuid = Guid.NewGuid();
             await _mediatorService.Send(new AddBoardGameCommand(newGuid, input.Name, input.Price));
-            return new OkObjectResult(new CreateOutput(newGuid));
+            return new OkObjectResult(new {newGuid});
         }
 
         [HttpPut]
         public async Task<IActionResult> Update(BoardGame input)
         {
-            await _mediatorService.Send(new UpdateAndSaveBoardGameCommand(input));
+            await _mediatorService.Send(new UpdateBoardGameCommand(input.Id, input.Name, input.Price));
             return new OkResult();
         }
 

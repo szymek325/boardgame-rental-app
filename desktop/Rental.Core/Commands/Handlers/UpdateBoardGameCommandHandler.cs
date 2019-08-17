@@ -21,6 +21,9 @@ namespace Rental.Core.Commands.Handlers
         public async Task Handle(UpdateBoardGameCommand command, CancellationToken cancellationToken)
         {
             var boardGame = await _mediatorService.Send(new GetBoardGameByIdQuery(command.Id), cancellationToken);
+            if (boardGame == null)
+                throw new ValidationException($"BoardGame with id {command.Id} doesn't exist");
+
             boardGame.Name = command.Name;
             boardGame.Price = command.Price;
             var validator = new BoardGameValidator();
