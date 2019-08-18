@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.89
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.WPF", "Rental.WPF\Rental.WPF.csproj", "{C9A7B4B7-EFA3-4D71-A196-D19B20EF0C92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.WPF", "src\Rental.WPF\Rental.WPF.csproj", "{C9A7B4B7-EFA3-4D71-A196-D19B20EF0C92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.Core", "Rental.Core\Rental.Core.csproj", "{14D1A0EE-3EF6-4226-8B2B-40A219ED1D06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.Core", "src\Rental.Core\Rental.Core.csproj", "{14D1A0EE-3EF6-4226-8B2B-40A219ED1D06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.DataAccess", "Rental.DataAccess\Rental.DataAccess.csproj", "{6959C936-DF0C-4267-B7CF-9352695761D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.DataAccess", "src\Rental.DataAccess\Rental.DataAccess.csproj", "{6959C936-DF0C-4267-B7CF-9352695761D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.WebApi", "Rental.WebApi\Rental.WebApi.csproj", "{019AA7BD-7578-47D6-BC98-AFD1E3B53AF9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.WebApi", "src\Rental.WebApi\Rental.WebApi.csproj", "{019AA7BD-7578-47D6-BC98-AFD1E3B53AF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{53B68C94-BAC8-4F33-8936-0B1EF6ED677F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.DataAccess.Tests", "Rental.DataAccess.Tests\Rental.DataAccess.Tests.csproj", "{4DC65A84-6A16-4CDA-8925-1146D0E97F24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.DataAccess.Tests", "tests\Rental.DataAccess.Tests\Rental.DataAccess.Tests.csproj", "{4DC65A84-6A16-4CDA-8925-1146D0E97F24}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.CQRS", "Rental.CQRS\Rental.CQRS.csproj", "{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.CQRS", "src\Rental.CQRS\Rental.CQRS.csproj", "{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{E8024DBB-5DCF-43EB-92E5-257A157BF2F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rental.Core.Tests", "Rental.Core.Tests\Rental.Core.Tests.csproj", "{FC348685-D1B2-4134-BEC1-14FA6153B83A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rental.Core.Tests", "tests\Rental.Core.Tests\Rental.Core.Tests.csproj", "{FC348685-D1B2-4134-BEC1-14FA6153B83A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
