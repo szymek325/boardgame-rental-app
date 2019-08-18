@@ -3,9 +3,9 @@ using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class CheckIfClientCanBeRemovedQuery : IQuery<bool>
+    public class CheckIfClientHasOnlyCompletedRentalsQuery : IQuery<bool>
     {
-        public CheckIfClientCanBeRemovedQuery(Guid id)
+        public CheckIfClientHasOnlyCompletedRentalsQuery(Guid id)
         {
             Id = id;
         }

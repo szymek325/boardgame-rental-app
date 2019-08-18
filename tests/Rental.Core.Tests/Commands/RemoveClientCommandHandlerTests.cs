@@ -31,7 +31,7 @@ namespace Rental.Core.Tests.Commands
         public async Task Handle_Should_RemoveAndSaveBoardGame_When_GameCanBeRemoved()
         {
             _mediatorService
-                .Setup(x => x.Send(It.Is((CheckIfClientCanBeRemovedQuery q) => q.Id == _inputCommand.Id),
+                .Setup(x => x.Send(It.Is((CheckIfClientHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.Id),
                     _cancellationToken))
                 .ReturnsAsync(true);
             _mediatorService
@@ -48,7 +48,7 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowCustomValidationException_When_GameCanNotBeRemoved()
         {
             _mediatorService
-                .Setup(x => x.Send(It.Is((CheckIfClientCanBeRemovedQuery q) => q.Id == _inputCommand.Id),
+                .Setup(x => x.Send(It.Is((CheckIfClientHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.Id),
                     _cancellationToken))
                 .ReturnsAsync(false);
 
