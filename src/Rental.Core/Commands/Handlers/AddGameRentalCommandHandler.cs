@@ -31,7 +31,7 @@ namespace Rental.Core.Commands.Handlers
             {
                 var canBeRented =
                     await _mediatorService.Send(
-                        new CheckIfBoardGameCanBeRemovedQuery(command.BoardGameGuid),
+                        new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
                         cancellationToken);
                 if (!canBeRented)
                     validationResult.Errors.Add(new ValidationFailure(nameof(newGameRental.BoardGameId),

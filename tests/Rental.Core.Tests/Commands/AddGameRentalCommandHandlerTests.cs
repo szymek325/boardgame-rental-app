@@ -45,7 +45,7 @@ namespace Rental.Core.Tests.Commands
             const bool canBeRented = true;
             _mediatorService
                 .Setup(x => x.Send(
-                    It.Is((CheckIfBoardGameCanBeRemovedQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
                     cancellationToken)).ReturnsAsync(canBeRented);
             _mediatorService.Setup(x =>
                 x.Send(It.Is((AddAndSaveRentalCommand c) => c.GameRental.Id == _inputCommand.NewGameRentalGuid),
@@ -68,7 +68,7 @@ namespace Rental.Core.Tests.Commands
             const bool canBeRented = false;
             _mediatorService
                 .Setup(x => x.Send(
-                    It.Is((CheckIfBoardGameCanBeRemovedQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
                     cancellationToken)).ReturnsAsync(canBeRented);
             const string errorMessage = "formatted error message";
             _mediatorService

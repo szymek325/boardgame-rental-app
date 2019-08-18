@@ -19,7 +19,7 @@ namespace Rental.Core.Commands.Handlers
         public async Task Handle(RemoveClientCommand command, CancellationToken cancellationToken)
         {
             var canBeRemoved =
-                await _mediatorService.Send(new CheckIfClientCanBeRemovedQuery(command.Id),
+                await _mediatorService.Send(new CheckIfClientHasOnlyCompletedRentalsQuery(command.Id),
                     cancellationToken);
             if (!canBeRemoved)
                 throw new CustomValidationException(
