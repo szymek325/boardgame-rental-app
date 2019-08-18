@@ -18,7 +18,7 @@ namespace Rental.Core.Commands.Handlers
 
         public async Task Handle(RemoveClientCommand command, CancellationToken cancellationToken)
         {
-            var client = await _mediatorService.Send(new GetBoardGameByIdQuery(command.Id), cancellationToken);
+            var client = await _mediatorService.Send(new GetClientByIdQuery(command.Id), cancellationToken);
             if (client == null)
                 throw new ClientNotFoundException(command.Id);
 
