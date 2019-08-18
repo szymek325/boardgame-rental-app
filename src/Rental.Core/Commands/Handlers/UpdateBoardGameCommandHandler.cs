@@ -25,7 +25,7 @@ namespace Rental.Core.Commands.Handlers
         {
             var boardGame = await _mediatorService.Send(new GetBoardGameByIdQuery(command.Id), cancellationToken);
             if (boardGame == null)
-                throw new CustomValidationException($"BoardGame with id {command.Id} doesn't exist");
+                throw new BoardGameNotFoundException(command.Id);
 
             boardGame.Name = command.Name;
             boardGame.Price = command.Price;
@@ -40,7 +40,7 @@ namespace Rental.Core.Commands.Handlers
                 var validationMessage =
                     await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
                         cancellationToken);
-                throw new ValidationException(validationMessage);
+                throw new CustomValidationException(validationMessage);
             }
         }
     }
