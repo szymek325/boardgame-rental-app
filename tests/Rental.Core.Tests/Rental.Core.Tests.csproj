@@ -21,4 +21,8 @@
     <ProjectReference Include="..\..\src\Rental.Core\Rental.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
 </Project>

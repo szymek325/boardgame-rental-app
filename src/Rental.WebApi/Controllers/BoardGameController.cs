@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models;
 using Rental.CQRS;
+using Rental.WebApi.Dto;
 
 namespace Rental.WebApi.Controllers
 {
@@ -20,7 +20,7 @@ namespace Rental.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateInput input)
+        public async Task<IActionResult> Create(CreateBoardGameDto input)
         {
             var newGuid = Guid.NewGuid();
             await _mediatorService.Send(new AddBoardGameCommand(newGuid, input.Name, input.Price));
@@ -28,9 +28,10 @@ namespace Rental.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(BoardGame input)
+        public async Task<IActionResult> Update(UpdateBoardGameDto input)
         {
-            await _mediatorService.Send(new UpdateBoardGameCommand(input.Id, input.Name, input.Price));
+            await _mediatorService.Send(new UpdateBoardGameCommand(input.BoardGameGuid, input.Name,
+                input.Price));
             return new OkResult();
         }
 
@@ -54,28 +55,5 @@ namespace Rental.WebApi.Controllers
             var result = await _mediatorService.Send(new GetAllBoardGamesQuery());
             return new OkObjectResult(result);
         }
-    }
-
-    public class CreateOutput
-    {
-        public CreateOutput(Guid newBoardGameId)
-        {
-            NewBoardGameId = newBoardGameId;
-        }
-
-        public CreateOutput(Guid newBoardGameId, string message)
-        {
-            NewBoardGameId = newBoardGameId;
-            Message = message;
-        }
-
-        public Guid NewBoardGameId { get; set; }
-        public string Message { get; set; }
-    }
-
-    public class CreateInput
-    {
-        public string Name { get; set; }
-        public float Price { get; set; }
     }
 }
