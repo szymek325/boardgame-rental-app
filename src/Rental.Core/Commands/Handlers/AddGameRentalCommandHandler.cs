@@ -29,15 +29,18 @@ namespace Rental.Core.Commands.Handlers
             var validationResult = _validator.Validate(newGameRental);
             if (validationResult.IsValid)
             {
-                var gameCanBeRented =
+                var canBeRented =
                     await _mediatorService.Send(
                         new CheckIfBoardGameCanBeRemovedQuery(command.BoardGameGuid),
                         cancellationToken);
-                if (gameCanBeRented)
-                    await _mediatorService.Send(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
-                else
+                if (!canBeRented)
                     validationResult.Errors.Add(new ValidationFailure(nameof(newGameRental.BoardGameId),
                         $"BoardGame {command.BoardGameGuid} is not available for rental - already rented"));
+            }
+
+            if (validationResult.IsValid)
+            {
+                await _mediatorService.Send(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
             }
             else
             {
