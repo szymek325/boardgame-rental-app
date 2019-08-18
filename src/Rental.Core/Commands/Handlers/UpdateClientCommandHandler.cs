@@ -25,7 +25,7 @@ namespace Rental.Core.Commands.Handlers
         {
             var client = await _mediatorService.Send(new GetClientByIdQuery(command.Id), cancellationToken);
             if (client == null)
-                throw new CustomValidationException($"Client with id {command.Id} doesn't exist");
+                throw new ClientNotFoundException(command.Id);
 
             client.FirstName = command.FirstName;
             client.LastName = command.LastName;
