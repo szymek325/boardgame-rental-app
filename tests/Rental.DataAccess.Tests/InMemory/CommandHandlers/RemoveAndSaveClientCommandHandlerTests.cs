@@ -7,10 +7,10 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Commands;
+using Rental.Core.Models;
 using Rental.CQRS;
 using Rental.DataAccess.CommandHandlers;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Entities;
 using Rental.DataAccess.Mapping;
 using Xunit;
 
@@ -25,46 +25,46 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
                 .Options;
             _rentalContext = new RentalContext(contextOptions);
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _sut = new RemoveAndSaveClientCommandHandler(mapper,new RentalContext(contextOptions));
+            _sut = new RemoveAndSaveClientCommandHandler(mapper, new RentalContext(contextOptions));
         }
 
         private readonly RentalContext _rentalContext;
         private readonly ICommandHandler<RemoveAndSaveClientCommand> _sut;
 
-        //[Fact]
-        //public async Task Handle_Should_RemoveClientFromDb_When_ClientExists()
-        //{
-        //    var inputId = Guid.NewGuid();
-        //    var entities = new List<Client>
-        //    {
-        //        new Client
-        //        {
-        //            Id = inputId,
-        //            FirstName = "test1"
-        //        },
-        //        new Client
-        //        {
-        //            Id = Guid.NewGuid(),
-        //            FirstName = "test2"
-        //        }
-        //    };
-        //    await _rentalContext.Clients.AddRangeAsync(entities);
-        //    await _rentalContext.SaveChangesAsync();
+        [Fact]
+        public async Task Handle_Should_RemoveClientFromDb_When_ClientExists()
+        {
+            var client = new Client(Guid.NewGuid(), "First", "Last", "number", "email");
+            var entities = new List<Entities.Client>
+            {
+                new Entities.Client
+                {
+                    Id = client.Id,
+                    FirstName = "test1"
+                },
+                new Entities.Client
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "test2"
+                }
+            };
+            await _rentalContext.Clients.AddRangeAsync(entities);
+            await _rentalContext.SaveChangesAsync();
 
-        //    await _sut.Handle(new RemoveAndSaveClientCommand(inputId), new CancellationToken());
+            await _sut.Handle(new RemoveAndSaveClientCommand(client), new CancellationToken());
 
-        //    _rentalContext.Clients.FirstOrDefault(x => x.Id == inputId).Should().BeNull();
-        //}
+            _rentalContext.Clients.Any(x => x.Id == client.Id).Should().BeFalse();
+        }
 
-        //[Fact]
-        //public void Handle_Should_ThrowDbUpdateConcurrencyException_When_ClientWithProvidedIdDoesNotExist()
-        //{
-        //    var input = Guid.NewGuid();
+        [Fact]
+        public void Handle_Should_ThrowDbUpdateConcurrencyException_When_ClientWithProvidedIdDoesNotExist()
+        {
+            var client = new Client(Guid.NewGuid(), "First", "Last", "number", "email");
 
-        //    Func<Task> act = async () =>
-        //        await _sut.Handle(new RemoveAndSaveClientCommand(input), new CancellationToken());
+            Func<Task> act = async () =>
+                await _sut.Handle(new RemoveAndSaveClientCommand(client), new CancellationToken());
 
-        //    act.Should().Throw<DbUpdateConcurrencyException>();
-        //}
+            act.Should().Throw<DbUpdateConcurrencyException>();
+        }
     }
 }

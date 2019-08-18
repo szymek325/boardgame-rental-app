@@ -8,6 +8,7 @@ using Rental.Core.Commands.Handlers;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
+using Rental.Core.Models;
 using Rental.CQRS;
 using Xunit;
 
@@ -30,6 +31,10 @@ namespace Rental.Core.Tests.Commands
         [Fact]
         public async Task Handle_Should_RemoveAndSaveBoardGame_When_GameCanBeRemoved()
         {
+            var client = new Client(_inputCommand.Id, "first", "last", "12412", "email");
+            _mediatorService
+                .Setup(x => x.Send(It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.Id), _cancellationToken))
+                .ReturnsAsync(client);
             _mediatorService
                 .Setup(x => x.Send(It.Is((CheckIfClientHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.Id),
                     _cancellationToken))
@@ -45,8 +50,25 @@ namespace Rental.Core.Tests.Commands
         }
 
         [Fact]
-        public void Handle_Should_ThrowCustomValidationException_When_GameCanNotBeRemoved()
+        public void Handle_Should_ThrowClientNotFoundException_When_ClientWasNotFoundInDb()
         {
+            Client client = null;
+            _mediatorService
+                .Setup(x => x.Send(It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.Id), _cancellationToken))
+                .ReturnsAsync(client);
+
+            Func<Task> act = async () => await _sut.Handle(_inputCommand, _cancellationToken);
+
+            act.Should().Throw<ClientNotFoundException>();
+        }
+
+        [Fact]
+        public void Handle_Should_ThrowCustomValidationException_When_ClientHasInProgressRentals()
+        {
+            var client = new Client(_inputCommand.Id, "first", "last", "12412", "email");
+            _mediatorService
+                .Setup(x => x.Send(It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.Id), _cancellationToken))
+                .ReturnsAsync(client);
             _mediatorService
                 .Setup(x => x.Send(It.Is((CheckIfClientHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.Id),
                     _cancellationToken))
@@ -54,8 +76,7 @@ namespace Rental.Core.Tests.Commands
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, _cancellationToken);
 
-            act.Should().Throw<CustomValidationException>()
-                .WithMessage($"Client with id {_inputCommand.Id} can't be removed because of open rentals");
+            act.Should().Throw<ClientHasOpenRentalException>();
         }
     }
 }
