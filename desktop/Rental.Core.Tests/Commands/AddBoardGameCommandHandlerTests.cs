@@ -9,6 +9,7 @@ using Moq;
 using Rental.Core.Commands;
 using Rental.Core.Commands.Handlers;
 using Rental.Core.Common.Exceptions;
+using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models;
 using Rental.Core.Queries;
 using Rental.CQRS;
@@ -30,6 +31,25 @@ namespace Rental.Core.Tests.Commands
         private readonly ICommandHandler<AddBoardGameCommand> _sut;
 
         [Fact]
+        public async Task Handle_Should_SendAddAndSaveCommand_When_ValidationIsPassed()
+        {
+            var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
+            _validator.Setup(x => x.Validate(It.Is((BoardGame game) =>
+                    game.Id == input.NewBoardGameGuid && game.Name == input.Name && game.Price == input.Price)))
+                .Returns(new ValidationResult());
+            var cancellationToken = new CancellationToken();
+            _mediatorService.Setup(x =>
+                x.Send(It.Is((AddAndSaveBoardGameCommand c) => c.BoardGame.Id == input.NewBoardGameGuid),
+                    It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+
+            await _sut.Handle(input, cancellationToken);
+
+            _mediatorService.Verify(x =>
+                x.Send(It.Is((AddAndSaveBoardGameCommand c) => c.BoardGame.Id == input.NewBoardGameGuid),
+                    cancellationToken));
+        }
+
+        [Fact]
         public void Handle_Should_ThrowCustomValidationException_When_ValidatorReturnsValidationErrors()
         {
             var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
@@ -39,10 +59,12 @@ namespace Rental.Core.Tests.Commands
             };
             _validator.Setup(x => x.Validate(It.Is((BoardGame game) =>
                     game.Id == input.NewBoardGameGuid && game.Name == input.Name && game.Price == input.Price)))
-                .Returns(new ValidationResult());
-            var errorsMessage = "erros happend";
+                .Returns(new ValidationResult(validationErrors));
+            const string errorsMessage = "errors happened";
             _mediatorService.Setup(x =>
-                x.Send(It.Is((GetFormattedValidationMessageQuery query) => query.ValidationErrors.Count.Equals(validationErrors.Count)),
+                x.Send(
+                    It.Is((GetFormattedValidationMessageQuery query) =>
+                        query.ValidationErrors.Count.Equals(validationErrors.Count)),
                     It.IsAny<CancellationToken>())).Returns(Task.FromResult(errorsMessage));
 
             Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
@@ -51,19 +73,48 @@ namespace Rental.Core.Tests.Commands
         }
 
         [Fact]
-        public void Handle_Should_SendAddAndSaveCommand_When_ValidationIsPassed()
+        public void Handle_Should_ThrowException_When_AddAndSaveBoardGameThrows()
         {
             var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
-            _validator.Setup(x => x.Validate(It.Is((BoardGame game) =>
-                    game.Id == input.NewBoardGameGuid && game.Name == input.Name && game.Price == input.Price)))
-                .Returns(new ValidationResult(new List<ValidationFailure>
-                {
-                    new ValidationFailure("test","test")
-                }));
+            var exception = new ArgumentException("test");
+            _validator.Setup(x => x.Validate(It.IsAny<BoardGame>())).Returns(new ValidationResult());
+            _mediatorService.Setup(x => x.Send(It.IsAny<AddAndSaveBoardGameCommand>(), It.IsAny<CancellationToken>()))
+                .Throws(exception);
 
             Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
 
-            act.Should().Throw<CustomValidationException>();
+            act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
+        }
+
+        [Fact]
+        public void Handle_Should_ThrowException_When_GetFormattedValidationMessageQueryThrows()
+        {
+            var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
+            var exception = new ArgumentException("test");
+            _validator.Setup(x => x.Validate(It.IsAny<BoardGame>())).Returns(new ValidationResult(
+                new List<ValidationFailure>
+                {
+                    new ValidationFailure("test", "test")
+                }));
+            _mediatorService.Setup(x =>
+                    x.Send(It.IsAny<GetFormattedValidationMessageQuery>(), It.IsAny<CancellationToken>()))
+                .Throws(exception);
+
+            Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
+
+            act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
+        }
+
+        [Fact]
+        public void Handle_Should_ThrowException_When_ValidatorThrows()
+        {
+            var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
+            var exception = new ArgumentException("test");
+            _validator.Setup(x => x.Validate(It.IsAny<BoardGame>())).Throws(exception);
+
+            Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
+
+            act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
         }
     }
 }
