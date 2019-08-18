@@ -35,12 +35,12 @@ namespace Rental.Core.Tests.Commands
                     _cancellationToken))
                 .ReturnsAsync(true);
             _mediatorService
-                .Setup(x => x.Send(It.Is((RemoveAndSaveClientCommand c) => c.Id == _inputCommand.Id),
+                .Setup(x => x.Send(It.Is((RemoveAndSaveClientByIdCommand c) => c.Id == _inputCommand.Id),
                     _cancellationToken)).Returns(Task.CompletedTask);
 
             await _sut.Handle(_inputCommand, _cancellationToken);
 
-            _mediatorService.Verify(x => x.Send(It.Is((RemoveAndSaveClientCommand c) => c.Id == _inputCommand.Id),
+            _mediatorService.Verify(x => x.Send(It.Is((RemoveAndSaveClientByIdCommand c) => c.Id == _inputCommand.Id),
                 _cancellationToken), Times.Once);
         }
 
