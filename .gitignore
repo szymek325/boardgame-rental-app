@@ -10,3 +10,8 @@
 /backend-on-micro/Clients.Api/BoardGames.db
 /backend-on-micro/Clients.Api/Clients.db
 /backend-on-micro/Games.Api/Games.db
+/tests/Rental.Core.Tests/bin/Debug/netcoreapp3.0
+/tests/Rental.Core.Tests/obj/Debug/netcoreapp3.0
+/tests/Rental.Core.Tests/obj
+/tests/Rental.DataAccess.Tests/bin/Debug/netcoreapp3.0
+/tests/Rental.DataAccess.Tests/obj
