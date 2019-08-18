@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -59,7 +58,8 @@ namespace Rental.Core.Tests.Commands
         }
 
         [Fact]
-        public void Handle_Should_ThrowCustomValidationException_When_ValidationIsPassedButBoardGameCanNotBeRented()
+        public void
+            Handle_Should_ThrowBoardGameHasOpenRentalException_When_ValidationIsPassedButBoardGameHasRentalInProgress()
         {
             _validator.Setup(
                     x => x.Validate(It.Is((GameRental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
@@ -70,16 +70,10 @@ namespace Rental.Core.Tests.Commands
                 .Setup(x => x.Send(
                     It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
                     cancellationToken)).ReturnsAsync(canBeRented);
-            const string errorMessage = "formatted error message";
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetFormattedValidationMessageQuery c) =>
-                        c.ValidationErrors.First().PropertyName == nameof(GameRental.BoardGameId)), cancellationToken))
-                .ReturnsAsync(errorMessage);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
 
-            act.Should().Throw<CustomValidationException>().WithMessage(errorMessage);
+            act.Should().Throw<BoardGameHasOpenRentalException>();
         }
 
         [Fact]
