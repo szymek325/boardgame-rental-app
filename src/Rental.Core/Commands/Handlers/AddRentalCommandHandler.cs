@@ -13,9 +13,9 @@ namespace Rental.Core.Commands.Handlers
     internal class AddRentalCommandHandler : ICommandHandler<AddRentalCommand>
     {
         private readonly IMediatorService _mediatorService;
-        private readonly IValidator<Models.Rental> _validator;
+        private readonly IValidator<Models.Rentals.Rental> _validator;
 
-        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Models.Rental> validator)
+        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Models.Rentals.Rental> validator)
         {
             _mediatorService = mediatorService;
             _validator = validator;
@@ -23,7 +23,7 @@ namespace Rental.Core.Commands.Handlers
 
         public async Task Handle(AddRentalCommand command, CancellationToken cancellationToken)
         {
-            var newGameRental = new Models.Rental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
+            var newGameRental = new Models.Rentals.Rental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
                 command.ChargedDeposit)
             {
                 Status = Status.InProgress

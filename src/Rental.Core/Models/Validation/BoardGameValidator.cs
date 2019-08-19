@@ -1,5 +1,6 @@
 ﻿using System;
 using FluentValidation;
+using Rental.Core.Models.BoardGames;
 
 namespace Rental.Core.Models.Validation
 {

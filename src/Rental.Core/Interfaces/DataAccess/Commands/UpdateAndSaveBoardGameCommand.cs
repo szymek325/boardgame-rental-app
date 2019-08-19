@@ -1,4 +1,4 @@
-﻿using Rental.Core.Models;
+﻿using Rental.Core.Models.BoardGames;
 using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Commands

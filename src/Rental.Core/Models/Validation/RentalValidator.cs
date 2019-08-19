@@ -2,7 +2,7 @@
 
 namespace Rental.Core.Models.Validation
 {
-    internal class RentalValidator : AbstractValidator<Rental>
+    internal class RentalValidator : AbstractValidator<Rentals.Rental>
     {
         public RentalValidator()
         {

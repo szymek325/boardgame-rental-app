@@ -1,4 +1,4 @@
-﻿using Rental.Core.Models;
+﻿using Rental.Core.Models.Clients;
 using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Commands

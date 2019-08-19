@@ -4,8 +4,7 @@ using Faker;
 using FizzWare.NBuilder;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Models;
-using BoardGame = Rental.DataAccess.Entities.BoardGame;
-using Client = Rental.DataAccess.Entities.Client;
+using Rental.DataAccess.Entities;
 
 namespace Rental.DataAccess.Context
 {

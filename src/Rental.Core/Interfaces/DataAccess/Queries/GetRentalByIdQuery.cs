@@ -3,7 +3,7 @@ using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class GetRentalByIdQuery : IQuery<Models.Rental>
+    public class GetRentalByIdQuery : IQuery<Models.Rentals.Rental>
     {
         public GetRentalByIdQuery(Guid id)
         {

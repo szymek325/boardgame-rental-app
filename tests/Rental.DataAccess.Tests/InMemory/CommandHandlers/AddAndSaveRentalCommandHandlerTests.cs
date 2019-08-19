@@ -32,7 +32,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_AddClientToDb_When_MethodCalled()
         {
-            var rental = new Core.Models.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
+            var rental = new Core.Models.Rentals.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
             var input = new AddAndSaveRentalCommand(rental);
 
             await _sut.Handle(input, new CancellationToken());
@@ -45,7 +45,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
-            var rental = new Core.Models.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
+            var rental = new Core.Models.Rentals.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
             var input = new AddAndSaveRentalCommand(rental);
             var existingEntity = new Entities.Rental
             {

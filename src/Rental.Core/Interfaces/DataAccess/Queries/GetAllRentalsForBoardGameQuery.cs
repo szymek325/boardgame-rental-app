@@ -4,7 +4,7 @@ using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class GetAllRentalsForBoardGameQuery : IQuery<IList<Models.Rental>>
+    public class GetAllRentalsForBoardGameQuery : IQuery<IList<Models.Rentals.Rental>>
     {
         public GetAllRentalsForBoardGameQuery(Guid boardGameId)
         {

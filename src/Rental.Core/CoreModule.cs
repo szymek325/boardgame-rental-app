@@ -1,7 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Rental.Core.Models;
+using Rental.Core.Models.BoardGames;
+using Rental.Core.Models.Clients;
 using Rental.Core.Models.Validation;
 using Rental.CQRS;
 
@@ -16,8 +17,7 @@ namespace Rental.Core
         {
             services.AddTransient<IValidator<BoardGame>, BoardGameValidator>();
             services.AddTransient<IValidator<Client>, ClientValidator>();
-            services.AddTransient<IValidator<Models.Rental>, RentalValidator>();
-
+            services.AddTransient<IValidator<Models.Rentals.Rental>, RentalValidator>();
 
             services.AddTransient<IMediatorService, MediatorService>();
 

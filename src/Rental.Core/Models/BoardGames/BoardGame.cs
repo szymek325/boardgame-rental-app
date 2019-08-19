@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rental.Core.Models
+namespace Rental.Core.Models.BoardGames
 {
     public class BoardGame
     {

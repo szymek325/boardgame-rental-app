@@ -1,17 +1,11 @@
 ﻿using System;
+using Rental.Core.Models.BoardGames;
+using Rental.Core.Models.Clients;
 
-namespace Rental.Core.Models
+namespace Rental.Core.Models.Rentals
 {
-    public class Rental
+    public class RentalWithDetails
     {
-        public Rental(Guid id, Guid clientId, Guid boardGameId, float chargedDeposit)
-        {
-            Id = id;
-            ClientId = clientId;
-            BoardGameId = boardGameId;
-            ChargedDeposit = chargedDeposit;
-        }
-
         public Guid Id { get; set; }
         public Guid ClientId { get; set; }
         public Guid BoardGameId { get; set; }
@@ -20,5 +14,7 @@ namespace Rental.Core.Models
         public Status Status { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime? FinishTime { get; set; }
+        public BoardGame BoardGame { get; set; }
+        public Client Client { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Rental.Core.Models;
+using Rental.Core.Models.Clients;
 
 namespace Rental.WPF.View.Clients
 {

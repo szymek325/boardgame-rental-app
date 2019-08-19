@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
-using Rental.Core.Models;
+using Rental.Core.Models.Clients;
 using Rental.Core.Queries;
 using Rental.CQRS;
 

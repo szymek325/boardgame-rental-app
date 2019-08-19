@@ -8,7 +8,7 @@ using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
-    internal class GetRentalByIdQueryHandler : IQueryHandler<GetRentalByIdQuery, Core.Models.Rental>
+    internal class GetRentalByIdQueryHandler : IQueryHandler<GetRentalByIdQuery, Core.Models.Rentals.Rental>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -19,11 +19,11 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<Core.Models.Rental> Handle(GetRentalByIdQuery query, CancellationToken cancellationToken)
+        public async Task<Core.Models.Rentals.Rental> Handle(GetRentalByIdQuery query, CancellationToken cancellationToken)
         {
             var entity =
                 await _rentalContext.Rentals.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
-            var mappedEntity = _mapper.Map<Core.Models.Rental>(entity);
+            var mappedEntity = _mapper.Map<Core.Models.Rentals.Rental>(entity);
             return mappedEntity;
         }
     }

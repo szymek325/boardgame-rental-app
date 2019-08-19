@@ -6,7 +6,7 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models;
+using Rental.Core.Models.Clients;
 using Rental.CQRS;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Mapping;

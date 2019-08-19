@@ -10,7 +10,7 @@ using Rental.Core.Commands;
 using Rental.Core.Commands.Handlers;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
-using Rental.Core.Models;
+using Rental.Core.Models.Clients;
 using Rental.Core.Queries;
 using Rental.CQRS;
 using Xunit;

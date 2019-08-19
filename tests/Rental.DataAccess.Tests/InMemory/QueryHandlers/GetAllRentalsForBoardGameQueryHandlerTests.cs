@@ -27,7 +27,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IQueryHandler<GetAllRentalsForBoardGameQuery, IList<Core.Models.Rental>> _sut;
+        private readonly IQueryHandler<GetAllRentalsForBoardGameQuery, IList<Core.Models.Rentals.Rental>> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnEmptyListOfGameRentals_When_TableIsEmpty()
@@ -60,7 +60,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
             var result = await _sut.Handle(new GetAllRentalsForBoardGameQuery(inputBoardGameIdGuid),
                 new CancellationToken());
 
-            result.Should().BeOfType<List<Core.Models.Rental>>();
+            result.Should().BeOfType<List<Core.Models.Rentals.Rental>>();
             result.Should().Contain(x => x.Id == entity1.Id);
             result.Should().NotContain(x => x.Id == entity2.Id);
             result.Count.Should().Be(1);

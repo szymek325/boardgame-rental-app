@@ -26,7 +26,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         }
 
         private readonly RentalContext _rentalContext;
-        private readonly IQueryHandler<GetRentalByIdQuery, Core.Models.Rental> _sut;
+        private readonly IQueryHandler<GetRentalByIdQuery, Core.Models.Rentals.Rental> _sut;
 
         [Fact]
         public async Task Handle_Should_ReturnElementWithSpecificId()
@@ -50,7 +50,7 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
 
             result.Id.Should().Be(inputId);
             result.PaidMoney.Should().Be(entity1.PaidMoney);
-            result.Should().BeOfType<Core.Models.Rental>();
+            result.Should().BeOfType<Core.Models.Rentals.Rental>();
         }
 
         [Fact]

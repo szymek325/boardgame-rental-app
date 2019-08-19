@@ -11,7 +11,8 @@ using Rental.Core.Commands.Handlers;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models;
+using Rental.Core.Models.BoardGames;
+using Rental.Core.Models.Clients;
 using Rental.Core.Queries;
 using Rental.CQRS;
 using Xunit;
@@ -23,7 +24,7 @@ namespace Rental.Core.Tests.Commands
         public AddGameRentalCommandHandlerTests()
         {
             _mediatorService = new Mock<IMediatorService>(MockBehavior.Strict);
-            _validator = new Mock<IValidator<Models.Rental>>(MockBehavior.Strict);
+            _validator = new Mock<IValidator<Models.Rentals.Rental>>(MockBehavior.Strict);
             _sut = new AddRentalCommandHandler(_mediatorService.Object, _validator.Object);
         }
 
@@ -32,7 +33,7 @@ namespace Rental.Core.Tests.Commands
 
         private readonly Mock<IMediatorService> _mediatorService;
         private readonly ICommandHandler<AddRentalCommand> _sut;
-        private readonly Mock<IValidator<Models.Rental>> _validator;
+        private readonly Mock<IValidator<Models.Rentals.Rental>> _validator;
 
         [Theory]
         [InlineData(false)]
@@ -40,7 +41,7 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowBoardGameNotFoundException_When_ReturnedBoardGameIsNull(bool canBeRented)
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
@@ -68,7 +69,7 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowClientNotFoundException_When_ReturnedClientIsNull(bool canBeRented)
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             Client client = null;
@@ -94,7 +95,7 @@ namespace Rental.Core.Tests.Commands
         public async Task Handle_Should_AddAndSaveRental_When_ValidationIsPassedAndGameCanBeRented()
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
@@ -126,7 +127,7 @@ namespace Rental.Core.Tests.Commands
             Handle_Should_ThrowBoardGameHasOpenRentalException_When_ValidationIsPassedButBoardGameHasRentalInProgress()
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
@@ -156,7 +157,7 @@ namespace Rental.Core.Tests.Commands
                 new ValidationFailure("test", "test")
             };
             _validator.Setup(x =>
-                    x.Validate(It.Is((Models.Rental gameRental) => gameRental.Id == _inputCommand.NewGameRentalGuid)))
+                    x.Validate(It.Is((Models.Rentals.Rental gameRental) => gameRental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult(validationErrors));
             const string errorsMessage = "errors happened";
             var cancellationToken = new CancellationToken();
