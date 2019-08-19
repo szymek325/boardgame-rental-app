@@ -25,7 +25,7 @@ namespace Rental.Core.Commands.Handlers
         public async Task Handle(AddGameRentalCommand command, CancellationToken cancellationToken)
         {
             var newGameRental = new GameRental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
-                command.ChargedDeposit);
+                command.ChargedDeposit) {Status = Status.InProgress};
             var validationResult = _validator.Validate(newGameRental);
             if (validationResult.IsValid)
             {
