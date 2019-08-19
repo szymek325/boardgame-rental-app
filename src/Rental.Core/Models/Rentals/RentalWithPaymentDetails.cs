@@ -5,7 +5,7 @@ using Rental.Core.Models.Clients;
 
 namespace Rental.Core.Models.Rentals
 {
-    internal class RentalWithPaymentDetails
+    public class RentalWithPaymentDetails
     {
         public Guid Id { get; set; }
         public Guid ClientId { get; set; }
@@ -14,7 +14,6 @@ namespace Rental.Core.Models.Rentals
         public Status Status { get; set; }
         public DateTime CreationTime { get; set; }
         public BoardGame BoardGame { get; set; }
-        public Client Client { get; set; }
         public float MoneyToPay { get; set; }
         public ICollection<RentalDay> RentalDays { get; set; }
     }

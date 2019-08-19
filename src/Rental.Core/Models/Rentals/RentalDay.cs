@@ -2,10 +2,16 @@
 
 namespace Rental.Core.Models.Rentals
 {
-    internal class RentalDay
+    public class RentalDay
     {
-        public DateTime Day { get; set; }
-        public string DayName { get; set; }
+        public RentalDay(float amountDue, DateTime day)
+        {
+            AmountDue = amountDue;
+            Day = day;
+        }
+
         public float AmountDue { get; set; }
+        public DateTime Day { get; set; }
+        public string DayName => Day.DayOfWeek.ToString();
     }
 }
