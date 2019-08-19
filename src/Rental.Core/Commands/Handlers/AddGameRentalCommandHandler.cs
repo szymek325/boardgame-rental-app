@@ -38,20 +38,17 @@ namespace Rental.Core.Commands.Handlers
                 throw new CustomValidationException(validationMessage);
             }
 
-            var client = await _mediatorService.Send(new GetClientByIdQuery(command.ClientGuid), cancellationToken);
-            if (client == null)
+            var client = _mediatorService.Send(new GetClientByIdQuery(command.ClientGuid), cancellationToken);
+            var boardGame = _mediatorService.Send(new GetBoardGameByIdQuery(command.BoardGameGuid), cancellationToken);
+            var canBeRented = _mediatorService.Send(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
+                cancellationToken);
+            await Task.WhenAll(client, boardGame, canBeRented);
+
+            if (client.Result == null)
                 throw new ClientNotFoundException(command.ClientGuid);
-
-            var boardGame =
-                await _mediatorService.Send(new GetBoardGameByIdQuery(command.ClientGuid), cancellationToken);
-            if (boardGame == null)
+            if (boardGame.Result == null)
                 throw new BoardGameNotFoundException(command.BoardGameGuid);
-
-            var canBeRented =
-                await _mediatorService.Send(
-                    new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
-                    cancellationToken);
-            if (!canBeRented)
+            if (!canBeRented.Result)
                 throw new BoardGameHasOpenRentalException(command.BoardGameGuid);
 
             await _mediatorService.Send(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
