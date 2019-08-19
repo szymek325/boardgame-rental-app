@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
-using FluentValidation.Results;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
@@ -25,30 +24,34 @@ namespace Rental.Core.Commands.Handlers
         public async Task Handle(AddGameRentalCommand command, CancellationToken cancellationToken)
         {
             var newGameRental = new GameRental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
-                command.ChargedDeposit) {Status = Status.InProgress};
+                command.ChargedDeposit)
+            {
+                Status = Status.InProgress
+            };
             var validationResult = _validator.Validate(newGameRental);
-            if (validationResult.IsValid)
-            {
-                var canBeRented =
-                    await _mediatorService.Send(
-                        new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
-                        cancellationToken);
-                if (!canBeRented)
-                    validationResult.Errors.Add(new ValidationFailure(nameof(newGameRental.BoardGameId),
-                        $"BoardGame {command.BoardGameGuid} is not available for rental - already rented"));
-            }
 
-            if (validationResult.IsValid)
-            {
-                await _mediatorService.Send(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
-            }
-            else
+            if (!validationResult.IsValid)
             {
                 var validationMessage =
                     await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
                         cancellationToken);
                 throw new CustomValidationException(validationMessage);
             }
+
+            var client = _mediatorService.Send(new GetClientByIdQuery(command.ClientGuid), cancellationToken);
+            var boardGame = _mediatorService.Send(new GetBoardGameByIdQuery(command.BoardGameGuid), cancellationToken);
+            var canBeRented = _mediatorService.Send(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
+                cancellationToken);
+            await Task.WhenAll(client, boardGame, canBeRented);
+
+            if (client.Result == null)
+                throw new ClientNotFoundException(command.ClientGuid);
+            if (boardGame.Result == null)
+                throw new BoardGameNotFoundException(command.BoardGameGuid);
+            if (!canBeRented.Result)
+                throw new BoardGameHasOpenRentalException(command.BoardGameGuid);
+
+            await _mediatorService.Send(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
         }
     }
 }

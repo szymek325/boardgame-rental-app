@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -35,6 +34,62 @@ namespace Rental.Core.Tests.Commands
         private readonly ICommandHandler<AddGameRentalCommand> _sut;
         private readonly Mock<IValidator<GameRental>> _validator;
 
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void Handle_Should_ThrowBoardGameNotFoundException_When_ReturnedBoardGameIsNull(bool canBeRented)
+        {
+            _validator.Setup(
+                    x => x.Validate(It.Is((GameRental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                .Returns(new ValidationResult());
+            var cancellationToken = new CancellationToken();
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
+                    cancellationToken)).ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
+            BoardGame boardGame = null;
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    cancellationToken)).ReturnsAsync(boardGame);
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    cancellationToken)).ReturnsAsync(canBeRented);
+
+            Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
+
+            act.Should().Throw<BoardGameNotFoundException>();
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void Handle_Should_ThrowClientNotFoundException_When_ReturnedClientIsNull(bool canBeRented)
+        {
+            _validator.Setup(
+                    x => x.Validate(It.Is((GameRental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                .Returns(new ValidationResult());
+            var cancellationToken = new CancellationToken();
+            Client client = null;
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
+                    cancellationToken)).ReturnsAsync(client);
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    cancellationToken)).ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    cancellationToken)).ReturnsAsync(canBeRented);
+
+            Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
+
+            act.Should().Throw<ClientNotFoundException>();
+        }
+
         [Fact]
         public async Task Handle_Should_AddAndSaveRental_When_ValidationIsPassedAndGameCanBeRented()
         {
@@ -42,6 +97,14 @@ namespace Rental.Core.Tests.Commands
                     x => x.Validate(It.Is((GameRental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
+                    cancellationToken)).ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    cancellationToken)).ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
             const bool canBeRented = true;
             _mediatorService
                 .Setup(x => x.Send(
@@ -59,27 +122,30 @@ namespace Rental.Core.Tests.Commands
         }
 
         [Fact]
-        public void Handle_Should_ThrowCustomValidationException_When_ValidationIsPassedButBoardGameCanNotBeRented()
+        public void
+            Handle_Should_ThrowBoardGameHasOpenRentalException_When_ValidationIsPassedButBoardGameHasRentalInProgress()
         {
             _validator.Setup(
                     x => x.Validate(It.Is((GameRental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
+                    cancellationToken)).ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
+            _mediatorService
+                .Setup(x => x.Send(
+                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
+                    cancellationToken)).ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
             const bool canBeRented = false;
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
                     cancellationToken)).ReturnsAsync(canBeRented);
-            const string errorMessage = "formatted error message";
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetFormattedValidationMessageQuery c) =>
-                        c.ValidationErrors.First().PropertyName == nameof(GameRental.BoardGameId)), cancellationToken))
-                .ReturnsAsync(errorMessage);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
 
-            act.Should().Throw<CustomValidationException>().WithMessage(errorMessage);
+            act.Should().Throw<BoardGameHasOpenRentalException>();
         }
 
         [Fact]
