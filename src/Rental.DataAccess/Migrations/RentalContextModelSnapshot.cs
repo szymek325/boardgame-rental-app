@@ -15,21 +15,25 @@ namespace Rental.DataAccess.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("r")
-                .HasAnnotation("ProductVersion", "3.0.0-preview7.19362.6");
+                .HasAnnotation("ProductVersion", "3.0.0-preview8.19405.11");
 
             modelBuilder.Entity("Rental.DataAccess.Entities.BoardGame", b =>
             {
                 b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("TEXT");
 
                 b.Property<DateTime>("CreationTime")
                     .ValueGeneratedOnAdd()
-                    .HasDefaultValue(new DateTime(2019, 8, 11, 6, 7, 13, 727, DateTimeKind.Utc).AddTicks(8863));
+                    .HasColumnType("TEXT")
+                    .HasDefaultValue(new DateTime(2019, 8, 19, 6, 59, 45, 533, DateTimeKind.Utc).AddTicks(6365));
 
                 b.Property<string>("Name")
-                    .IsRequired();
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                b.Property<float>("Price");
+                b.Property<float>("Price")
+                    .HasColumnType("REAL");
 
                 b.HasKey("Id");
 
@@ -38,726 +42,732 @@ namespace Rental.DataAccess.Migrations
                 b.HasData(
                     new
                     {
-                        Id = new Guid("f776435f-52ba-45d7-8f77-450695189488"),
-                        CreationTime = new DateTime(2019, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 182f
-                    },
-                    new
-                    {
-                        Id = new Guid("1b7f60df-2e75-488e-b0e8-f3ef8d113903"),
-                        CreationTime = new DateTime(2019, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 164f
-                    },
-                    new
-                    {
-                        Id = new Guid("47ff77a6-a27d-4387-9880-0f281dd49d4d"),
-                        CreationTime = new DateTime(2019, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 222f
-                    },
-                    new
-                    {
-                        Id = new Guid("a184ecda-ded7-4b3f-a083-8f8360114d18"),
-                        CreationTime = new DateTime(2019, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 198f
-                    },
-                    new
-                    {
-                        Id = new Guid("4cd8864d-da8c-447c-b92f-f8523b1a47f2"),
-                        CreationTime = new DateTime(2019, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 198f
-                    },
-                    new
-                    {
-                        Id = new Guid("341fe361-49cf-4720-85d8-36087bd36e79"),
-                        CreationTime = new DateTime(2019, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 106f
-                    },
-                    new
-                    {
-                        Id = new Guid("e5ae84a2-605e-431d-bb17-523324192bd9"),
-                        CreationTime = new DateTime(2019, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 243f
-                    },
-                    new
-                    {
-                        Id = new Guid("bf42a1e6-4d8b-4d2b-8531-e9d394340278"),
-                        CreationTime = new DateTime(2019, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 141f
-                    },
-                    new
-                    {
-                        Id = new Guid("f381144e-1ad6-4e2a-b0dc-326a6f79b4c7"),
+                        Id = new Guid("759b67f2-c1b0-4d9c-bb5b-a0092b9bba3f"),
                         CreationTime = new DateTime(2019, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 129f
-                    },
-                    new
-                    {
-                        Id = new Guid("6ead2c39-74f9-4603-959d-2501712f6f69"),
-                        CreationTime = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
                         Price = 81f
                     },
                     new
                     {
-                        Id = new Guid("7300b8ad-2f2c-4005-8384-97883109ba7a"),
+                        Id = new Guid("70db1271-fb8a-4024-aa8a-4d40ff20835f"),
+                        CreationTime = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 62f
+                    },
+                    new
+                    {
+                        Id = new Guid("04d85352-b12b-48dc-913a-734e2284dc01"),
                         CreationTime = new DateTime(2019, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 54f
+                        Price = 72f
                     },
                     new
                     {
-                        Id = new Guid("fc0fcf5f-cb25-4649-b533-60f6eb3f5909"),
+                        Id = new Guid("200d9cac-d6db-4855-821d-028017a8f4b3"),
                         CreationTime = new DateTime(2019, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 85f
-                    },
-                    new
-                    {
-                        Id = new Guid("0d168485-3d1e-44d0-be49-35550ea47814"),
-                        CreationTime = new DateTime(2019, 8, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 62f
-                    },
-                    new
-                    {
-                        Id = new Guid("7ece71b5-8760-4f5c-bd9e-6e69844c8416"),
-                        CreationTime = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 133f
-                    },
-                    new
-                    {
-                        Id = new Guid("f3d8fba1-5679-4fb6-8d4d-f0c05ac7a6af"),
-                        CreationTime = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 57f
-                    },
-                    new
-                    {
-                        Id = new Guid("11efb3b0-fc49-414b-945b-cdcbe0a86da8"),
-                        CreationTime = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 154f
-                    },
-                    new
-                    {
-                        Id = new Guid("874a2e82-91e2-4801-af16-b22aa9ef9c38"),
-                        CreationTime = new DateTime(2019, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 248f
-                    },
-                    new
-                    {
-                        Id = new Guid("3821dbfe-3188-4abe-a8f5-38d60cac2228"),
-                        CreationTime = new DateTime(2019, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 207f
-                    },
-                    new
-                    {
-                        Id = new Guid("8a313dc1-5a02-4e8a-b377-a299768f98b6"),
-                        CreationTime = new DateTime(2019, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 230f
-                    },
-                    new
-                    {
-                        Id = new Guid("03ad766a-4570-42aa-ae4d-6b73af391527"),
-                        CreationTime = new DateTime(2019, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 72f
-                    },
-                    new
-                    {
-                        Id = new Guid("36221789-a567-4e05-9cfd-befa1c89f220"),
-                        CreationTime = new DateTime(2019, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 141f
-                    },
-                    new
-                    {
-                        Id = new Guid("00462b00-90ee-48bc-8af4-c2e6912c765c"),
-                        CreationTime = new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 165f
-                    },
-                    new
-                    {
-                        Id = new Guid("6ee097bc-cef5-4c38-9a41-63d0e2977486"),
-                        CreationTime = new DateTime(2019, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 79f
-                    },
-                    new
-                    {
-                        Id = new Guid("9e41cfa2-b903-475c-834a-46c5c6c38665"),
-                        CreationTime = new DateTime(2019, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 79f
-                    },
-                    new
-                    {
-                        Id = new Guid("f74c472b-139e-4bbd-9c7c-aa1c7fb6cee3"),
-                        CreationTime = new DateTime(2019, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 177f
-                    },
-                    new
-                    {
-                        Id = new Guid("6f9201df-99d6-468f-81fc-be59ee4f9286"),
-                        CreationTime = new DateTime(2019, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 62f
-                    },
-                    new
-                    {
-                        Id = new Guid("2c80dd98-649f-4ca2-98df-7513481d8d26"),
-                        CreationTime = new DateTime(2019, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 111f
-                    },
-                    new
-                    {
-                        Id = new Guid("a5f39d3a-b716-4cd2-bd10-00dd3a995b65"),
-                        CreationTime = new DateTime(2019, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 248f
-                    },
-                    new
-                    {
-                        Id = new Guid("8e07df45-ba33-4526-bd07-458cf282308e"),
-                        CreationTime = new DateTime(2019, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 133f
-                    },
-                    new
-                    {
-                        Id = new Guid("d9f931f7-31e8-490a-97e7-7bc54b6a9363"),
-                        CreationTime = new DateTime(2019, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 148f
-                    },
-                    new
-                    {
-                        Id = new Guid("105601c3-3468-4ef7-a393-6cf6668cecbb"),
-                        CreationTime = new DateTime(2019, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 145f
-                    },
-                    new
-                    {
-                        Id = new Guid("7e0d89d8-ed3e-4772-974b-ca9e0b553e68"),
-                        CreationTime = new DateTime(2019, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 147f
-                    },
-                    new
-                    {
-                        Id = new Guid("dbd38fbf-0583-4d48-b81e-f3bdcbf60f4c"),
-                        CreationTime = new DateTime(2019, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 191f
-                    },
-                    new
-                    {
-                        Id = new Guid("1c1cb5b7-362a-4278-9eb8-752c1ed7e202"),
-                        CreationTime = new DateTime(2019, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 144f
-                    },
-                    new
-                    {
-                        Id = new Guid("f162ad17-7f88-465b-ac3b-dda3a0a34e60"),
-                        CreationTime = new DateTime(2019, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 197f
-                    },
-                    new
-                    {
-                        Id = new Guid("6ec0213e-f8bc-4b79-9864-372007818bb1"),
-                        CreationTime = new DateTime(2019, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 214f
-                    },
-                    new
-                    {
-                        Id = new Guid("09622a47-32c8-4225-a73e-61009efb5d03"),
-                        CreationTime = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 248f
-                    },
-                    new
-                    {
-                        Id = new Guid("bc02e975-11f1-47bd-b82c-7e2d21ebf5e3"),
-                        CreationTime = new DateTime(2019, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 129f
-                    },
-                    new
-                    {
-                        Id = new Guid("7d54a858-6932-45cb-9b3f-2bd707ddec8e"),
-                        CreationTime = new DateTime(2019, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 73f
-                    },
-                    new
-                    {
-                        Id = new Guid("d5ebd11b-4165-4f60-ac26-62523ee211ce"),
-                        CreationTime = new DateTime(2019, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 193f
-                    },
-                    new
-                    {
-                        Id = new Guid("443b9b36-19bc-4027-b160-5ff9dd9e7a39"),
-                        CreationTime = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 192f
-                    },
-                    new
-                    {
-                        Id = new Guid("b9ba7b67-8923-455a-b022-915bd61a7481"),
-                        CreationTime = new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 112f
-                    },
-                    new
-                    {
-                        Id = new Guid("a4a7b644-6025-4845-9178-bcb807c867fa"),
-                        CreationTime = new DateTime(2019, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 72f
-                    },
-                    new
-                    {
-                        Id = new Guid("193398ed-8bc8-473c-ade2-a9d6eb19d2be"),
-                        CreationTime = new DateTime(2019, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 205f
-                    },
-                    new
-                    {
-                        Id = new Guid("e6da9750-8490-453d-9f0e-4591f12a8cf2"),
-                        CreationTime = new DateTime(2019, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 158f
-                    },
-                    new
-                    {
-                        Id = new Guid("fa21672b-860e-4c24-986b-98549f6ddd87"),
-                        CreationTime = new DateTime(2019, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 241f
-                    },
-                    new
-                    {
-                        Id = new Guid("6194ed35-1684-4177-8684-af80b1c4aa46"),
-                        CreationTime = new DateTime(2019, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 76f
-                    },
-                    new
-                    {
-                        Id = new Guid("93b29ce1-56f6-40bd-baed-ac2deef833e4"),
-                        CreationTime = new DateTime(2019, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 152f
-                    },
-                    new
-                    {
-                        Id = new Guid("adfa8356-bcf4-4d01-81ca-27cc7e9af247"),
-                        CreationTime = new DateTime(2019, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 87f
-                    },
-                    new
-                    {
-                        Id = new Guid("4e4e18ac-df41-422e-9753-b0d7a6c57042"),
-                        CreationTime = new DateTime(2019, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 118f
-                    },
-                    new
-                    {
-                        Id = new Guid("dd3d3ccb-d098-4665-acf7-ae2298a4cd18"),
-                        CreationTime = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 89f
-                    },
-                    new
-                    {
-                        Id = new Guid("fd10b04b-e87a-4f24-9490-459aa3974fd9"),
-                        CreationTime = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 98f
-                    },
-                    new
-                    {
-                        Id = new Guid("bf2a4d27-a28b-4f5d-a9b8-27d086f10f55"),
-                        CreationTime = new DateTime(2019, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 93f
-                    },
-                    new
-                    {
-                        Id = new Guid("47c34665-8033-45f5-9017-a9c8d7601ddc"),
-                        CreationTime = new DateTime(2019, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 157f
-                    },
-                    new
-                    {
-                        Id = new Guid("8feb0198-5669-4cc7-94a4-350f3fec4da7"),
-                        CreationTime = new DateTime(2019, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 151f
-                    },
-                    new
-                    {
-                        Id = new Guid("d7aac946-9a59-4c00-a6be-1e2b99037b31"),
-                        CreationTime = new DateTime(2019, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 66f
-                    },
-                    new
-                    {
-                        Id = new Guid("1bbbeb14-21cb-443d-9e5e-b83ac0c7598f"),
-                        CreationTime = new DateTime(2019, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 135f
-                    },
-                    new
-                    {
-                        Id = new Guid("4f22ce42-ee2a-4d35-9355-0f55d83a29db"),
-                        CreationTime = new DateTime(2019, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 193f
-                    },
-                    new
-                    {
-                        Id = new Guid("56a72c55-947c-4b17-bada-d2deb7cf7a1c"),
-                        CreationTime = new DateTime(2019, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 70f
-                    },
-                    new
-                    {
-                        Id = new Guid("109e83cf-8e8b-4bab-bfe2-1d13cf8e7ed6"),
-                        CreationTime = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 186f
-                    },
-                    new
-                    {
-                        Id = new Guid("b0c8d5ba-3882-4c20-ae2d-7bead2d25d39"),
-                        CreationTime = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 245f
-                    },
-                    new
-                    {
-                        Id = new Guid("b59fcbc9-c344-48e0-ac72-6bc55065cd12"),
-                        CreationTime = new DateTime(2019, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 245f
-                    },
-                    new
-                    {
-                        Id = new Guid("a41827d0-7636-49e2-8080-5d00d35b1206"),
-                        CreationTime = new DateTime(2019, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 58f
-                    },
-                    new
-                    {
-                        Id = new Guid("f40379aa-8f9a-496c-aff5-af3bf60ca884"),
-                        CreationTime = new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 230f
-                    },
-                    new
-                    {
-                        Id = new Guid("134ff0d9-1f2c-494e-a6b6-09c353f0c01f"),
-                        CreationTime = new DateTime(2019, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 186f
-                    },
-                    new
-                    {
-                        Id = new Guid("73a4be53-0021-4ece-bffd-28db8ec01bf9"),
-                        CreationTime = new DateTime(2019, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 156f
-                    },
-                    new
-                    {
-                        Id = new Guid("b960d38e-6423-4dfd-8f02-141113b9aa07"),
-                        CreationTime = new DateTime(2019, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 144f
-                    },
-                    new
-                    {
-                        Id = new Guid("cd43b8db-af67-45dc-8bed-ce1dc3d91782"),
-                        CreationTime = new DateTime(2019, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 168f
-                    },
-                    new
-                    {
-                        Id = new Guid("fdf3433a-10fa-49b2-bb29-d4878252414f"),
-                        CreationTime = new DateTime(2019, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 185f
-                    },
-                    new
-                    {
-                        Id = new Guid("91bceaa8-fbf9-4b41-81fd-c25a526dc3a5"),
-                        CreationTime = new DateTime(2019, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 92f
-                    },
-                    new
-                    {
-                        Id = new Guid("531c2a70-6513-4816-a347-1843e500c5b2"),
-                        CreationTime = new DateTime(2019, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 155f
-                    },
-                    new
-                    {
-                        Id = new Guid("d9bac877-3e42-47b7-ac09-23338bf7b128"),
-                        CreationTime = new DateTime(2019, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 169f
-                    },
-                    new
-                    {
-                        Id = new Guid("85e5d3c3-885c-46f2-8c0a-30e47cabb70e"),
-                        CreationTime = new DateTime(2019, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 184f
-                    },
-                    new
-                    {
-                        Id = new Guid("c175e2ac-e542-4fd9-a01d-74506adc9a6b"),
-                        CreationTime = new DateTime(2019, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 86f
-                    },
-                    new
-                    {
-                        Id = new Guid("82370fd7-c528-4215-b2ff-5ad3d75cdbe7"),
-                        CreationTime = new DateTime(2019, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 130f
-                    },
-                    new
-                    {
-                        Id = new Guid("40053388-1ec1-4853-bc62-6115cf13513e"),
-                        CreationTime = new DateTime(2019, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 79f
-                    },
-                    new
-                    {
-                        Id = new Guid("e4682c9e-b589-401f-97c1-afdffe4fccd2"),
-                        CreationTime = new DateTime(2019, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 143f
-                    },
-                    new
-                    {
-                        Id = new Guid("d7a14f1c-3376-4052-83fa-891749cc1557"),
-                        CreationTime = new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 123f
-                    },
-                    new
-                    {
-                        Id = new Guid("dbb975cd-e418-4bc5-877a-affb8174b6f4"),
-                        CreationTime = new DateTime(2019, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 170f
-                    },
-                    new
-                    {
-                        Id = new Guid("7ecbf069-3fea-4e80-b0df-b091ba76585d"),
-                        CreationTime = new DateTime(2019, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 186f
-                    },
-                    new
-                    {
-                        Id = new Guid("f8523918-5f92-40d5-ac8c-52272274a77b"),
-                        CreationTime = new DateTime(2019, 10, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 235f
-                    },
-                    new
-                    {
-                        Id = new Guid("b4ff55ab-bb48-44aa-a117-49bf811064be"),
-                        CreationTime = new DateTime(2019, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 209f
-                    },
-                    new
-                    {
-                        Id = new Guid("306728c7-4615-4383-9bb4-a057f6446587"),
-                        CreationTime = new DateTime(2019, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 210f
-                    },
-                    new
-                    {
-                        Id = new Guid("64877867-7dd1-4981-b210-1b6273ba6f0a"),
-                        CreationTime = new DateTime(2019, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 65f
-                    },
-                    new
-                    {
-                        Id = new Guid("960a7013-b318-4098-b398-642e7938c079"),
-                        CreationTime = new DateTime(2019, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 109f
-                    },
-                    new
-                    {
-                        Id = new Guid("6dc2ed53-ad97-4832-87d6-4007b3451eb3"),
-                        CreationTime = new DateTime(2019, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 96f
-                    },
-                    new
-                    {
-                        Id = new Guid("e964b20f-5847-452f-8ae0-143b56e9c5f9"),
-                        CreationTime = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 104f
-                    },
-                    new
-                    {
-                        Id = new Guid("161a053a-bf76-4b32-a574-d0133bf9bb81"),
-                        CreationTime = new DateTime(2019, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 84f
-                    },
-                    new
-                    {
-                        Id = new Guid("2dbc8ca3-e85f-4ef9-a5f8-b9a521b37353"),
-                        CreationTime = new DateTime(2019, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        Name = "alias",
-                        Price = 242f
-                    },
-                    new
-                    {
-                        Id = new Guid("64b65da1-3403-40ae-b72f-209998e64d4c"),
-                        CreationTime = new DateTime(2019, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
                         Price = 180f
                     },
                     new
                     {
-                        Id = new Guid("be3f33fc-87fb-4b11-86f8-cade16ac2881"),
-                        CreationTime = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Id = new Guid("6e9c7b74-946a-41ff-94e5-584adcc7f42a"),
+                        CreationTime = new DateTime(2019, 8, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 129f
+                        Price = 120f
                     },
                     new
                     {
-                        Id = new Guid("ebf0351e-a427-483d-8224-b358095ee755"),
-                        CreationTime = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Id = new Guid("8cafd90e-84ae-4b22-8dbf-4b18e0475460"),
+                        CreationTime = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 77f
+                    },
+                    new
+                    {
+                        Id = new Guid("0b8ba02f-5e23-4c5e-92e5-50253460ad4f"),
+                        CreationTime = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
                         Price = 105f
                     },
                     new
                     {
-                        Id = new Guid("021b95cb-e28b-4d2c-ae1d-8c70b25436aa"),
-                        CreationTime = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Id = new Guid("9ba8cca0-c820-4950-8077-9755c0c7c63c"),
+                        CreationTime = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 108f
+                        Price = 112f
                     },
                     new
                     {
-                        Id = new Guid("4b942334-2bdc-48a9-a049-598e75b2a75a"),
-                        CreationTime = new DateTime(2019, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Id = new Guid("5bab3075-b9a7-449c-b427-b5fb57eb6066"),
+                        CreationTime = new DateTime(2019, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 137f
+                        Price = 213f
                     },
                     new
                     {
-                        Id = new Guid("65294eea-73fa-4964-82bb-220ed628bf76"),
-                        CreationTime = new DateTime(2019, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Id = new Guid("f5ae3bc5-ab73-4d7b-934d-a3dfd0ff408f"),
+                        CreationTime = new DateTime(2019, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 114f
+                    },
+                    new
+                    {
+                        Id = new Guid("764d4177-e693-44eb-9bf6-bb13a53feef5"),
+                        CreationTime = new DateTime(2019, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 154f
+                    },
+                    new
+                    {
+                        Id = new Guid("5384fe18-c4a4-47b2-b44d-5ecd8e6837d5"),
+                        CreationTime = new DateTime(2019, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 233f
+                    },
+                    new
+                    {
+                        Id = new Guid("0c5ae44e-683b-4743-b7d2-216c864dfdc4"),
+                        CreationTime = new DateTime(2019, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 233f
+                    },
+                    new
+                    {
+                        Id = new Guid("992732af-7083-4cf8-b48c-fa34854c8c29"),
+                        CreationTime = new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 222f
+                    },
+                    new
+                    {
+                        Id = new Guid("2046a240-90b7-42f8-a13f-5245764de619"),
+                        CreationTime = new DateTime(2019, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 221f
+                    },
+                    new
+                    {
+                        Id = new Guid("74a8acf7-40aa-4165-9235-938973709f8d"),
+                        CreationTime = new DateTime(2019, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 149f
+                    },
+                    new
+                    {
+                        Id = new Guid("0102b600-3309-467c-9455-edf3265544b2"),
+                        CreationTime = new DateTime(2019, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 220f
+                    },
+                    new
+                    {
+                        Id = new Guid("1468e85e-205e-4e6a-9263-f6dc65407ee1"),
+                        CreationTime = new DateTime(2019, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 244f
+                    },
+                    new
+                    {
+                        Id = new Guid("88b841b5-6760-4db8-a01f-a8c1b91483cf"),
+                        CreationTime = new DateTime(2019, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 191f
+                    },
+                    new
+                    {
+                        Id = new Guid("20594c10-25e4-4183-9735-a627d27363a1"),
+                        CreationTime = new DateTime(2019, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 132f
+                    },
+                    new
+                    {
+                        Id = new Guid("1bc4e561-fc8c-4fa3-9c35-80f57a6e7f2a"),
+                        CreationTime = new DateTime(2019, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 78f
+                    },
+                    new
+                    {
+                        Id = new Guid("2bc4f63c-7f79-420e-894a-13b1f47144d3"),
+                        CreationTime = new DateTime(2019, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 53f
+                    },
+                    new
+                    {
+                        Id = new Guid("d101f0bf-a576-41ba-bd6c-364b3c950445"),
+                        CreationTime = new DateTime(2019, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 153f
+                    },
+                    new
+                    {
+                        Id = new Guid("f96d5518-3418-4a34-8e92-37da6c877d07"),
+                        CreationTime = new DateTime(2019, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 193f
+                    },
+                    new
+                    {
+                        Id = new Guid("4192bba0-f6d1-4f57-be9d-ba9bb2a2a4c0"),
+                        CreationTime = new DateTime(2019, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 223f
+                    },
+                    new
+                    {
+                        Id = new Guid("77bcf389-4541-41ce-ba6c-a5e89ac5ad00"),
+                        CreationTime = new DateTime(2019, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 211f
+                    },
+                    new
+                    {
+                        Id = new Guid("48902c82-efd9-48ae-9112-b1717096d70e"),
+                        CreationTime = new DateTime(2019, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 116f
+                    },
+                    new
+                    {
+                        Id = new Guid("78663cd1-1da6-4ad9-abc1-4e5ea472ce62"),
+                        CreationTime = new DateTime(2019, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 71f
+                    },
+                    new
+                    {
+                        Id = new Guid("8bf83716-ffbc-4b5d-9bee-32686bb7f7a8"),
+                        CreationTime = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 114f
+                    },
+                    new
+                    {
+                        Id = new Guid("12e52f4a-589f-450c-8ec8-d502e8180d70"),
+                        CreationTime = new DateTime(2019, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 111f
+                    },
+                    new
+                    {
+                        Id = new Guid("c6072459-6cfa-43b4-a4d6-cd16d4625b2f"),
+                        CreationTime = new DateTime(2019, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 161f
+                    },
+                    new
+                    {
+                        Id = new Guid("eba74825-fcc1-4e23-9792-e0a7eba0bc5e"),
+                        CreationTime = new DateTime(2019, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 70f
+                    },
+                    new
+                    {
+                        Id = new Guid("ba28df39-cc26-47bf-9e0e-e586a6317f96"),
+                        CreationTime = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 157f
+                    },
+                    new
+                    {
+                        Id = new Guid("63996227-f5ed-4898-a96e-7269967204eb"),
+                        CreationTime = new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 220f
+                    },
+                    new
+                    {
+                        Id = new Guid("ae40078e-00cc-4521-bbcd-6fb5f7321a3c"),
+                        CreationTime = new DateTime(2019, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
                         Price = 198f
                     },
                     new
                     {
-                        Id = new Guid("bc0f87f0-549c-431e-b938-f13dcb35a9b9"),
+                        Id = new Guid("512d8ea9-0856-4f3f-9791-f6ca30ec5e85"),
+                        CreationTime = new DateTime(2019, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 169f
+                    },
+                    new
+                    {
+                        Id = new Guid("54809fcf-04d4-4285-90da-ef6b8482b5a9"),
+                        CreationTime = new DateTime(2019, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 209f
+                    },
+                    new
+                    {
+                        Id = new Guid("2019709b-8ffb-48db-a01d-ffd759d7df21"),
+                        CreationTime = new DateTime(2019, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 186f
+                    },
+                    new
+                    {
+                        Id = new Guid("3703f5fa-a316-4ed5-9543-1ae72bfd501d"),
+                        CreationTime = new DateTime(2019, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 118f
+                    },
+                    new
+                    {
+                        Id = new Guid("62b1eae5-fe98-41ff-83dc-12273e5641d7"),
+                        CreationTime = new DateTime(2019, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 132f
+                    },
+                    new
+                    {
+                        Id = new Guid("f09a3f0f-6bd4-4177-95cd-dcba54c26203"),
+                        CreationTime = new DateTime(2019, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 159f
+                    },
+                    new
+                    {
+                        Id = new Guid("300fa3a7-7017-4f06-b1b7-5305dffe9e75"),
+                        CreationTime = new DateTime(2019, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 94f
+                    },
+                    new
+                    {
+                        Id = new Guid("38aeeb95-c2e9-4cfb-be40-6cf77131f193"),
+                        CreationTime = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 111f
+                    },
+                    new
+                    {
+                        Id = new Guid("1d6f38fd-9455-444f-a9a3-e954630316ea"),
+                        CreationTime = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 141f
+                    },
+                    new
+                    {
+                        Id = new Guid("9ae1ecd5-f630-479b-abca-1b0f4784e748"),
+                        CreationTime = new DateTime(2019, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 142f
+                    },
+                    new
+                    {
+                        Id = new Guid("99eea78c-acc8-4c9a-9cb6-776d8d29db8c"),
+                        CreationTime = new DateTime(2019, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 88f
+                    },
+                    new
+                    {
+                        Id = new Guid("416ac003-1847-4fbf-88fc-8f8c3386be7f"),
+                        CreationTime = new DateTime(2019, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 51f
+                    },
+                    new
+                    {
+                        Id = new Guid("cb8ae063-371b-47f4-8023-1b3b25710efd"),
+                        CreationTime = new DateTime(2019, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 197f
+                    },
+                    new
+                    {
+                        Id = new Guid("383b29a6-d7e4-48a4-9498-a565f76bcc37"),
+                        CreationTime = new DateTime(2019, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 139f
+                    },
+                    new
+                    {
+                        Id = new Guid("ae4af7ec-3fc4-4b36-9ffd-a75dac1bf4b7"),
+                        CreationTime = new DateTime(2019, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 133f
+                    },
+                    new
+                    {
+                        Id = new Guid("b31781dd-6b63-4ac3-8ae7-11af78a4eefd"),
+                        CreationTime = new DateTime(2019, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 241f
+                    },
+                    new
+                    {
+                        Id = new Guid("a77f7dc7-c855-46c5-b055-7045a9412465"),
+                        CreationTime = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 240f
+                    },
+                    new
+                    {
+                        Id = new Guid("a0bc55cb-1a28-4483-bcf8-96cfdb422e6e"),
+                        CreationTime = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 183f
+                    },
+                    new
+                    {
+                        Id = new Guid("24ea4dd9-3d5c-4f3e-afeb-5900b0509eda"),
+                        CreationTime = new DateTime(2019, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 209f
+                    },
+                    new
+                    {
+                        Id = new Guid("2f77b350-2f72-42fb-950a-627784dbc35d"),
+                        CreationTime = new DateTime(2019, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 78f
+                    },
+                    new
+                    {
+                        Id = new Guid("937f814e-4e38-4cc6-8970-b00f47630684"),
+                        CreationTime = new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 77f
+                    },
+                    new
+                    {
+                        Id = new Guid("2e4ba96f-17da-4205-b9a3-b6b06411b2fa"),
+                        CreationTime = new DateTime(2019, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 158f
+                    },
+                    new
+                    {
+                        Id = new Guid("000f78eb-ff8e-44fd-bf9d-aaa0c5e67dc6"),
+                        CreationTime = new DateTime(2019, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 129f
+                    },
+                    new
+                    {
+                        Id = new Guid("61b9b069-ea68-464f-afd1-8575723e640a"),
+                        CreationTime = new DateTime(2019, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 206f
+                    },
+                    new
+                    {
+                        Id = new Guid("f872b678-dc86-4c54-93f2-73cad03c38fe"),
+                        CreationTime = new DateTime(2019, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 159f
+                    },
+                    new
+                    {
+                        Id = new Guid("cc338bc1-814b-4eef-881e-d65bc1c8a0ec"),
+                        CreationTime = new DateTime(2019, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 211f
+                    },
+                    new
+                    {
+                        Id = new Guid("8de45cbe-a3ed-41e1-b46c-05de6842d72f"),
+                        CreationTime = new DateTime(2019, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 84f
+                    },
+                    new
+                    {
+                        Id = new Guid("d8d407c7-e89f-4e4b-a40d-3e24e39d3b10"),
+                        CreationTime = new DateTime(2019, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 247f
+                    },
+                    new
+                    {
+                        Id = new Guid("8be30135-496a-4b2c-b3c1-26f1d1e6fab1"),
+                        CreationTime = new DateTime(2019, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 152f
+                    },
+                    new
+                    {
+                        Id = new Guid("6d9067cb-3db7-444b-bab4-0bae408fa93f"),
+                        CreationTime = new DateTime(2019, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 202f
+                    },
+                    new
+                    {
+                        Id = new Guid("c4c02a77-cae0-495d-923d-002491504c65"),
+                        CreationTime = new DateTime(2019, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 134f
+                    },
+                    new
+                    {
+                        Id = new Guid("18b9b42f-2a44-4d11-b4dd-abf6717e651d"),
+                        CreationTime = new DateTime(2019, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 126f
+                    },
+                    new
+                    {
+                        Id = new Guid("f7f75756-43ba-44c4-8e97-0dca8c2b966a"),
+                        CreationTime = new DateTime(2019, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 63f
+                    },
+                    new
+                    {
+                        Id = new Guid("c9a3fb5d-dafd-4f85-baf8-1a9a0ce47576"),
+                        CreationTime = new DateTime(2019, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 74f
+                    },
+                    new
+                    {
+                        Id = new Guid("663bf7ed-b5e1-4e79-a7ed-c32968ccd523"),
+                        CreationTime = new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 102f
+                    },
+                    new
+                    {
+                        Id = new Guid("271f61bf-980d-46c3-8d50-77133cfda189"),
+                        CreationTime = new DateTime(2019, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 189f
+                    },
+                    new
+                    {
+                        Id = new Guid("29a7b295-4174-4c3a-a52a-f913157b0eb3"),
+                        CreationTime = new DateTime(2019, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 84f
+                    },
+                    new
+                    {
+                        Id = new Guid("0927c8d0-2504-4b8c-8930-917c3c8bad02"),
+                        CreationTime = new DateTime(2019, 10, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 176f
+                    },
+                    new
+                    {
+                        Id = new Guid("10b874ea-ce49-422a-a830-793828b4d4da"),
+                        CreationTime = new DateTime(2019, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 108f
+                    },
+                    new
+                    {
+                        Id = new Guid("e1e1e750-16de-45cc-bd44-3b09cc42a072"),
+                        CreationTime = new DateTime(2019, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 223f
+                    },
+                    new
+                    {
+                        Id = new Guid("6adcf959-7486-4da9-ab03-55b2a7615816"),
+                        CreationTime = new DateTime(2019, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 234f
+                    },
+                    new
+                    {
+                        Id = new Guid("7e5f5fa1-50c6-4665-b153-fd40249f9b66"),
+                        CreationTime = new DateTime(2019, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 192f
+                    },
+                    new
+                    {
+                        Id = new Guid("c8f08336-f853-4f21-ac0f-86fefbbafe6f"),
+                        CreationTime = new DateTime(2019, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 62f
+                    },
+                    new
+                    {
+                        Id = new Guid("217a436a-a62a-4dd0-a21d-aad8f6eb70b9"),
+                        CreationTime = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 100f
+                    },
+                    new
+                    {
+                        Id = new Guid("db3fc5cc-6f52-4712-bf32-ca697c1b2377"),
+                        CreationTime = new DateTime(2019, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 185f
+                    },
+                    new
+                    {
+                        Id = new Guid("08882a51-d98b-44cf-963c-ed0ff871c01e"),
+                        CreationTime = new DateTime(2019, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 209f
+                    },
+                    new
+                    {
+                        Id = new Guid("6e9b7465-7290-4021-82b9-dfaf54d5e29e"),
+                        CreationTime = new DateTime(2019, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 168f
+                    },
+                    new
+                    {
+                        Id = new Guid("7ed6ac7d-fc6d-4d7d-a6ae-4c082481fe84"),
+                        CreationTime = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 182f
+                    },
+                    new
+                    {
+                        Id = new Guid("acc85374-67c0-4e3e-a4ef-3f335be4ad15"),
+                        CreationTime = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 231f
+                    },
+                    new
+                    {
+                        Id = new Guid("f3e32712-2c79-4d73-996b-123698aa2139"),
+                        CreationTime = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 120f
+                    },
+                    new
+                    {
+                        Id = new Guid("f02d2f3c-f37a-42f9-ba18-f9c0ab50afdd"),
+                        CreationTime = new DateTime(2019, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 171f
+                    },
+                    new
+                    {
+                        Id = new Guid("f88778c6-ece9-4c2f-8bf1-cf2cb97eae89"),
+                        CreationTime = new DateTime(2019, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 137f
+                    },
+                    new
+                    {
+                        Id = new Guid("dc76a868-f80a-45d1-8cf5-cd3c1367c606"),
                         CreationTime = new DateTime(2019, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 196f
+                        Price = 197f
                     },
                     new
                     {
-                        Id = new Guid("3d1bcdc5-36c6-4ebc-a455-9b01a6abfd60"),
+                        Id = new Guid("a78c3a40-179a-4e4d-9617-6b1711f1ce2e"),
                         CreationTime = new DateTime(2019, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 103f
+                        Price = 192f
                     },
                     new
                     {
-                        Id = new Guid("851d0083-5e1e-447e-99fd-ce6b8c2f0fe3"),
+                        Id = new Guid("1d2d517d-f9c9-4029-9098-dcbbce615505"),
                         CreationTime = new DateTime(2019, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 92f
+                        Price = 170f
                     },
                     new
                     {
-                        Id = new Guid("e9673244-1bd0-4c0c-9866-b38f509c5856"),
+                        Id = new Guid("98f1df2b-daa9-4fa3-9e9a-f2f257511638"),
                         CreationTime = new DateTime(2019, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 69f
+                        Price = 60f
                     },
                     new
                     {
-                        Id = new Guid("8f110aff-b801-44c3-b87a-0d2c4869404e"),
+                        Id = new Guid("3998d2b8-21e1-4a1c-959c-2f9e3c1324b6"),
                         CreationTime = new DateTime(2019, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                         Name = "alias",
-                        Price = 52f
+                        Price = 129f
+                    },
+                    new
+                    {
+                        Id = new Guid("44ab4ca9-a1a1-4a27-ad5c-99df438b06c8"),
+                        CreationTime = new DateTime(2019, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 229f
+                    },
+                    new
+                    {
+                        Id = new Guid("3eef0f39-9b2a-4f5b-b57a-d72f13f488c1"),
+                        CreationTime = new DateTime(2019, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 208f
+                    },
+                    new
+                    {
+                        Id = new Guid("0c75205f-d107-4f38-abf4-f360c1fed672"),
+                        CreationTime = new DateTime(2019, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 170f
+                    },
+                    new
+                    {
+                        Id = new Guid("df8e65d0-cbe1-4902-b536-f701bebdc636"),
+                        CreationTime = new DateTime(2019, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 124f
+                    },
+                    new
+                    {
+                        Id = new Guid("72085cc2-634f-481f-a2dd-83aba93d86d0"),
+                        CreationTime = new DateTime(2019, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 97f
+                    },
+                    new
+                    {
+                        Id = new Guid("2b1dd15a-63a5-4e6b-b944-a190dcd520d1"),
+                        CreationTime = new DateTime(2019, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 209f
+                    },
+                    new
+                    {
+                        Id = new Guid("58f7b588-7b8e-4be3-be55-ae59eda7e8cb"),
+                        CreationTime = new DateTime(2019, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 188f
+                    },
+                    new
+                    {
+                        Id = new Guid("f6956d1a-baac-4958-957b-3c050dc76d5f"),
+                        CreationTime = new DateTime(2019, 11, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        Name = "alias",
+                        Price = 58f
                     });
             });
 
             modelBuilder.Entity("Rental.DataAccess.Entities.Client", b =>
             {
                 b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("TEXT");
 
                 b.Property<string>("ContactNumber")
-                    .IsRequired();
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
                 b.Property<DateTime>("CreationTime")
                     .ValueGeneratedOnAdd()
-                    .HasDefaultValue(new DateTime(2019, 8, 11, 6, 7, 13, 733, DateTimeKind.Utc).AddTicks(8225));
+                    .HasColumnType("TEXT")
+                    .HasDefaultValue(new DateTime(2019, 8, 19, 6, 59, 45, 538, DateTimeKind.Utc).AddTicks(2836));
 
                 b.Property<string>("EmailAddress")
-                    .IsRequired();
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
                 b.Property<string>("FirstName")
-                    .IsRequired();
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
                 b.Property<string>("LastName")
-                    .IsRequired();
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
                 b.HasKey("Id");
 
@@ -766,926 +776,934 @@ namespace Rental.DataAccess.Migrations
                 b.HasData(
                     new
                     {
-                        Id = new Guid("24a9ce44-2534-4c54-9d53-b40319a575d9"),
-                        ContactNumber = "053-216-2044 x2770",
-                        CreationTime = new DateTime(2019, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "bryon@mante.ca",
-                        FirstName = "Kellen",
-                        LastName = "Abbott"
-                    },
-                    new
-                    {
-                        Id = new Guid("f0e7cb03-6acb-4b25-8177-5b460713287e"),
-                        ContactNumber = "(720)504-3201 x4687",
-                        CreationTime = new DateTime(2019, 8, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "theodore@weimann.info",
-                        FirstName = "Adrain",
-                        LastName = "Wuckert"
-                    },
-                    new
-                    {
-                        Id = new Guid("db5659cf-746a-4fdd-93ed-26612156dcf4"),
-                        ContactNumber = "265-677-1006 x6486",
-                        CreationTime = new DateTime(2019, 8, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "aileen_breitenberg@rodriguez.ca",
-                        FirstName = "Adonis",
-                        LastName = "Skiles"
-                    },
-                    new
-                    {
-                        Id = new Guid("132066eb-77b8-400e-93e2-66f9b8409345"),
-                        ContactNumber = "276.570.6856 x73654",
-                        CreationTime = new DateTime(2019, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "cara_block@hane.com",
-                        FirstName = "Lizzie",
-                        LastName = "Doyle"
-                    },
-                    new
-                    {
-                        Id = new Guid("40f06a83-83dd-46a1-b380-2e8e0d0bacf5"),
-                        ContactNumber = "600-871-3658",
-                        CreationTime = new DateTime(2019, 8, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "garland@mayert.uk",
-                        FirstName = "Heaven",
-                        LastName = "Waelchi"
-                    },
-                    new
-                    {
-                        Id = new Guid("c7202156-faac-4ca8-ad62-3f39b481e9a3"),
-                        ContactNumber = "524-474-8485 x75364",
-                        CreationTime = new DateTime(2019, 8, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "mallory@okuneva.co.uk",
-                        FirstName = "Dewayne",
-                        LastName = "Altenwerth"
-                    },
-                    new
-                    {
-                        Id = new Guid("92b4cd79-e57a-417b-bcbc-ff3149c7f23f"),
-                        ContactNumber = "472.427.1153 x024",
-                        CreationTime = new DateTime(2019, 8, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "janet@mckenzie.info",
-                        FirstName = "Adaline",
-                        LastName = "West"
-                    },
-                    new
-                    {
-                        Id = new Guid("d4a2be61-09eb-4dc2-8043-f4cbd97e46fc"),
-                        ContactNumber = "623-551-0425 x8266",
-                        CreationTime = new DateTime(2019, 8, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "monroe@rau.uk",
-                        FirstName = "Doug",
-                        LastName = "Barrows"
-                    },
-                    new
-                    {
-                        Id = new Guid("d1f5408d-68d0-4b8e-b984-4832f565834f"),
-                        ContactNumber = "510.158.1241",
+                        Id = new Guid("c0bc8ce0-b25c-4c93-bc74-91468f325c5d"),
+                        ContactNumber = "450-151-7070 x666",
                         CreationTime = new DateTime(2019, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "destin_feil@bernierlittle.info",
-                        FirstName = "Judy",
-                        LastName = "Buckridge"
+                        EmailAddress = "judson.treutel@ohara.biz",
+                        FirstName = "Athena",
+                        LastName = "Klein"
                     },
                     new
                     {
-                        Id = new Guid("d232b3a2-28aa-47d6-ae77-d07643061450"),
-                        ContactNumber = "1-860-462-0722 x111",
+                        Id = new Guid("520239fb-937b-45bb-86eb-2db65dc33061"),
+                        ContactNumber = "165-883-6610",
                         CreationTime = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "hassie.veum@hackett.info",
-                        FirstName = "Pasquale",
-                        LastName = "Muller"
+                        EmailAddress = "mathilde@jonesdeckow.com",
+                        FirstName = "Kendrick",
+                        LastName = "Wiegand"
                     },
                     new
                     {
-                        Id = new Guid("ebd89e66-5613-4e72-b63f-8fe177ee873d"),
-                        ContactNumber = "751.315.6456 x4858",
+                        Id = new Guid("dc66d9fd-f32d-4fe9-ad3f-11782f75ae4c"),
+                        ContactNumber = "1-715-266-5323 x178",
                         CreationTime = new DateTime(2019, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "camylle.doyle@howe.us",
-                        FirstName = "Kyra",
-                        LastName = "D'Amore"
+                        EmailAddress = "savion_treutel@schummcollins.uk",
+                        FirstName = "Annabell",
+                        LastName = "Lehner"
                     },
                     new
                     {
-                        Id = new Guid("bf613030-0739-425b-b583-0b5c12426a11"),
-                        ContactNumber = "841-711-8676 x7316",
+                        Id = new Guid("1fffca94-e57d-4747-805a-dc98af4af3d5"),
+                        ContactNumber = "1-637-547-3210 x104",
                         CreationTime = new DateTime(2019, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "lowell@gerholdwisozk.co.uk",
-                        FirstName = "Boris",
-                        LastName = "Ankunding"
+                        EmailAddress = "raegan@gleason.uk",
+                        FirstName = "Eusebio",
+                        LastName = "Abernathy"
                     },
                     new
                     {
-                        Id = new Guid("7d54f999-a097-4d0b-8ff6-134d646d07f6"),
-                        ContactNumber = "(225)675-1203 x4622",
+                        Id = new Guid("25d6d73b-4e5b-4652-8093-d3280e06762e"),
+                        ContactNumber = "304-325-2303",
                         CreationTime = new DateTime(2019, 8, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "lavern.bergnaum@bartoletti.co.uk",
-                        FirstName = "Elisha",
-                        LastName = "Bartoletti"
+                        EmailAddress = "angeline@johnsstamm.name",
+                        FirstName = "Easton",
+                        LastName = "Bradtke"
                     },
                     new
                     {
-                        Id = new Guid("d5eed847-8bd7-4c88-af34-6e0f7491f055"),
-                        ContactNumber = "1-410-183-7785 x44106",
+                        Id = new Guid("2151bae0-1303-4e3f-885e-304ef2b0c2ee"),
+                        ContactNumber = "767.474.4747 x48634",
                         CreationTime = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "quentin@mante.com",
-                        FirstName = "Ashleigh",
-                        LastName = "Eichmann"
+                        EmailAddress = "noemi.barton@strosinbailey.biz",
+                        FirstName = "Tess",
+                        LastName = "Kovacek"
                     },
                     new
                     {
-                        Id = new Guid("e36a4b3c-42fc-46e4-bbb6-1ca40fefd3a5"),
-                        ContactNumber = "(603)868-1447 x1828",
+                        Id = new Guid("716bac35-bae9-4357-a007-2d368a0437c0"),
+                        ContactNumber = "(473)420-8224 x55686",
                         CreationTime = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "cristian@kilback.co.uk",
-                        FirstName = "Freddy",
-                        LastName = "Prosacco"
-                    },
-                    new
-                    {
-                        Id = new Guid("42db85a7-0b50-45b3-8bcb-160a357d9b7c"),
-                        ContactNumber = "254.841.6143 x4887",
-                        CreationTime = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "zoila@wizawolf.us",
-                        FirstName = "Robb",
-                        LastName = "Watsica"
-                    },
-                    new
-                    {
-                        Id = new Guid("e6c1252b-d4a2-4f9e-a29d-0f752c1a5140"),
-                        ContactNumber = "(853)160-4570",
-                        CreationTime = new DateTime(2019, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "marco.kozey@abshire.co.uk",
-                        FirstName = "Tierra",
-                        LastName = "Reinger"
-                    },
-                    new
-                    {
-                        Id = new Guid("21d586b7-3d4b-41b0-ae21-ef7af98c19f0"),
-                        ContactNumber = "342.832.7175 x75453",
-                        CreationTime = new DateTime(2019, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "amina@bernier.info",
-                        FirstName = "Aliza",
-                        LastName = "Kuvalis"
-                    },
-                    new
-                    {
-                        Id = new Guid("7e07a52d-1b87-405e-bbb9-7fc33664761c"),
-                        ContactNumber = "184-186-2711",
-                        CreationTime = new DateTime(2019, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "bessie@douglas.biz",
-                        FirstName = "Lolita",
-                        LastName = "Spencer"
-                    },
-                    new
-                    {
-                        Id = new Guid("310a1e8a-63c8-4faf-97e1-10a754eb3bb1"),
-                        ContactNumber = "370.678.7108 x41760",
-                        CreationTime = new DateTime(2019, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "ines_murphy@considine.name",
-                        FirstName = "Maverick",
-                        LastName = "Kemmer"
-                    },
-                    new
-                    {
-                        Id = new Guid("b2bd44b1-3e65-4266-a146-d6546c388711"),
-                        ContactNumber = "1-117-522-3533",
-                        CreationTime = new DateTime(2019, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "darrin@gibsoncassin.ca",
-                        FirstName = "Geo",
-                        LastName = "Heidenreich"
-                    },
-                    new
-                    {
-                        Id = new Guid("8a6bdf05-cc7d-4e58-94f6-eef1d5f59743"),
-                        ContactNumber = "(863)838-8027 x0763",
-                        CreationTime = new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "marlon_hermiston@nikolausfranecki.info",
-                        FirstName = "Christopher",
-                        LastName = "Von"
-                    },
-                    new
-                    {
-                        Id = new Guid("13d5f28d-345e-470b-b5b2-7886f9e5d523"),
-                        ContactNumber = "1-511-305-2063 x3713",
-                        CreationTime = new DateTime(2019, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "gage.blanda@hettinger.name",
-                        FirstName = "Carissa",
-                        LastName = "Gorczany"
-                    },
-                    new
-                    {
-                        Id = new Guid("83f54ed1-f58c-4eb4-ab39-e8cbd01f3cae"),
-                        ContactNumber = "172-414-1166 x762",
-                        CreationTime = new DateTime(2019, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "quinn@abbott.name",
-                        FirstName = "Sabina",
-                        LastName = "Mayer"
-                    },
-                    new
-                    {
-                        Id = new Guid("fbd4923b-1c62-4f9d-9e30-73c776ba2f43"),
-                        ContactNumber = "206-382-2227 x5436",
-                        CreationTime = new DateTime(2019, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "darby@mosciski.co.uk",
-                        FirstName = "Jennings",
-                        LastName = "Waters"
-                    },
-                    new
-                    {
-                        Id = new Guid("239622b3-9641-4a66-97cb-628395f926b8"),
-                        ContactNumber = "555-384-6811 x03312",
-                        CreationTime = new DateTime(2019, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "kari.lang@murray.co.uk",
-                        FirstName = "Keshaun",
-                        LastName = "Lang"
-                    },
-                    new
-                    {
-                        Id = new Guid("55d55b7f-f9eb-4536-95e3-e28abf953827"),
-                        ContactNumber = "242-564-8635 x736",
-                        CreationTime = new DateTime(2019, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "marion@gibson.info",
-                        FirstName = "Noemie",
+                        EmailAddress = "newell_kub@kirlinmorissette.co.uk",
+                        FirstName = "Alice",
                         LastName = "Reichert"
                     },
                     new
                     {
-                        Id = new Guid("d335500d-be89-47b6-9439-ab9908a030fe"),
-                        ContactNumber = "015.051.7146",
-                        CreationTime = new DateTime(2019, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "belle@kohlerweissnat.ca",
-                        FirstName = "Raymundo",
-                        LastName = "Rohan"
+                        Id = new Guid("ed3a1eac-61e3-412a-a27a-c5b29bf85bf0"),
+                        ContactNumber = "781-787-6806 x40540",
+                        CreationTime = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "christelle@hansen.co.uk",
+                        FirstName = "Jordyn",
+                        LastName = "Bogan"
                     },
                     new
                     {
-                        Id = new Guid("8a196d12-d7b0-484b-bf3a-3cda261b6f0e"),
-                        ContactNumber = "1-383-606-7831 x388",
-                        CreationTime = new DateTime(2019, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "tanner.cronin@nitzsche.biz",
-                        FirstName = "Elroy",
-                        LastName = "Torphy"
+                        Id = new Guid("9b7774ad-1b08-41e8-b0e4-ad995dda2d7b"),
+                        ContactNumber = "(142)376-7341",
+                        CreationTime = new DateTime(2019, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "carmella.miller@torphy.co.uk",
+                        FirstName = "Ova",
+                        LastName = "Cole"
                     },
                     new
                     {
-                        Id = new Guid("a15dd62e-e2d4-4e25-b762-b73fc2afbeb5"),
-                        ContactNumber = "(115)613-6382",
-                        CreationTime = new DateTime(2019, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jay@hickle.info",
-                        FirstName = "Sammy",
-                        LastName = "Daugherty"
+                        Id = new Guid("e92d136b-5291-47ae-96ed-d067a95790ce"),
+                        ContactNumber = "040.301.8371 x84624",
+                        CreationTime = new DateTime(2019, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "carmen_marquardt@breitenberghaley.co.uk",
+                        FirstName = "Elda",
+                        LastName = "Reinger"
                     },
                     new
                     {
-                        Id = new Guid("8f8a55a4-3091-4a1c-89a7-2b90463d7840"),
-                        ContactNumber = "(162)340-7458",
-                        CreationTime = new DateTime(2019, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "karson_grady@tremblaybode.co.uk",
-                        FirstName = "Delaney",
-                        LastName = "Kirlin"
+                        Id = new Guid("3a3863d1-0284-4f21-b5d4-a2aed5b37a7f"),
+                        ContactNumber = "526.067.4247",
+                        CreationTime = new DateTime(2019, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "haleigh@paucek.us",
+                        FirstName = "Dovie",
+                        LastName = "Rippin"
                     },
                     new
                     {
-                        Id = new Guid("6ecb66fc-f520-4d0f-9e3a-34b50c1f2181"),
-                        ContactNumber = "885.235.7421",
-                        CreationTime = new DateTime(2019, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "harold@spinka.info",
-                        FirstName = "Myra",
-                        LastName = "Brakus"
+                        Id = new Guid("fb8f6014-9d87-47ca-89b8-5f69b3da49a7"),
+                        ContactNumber = "1-743-171-6076 x36665",
+                        CreationTime = new DateTime(2019, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "leonie_kassulke@zieme.biz",
+                        FirstName = "Rowan",
+                        LastName = "Cruickshank"
                     },
                     new
                     {
-                        Id = new Guid("61b9500e-ac1d-4ffd-bfe5-796ed8ea9df9"),
-                        ContactNumber = "1-426-847-6466",
-                        CreationTime = new DateTime(2019, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "murl@hellerosinski.us",
-                        FirstName = "Daniella",
-                        LastName = "Funk"
-                    },
-                    new
-                    {
-                        Id = new Guid("3a776a95-0896-4815-95be-e262999c8f75"),
-                        ContactNumber = "1-048-037-2153",
-                        CreationTime = new DateTime(2019, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "anika@schroeder.com",
-                        FirstName = "Nedra",
-                        LastName = "Reichel"
-                    },
-                    new
-                    {
-                        Id = new Guid("925815e3-0da9-422a-b7b2-2ed365132d70"),
-                        ContactNumber = "(461)070-3804",
-                        CreationTime = new DateTime(2019, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "luciano.cartwright@okeefe.com",
-                        FirstName = "Bobby",
-                        LastName = "Altenwerth"
-                    },
-                    new
-                    {
-                        Id = new Guid("fc59a3e9-668b-4a9c-bb29-8389c46d441b"),
-                        ContactNumber = "510-453-8874",
-                        CreationTime = new DateTime(2019, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "myron@mannhintz.us",
-                        FirstName = "Hyman",
-                        LastName = "Corkery"
-                    },
-                    new
-                    {
-                        Id = new Guid("0d2730c5-445d-43fd-9e44-b0e3a6767b30"),
-                        ContactNumber = "430-185-8658",
-                        CreationTime = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "valentina_stracke@thompson.ca",
-                        FirstName = "Tressa",
-                        LastName = "Gibson"
-                    },
-                    new
-                    {
-                        Id = new Guid("96776636-6760-4579-84fb-8b1b619abbd2"),
-                        ContactNumber = "(028)384-4735 x816",
-                        CreationTime = new DateTime(2019, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "lacy.buckridge@okon.name",
-                        FirstName = "Celestine",
-                        LastName = "Raynor"
-                    },
-                    new
-                    {
-                        Id = new Guid("68026d92-8099-40b0-ae56-b30dc85c143b"),
-                        ContactNumber = "1-776-713-0482 x715",
-                        CreationTime = new DateTime(2019, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jeramie.rowe@herzogauer.uk",
-                        FirstName = "Rasheed",
-                        LastName = "Mayer"
-                    },
-                    new
-                    {
-                        Id = new Guid("9efac78b-40e9-46b9-842f-7d6e4c259912"),
-                        ContactNumber = "(405)401-1437",
-                        CreationTime = new DateTime(2019, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "marina@williamson.info",
-                        FirstName = "Carrie",
-                        LastName = "Barton"
-                    },
-                    new
-                    {
-                        Id = new Guid("60a1d5e7-0552-447a-a9a0-413490459d6b"),
-                        ContactNumber = "1-774-114-5245 x066",
-                        CreationTime = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "hazel@roob.uk",
-                        FirstName = "Margret",
-                        LastName = "Reilly"
-                    },
-                    new
-                    {
-                        Id = new Guid("7afb4d78-d131-4046-b962-1f16cf354f03"),
-                        ContactNumber = "766.727.3117",
-                        CreationTime = new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jerrod@nitzschekozey.uk",
-                        FirstName = "Rita",
+                        Id = new Guid("bf198996-5637-4988-98f5-314a9fad6c5d"),
+                        ContactNumber = "1-281-081-1740 x7525",
+                        CreationTime = new DateTime(2019, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "jackie@stehrhudson.biz",
+                        FirstName = "Mervin",
                         LastName = "Cummerata"
                     },
                     new
                     {
-                        Id = new Guid("4a5e5e76-5999-4e82-be10-4cd9def2cd0c"),
-                        ContactNumber = "787.728.4404 x228",
-                        CreationTime = new DateTime(2019, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "hayley@schinner.com",
-                        FirstName = "Federico",
-                        LastName = "Mohr"
+                        Id = new Guid("f1c748e7-5653-4e94-b591-182a48bc05ec"),
+                        ContactNumber = "(645)308-2668",
+                        CreationTime = new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "teagan@treutel.com",
+                        FirstName = "Mertie",
+                        LastName = "Weber"
                     },
                     new
                     {
-                        Id = new Guid("a421269a-8757-41dd-a429-3f8d316748c3"),
-                        ContactNumber = "1-312-276-6327",
-                        CreationTime = new DateTime(2019, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "fay@bodeweimann.us",
-                        FirstName = "Norene",
-                        LastName = "Swaniawski"
+                        Id = new Guid("f50a5028-c3a6-436a-a1f9-bcf4a0113e24"),
+                        ContactNumber = "470-470-4172",
+                        CreationTime = new DateTime(2019, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "ali.schumm@langhilll.info",
+                        FirstName = "Litzy",
+                        LastName = "Stracke"
                     },
                     new
                     {
-                        Id = new Guid("7c972ba9-0af8-4171-8daa-49c6531f0000"),
-                        ContactNumber = "(358)541-0667",
-                        CreationTime = new DateTime(2019, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jackson_welch@jaskolskimedhurst.co.uk",
-                        FirstName = "Selina",
-                        LastName = "Smitham"
+                        Id = new Guid("0c8369fa-0de5-4a89-8d38-d3a0fff25320"),
+                        ContactNumber = "315.152.5511",
+                        CreationTime = new DateTime(2019, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "rosemarie@luettgen.com",
+                        FirstName = "Ben",
+                        LastName = "Walker"
                     },
                     new
                     {
-                        Id = new Guid("e537be85-9d8a-4452-ab0a-d0165d4354c8"),
-                        ContactNumber = "210.350.0771 x4243",
-                        CreationTime = new DateTime(2019, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jamal_renner@sawayn.name",
-                        FirstName = "Marques",
-                        LastName = "Medhurst"
+                        Id = new Guid("c45492d0-81a1-436b-95f7-5f63ad933d32"),
+                        ContactNumber = "173.405.0423",
+                        CreationTime = new DateTime(2019, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "jovanny@berge.uk",
+                        FirstName = "Kayden",
+                        LastName = "Witting"
                     },
                     new
                     {
-                        Id = new Guid("17e29685-c7b1-4c9e-98fe-8bfca505f475"),
-                        ContactNumber = "336.632.1240",
-                        CreationTime = new DateTime(2019, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "shane.ullrich@beahan.info",
-                        FirstName = "Jacques",
+                        Id = new Guid("2eac0ebc-8eae-4807-a11e-299fdc521c17"),
+                        ContactNumber = "1-846-141-5240 x1214",
+                        CreationTime = new DateTime(2019, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "jamar_corkery@barrows.co.uk",
+                        FirstName = "Davin",
                         LastName = "Farrell"
                     },
                     new
                     {
-                        Id = new Guid("8dac56da-1365-4b50-8d81-98d2113df192"),
-                        ContactNumber = "1-248-882-5762",
-                        CreationTime = new DateTime(2019, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "rachel_dooley@heathcotedonnelly.ca",
-                        FirstName = "Maryam",
-                        LastName = "Larson"
+                        Id = new Guid("09918721-6487-4000-8406-3eb8b0426e4b"),
+                        ContactNumber = "485.320.8223 x6128",
+                        CreationTime = new DateTime(2019, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "adaline_willms@christiansen.uk",
+                        FirstName = "Daphney",
+                        LastName = "Schaefer"
                     },
                     new
                     {
-                        Id = new Guid("b56a1418-d5aa-43ca-993d-030f266ac910"),
-                        ContactNumber = "(031)537-0621",
-                        CreationTime = new DateTime(2019, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "melody.champlin@ratke.co.uk",
-                        FirstName = "Sandrine",
-                        LastName = "Graham"
+                        Id = new Guid("3f878282-0257-4c68-b54f-b64a54456442"),
+                        ContactNumber = "1-720-147-2828 x2871",
+                        CreationTime = new DateTime(2019, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "elmira_turner@graham.ca",
+                        FirstName = "Gertrude",
+                        LastName = "Brekke"
                     },
                     new
                     {
-                        Id = new Guid("e72eda1b-127c-4be5-93ad-b7dd3b8d0653"),
-                        ContactNumber = "670-164-6527 x20217",
-                        CreationTime = new DateTime(2019, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "kasandra@lindgrenbins.uk",
-                        FirstName = "Lisette",
-                        LastName = "Keeling"
+                        Id = new Guid("f084f04b-fe2b-4ed8-aa1b-beedfd12275d"),
+                        ContactNumber = "418-551-4464",
+                        CreationTime = new DateTime(2019, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "sandra.runolfsdottir@heathcotedietrich.name",
+                        FirstName = "Cara",
+                        LastName = "Hermiston"
                     },
                     new
                     {
-                        Id = new Guid("9bb9a8d0-9559-403c-99a3-6dcc4f01590b"),
-                        ContactNumber = "(606)541-7551",
-                        CreationTime = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "everett_emmerich@lemke.biz",
-                        FirstName = "Carmelo",
-                        LastName = "Von"
+                        Id = new Guid("cc115b94-4c95-4bee-b4b3-2793a8425519"),
+                        ContactNumber = "763-724-1731",
+                        CreationTime = new DateTime(2019, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "marta@wehner.uk",
+                        FirstName = "Aida",
+                        LastName = "Lowe"
                     },
                     new
                     {
-                        Id = new Guid("13c4dd80-59e4-4511-b2cb-48a0fd2027e8"),
-                        ContactNumber = "(176)837-4033 x588",
-                        CreationTime = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "loraine@bins.name",
-                        FirstName = "Ruthe",
-                        LastName = "Welch"
+                        Id = new Guid("c2040bd5-d007-41b9-bb0a-4029bbd9e208"),
+                        ContactNumber = "(631)603-6168 x16178",
+                        CreationTime = new DateTime(2019, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "garfield_sipes@nader.biz",
+                        FirstName = "Efrain",
+                        LastName = "Renner"
                     },
                     new
                     {
-                        Id = new Guid("5445933e-85e4-4ea2-9b2b-d95cf83c063c"),
-                        ContactNumber = "1-547-230-0728",
-                        CreationTime = new DateTime(2019, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "kristy.wisozk@boyer.ca",
-                        FirstName = "Kiley",
-                        LastName = "Kemmer"
+                        Id = new Guid("fc6869d0-5c5b-46ae-936f-5c0d17214e7c"),
+                        ContactNumber = "187.688.1175 x6023",
+                        CreationTime = new DateTime(2019, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "evert_tillman@kulas.name",
+                        FirstName = "Elizabeth",
+                        LastName = "Hackett"
                     },
                     new
                     {
-                        Id = new Guid("62c3abc4-a3b5-4827-bada-176d00618701"),
-                        ContactNumber = "346.468.4688 x66134",
-                        CreationTime = new DateTime(2019, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "casandra.hand@haagwatsica.us",
-                        FirstName = "Dorian",
-                        LastName = "Schmitt"
+                        Id = new Guid("173697fe-1065-426d-ac2d-6ec5b4669e81"),
+                        ContactNumber = "743.146.7322",
+                        CreationTime = new DateTime(2019, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "elyssa_ziemann@legros.co.uk",
+                        FirstName = "Cleta",
+                        LastName = "Grimes"
                     },
                     new
                     {
-                        Id = new Guid("6c63fc1d-f9a3-4b23-8d84-8e21b540afa2"),
-                        ContactNumber = "307-581-2502 x57202",
-                        CreationTime = new DateTime(2019, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "zetta_stanton@schowalterhammes.ca",
-                        FirstName = "Samara",
-                        LastName = "Hoppe"
+                        Id = new Guid("66ecb9c7-fd9f-4bd6-a741-675438462691"),
+                        ContactNumber = "1-247-267-0772",
+                        CreationTime = new DateTime(2019, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "justus.bosco@rogahnweimann.us",
+                        FirstName = "Georgette",
+                        LastName = "Weimann"
                     },
                     new
                     {
-                        Id = new Guid("eab11ea0-6b92-43c6-9a7d-1d3fc4a54ac5"),
-                        ContactNumber = "(815)418-0853 x728",
-                        CreationTime = new DateTime(2019, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "hector_hilpert@weissnat.info",
-                        FirstName = "Preston",
-                        LastName = "Cronin"
-                    },
-                    new
-                    {
-                        Id = new Guid("93ce18e1-3cc9-4acf-8504-716c7391ccb9"),
-                        ContactNumber = "(850)780-4044 x1084",
-                        CreationTime = new DateTime(2019, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "madison@greenfelder.info",
-                        FirstName = "Dejon",
-                        LastName = "Gusikowski"
-                    },
-                    new
-                    {
-                        Id = new Guid("7249191d-78f4-4f40-8fc8-fea9174d392d"),
-                        ContactNumber = "(028)377-6688",
-                        CreationTime = new DateTime(2019, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "kaylee_fisher@moen.info",
-                        FirstName = "Manley",
+                        Id = new Guid("5fef9da5-0186-4613-a825-34e3e69530a2"),
+                        ContactNumber = "(016)057-0887 x7305",
+                        CreationTime = new DateTime(2019, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "lloyd@quitzon.ca",
+                        FirstName = "Samson",
                         LastName = "Schuster"
                     },
                     new
                     {
-                        Id = new Guid("af48b2e5-743e-43ec-8d1e-fb8f35812f58"),
-                        ContactNumber = "1-570-244-7372",
-                        CreationTime = new DateTime(2019, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "napoleon_reynolds@cole.ca",
-                        FirstName = "Gregorio",
-                        LastName = "Herzog"
+                        Id = new Guid("264024c3-52e1-405d-a923-c6c0007cbafa"),
+                        ContactNumber = "(748)670-6415",
+                        CreationTime = new DateTime(2019, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "emily@gerlach.name",
+                        FirstName = "Jaclyn",
+                        LastName = "Willms"
                     },
                     new
                     {
-                        Id = new Guid("6ef135d7-f058-48da-9dfe-d76f34525cad"),
-                        ContactNumber = "885-643-7817",
-                        CreationTime = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "taya@pacocha.ca",
-                        FirstName = "Richie",
-                        LastName = "Labadie"
+                        Id = new Guid("03f6ff47-012f-48c8-9e16-f49625519cd2"),
+                        ContactNumber = "(381)243-1058 x81515",
+                        CreationTime = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "antoinette@gerlach.com",
+                        FirstName = "Adolph",
+                        LastName = "Stark"
                     },
                     new
                     {
-                        Id = new Guid("4430c8d1-dd2c-4d4e-9266-bf5976bbf9f2"),
-                        ContactNumber = "1-412-614-2474 x25705",
-                        CreationTime = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jordy_wilkinson@weimann.biz",
-                        FirstName = "George",
-                        LastName = "Collier"
+                        Id = new Guid("cba4e37a-adae-4cdf-91ca-8b5abe13d365"),
+                        ContactNumber = "(364)658-7654 x152",
+                        CreationTime = new DateTime(2019, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "ethyl@balistreriblock.ca",
+                        FirstName = "Eliezer",
+                        LastName = "Feest"
                     },
                     new
                     {
-                        Id = new Guid("9d745909-664a-4a2f-88ee-922d59a18236"),
-                        ContactNumber = "808-752-6567 x67500",
-                        CreationTime = new DateTime(2019, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "chloe@mcculloughstark.co.uk",
-                        FirstName = "Isobel",
-                        LastName = "Hoppe"
+                        Id = new Guid("f685db70-02db-4f4a-afc3-5c6f7de6b5bb"),
+                        ContactNumber = "140-086-6825 x8706",
+                        CreationTime = new DateTime(2019, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "ethyl.wyman@huels.biz",
+                        FirstName = "Brennan",
+                        LastName = "Lakin"
                     },
                     new
                     {
-                        Id = new Guid("bf645981-14e9-4c51-98f8-73bf736075f9"),
-                        ContactNumber = "(603)880-3732",
-                        CreationTime = new DateTime(2019, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "catalina_watsica@anderson.uk",
-                        FirstName = "Marta",
-                        LastName = "Bechtelar"
+                        Id = new Guid("b8343d29-0b2b-476c-8aa5-9bafcd567a72"),
+                        ContactNumber = "484-806-0874 x05400",
+                        CreationTime = new DateTime(2019, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "martina@kub.uk",
+                        FirstName = "Jillian",
+                        LastName = "Nolan"
                     },
                     new
                     {
-                        Id = new Guid("1510533e-6e1e-40a6-98cf-9bce52e5842b"),
-                        ContactNumber = "(780)520-7462 x0605",
-                        CreationTime = new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "nya_okuneva@smithklein.us",
-                        FirstName = "Pearline",
-                        LastName = "Daugherty"
+                        Id = new Guid("e4b64cb0-bbf1-431e-bde5-250c9ddec7be"),
+                        ContactNumber = "(605)815-4832",
+                        CreationTime = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "rhianna@zulauf.name",
+                        FirstName = "Gussie",
+                        LastName = "McLaughlin"
                     },
                     new
                     {
-                        Id = new Guid("f2efa964-4c8b-40a2-b1b3-d0583c6f09d2"),
-                        ContactNumber = "1-275-872-2001 x4737",
-                        CreationTime = new DateTime(2019, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "wilfred@lowe.name",
-                        FirstName = "Jonathon",
-                        LastName = "Weissnat"
-                    },
-                    new
-                    {
-                        Id = new Guid("c921e6d3-6389-4904-9f92-cb68331061a0"),
-                        ContactNumber = "056-332-5318",
-                        CreationTime = new DateTime(2019, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "elisabeth.luettgen@wisoky.co.uk",
-                        FirstName = "Rickey",
-                        LastName = "Gislason"
-                    },
-                    new
-                    {
-                        Id = new Guid("5ebdbfe4-39b5-4ebf-824f-ed73bef73722"),
-                        ContactNumber = "1-270-756-2773 x43715",
-                        CreationTime = new DateTime(2019, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "myra_miller@parker.info",
-                        FirstName = "Gust",
-                        LastName = "Goyette"
-                    },
-                    new
-                    {
-                        Id = new Guid("303f2e9f-7f19-411b-b013-93479615743a"),
-                        ContactNumber = "(523)277-8137",
-                        CreationTime = new DateTime(2019, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jaylan@schultzconsidine.us",
-                        FirstName = "Alice",
-                        LastName = "Pfannerstill"
-                    },
-                    new
-                    {
-                        Id = new Guid("384da756-3670-4f70-a68c-8816afc3cc15"),
-                        ContactNumber = "867.377.1712 x7001",
-                        CreationTime = new DateTime(2019, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "cecilia@hills.biz",
-                        FirstName = "Ana",
-                        LastName = "McClure"
-                    },
-                    new
-                    {
-                        Id = new Guid("122e3b29-6775-48e0-83a9-19e4bac28d8d"),
-                        ContactNumber = "642.178.2322 x6578",
-                        CreationTime = new DateTime(2019, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "garth_becker@waters.us",
-                        FirstName = "Hilton",
-                        LastName = "Pfeffer"
-                    },
-                    new
-                    {
-                        Id = new Guid("fae389ba-9dff-496e-963b-e3caec311b7a"),
-                        ContactNumber = "104-814-0062 x5001",
-                        CreationTime = new DateTime(2019, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "hipolito_russel@runolfsdottirhoppe.co.uk",
-                        FirstName = "Elton",
-                        LastName = "Gleason"
-                    },
-                    new
-                    {
-                        Id = new Guid("ffac5957-2e3c-4e80-915f-4ae4395987e5"),
-                        ContactNumber = "(556)272-8817",
-                        CreationTime = new DateTime(2019, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "terrill@collins.ca",
-                        FirstName = "Rocky",
-                        LastName = "DuBuque"
-                    },
-                    new
-                    {
-                        Id = new Guid("06512c71-41d1-4a11-aff3-547ca5fbedd0"),
-                        ContactNumber = "650-581-0484",
-                        CreationTime = new DateTime(2019, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "carley@gleason.ca",
-                        FirstName = "Oceane",
-                        LastName = "Effertz"
-                    },
-                    new
-                    {
-                        Id = new Guid("a7e40221-f703-4d06-bb81-6c27afdce27b"),
-                        ContactNumber = "706.073.5445 x1157",
-                        CreationTime = new DateTime(2019, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jadyn.marquardt@rosenbaum.info",
-                        FirstName = "Roselyn",
-                        LastName = "Frami"
-                    },
-                    new
-                    {
-                        Id = new Guid("307fd51a-e9f9-4614-9250-30402bb092d6"),
-                        ContactNumber = "751-535-3383 x104",
-                        CreationTime = new DateTime(2019, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "dallas@moenlarson.name",
-                        FirstName = "Modesto",
-                        LastName = "Beatty"
-                    },
-                    new
-                    {
-                        Id = new Guid("7f4bb0d1-4287-4e11-9744-32e336049a76"),
-                        ContactNumber = "247-387-4603 x5586",
-                        CreationTime = new DateTime(2019, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "sage@altenwerth.info",
-                        FirstName = "Moses",
-                        LastName = "Halvorson"
-                    },
-                    new
-                    {
-                        Id = new Guid("5f832539-20f2-492d-b7d8-732d53dc596a"),
-                        ContactNumber = "1-383-734-2721 x225",
-                        CreationTime = new DateTime(2019, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "vesta_mohr@haley.uk",
-                        FirstName = "Lorenz",
-                        LastName = "Koelpin"
-                    },
-                    new
-                    {
-                        Id = new Guid("1f2e5aa0-04b7-4fd7-b346-0936f911f8bd"),
-                        ContactNumber = "(863)784-0703 x348",
-                        CreationTime = new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "carroll@lebsack.info",
-                        FirstName = "Scottie",
-                        LastName = "Crona"
-                    },
-                    new
-                    {
-                        Id = new Guid("6bc4008a-616a-41d7-86d6-fb8f4b002226"),
-                        ContactNumber = "121-821-6812",
-                        CreationTime = new DateTime(2019, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "jermey@volkman.biz",
-                        FirstName = "Ivah",
-                        LastName = "Streich"
-                    },
-                    new
-                    {
-                        Id = new Guid("98947815-61fa-4a17-a267-b8c9c17414e9"),
-                        ContactNumber = "341-561-5203 x3006",
-                        CreationTime = new DateTime(2019, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "kaylee@kovacek.com",
-                        FirstName = "Darrick",
-                        LastName = "Kertzmann"
-                    },
-                    new
-                    {
-                        Id = new Guid("5b58b32e-f48c-40af-82c7-29c2bf3ba024"),
-                        ContactNumber = "(553)758-7402",
-                        CreationTime = new DateTime(2019, 10, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "maida.lakin@cummings.ca",
-                        FirstName = "Hoyt",
-                        LastName = "Hamill"
-                    },
-                    new
-                    {
-                        Id = new Guid("97694fd3-b46b-4958-8447-67bcf7e1f419"),
-                        ContactNumber = "(340)634-1463 x81801",
-                        CreationTime = new DateTime(2019, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "mittie_cole@thompsonabernathy.info",
-                        FirstName = "Samanta",
-                        LastName = "Ritchie"
-                    },
-                    new
-                    {
-                        Id = new Guid("25b1af46-4282-4da8-a48a-e67bd3b959d0"),
-                        ContactNumber = "224.165.5321",
-                        CreationTime = new DateTime(2019, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "bernardo@kohler.name",
-                        FirstName = "Brook",
-                        LastName = "Larson"
-                    },
-                    new
-                    {
-                        Id = new Guid("abcc8367-1ed5-45fb-a690-858dfd67c97e"),
-                        ContactNumber = "424.037.7618 x368",
-                        CreationTime = new DateTime(2019, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "abner@wiegand.ca",
-                        FirstName = "Elda",
+                        Id = new Guid("ba502660-aa0d-4d83-a966-56bb839a266f"),
+                        ContactNumber = "146-480-3230",
+                        CreationTime = new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "grady.harris@fadelbauch.com",
+                        FirstName = "Rodger",
                         LastName = "Turner"
                     },
                     new
                     {
-                        Id = new Guid("74ccc071-6dbd-445d-b83a-d3ed50d76012"),
-                        ContactNumber = "460-354-5786 x7401",
-                        CreationTime = new DateTime(2019, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "boris.greenholt@smitham.name",
-                        FirstName = "Lourdes",
-                        LastName = "Jones"
+                        Id = new Guid("c1f3a679-9f67-45c1-905e-ca0e1ed52e34"),
+                        ContactNumber = "002.252.8605",
+                        CreationTime = new DateTime(2019, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "john.howe@ankundinglindgren.ca",
+                        FirstName = "Bridget",
+                        LastName = "Shields"
                     },
                     new
                     {
-                        Id = new Guid("e231eb38-0186-48ea-b569-33995acadfb2"),
-                        ContactNumber = "(126)862-1766 x00230",
-                        CreationTime = new DateTime(2019, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "antonietta@spinkaheathcote.com",
-                        FirstName = "Holden",
-                        LastName = "Koss"
+                        Id = new Guid("886d6073-7bda-4497-96fb-a7e2486ea9e8"),
+                        ContactNumber = "183.724.6616",
+                        CreationTime = new DateTime(2019, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "ardella.dare@hoegerfahey.us",
+                        FirstName = "Savanah",
+                        LastName = "Runolfsson"
                     },
                     new
                     {
-                        Id = new Guid("cb88d6c8-1944-4ba6-89ab-d7c81c6fb5e3"),
-                        ContactNumber = "827-520-7586 x23188",
-                        CreationTime = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "gianni.hermann@bailey.co.uk",
-                        FirstName = "Shad",
-                        LastName = "Heller"
+                        Id = new Guid("8d030c87-5edb-410f-82af-c6fab8660a24"),
+                        ContactNumber = "231.788.7145 x207",
+                        CreationTime = new DateTime(2019, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "carmel_keebler@robertsdaugherty.name",
+                        FirstName = "Ruby",
+                        LastName = "Kirlin"
                     },
                     new
                     {
-                        Id = new Guid("206f9163-486e-46a8-8d19-b41057c27152"),
-                        ContactNumber = "325.162.8803 x45568",
-                        CreationTime = new DateTime(2019, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "beverly_bergstrom@feest.com",
-                        FirstName = "Janice",
-                        LastName = "Russel"
+                        Id = new Guid("68e13b8e-c8e4-476f-981e-614875af432c"),
+                        ContactNumber = "1-311-152-2026",
+                        CreationTime = new DateTime(2019, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "joseph.willms@lubowitz.ca",
+                        FirstName = "Vernon",
+                        LastName = "Stehr"
                     },
                     new
                     {
-                        Id = new Guid("486bf75f-5719-4b67-9fe6-9a5d5bed5890"),
-                        ContactNumber = "1-277-227-2648 x780",
-                        CreationTime = new DateTime(2019, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "davion@lowe.biz",
-                        FirstName = "Verner",
-                        LastName = "Ullrich"
+                        Id = new Guid("b5f13e09-c8eb-46ef-ab4c-6f04e93e0b69"),
+                        ContactNumber = "022-247-8026 x250",
+                        CreationTime = new DateTime(2019, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "pietro@reynolds.us",
+                        FirstName = "Lorine",
+                        LastName = "Dare"
                     },
                     new
                     {
-                        Id = new Guid("472f9a86-50a0-43cd-96df-5e72cedf31ed"),
-                        ContactNumber = "1-843-062-5317 x660",
-                        CreationTime = new DateTime(2019, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "cyril@rosenbaum.name",
-                        FirstName = "Mable",
-                        LastName = "DuBuque"
+                        Id = new Guid("9e6b6e4a-8288-4698-9b2c-162a1ea51b1b"),
+                        ContactNumber = "(056)401-3326",
+                        CreationTime = new DateTime(2019, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "hazle_walker@crooks.name",
+                        FirstName = "Delfina",
+                        LastName = "Rogahn"
                     },
                     new
                     {
-                        Id = new Guid("2f327e5c-00b2-4c1e-8bb8-107b575ec94c"),
-                        ContactNumber = "1-402-810-1127",
-                        CreationTime = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "eliseo@parker.ca",
-                        FirstName = "Fred",
-                        LastName = "Lesch"
+                        Id = new Guid("7dcbd706-ac22-49e4-9266-814ee26bd4ee"),
+                        ContactNumber = "1-814-470-8471 x212",
+                        CreationTime = new DateTime(2019, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "price.white@ward.name",
+                        FirstName = "Alison",
+                        LastName = "Block"
                     },
                     new
                     {
-                        Id = new Guid("57d1b103-5274-4d8b-879b-c0889875ff4d"),
-                        ContactNumber = "512-616-2803 x5785",
-                        CreationTime = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "frankie_runolfsson@mante.co.uk",
-                        FirstName = "Jan",
-                        LastName = "Thiel"
+                        Id = new Guid("f00c9570-84c6-46fc-bb4c-2c953e10fbf0"),
+                        ContactNumber = "(773)503-6846 x48432",
+                        CreationTime = new DateTime(2019, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "sandy@kunze.biz",
+                        FirstName = "Esther",
+                        LastName = "Barton"
                     },
                     new
                     {
-                        Id = new Guid("5109c947-4203-4ddd-abbb-9c50226effe3"),
-                        ContactNumber = "724-207-4486 x3747",
-                        CreationTime = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "nicole@bosco.com",
-                        FirstName = "Liam",
-                        LastName = "Treutel"
+                        Id = new Guid("8e9c34e6-d6d9-495c-8776-938dacd02c31"),
+                        ContactNumber = "280.640.7450",
+                        CreationTime = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "kennith@swaniawski.com",
+                        FirstName = "Drew",
+                        LastName = "Herzog"
                     },
                     new
                     {
-                        Id = new Guid("84abdaca-da09-4aed-abfe-4eed66826102"),
-                        ContactNumber = "(647)632-3543",
-                        CreationTime = new DateTime(2019, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "francesca@schmelerpollich.co.uk",
-                        FirstName = "Cody",
-                        LastName = "Hartmann"
+                        Id = new Guid("ae181790-eaee-4b0d-b260-742d424ee92f"),
+                        ContactNumber = "1-334-681-1771",
+                        CreationTime = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "kelsie@koelpin.us",
+                        FirstName = "Nigel",
+                        LastName = "Von"
                     },
                     new
                     {
-                        Id = new Guid("e668ac7f-b51d-4ad0-b5e6-c3ba49debcc4"),
-                        ContactNumber = "085.538.5708",
-                        CreationTime = new DateTime(2019, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "marilyne.kirlin@smitham.com",
-                        FirstName = "Kurt",
-                        LastName = "Cassin"
+                        Id = new Guid("e197dc70-d81d-4ae1-a3d8-bafcf9952748"),
+                        ContactNumber = "554.738.7085 x54830",
+                        CreationTime = new DateTime(2019, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "syble.johnston@huels.ca",
+                        FirstName = "Laverne",
+                        LastName = "Fadel"
                     },
                     new
                     {
-                        Id = new Guid("fb0b2ba7-b09c-4980-9d76-91ce53bc544b"),
-                        ContactNumber = "418.334.8840",
-                        CreationTime = new DateTime(2019, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "audie@gerhold.name",
-                        FirstName = "Andy",
-                        LastName = "Buckridge"
-                    },
-                    new
-                    {
-                        Id = new Guid("97724559-aff2-4bd5-90ef-09fd62b7597b"),
-                        ContactNumber = "435.666.8488 x7401",
-                        CreationTime = new DateTime(2019, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "raegan_corwin@keeling.info",
-                        FirstName = "Jedidiah",
-                        LastName = "Schultz"
-                    },
-                    new
-                    {
-                        Id = new Guid("54548b85-e4f0-4088-a31d-9916d1c1a7db"),
-                        ContactNumber = "1-551-666-5226 x041",
-                        CreationTime = new DateTime(2019, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "madie_larkin@larkin.co.uk",
-                        FirstName = "Josie",
+                        Id = new Guid("fa0e7b0f-c78d-4c3c-ad13-5a1fe3cdb905"),
+                        ContactNumber = "(421)488-7267 x4161",
+                        CreationTime = new DateTime(2019, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "cleo@grimes.com",
+                        FirstName = "Joyce",
                         LastName = "Stroman"
                     },
                     new
                     {
-                        Id = new Guid("1ac8af88-3fdd-4d82-8139-1a479d98dee5"),
-                        ContactNumber = "1-473-315-8720 x066",
-                        CreationTime = new DateTime(2019, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "darrion@gottlieb.ca",
-                        FirstName = "Makenzie",
-                        LastName = "Murazik"
+                        Id = new Guid("09c72a91-3112-4377-9a7d-ea627bb07b34"),
+                        ContactNumber = "781-356-4834 x2266",
+                        CreationTime = new DateTime(2019, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "lisa@cassinbraun.us",
+                        FirstName = "Colleen",
+                        LastName = "Baumbach"
                     },
                     new
                     {
-                        Id = new Guid("3376a073-81e8-4a93-a997-09f84cf1ec63"),
-                        ContactNumber = "337-170-6648 x511",
+                        Id = new Guid("80d5b6d4-4ac9-4304-8b58-145fb06c42ca"),
+                        ContactNumber = "(653)672-8544",
+                        CreationTime = new DateTime(2019, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "gudrun_schaefer@ebertlegros.com",
+                        FirstName = "Vicente",
+                        LastName = "Hintz"
+                    },
+                    new
+                    {
+                        Id = new Guid("a7158e3f-78a1-4f70-b846-131aea522976"),
+                        ContactNumber = "(372)406-8007 x6354",
+                        CreationTime = new DateTime(2019, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "deangelo_paucek@jakubowskistiedemann.info",
+                        FirstName = "Vladimir",
+                        LastName = "Cummings"
+                    },
+                    new
+                    {
+                        Id = new Guid("0171793c-8f12-48c4-878f-3f16e6d56cfd"),
+                        ContactNumber = "1-470-850-8152",
+                        CreationTime = new DateTime(2019, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "adolfo.schroeder@wolfledner.uk",
+                        FirstName = "Rhianna",
+                        LastName = "Batz"
+                    },
+                    new
+                    {
+                        Id = new Guid("33d56b76-b5a4-4acb-807e-13728e53e71e"),
+                        ContactNumber = "826.844.3675 x02147",
+                        CreationTime = new DateTime(2019, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "clementina_rosenbaum@donnelly.co.uk",
+                        FirstName = "Marguerite",
+                        LastName = "Bartell"
+                    },
+                    new
+                    {
+                        Id = new Guid("ef41ac83-0ea5-4df0-8de3-1942e1b80214"),
+                        ContactNumber = "(832)310-2542 x80454",
+                        CreationTime = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "marcus_renner@hammes.co.uk",
+                        FirstName = "Daphney",
+                        LastName = "Reichert"
+                    },
+                    new
+                    {
+                        Id = new Guid("40acfaed-cc67-4c7f-9565-59b007008fd1"),
+                        ContactNumber = "1-377-156-7532 x42827",
+                        CreationTime = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "erika_frami@gibsonbayer.info",
+                        FirstName = "Esperanza",
+                        LastName = "Swift"
+                    },
+                    new
+                    {
+                        Id = new Guid("66e8ee47-c0f7-4a9f-8074-433b2277afa6"),
+                        ContactNumber = "454.130.4254",
+                        CreationTime = new DateTime(2019, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "eriberto_ebert@simonis.co.uk",
+                        FirstName = "Garrick",
+                        LastName = "Kris"
+                    },
+                    new
+                    {
+                        Id = new Guid("9c1be3d4-509d-4368-9bad-fa3d92e2a5b8"),
+                        ContactNumber = "433-430-3520 x46222",
+                        CreationTime = new DateTime(2019, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "carolina@kuvalis.ca",
+                        FirstName = "Cristina",
+                        LastName = "Keebler"
+                    },
+                    new
+                    {
+                        Id = new Guid("41478677-5690-43c0-b254-c31efcd00b15"),
+                        ContactNumber = "802-365-1040",
+                        CreationTime = new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "bernadine@wintheiser.ca",
+                        FirstName = "Donato",
+                        LastName = "Brown"
+                    },
+                    new
+                    {
+                        Id = new Guid("ee064d8e-51a2-4b34-a0ce-817a316b21a1"),
+                        ContactNumber = "(538)860-1661",
+                        CreationTime = new DateTime(2019, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "aniya.klocko@beahanchamplin.com",
+                        FirstName = "Fleta",
+                        LastName = "Kshlerin"
+                    },
+                    new
+                    {
+                        Id = new Guid("bf2b6019-6228-4461-8baf-d10888cdcbe8"),
+                        ContactNumber = "1-561-803-8550",
+                        CreationTime = new DateTime(2019, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "paige@hintz.us",
+                        FirstName = "Juliana",
+                        LastName = "Jaskolski"
+                    },
+                    new
+                    {
+                        Id = new Guid("4527a853-8708-4bce-8d31-0ae4014c9beb"),
+                        ContactNumber = "(433)116-2478 x370",
+                        CreationTime = new DateTime(2019, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "willis_rutherford@rath.com",
+                        FirstName = "Michele",
+                        LastName = "Orn"
+                    },
+                    new
+                    {
+                        Id = new Guid("7aedb55a-0863-4745-bd3b-33caaaffdedf"),
+                        ContactNumber = "(524)088-7478",
+                        CreationTime = new DateTime(2019, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "elise.abernathy@fahey.biz",
+                        FirstName = "Blanche",
+                        LastName = "Brekke"
+                    },
+                    new
+                    {
+                        Id = new Guid("5c7f2231-8414-4fdf-914a-1daa3e0a0da4"),
+                        ContactNumber = "673-722-0822 x225",
+                        CreationTime = new DateTime(2019, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "destiny.lakin@collins.com",
+                        FirstName = "Lavinia",
+                        LastName = "Quitzon"
+                    },
+                    new
+                    {
+                        Id = new Guid("17c761b5-e928-4c5f-a1e8-e8ca4455f05f"),
+                        ContactNumber = "1-614-463-4315",
+                        CreationTime = new DateTime(2019, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "matilde.pfannerstill@kuphalthompson.biz",
+                        FirstName = "Bria",
+                        LastName = "Parker"
+                    },
+                    new
+                    {
+                        Id = new Guid("cc4e9d4c-dc13-4c77-90df-0f7e9ece7d38"),
+                        ContactNumber = "388-887-4745",
+                        CreationTime = new DateTime(2019, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "melyssa_lebsack@larkin.ca",
+                        FirstName = "Judge",
+                        LastName = "Bergnaum"
+                    },
+                    new
+                    {
+                        Id = new Guid("db058bd3-9968-4f64-bc53-593ae62b5c84"),
+                        ContactNumber = "1-335-431-4304 x55232",
+                        CreationTime = new DateTime(2019, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "lilian_macejkovic@ledner.name",
+                        FirstName = "Torrance",
+                        LastName = "Reilly"
+                    },
+                    new
+                    {
+                        Id = new Guid("2390c722-ccc8-4902-949a-66ce38f93d19"),
+                        ContactNumber = "1-158-405-3185 x335",
+                        CreationTime = new DateTime(2019, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "tre.hettinger@block.us",
+                        FirstName = "Abigayle",
+                        LastName = "Wunsch"
+                    },
+                    new
+                    {
+                        Id = new Guid("ec4563d2-7fde-454b-b1fe-c57293fbfc2b"),
+                        ContactNumber = "773-636-3547",
+                        CreationTime = new DateTime(2019, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "velda@naderhilpert.co.uk",
+                        FirstName = "Carlie",
+                        LastName = "Ratke"
+                    },
+                    new
+                    {
+                        Id = new Guid("d82b9695-2d66-4267-8656-4553379f4778"),
+                        ContactNumber = "611-181-0378 x820",
+                        CreationTime = new DateTime(2019, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "wilhelmine_dubuque@olson.com",
+                        FirstName = "Drake",
+                        LastName = "Corwin"
+                    },
+                    new
+                    {
+                        Id = new Guid("ddde7243-5b24-4438-a86b-cbae40d8421d"),
+                        ContactNumber = "1-658-166-0716 x87563",
+                        CreationTime = new DateTime(2019, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "freddy.kling@nadermedhurst.co.uk",
+                        FirstName = "Cyrus",
+                        LastName = "Spinka"
+                    },
+                    new
+                    {
+                        Id = new Guid("648c3d21-79d6-42c7-bc2d-19bd8209398b"),
+                        ContactNumber = "175.314.2232 x18517",
+                        CreationTime = new DateTime(2019, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "carlos@ullrich.co.uk",
+                        FirstName = "Aurore",
+                        LastName = "Hudson"
+                    },
+                    new
+                    {
+                        Id = new Guid("77554a2c-bc11-45ec-8dc1-ef21d7031026"),
+                        ContactNumber = "(376)121-5766",
+                        CreationTime = new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "diego.prosacco@jaskolskimorissette.us",
+                        FirstName = "Hilma",
+                        LastName = "Sanford"
+                    },
+                    new
+                    {
+                        Id = new Guid("12c83d4a-61ec-4f91-939a-154c49778e50"),
+                        ContactNumber = "462-653-6128 x604",
+                        CreationTime = new DateTime(2019, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "emmy@bergnaum.info",
+                        FirstName = "Gail",
+                        LastName = "Carter"
+                    },
+                    new
+                    {
+                        Id = new Guid("ab1754fe-d2a8-46c1-91c2-d85176c19d6b"),
+                        ContactNumber = "(557)464-4605 x58043",
+                        CreationTime = new DateTime(2019, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "marisa_price@schulistsmith.com",
+                        FirstName = "Declan",
+                        LastName = "Cummerata"
+                    },
+                    new
+                    {
+                        Id = new Guid("17a32716-37c7-468e-a1e4-9bcdd593b390"),
+                        ContactNumber = "(542)031-2861",
+                        CreationTime = new DateTime(2019, 10, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "willis.pollich@fahey.info",
+                        FirstName = "Marjory",
+                        LastName = "O'Kon"
+                    },
+                    new
+                    {
+                        Id = new Guid("4a4a0c72-40c5-4e88-9d42-4b8ab4194f9b"),
+                        ContactNumber = "1-525-846-0631",
+                        CreationTime = new DateTime(2019, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "herminio_walker@wisozkgreenfelder.uk",
+                        FirstName = "Buford",
+                        LastName = "Feeney"
+                    },
+                    new
+                    {
+                        Id = new Guid("a0426631-403d-4ee2-b221-ee4222575319"),
+                        ContactNumber = "1-206-605-5177 x4028",
+                        CreationTime = new DateTime(2019, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "jeanie@oberbrunnermann.info",
+                        FirstName = "Leif",
+                        LastName = "Dicki"
+                    },
+                    new
+                    {
+                        Id = new Guid("83c5d933-4316-46bc-a2df-d73d0a73e5a1"),
+                        ContactNumber = "1-157-876-0340 x532",
+                        CreationTime = new DateTime(2019, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "delbert_casper@mayerkoss.us",
+                        FirstName = "Adan",
+                        LastName = "Schulist"
+                    },
+                    new
+                    {
+                        Id = new Guid("17d7b325-d55d-4c07-814c-7dcba0e6e537"),
+                        ContactNumber = "834.770.3644 x401",
+                        CreationTime = new DateTime(2019, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "neil.schultz@wittingwuckert.biz",
+                        FirstName = "Eden",
+                        LastName = "Jacobson"
+                    },
+                    new
+                    {
+                        Id = new Guid("297ba073-ec9e-40a8-8e84-970d599a8714"),
+                        ContactNumber = "113.333.1822 x842",
+                        CreationTime = new DateTime(2019, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "kaylie@pollichwatsica.name",
+                        FirstName = "Kenyatta",
+                        LastName = "Roob"
+                    },
+                    new
+                    {
+                        Id = new Guid("0ab65d02-2bc7-4ce8-9ee7-6380c25dfd79"),
+                        ContactNumber = "336-158-2383",
+                        CreationTime = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "stefan_ratke@wolfgleason.co.uk",
+                        FirstName = "Nathaniel",
+                        LastName = "Howe"
+                    },
+                    new
+                    {
+                        Id = new Guid("83c90289-515b-4cc6-ad0b-fe17a55f48ce"),
+                        ContactNumber = "872.158.4265 x0186",
+                        CreationTime = new DateTime(2019, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "madaline@pfannerstill.ca",
+                        FirstName = "Geovany",
+                        LastName = "Morar"
+                    },
+                    new
+                    {
+                        Id = new Guid("a0b15085-3865-4aeb-ac07-3d574edef363"),
+                        ContactNumber = "(724)786-5736 x335",
+                        CreationTime = new DateTime(2019, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "talia@bahringer.com",
+                        FirstName = "Rodger",
+                        LastName = "Gusikowski"
+                    },
+                    new
+                    {
+                        Id = new Guid("a1a3b4db-4edc-41d5-82d0-7487221e9930"),
+                        ContactNumber = "668.528.3108 x523",
+                        CreationTime = new DateTime(2019, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "camren.lueilwitz@beerstroman.biz",
+                        FirstName = "Concepcion",
+                        LastName = "Runolfsson"
+                    },
+                    new
+                    {
+                        Id = new Guid("b67815ce-327a-4755-9514-156cfc96f156"),
+                        ContactNumber = "313.516.6062",
+                        CreationTime = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "mitchel_hegmann@predovichills.com",
+                        FirstName = "Helmer",
+                        LastName = "Lesch"
+                    },
+                    new
+                    {
+                        Id = new Guid("0bccca59-c86c-4b4f-bdc1-04a001aef558"),
+                        ContactNumber = "1-200-782-5188 x2141",
+                        CreationTime = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "kolby@white.ca",
+                        FirstName = "Natasha",
+                        LastName = "Kris"
+                    },
+                    new
+                    {
+                        Id = new Guid("661d8c46-df31-46d4-879e-93859b80f61e"),
+                        ContactNumber = "(311)134-3606",
+                        CreationTime = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "carmelo@sauerfay.uk",
+                        FirstName = "Lexus",
+                        LastName = "Champlin"
+                    },
+                    new
+                    {
+                        Id = new Guid("d4e5f11a-1164-40e8-9045-2a2fad9042ae"),
+                        ContactNumber = "234-312-1524 x21686",
+                        CreationTime = new DateTime(2019, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "reyna@hodkiewicz.uk",
+                        FirstName = "Brown",
+                        LastName = "Wilderman"
+                    },
+                    new
+                    {
+                        Id = new Guid("af4d0057-d868-4176-9147-c9ba5831c9c8"),
+                        ContactNumber = "708.186.7057",
+                        CreationTime = new DateTime(2019, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "tillman_schmidt@ullrich.name",
+                        FirstName = "Joesph",
+                        LastName = "Mitchell"
+                    },
+                    new
+                    {
+                        Id = new Guid("757a500d-7329-4f23-b336-5b10036c8430"),
+                        ContactNumber = "442-523-3613 x76341",
+                        CreationTime = new DateTime(2019, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "tanner@littelmraz.com",
+                        FirstName = "Chauncey",
+                        LastName = "Erdman"
+                    },
+                    new
+                    {
+                        Id = new Guid("668620e1-869c-404b-96b3-4d73b74cab34"),
+                        ContactNumber = "1-740-044-4233",
+                        CreationTime = new DateTime(2019, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "kelvin@mccullough.uk",
+                        FirstName = "Juston",
+                        LastName = "Stracke"
+                    },
+                    new
+                    {
+                        Id = new Guid("68a4ffee-3644-48b6-9640-26b4016e61c6"),
+                        ContactNumber = "815.275.2255",
+                        CreationTime = new DateTime(2019, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "abelardo_carter@schmidt.us",
+                        FirstName = "Eudora",
+                        LastName = "Kiehn"
+                    },
+                    new
+                    {
+                        Id = new Guid("335ed577-7e77-4dfc-abc2-2b64d31153a1"),
+                        ContactNumber = "(381)552-8217 x041",
+                        CreationTime = new DateTime(2019, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "vernie_ferry@effertz.info",
+                        FirstName = "Liza",
+                        LastName = "Turner"
+                    },
+                    new
+                    {
+                        Id = new Guid("079f6d83-9a71-4171-9be7-f5f2c3f29480"),
+                        ContactNumber = "577.810.7447 x51180",
                         CreationTime = new DateTime(2019, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                        EmailAddress = "daniella_dicki@carter.name",
-                        FirstName = "Lenna",
-                        LastName = "Herzog"
+                        EmailAddress = "grayson@stromanvonrueden.co.uk",
+                        FirstName = "Maria",
+                        LastName = "Harber"
+                    },
+                    new
+                    {
+                        Id = new Guid("bc112d95-7cac-4b5a-9f8d-9265e842fa1e"),
+                        ContactNumber = "603-357-5275 x84128",
+                        CreationTime = new DateTime(2019, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "domingo_ohara@hoppe.name",
+                        FirstName = "Wilber",
+                        LastName = "Dach"
+                    },
+                    new
+                    {
+                        Id = new Guid("9e16ac8e-2582-48bb-8b80-639026237579"),
+                        ContactNumber = "(373)755-0205",
+                        CreationTime = new DateTime(2019, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "reuben@gerhold.ca",
+                        FirstName = "Cortez",
+                        LastName = "Weissnat"
+                    },
+                    new
+                    {
+                        Id = new Guid("71adf1a5-b503-485a-85bf-8c9448d60ade"),
+                        ContactNumber = "040.512.3410",
+                        CreationTime = new DateTime(2019, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "connor_kunde@larkin.info",
+                        FirstName = "Zoila",
+                        LastName = "Klein"
+                    },
+                    new
+                    {
+                        Id = new Guid("c7045f14-66a6-45eb-9373-691bdfaf4d55"),
+                        ContactNumber = "1-071-718-4114",
+                        CreationTime = new DateTime(2019, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "nicolette_dooley@predovic.us",
+                        FirstName = "Gail",
+                        LastName = "Weber"
+                    },
+                    new
+                    {
+                        Id = new Guid("cd51e5f1-21fe-4b6d-a0db-f7720a371393"),
+                        ContactNumber = "1-011-010-6875",
+                        CreationTime = new DateTime(2019, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "arlo.mcclure@sauer.info",
+                        FirstName = "Dean",
+                        LastName = "Lueilwitz"
+                    },
+                    new
+                    {
+                        Id = new Guid("c13f91d9-579a-4ff8-bd1e-a92b719e5310"),
+                        ContactNumber = "548.237.5006 x487",
+                        CreationTime = new DateTime(2019, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "marcelle@ruecker.uk",
+                        FirstName = "Emmalee",
+                        LastName = "Ziemann"
+                    },
+                    new
+                    {
+                        Id = new Guid("4ef30228-2585-402e-a75f-fe3cf0bd982d"),
+                        ContactNumber = "(261)268-6832",
+                        CreationTime = new DateTime(2019, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "jaylen@rohanconn.name",
+                        FirstName = "Chyna",
+                        LastName = "Orn"
+                    },
+                    new
+                    {
+                        Id = new Guid("b7d8580b-0149-466c-b2b2-14bcad99cb66"),
+                        ContactNumber = "1-647-416-8185",
+                        CreationTime = new DateTime(2019, 11, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        EmailAddress = "taryn@walker.us",
+                        FirstName = "Maida",
+                        LastName = "Vandervort"
                     });
             });
 
             modelBuilder.Entity("Rental.DataAccess.Entities.GameRental", b =>
             {
                 b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("TEXT");
 
-                b.Property<Guid>("BoardGameId");
+                b.Property<Guid>("BoardGameId")
+                    .HasColumnType("TEXT");
 
-                b.Property<float>("ChargedDeposit");
+                b.Property<float>("ChargedDeposit")
+                    .HasColumnType("REAL");
 
-                b.Property<Guid>("ClientId");
+                b.Property<Guid>("ClientId")
+                    .HasColumnType("TEXT");
 
                 b.Property<DateTime>("CreationTime")
                     .ValueGeneratedOnAdd()
-                    .HasDefaultValue(new DateTime(2019, 8, 11, 6, 7, 13, 733, DateTimeKind.Utc).AddTicks(2484));
+                    .HasColumnType("TEXT")
+                    .HasDefaultValue(new DateTime(2019, 8, 19, 6, 59, 45, 537, DateTimeKind.Utc).AddTicks(9115));
 
-                b.Property<DateTime?>("FinishTime");
+                b.Property<DateTime?>("FinishTime")
+                    .HasColumnType("TEXT");
 
-                b.Property<float>("PaidMoney");
+                b.Property<float>("PaidMoney")
+                    .HasColumnType("REAL");
 
-                b.Property<int>("Status");
+                b.Property<int>("Status")
+                    .HasColumnType("INTEGER");
 
                 b.HasKey("Id");
 
@@ -1694,6 +1712,1108 @@ namespace Rental.DataAccess.Migrations
                 b.HasIndex("ClientId");
 
                 b.ToTable("GameRentals");
+
+                b.HasData(
+                    new
+                    {
+                        Id = new Guid("4f403604-ad7c-473a-9a06-7b7510338195"),
+                        BoardGameId = new Guid("df8e65d0-cbe1-4902-b536-f701bebdc636"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("0ab65d02-2bc7-4ce8-9ee7-6380c25dfd79"),
+                        CreationTime = new DateTime(2019, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 1f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("a3de18a6-7f9b-425b-95d1-47159bf5a7fb"),
+                        BoardGameId = new Guid("f88778c6-ece9-4c2f-8bf1-cf2cb97eae89"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("ddde7243-5b24-4438-a86b-cbae40d8421d"),
+                        CreationTime = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 2f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("552433b2-336d-420b-9c35-8ad9bf8c7f47"),
+                        BoardGameId = new Guid("e1e1e750-16de-45cc-bd44-3b09cc42a072"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("dc66d9fd-f32d-4fe9-ad3f-11782f75ae4c"),
+                        CreationTime = new DateTime(2019, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 3f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e7661947-3297-43ee-971f-01b9a3776e15"),
+                        BoardGameId = new Guid("4192bba0-f6d1-4f57-be9d-ba9bb2a2a4c0"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("bf198996-5637-4988-98f5-314a9fad6c5d"),
+                        CreationTime = new DateTime(2019, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 4f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e70e07fb-a693-4add-b9d1-1c6d1c5dea1e"),
+                        BoardGameId = new Guid("df8e65d0-cbe1-4902-b536-f701bebdc636"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("f685db70-02db-4f4a-afc3-5c6f7de6b5bb"),
+                        CreationTime = new DateTime(2019, 8, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 5f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("85f54f5b-8d90-47a4-b415-7ae5ee2241f9"),
+                        BoardGameId = new Guid("e1e1e750-16de-45cc-bd44-3b09cc42a072"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("fb8f6014-9d87-47ca-89b8-5f69b3da49a7"),
+                        CreationTime = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 6f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("82dc35a9-bd63-44e9-8152-8273c8bfeaa7"),
+                        BoardGameId = new Guid("24ea4dd9-3d5c-4f3e-afeb-5900b0509eda"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("25d6d73b-4e5b-4652-8093-d3280e06762e"),
+                        CreationTime = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 7f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("47ae6e74-5592-4566-bf45-4c441b83c7c9"),
+                        BoardGameId = new Guid("eba74825-fcc1-4e23-9792-e0a7eba0bc5e"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("9c1be3d4-509d-4368-9bad-fa3d92e2a5b8"),
+                        CreationTime = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 8f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("7e38feb1-037e-4c08-bae1-4baea7e7eb15"),
+                        BoardGameId = new Guid("8bf83716-ffbc-4b5d-9bee-32686bb7f7a8"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("ab1754fe-d2a8-46c1-91c2-d85176c19d6b"),
+                        CreationTime = new DateTime(2019, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 9f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("105b786c-0a3f-4084-ab44-e0a5aa6851d1"),
+                        BoardGameId = new Guid("20594c10-25e4-4183-9735-a627d27363a1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("c13f91d9-579a-4ff8-bd1e-a92b719e5310"),
+                        CreationTime = new DateTime(2019, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 10f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("8db7267e-dbb5-44d7-a71d-ca23c0e3cc87"),
+                        BoardGameId = new Guid("3eef0f39-9b2a-4f5b-b57a-d72f13f488c1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("b67815ce-327a-4755-9514-156cfc96f156"),
+                        CreationTime = new DateTime(2019, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 11f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("d03f86a3-621c-4353-b76f-5aff8e349807"),
+                        BoardGameId = new Guid("08882a51-d98b-44cf-963c-ed0ff871c01e"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("25d6d73b-4e5b-4652-8093-d3280e06762e"),
+                        CreationTime = new DateTime(2019, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 12f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("a8adf366-c922-4df6-8fe4-d3a683356793"),
+                        BoardGameId = new Guid("2b1dd15a-63a5-4e6b-b944-a190dcd520d1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("4a4a0c72-40c5-4e88-9d42-4b8ab4194f9b"),
+                        CreationTime = new DateTime(2019, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 8, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 13f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ea37334b-1ec0-4f50-a4ea-e9d702da44e3"),
+                        BoardGameId = new Guid("b31781dd-6b63-4ac3-8ae7-11af78a4eefd"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("b7d8580b-0149-466c-b2b2-14bcad99cb66"),
+                        CreationTime = new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 14f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("f32354d5-d13a-4ae2-872b-fc7606f72e58"),
+                        BoardGameId = new Guid("992732af-7083-4cf8-b48c-fa34854c8c29"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("4ef30228-2585-402e-a75f-fe3cf0bd982d"),
+                        CreationTime = new DateTime(2019, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 15f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e3e703df-a9b3-4a5b-927f-5230b5451b00"),
+                        BoardGameId = new Guid("271f61bf-980d-46c3-8d50-77133cfda189"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("c1f3a679-9f67-45c1-905e-ca0e1ed52e34"),
+                        CreationTime = new DateTime(2019, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 16f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("94c51b7d-10f2-4045-b8c4-c31f3f32b5df"),
+                        BoardGameId = new Guid("54809fcf-04d4-4285-90da-ef6b8482b5a9"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("8d030c87-5edb-410f-82af-c6fab8660a24"),
+                        CreationTime = new DateTime(2019, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 17f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("bf8f8f74-5be4-4e92-b47c-34ca1e6dd64e"),
+                        BoardGameId = new Guid("74a8acf7-40aa-4165-9235-938973709f8d"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("fb8f6014-9d87-47ca-89b8-5f69b3da49a7"),
+                        CreationTime = new DateTime(2019, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 18f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("61daf6bd-fffc-4461-83ac-9eb3099ce605"),
+                        BoardGameId = new Guid("f872b678-dc86-4c54-93f2-73cad03c38fe"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("25d6d73b-4e5b-4652-8093-d3280e06762e"),
+                        CreationTime = new DateTime(2019, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 19f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("57a93704-65b3-4df9-8e3f-053ab8511479"),
+                        BoardGameId = new Guid("217a436a-a62a-4dd0-a21d-aad8f6eb70b9"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("80d5b6d4-4ac9-4304-8b58-145fb06c42ca"),
+                        CreationTime = new DateTime(2019, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 20f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("3db3e269-a339-40e1-8678-e3ba9a19da9d"),
+                        BoardGameId = new Guid("512d8ea9-0856-4f3f-9791-f6ca30ec5e85"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("c1f3a679-9f67-45c1-905e-ca0e1ed52e34"),
+                        CreationTime = new DateTime(2019, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 21f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e1c27ac1-1a57-4d4c-ae78-37b33864f6e4"),
+                        BoardGameId = new Guid("8bf83716-ffbc-4b5d-9bee-32686bb7f7a8"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("66ecb9c7-fd9f-4bd6-a741-675438462691"),
+                        CreationTime = new DateTime(2019, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 22f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("14b8e126-c5dc-4eb0-950e-1f65b0f414b1"),
+                        BoardGameId = new Guid("88b841b5-6760-4db8-a01f-a8c1b91483cf"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("2151bae0-1303-4e3f-885e-304ef2b0c2ee"),
+                        CreationTime = new DateTime(2019, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 23f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("94fca1c1-d879-48df-84b7-e05ade7b223c"),
+                        BoardGameId = new Guid("512d8ea9-0856-4f3f-9791-f6ca30ec5e85"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("17a32716-37c7-468e-a1e4-9bcdd593b390"),
+                        CreationTime = new DateTime(2019, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 24f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("f96d4378-d990-44bf-b428-bca94e5e4ba4"),
+                        BoardGameId = new Guid("44ab4ca9-a1a1-4a27-ad5c-99df438b06c8"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("5fef9da5-0186-4613-a825-34e3e69530a2"),
+                        CreationTime = new DateTime(2019, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 25f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("cfde05f2-b5d6-4588-b89b-61c664d854a9"),
+                        BoardGameId = new Guid("000f78eb-ff8e-44fd-bf9d-aaa0c5e67dc6"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("7aedb55a-0863-4745-bd3b-33caaaffdedf"),
+                        CreationTime = new DateTime(2019, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 26f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("b700fb33-bdf1-4e25-8f54-4c86b455a397"),
+                        BoardGameId = new Guid("2046a240-90b7-42f8-a13f-5245764de619"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("af4d0057-d868-4176-9147-c9ba5831c9c8"),
+                        CreationTime = new DateTime(2019, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 27f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("b3b1d224-42b9-4f53-9a5c-973564dfe46a"),
+                        BoardGameId = new Guid("7e5f5fa1-50c6-4665-b153-fd40249f9b66"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("a0b15085-3865-4aeb-ac07-3d574edef363"),
+                        CreationTime = new DateTime(2019, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 28f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("b6fcf8b9-dcc5-4641-82c6-057c69108488"),
+                        BoardGameId = new Guid("20594c10-25e4-4183-9735-a627d27363a1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("0171793c-8f12-48c4-878f-3f16e6d56cfd"),
+                        CreationTime = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 29f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("d3094657-277c-4a34-ba91-bc2def795b0a"),
+                        BoardGameId = new Guid("271f61bf-980d-46c3-8d50-77133cfda189"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("4a4a0c72-40c5-4e88-9d42-4b8ab4194f9b"),
+                        CreationTime = new DateTime(2019, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 30f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("2549d86a-0df6-4a45-b138-21d1c4d96ac9"),
+                        BoardGameId = new Guid("2019709b-8ffb-48db-a01d-ffd759d7df21"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("dc66d9fd-f32d-4fe9-ad3f-11782f75ae4c"),
+                        CreationTime = new DateTime(2019, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 31f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ec450f1a-805c-4607-b468-4d5fdccd127b"),
+                        BoardGameId = new Guid("2bc4f63c-7f79-420e-894a-13b1f47144d3"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("9e6b6e4a-8288-4698-9b2c-162a1ea51b1b"),
+                        CreationTime = new DateTime(2019, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 32f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("47a45f42-229e-4883-927b-ece4c6cf0c52"),
+                        BoardGameId = new Guid("8be30135-496a-4b2c-b3c1-26f1d1e6fab1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("c1f3a679-9f67-45c1-905e-ca0e1ed52e34"),
+                        CreationTime = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 33f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("0caecf9b-4849-4c20-9ef0-e7f2f575fa4a"),
+                        BoardGameId = new Guid("58f7b588-7b8e-4be3-be55-ae59eda7e8cb"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("83c90289-515b-4cc6-ad0b-fe17a55f48ce"),
+                        CreationTime = new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 34f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("2d217746-b1d7-4a18-8b1b-6a41a92c6774"),
+                        BoardGameId = new Guid("6e9c7b74-946a-41ff-94e5-584adcc7f42a"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("b5f13e09-c8eb-46ef-ab4c-6f04e93e0b69"),
+                        CreationTime = new DateTime(2019, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 35f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("949345ad-d0ad-4378-b380-fbfeb0662910"),
+                        BoardGameId = new Guid("ae4af7ec-3fc4-4b36-9ffd-a75dac1bf4b7"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("66e8ee47-c0f7-4a9f-8074-433b2277afa6"),
+                        CreationTime = new DateTime(2019, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 36f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e9ea6ab4-54ca-48d2-99f5-e2ed45f5af68"),
+                        BoardGameId = new Guid("ae40078e-00cc-4521-bbcd-6fb5f7321a3c"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("b7d8580b-0149-466c-b2b2-14bcad99cb66"),
+                        CreationTime = new DateTime(2019, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 37f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("45323d10-67ac-48a9-b6fb-7661978ae3b8"),
+                        BoardGameId = new Guid("08882a51-d98b-44cf-963c-ed0ff871c01e"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("83c90289-515b-4cc6-ad0b-fe17a55f48ce"),
+                        CreationTime = new DateTime(2019, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 38f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("754938f8-4d53-4659-9ace-172b25347e5d"),
+                        BoardGameId = new Guid("f88778c6-ece9-4c2f-8bf1-cf2cb97eae89"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("c7045f14-66a6-45eb-9373-691bdfaf4d55"),
+                        CreationTime = new DateTime(2019, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 39f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("d359d42b-dbcd-48c8-9713-f58fe26f8a32"),
+                        BoardGameId = new Guid("b31781dd-6b63-4ac3-8ae7-11af78a4eefd"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("648c3d21-79d6-42c7-bc2d-19bd8209398b"),
+                        CreationTime = new DateTime(2019, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 40f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("f4fd6641-f18d-42cb-a2ae-f7c172a76851"),
+                        BoardGameId = new Guid("0102b600-3309-467c-9455-edf3265544b2"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("cba4e37a-adae-4cdf-91ca-8b5abe13d365"),
+                        CreationTime = new DateTime(2019, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 41f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("7af691df-2001-450c-9c21-af26fb992379"),
+                        BoardGameId = new Guid("18b9b42f-2a44-4d11-b4dd-abf6717e651d"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("0bccca59-c86c-4b4f-bdc1-04a001aef558"),
+                        CreationTime = new DateTime(2019, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 42f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("48dc2e88-9221-4613-bbba-c8cea9ade99f"),
+                        BoardGameId = new Guid("a77f7dc7-c855-46c5-b055-7045a9412465"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("ef41ac83-0ea5-4df0-8de3-1942e1b80214"),
+                        CreationTime = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 9, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 43f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("af86d481-ec90-4c7f-8cb4-e950a60cabe4"),
+                        BoardGameId = new Guid("9ae1ecd5-f630-479b-abca-1b0f4784e748"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("cc115b94-4c95-4bee-b4b3-2793a8425519"),
+                        CreationTime = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 44f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("2e8b4bce-b831-4d31-94da-dda116a354b6"),
+                        BoardGameId = new Guid("992732af-7083-4cf8-b48c-fa34854c8c29"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("ddde7243-5b24-4438-a86b-cbae40d8421d"),
+                        CreationTime = new DateTime(2019, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 45f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("4a2054ad-286b-4848-ab18-91df5cdb0ee6"),
+                        BoardGameId = new Guid("04d85352-b12b-48dc-913a-734e2284dc01"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("71adf1a5-b503-485a-85bf-8c9448d60ade"),
+                        CreationTime = new DateTime(2019, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 46f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("5a70ed6e-79eb-44e6-b088-312dd97a005a"),
+                        BoardGameId = new Guid("2046a240-90b7-42f8-a13f-5245764de619"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("03f6ff47-012f-48c8-9e16-f49625519cd2"),
+                        CreationTime = new DateTime(2019, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 47f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("2acf9a1c-250a-474e-8747-75e86f9fb5bd"),
+                        BoardGameId = new Guid("d8d407c7-e89f-4e4b-a40d-3e24e39d3b10"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("4a4a0c72-40c5-4e88-9d42-4b8ab4194f9b"),
+                        CreationTime = new DateTime(2019, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 48f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("20b41f03-bdfe-409a-8d21-1c9539b5ad0f"),
+                        BoardGameId = new Guid("383b29a6-d7e4-48a4-9498-a565f76bcc37"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("2eac0ebc-8eae-4807-a11e-299fdc521c17"),
+                        CreationTime = new DateTime(2019, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 49f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("0a5b4099-6610-4636-8349-84d8b9017255"),
+                        BoardGameId = new Guid("416ac003-1847-4fbf-88fc-8f8c3386be7f"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("5c7f2231-8414-4fdf-914a-1daa3e0a0da4"),
+                        CreationTime = new DateTime(2019, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 50f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e43fdbc9-1385-4795-aa37-ef56435b983e"),
+                        BoardGameId = new Guid("12e52f4a-589f-450c-8ec8-d502e8180d70"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("cc115b94-4c95-4bee-b4b3-2793a8425519"),
+                        CreationTime = new DateTime(2019, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 51f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("b54bf7be-f8fb-4370-9aaf-7e2e6a8fb7b7"),
+                        BoardGameId = new Guid("1d6f38fd-9455-444f-a9a3-e954630316ea"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("33d56b76-b5a4-4acb-807e-13728e53e71e"),
+                        CreationTime = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 52f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("0030e4ae-f808-4dc6-8432-315aa9b68cce"),
+                        BoardGameId = new Guid("9ba8cca0-c820-4950-8077-9755c0c7c63c"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("5c7f2231-8414-4fdf-914a-1daa3e0a0da4"),
+                        CreationTime = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 53f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("6078f919-5d46-42e0-b02b-d72e0380c551"),
+                        BoardGameId = new Guid("992732af-7083-4cf8-b48c-fa34854c8c29"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("8e9c34e6-d6d9-495c-8776-938dacd02c31"),
+                        CreationTime = new DateTime(2019, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 54f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ead6f8c3-9d9a-4d72-ab63-b67e9fe09126"),
+                        BoardGameId = new Guid("3eef0f39-9b2a-4f5b-b57a-d72f13f488c1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("ae181790-eaee-4b0d-b260-742d424ee92f"),
+                        CreationTime = new DateTime(2019, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 55f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ee6b9b23-d699-484d-a8dd-e7d9a9506f3a"),
+                        BoardGameId = new Guid("8cafd90e-84ae-4b22-8dbf-4b18e0475460"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("80d5b6d4-4ac9-4304-8b58-145fb06c42ca"),
+                        CreationTime = new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 56f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("26313fae-42e0-4f79-8d9b-509d7f09cd3b"),
+                        BoardGameId = new Guid("ba28df39-cc26-47bf-9e0e-e586a6317f96"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("12c83d4a-61ec-4f91-939a-154c49778e50"),
+                        CreationTime = new DateTime(2019, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 57f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("2fdf740b-8766-4798-bc9d-27681e82b4e6"),
+                        BoardGameId = new Guid("764d4177-e693-44eb-9bf6-bb13a53feef5"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("17d7b325-d55d-4c07-814c-7dcba0e6e537"),
+                        CreationTime = new DateTime(2019, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 58f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("6f1acb29-d056-49c6-9182-d66b0fb03c05"),
+                        BoardGameId = new Guid("f7f75756-43ba-44c4-8e97-0dca8c2b966a"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("17a32716-37c7-468e-a1e4-9bcdd593b390"),
+                        CreationTime = new DateTime(2019, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 59f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("7bcabbc7-e360-4445-a91c-d786d62969e0"),
+                        BoardGameId = new Guid("2b1dd15a-63a5-4e6b-b944-a190dcd520d1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("2151bae0-1303-4e3f-885e-304ef2b0c2ee"),
+                        CreationTime = new DateTime(2019, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 60f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ce464f32-9674-474c-b8d8-4e24ae99bae2"),
+                        BoardGameId = new Guid("eba74825-fcc1-4e23-9792-e0a7eba0bc5e"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("716bac35-bae9-4357-a007-2d368a0437c0"),
+                        CreationTime = new DateTime(2019, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 61f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("700a2016-1ae6-4232-90e5-37d1ebac80c2"),
+                        BoardGameId = new Guid("78663cd1-1da6-4ad9-abc1-4e5ea472ce62"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("079f6d83-9a71-4171-9be7-f5f2c3f29480"),
+                        CreationTime = new DateTime(2019, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 62f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("0eafb9cf-fe78-4d2d-8ba3-4f8844d99c1d"),
+                        BoardGameId = new Guid("88b841b5-6760-4db8-a01f-a8c1b91483cf"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("17a32716-37c7-468e-a1e4-9bcdd593b390"),
+                        CreationTime = new DateTime(2019, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 63f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("27fb1c19-6471-4b6d-9dfe-95c301169c98"),
+                        BoardGameId = new Guid("a78c3a40-179a-4e4d-9617-6b1711f1ce2e"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("77554a2c-bc11-45ec-8dc1-ef21d7031026"),
+                        CreationTime = new DateTime(2019, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 64f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("886ed595-24b2-424e-bbbd-2217a9252c96"),
+                        BoardGameId = new Guid("f6956d1a-baac-4958-957b-3c050dc76d5f"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("fa0e7b0f-c78d-4c3c-ad13-5a1fe3cdb905"),
+                        CreationTime = new DateTime(2019, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 65f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e18391a1-0351-4499-a2c0-fc16eb41ce45"),
+                        BoardGameId = new Guid("2046a240-90b7-42f8-a13f-5245764de619"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("b7d8580b-0149-466c-b2b2-14bcad99cb66"),
+                        CreationTime = new DateTime(2019, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 66f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e6c57ce3-21f4-4c8e-9151-91a81405a1fd"),
+                        BoardGameId = new Guid("12e52f4a-589f-450c-8ec8-d502e8180d70"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("4527a853-8708-4bce-8d31-0ae4014c9beb"),
+                        CreationTime = new DateTime(2019, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 67f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("2e4385a5-a02f-4b95-9cf6-6a34db8ea0dc"),
+                        BoardGameId = new Guid("f02d2f3c-f37a-42f9-ba18-f9c0ab50afdd"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("2eac0ebc-8eae-4807-a11e-299fdc521c17"),
+                        CreationTime = new DateTime(2019, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 68f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("7cc96007-2f0e-4821-9a2d-939a6f175af2"),
+                        BoardGameId = new Guid("98f1df2b-daa9-4fa3-9e9a-f2f257511638"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("886d6073-7bda-4497-96fb-a7e2486ea9e8"),
+                        CreationTime = new DateTime(2019, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 69f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("c0f5029f-8ae2-419c-87ef-e809cbd2cbbd"),
+                        BoardGameId = new Guid("ae40078e-00cc-4521-bbcd-6fb5f7321a3c"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("af4d0057-d868-4176-9147-c9ba5831c9c8"),
+                        CreationTime = new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 70f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("68658216-b3af-4b7b-9c2e-9f56d209dd66"),
+                        BoardGameId = new Guid("2019709b-8ffb-48db-a01d-ffd759d7df21"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("bf198996-5637-4988-98f5-314a9fad6c5d"),
+                        CreationTime = new DateTime(2019, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 71f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("68925cbb-b60d-4e31-8716-a85020a96d5d"),
+                        BoardGameId = new Guid("88b841b5-6760-4db8-a01f-a8c1b91483cf"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("a0426631-403d-4ee2-b221-ee4222575319"),
+                        CreationTime = new DateTime(2019, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 72f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ba31321c-a44f-4527-bcc7-8221bb277916"),
+                        BoardGameId = new Guid("764d4177-e693-44eb-9bf6-bb13a53feef5"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("68a4ffee-3644-48b6-9640-26b4016e61c6"),
+                        CreationTime = new DateTime(2019, 10, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 73f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("41cdde88-77c2-458c-a3d7-827385bf3a49"),
+                        BoardGameId = new Guid("18b9b42f-2a44-4d11-b4dd-abf6717e651d"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("173697fe-1065-426d-ac2d-6ec5b4669e81"),
+                        CreationTime = new DateTime(2019, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 10, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 74f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("dee39334-d947-468f-965c-a9443175e506"),
+                        BoardGameId = new Guid("c4c02a77-cae0-495d-923d-002491504c65"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("17c761b5-e928-4c5f-a1e8-e8ca4455f05f"),
+                        CreationTime = new DateTime(2019, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 75f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("49ac71ee-312e-4bc2-9ab0-91d9b79d05a3"),
+                        BoardGameId = new Guid("1468e85e-205e-4e6a-9263-f6dc65407ee1"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("25d6d73b-4e5b-4652-8093-d3280e06762e"),
+                        CreationTime = new DateTime(2019, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 76f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("288541d5-adc4-4dd5-9d9e-4e16ab88fb1b"),
+                        BoardGameId = new Guid("271f61bf-980d-46c3-8d50-77133cfda189"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("c45492d0-81a1-436b-95f7-5f63ad933d32"),
+                        CreationTime = new DateTime(2019, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 77f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("a8f6bbd2-9b07-4033-9831-0b86c3299c88"),
+                        BoardGameId = new Guid("9ba8cca0-c820-4950-8077-9755c0c7c63c"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("83c5d933-4316-46bc-a2df-d73d0a73e5a1"),
+                        CreationTime = new DateTime(2019, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 78f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("865eca9e-6662-474c-a77f-f9a12328fb39"),
+                        BoardGameId = new Guid("08882a51-d98b-44cf-963c-ed0ff871c01e"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("520239fb-937b-45bb-86eb-2db65dc33061"),
+                        CreationTime = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 79f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("78a891ba-6593-46b1-bd48-8c540f918f4e"),
+                        BoardGameId = new Guid("f88778c6-ece9-4c2f-8bf1-cf2cb97eae89"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("68a4ffee-3644-48b6-9640-26b4016e61c6"),
+                        CreationTime = new DateTime(2019, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 80f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("3f37a6ae-58b2-4601-bbd3-3c1eae5e80e3"),
+                        BoardGameId = new Guid("29a7b295-4174-4c3a-a52a-f913157b0eb3"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("c1f3a679-9f67-45c1-905e-ca0e1ed52e34"),
+                        CreationTime = new DateTime(2019, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 81f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("a3f03e9e-a321-4407-81b7-ea4146ea9aae"),
+                        BoardGameId = new Guid("764d4177-e693-44eb-9bf6-bb13a53feef5"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("173697fe-1065-426d-ac2d-6ec5b4669e81"),
+                        CreationTime = new DateTime(2019, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 82f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("e71426c0-fee7-428a-b81c-2ea592733c00"),
+                        BoardGameId = new Guid("2e4ba96f-17da-4205-b9a3-b6b06411b2fa"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("dc66d9fd-f32d-4fe9-ad3f-11782f75ae4c"),
+                        CreationTime = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 83f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("04507b72-3da0-495e-8944-3fa5ed471574"),
+                        BoardGameId = new Guid("937f814e-4e38-4cc6-8970-b00f47630684"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("e4b64cb0-bbf1-431e-bde5-250c9ddec7be"),
+                        CreationTime = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 84f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("8c03e8a3-f60b-429f-b17a-2a67f5e61e39"),
+                        BoardGameId = new Guid("24ea4dd9-3d5c-4f3e-afeb-5900b0509eda"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("41478677-5690-43c0-b254-c31efcd00b15"),
+                        CreationTime = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 85f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("f368f8ea-f402-40ba-8b8c-e50dd94e5ea2"),
+                        BoardGameId = new Guid("271f61bf-980d-46c3-8d50-77133cfda189"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("68a4ffee-3644-48b6-9640-26b4016e61c6"),
+                        CreationTime = new DateTime(2019, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 86f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ac2b1784-ba19-4cde-b22f-5495d6631866"),
+                        BoardGameId = new Guid("38aeeb95-c2e9-4cfb-be40-6cf77131f193"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("d4e5f11a-1164-40e8-9045-2a2fad9042ae"),
+                        CreationTime = new DateTime(2019, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 87f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("c62325f1-e29e-4f04-a6e2-b9c481f5bdda"),
+                        BoardGameId = new Guid("0c5ae44e-683b-4743-b7d2-216c864dfdc4"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("af4d0057-d868-4176-9147-c9ba5831c9c8"),
+                        CreationTime = new DateTime(2019, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 88f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("7fa21c7e-5acc-4310-826a-74541647bc08"),
+                        BoardGameId = new Guid("759b67f2-c1b0-4d9c-bb5b-a0092b9bba3f"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("9c1be3d4-509d-4368-9bad-fa3d92e2a5b8"),
+                        CreationTime = new DateTime(2019, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 89f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("ec23b3c4-cf54-4b63-87aa-6a1976177d37"),
+                        BoardGameId = new Guid("6e9c7b74-946a-41ff-94e5-584adcc7f42a"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("b7d8580b-0149-466c-b2b2-14bcad99cb66"),
+                        CreationTime = new DateTime(2019, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 90f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("c288c4df-debe-4077-806b-52e829b42b0b"),
+                        BoardGameId = new Guid("74a8acf7-40aa-4165-9235-938973709f8d"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("40acfaed-cc67-4c7f-9565-59b007008fd1"),
+                        CreationTime = new DateTime(2019, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 91f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("b6713ed7-2de0-4530-ab45-69cdd48fdce8"),
+                        BoardGameId = new Guid("0927c8d0-2504-4b8c-8930-917c3c8bad02"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("079f6d83-9a71-4171-9be7-f5f2c3f29480"),
+                        CreationTime = new DateTime(2019, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 92f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("479cd003-6c68-407e-8c74-02ce488552e1"),
+                        BoardGameId = new Guid("f6956d1a-baac-4958-957b-3c050dc76d5f"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("cc115b94-4c95-4bee-b4b3-2793a8425519"),
+                        CreationTime = new DateTime(2019, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 93f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("d9a590bc-1457-4d27-9fe8-f354943953a4"),
+                        BoardGameId = new Guid("c4c02a77-cae0-495d-923d-002491504c65"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("66e8ee47-c0f7-4a9f-8074-433b2277afa6"),
+                        CreationTime = new DateTime(2019, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 94f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("a9547c7c-7380-457d-bce4-76e78a640d24"),
+                        BoardGameId = new Guid("2019709b-8ffb-48db-a01d-ffd759d7df21"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("ef41ac83-0ea5-4df0-8de3-1942e1b80214"),
+                        CreationTime = new DateTime(2019, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 95f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("6b08710c-6ca3-4e7d-bf42-962a5ddfc288"),
+                        BoardGameId = new Guid("63996227-f5ed-4898-a96e-7269967204eb"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("25d6d73b-4e5b-4652-8093-d3280e06762e"),
+                        CreationTime = new DateTime(2019, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 96f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("06c0834b-32b5-43cf-98f7-0cec1edb4157"),
+                        BoardGameId = new Guid("f5ae3bc5-ab73-4d7b-934d-a3dfd0ff408f"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("b5f13e09-c8eb-46ef-ab4c-6f04e93e0b69"),
+                        CreationTime = new DateTime(2019, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 97f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("077eef9f-6340-4529-ac89-06ba3b180316"),
+                        BoardGameId = new Guid("2046a240-90b7-42f8-a13f-5245764de619"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("0171793c-8f12-48c4-878f-3f16e6d56cfd"),
+                        CreationTime = new DateTime(2019, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 98f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("3c0fd37b-c290-47c3-b5d8-228c68604080"),
+                        BoardGameId = new Guid("1d2d517d-f9c9-4029-9098-dcbbce615505"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("5fef9da5-0186-4613-a825-34e3e69530a2"),
+                        CreationTime = new DateTime(2019, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 99f,
+                        Status = 1
+                    },
+                    new
+                    {
+                        Id = new Guid("5d8bf130-46a2-45b9-a522-1e2db3873e24"),
+                        BoardGameId = new Guid("f09a3f0f-6bd4-4177-95cd-dcba54c26203"),
+                        ChargedDeposit = 15f,
+                        ClientId = new Guid("f1c748e7-5653-4e94-b591-182a48bc05ec"),
+                        CreationTime = new DateTime(2019, 11, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        FinishTime = new DateTime(2019, 11, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                        PaidMoney = 100f,
+                        Status = 1
+                    });
             });
 
             modelBuilder.Entity("Rental.DataAccess.Entities.GameRental", b =>

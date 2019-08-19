@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Linq;
 using Faker;
 using FizzWare.NBuilder;
 using Microsoft.EntityFrameworkCore;
-using Rental.DataAccess.Entities;
+using Rental.Core.Models;
+using BoardGame = Rental.DataAccess.Entities.BoardGame;
+using Client = Rental.DataAccess.Entities.Client;
+using GameRental = Rental.DataAccess.Entities.GameRental;
 
 namespace Rental.DataAccess.Context
 {
@@ -57,6 +61,17 @@ namespace Rental.DataAccess.Context
                 .With(c => c.Price = RandomNumber.Next(50, 250))
                 .Build();
             modelBuilder.Entity<BoardGame>().HasData(boardGames);
+
+            var rnd = new Random();
+            var rentals = Builder<GameRental>.CreateListOfSize(100)
+                .All()
+                .With(c => c.Id = Guid.NewGuid())
+                .With(c => c.ClientId = client.OrderBy(x => Guid.NewGuid()).First().Id)
+                .With(c => c.BoardGameId = boardGames.OrderBy(x => Guid.NewGuid()).First().Id)
+                .With(c => c.ChargedDeposit = 15)
+                .With(c => c.Status = (Status) rnd.Next(1, 2))
+                .Build();
+            modelBuilder.Entity<GameRental>().HasData(rentals);
         }
     }
 }
