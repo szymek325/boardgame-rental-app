@@ -11,9 +11,18 @@ namespace Rental.Core.Queries
         {
             BoardGamePrice = boardGamePrice;
             RentStartDate = rentStartDate;
+            RentFinishDate = null;
+        }
+
+        public CalculateDailyRentalPaymentsQuery(float boardGamePrice, DateTime rentStartDate, DateTime? rentFinishDate)
+        {
+            BoardGamePrice = boardGamePrice;
+            RentStartDate = rentStartDate;
+            RentFinishDate = rentFinishDate;
         }
 
         public float BoardGamePrice { get; set; }
         public DateTime RentStartDate { get; set; }
+        public DateTime? RentFinishDate { get; set; }
     }
 }
