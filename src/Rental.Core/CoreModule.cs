@@ -16,7 +16,7 @@ namespace Rental.Core
         {
             services.AddTransient<IValidator<BoardGame>, BoardGameValidator>();
             services.AddTransient<IValidator<Client>, ClientValidator>();
-            services.AddTransient<IValidator<GameRental>, RentalValidator>();
+            services.AddTransient<IValidator<Models.Rental>, RentalValidator>();
 
 
             services.AddTransient<IMediatorService, MediatorService>();

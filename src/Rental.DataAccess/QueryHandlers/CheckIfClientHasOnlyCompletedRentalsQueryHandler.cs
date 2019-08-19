@@ -23,7 +23,7 @@ namespace Rental.DataAccess.QueryHandlers
         public async Task<bool> Handle(CheckIfClientHasOnlyCompletedRentalsQuery query,
             CancellationToken cancellationToken)
         {
-            var allRentalsForClientAreCompleted = await _rentalContext.GameRentals
+            var allRentalsForClientAreCompleted = await _rentalContext.Rentals
                 .Where(x => x.ClientId == query.Id)
                 .AllAsync(x => x.Status == Status.Completed, cancellationToken);
             return allRentalsForClientAreCompleted;

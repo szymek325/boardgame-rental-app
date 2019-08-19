@@ -10,7 +10,6 @@ using Rental.CQRS;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.QueryHandlers;
 using Xunit;
-using GameRental = Rental.DataAccess.Entities.GameRental;
 
 namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
 {
@@ -33,20 +32,20 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         {
             var boardGameId = Guid.NewGuid();
             var input = new CheckIfBoardGameHasOnlyCompletedRentalsQuery(boardGameId);
-            var rentals = new List<GameRental>
+            var rentals = new List<Entities.Rental>
             {
-                new GameRental
+                new Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.InProgress
                 },
-                new GameRental
+                new Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.Completed
                 }
             };
-            await _rentalContext.GameRentals.AddRangeAsync(rentals);
+            await _rentalContext.Rentals.AddRangeAsync(rentals);
             await _rentalContext.SaveChangesAsync();
 
             var response = await _sut.Handle(input, new CancellationToken());
@@ -70,20 +69,20 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         {
             var boardGameId = Guid.NewGuid();
             var input = new CheckIfBoardGameHasOnlyCompletedRentalsQuery(boardGameId);
-            var rentals = new List<GameRental>
+            var rentals = new List<Entities.Rental>
             {
-                new GameRental
+                new Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.Completed
                 },
-                new GameRental
+                new Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.Completed
                 }
             };
-            await _rentalContext.GameRentals.AddRangeAsync(rentals);
+            await _rentalContext.Rentals.AddRangeAsync(rentals);
             await _rentalContext.SaveChangesAsync();
 
             var response = await _sut.Handle(input, new CancellationToken());

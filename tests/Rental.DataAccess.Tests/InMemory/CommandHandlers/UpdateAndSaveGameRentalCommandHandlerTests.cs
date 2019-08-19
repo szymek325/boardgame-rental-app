@@ -7,7 +7,6 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Commands;
-using Rental.Core.Models;
 using Rental.CQRS;
 using Rental.DataAccess.CommandHandlers;
 using Rental.DataAccess.Context;
@@ -34,7 +33,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_Throw_When_EntityDoesNotExist()
         {
-            var input = new GameRental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
+            var input = new Core.Models.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
 
             Func<Task> act = async () =>
                 await _sut.Handle(new UpdateAndSaveGameRentalCommand(input), new CancellationToken());
@@ -45,27 +44,27 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_UpdateEntity_When_ItExists()
         {
-            var input = new GameRental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
-            var entities = new List<Entities.GameRental>
+            var input = new Core.Models.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
+            var entities = new List<Entities.Rental>
             {
-                new Entities.GameRental
+                new Entities.Rental
                 {
                     Id = input.Id,
                     ClientId = Guid.NewGuid()
                 },
-                new Entities.GameRental
+                new Entities.Rental
                 {
                     Id = Guid.NewGuid(),
                     ClientId = Guid.NewGuid()
                 }
             };
-            await _rentalContext.GameRentals.AddRangeAsync(entities);
+            await _rentalContext.Rentals.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
             await _sut.Handle(new UpdateAndSaveGameRentalCommand(input), new CancellationToken());
 
-            _rentalContext.GameRentals.Count().Should().Be(entities.Count);
-            var result = _rentalContext.GameRentals.FirstOrDefault(x => x.Id == input.Id);
+            _rentalContext.Rentals.Count().Should().Be(entities.Count);
+            var result = _rentalContext.Rentals.FirstOrDefault(x => x.Id == input.Id);
             result.ClientId.Should().Be(input.ClientId);
             result.BoardGameId.Should().Be(input.BoardGameId);
         }

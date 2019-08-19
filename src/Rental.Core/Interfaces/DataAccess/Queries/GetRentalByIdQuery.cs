@@ -1,10 +1,9 @@
 ﻿using System;
-using Rental.Core.Models;
 using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class GetRentalByIdQuery : IQuery<GameRental>
+    public class GetRentalByIdQuery : IQuery<Models.Rental>
     {
         public GetRentalByIdQuery(Guid id)
         {

@@ -25,6 +25,6 @@ namespace Rental.DataAccess.Entities
         [Required]
         public DateTime CreationTime { get; set; }
 
-        public ICollection<GameRental> GameRentals { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
     }
 }

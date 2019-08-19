@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Rental.Core.Models;
 using BoardGame = Rental.DataAccess.Entities.BoardGame;
 using Client = Rental.DataAccess.Entities.Client;
-using GameRental = Rental.DataAccess.Entities.GameRental;
 
 namespace Rental.DataAccess.Context
 {
@@ -24,7 +23,7 @@ namespace Rental.DataAccess.Context
 
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<GameRental> GameRentals { get; set; }
+        public DbSet<Entities.Rental> Rentals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,13 +32,13 @@ namespace Rental.DataAccess.Context
             modelBuilder.Entity<BoardGame>().HasKey(x => x.Id);
             modelBuilder.Entity<BoardGame>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
-            modelBuilder.Entity<GameRental>().HasKey(x => x.Id);
-            modelBuilder.Entity<GameRental>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
+            modelBuilder.Entity<Entities.Rental>().HasKey(x => x.Id);
+            modelBuilder.Entity<Entities.Rental>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
             modelBuilder.Entity<Client>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
-            //FillData(modelBuilder);
+            FillData(modelBuilder);
         }
 
         private static void FillData(ModelBuilder modelBuilder)
@@ -63,7 +62,7 @@ namespace Rental.DataAccess.Context
             modelBuilder.Entity<BoardGame>().HasData(boardGames);
 
             var rnd = new Random();
-            var rentals = Builder<GameRental>.CreateListOfSize(100)
+            var rentals = Builder<Entities.Rental>.CreateListOfSize(100)
                 .All()
                 .With(c => c.Id = Guid.NewGuid())
                 .With(c => c.ClientId = client.OrderBy(x => Guid.NewGuid()).First().Id)
@@ -71,7 +70,7 @@ namespace Rental.DataAccess.Context
                 .With(c => c.ChargedDeposit = 15)
                 .With(c => c.Status = (Status) rnd.Next(1, 2))
                 .Build();
-            modelBuilder.Entity<GameRental>().HasData(rentals);
+            modelBuilder.Entity<Entities.Rental>().HasData(rentals);
         }
     }
 }

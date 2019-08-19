@@ -10,20 +10,20 @@ using Rental.CQRS;
 
 namespace Rental.Core.Commands.Handlers
 {
-    internal class AddGameRentalCommandHandler : ICommandHandler<AddGameRentalCommand>
+    internal class AddRentalCommandHandler : ICommandHandler<AddRentalCommand>
     {
         private readonly IMediatorService _mediatorService;
-        private readonly IValidator<GameRental> _validator;
+        private readonly IValidator<Models.Rental> _validator;
 
-        public AddGameRentalCommandHandler(IMediatorService mediatorService, IValidator<GameRental> validator)
+        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Models.Rental> validator)
         {
             _mediatorService = mediatorService;
             _validator = validator;
         }
 
-        public async Task Handle(AddGameRentalCommand command, CancellationToken cancellationToken)
+        public async Task Handle(AddRentalCommand command, CancellationToken cancellationToken)
         {
-            var newGameRental = new GameRental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
+            var newGameRental = new Models.Rental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
                 command.ChargedDeposit)
             {
                 Status = Status.InProgress

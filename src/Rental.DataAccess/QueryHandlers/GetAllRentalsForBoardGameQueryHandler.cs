@@ -5,14 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models;
 using Rental.CQRS;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
     internal class
-        GetAllRentalsForBoardGameQueryHandler : IQueryHandler<GetAllRentalsForBoardGameQuery, IList<GameRental>>
+        GetAllRentalsForBoardGameQueryHandler : IQueryHandler<GetAllRentalsForBoardGameQuery, IList<Core.Models.Rental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -23,12 +22,12 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<IList<GameRental>> Handle(GetAllRentalsForBoardGameQuery query,
+        public async Task<IList<Core.Models.Rental>> Handle(GetAllRentalsForBoardGameQuery query,
             CancellationToken cancellationToken)
         {
-            var entities = await _rentalContext.GameRentals.Where(x => x.BoardGameId == query.BoardGameId)
+            var entities = await _rentalContext.Rentals.Where(x => x.BoardGameId == query.BoardGameId)
                 .ToListAsync(cancellationToken);
-            var mappedRentals = _mapper.Map<IList<GameRental>>(entities);
+            var mappedRentals = _mapper.Map<IList<Core.Models.Rental>>(entities);
             return mappedRentals;
         }
     }

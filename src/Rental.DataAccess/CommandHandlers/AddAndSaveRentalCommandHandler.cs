@@ -4,7 +4,6 @@ using AutoMapper;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.CQRS;
 using Rental.DataAccess.Context;
-using Rental.DataAccess.Entities;
 
 namespace Rental.DataAccess.CommandHandlers
 {
@@ -21,8 +20,8 @@ namespace Rental.DataAccess.CommandHandlers
 
         public async Task Handle(AddAndSaveRentalCommand command, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<GameRental>(command.GameRental);
-            await _rentalContext.GameRentals.AddAsync(entity, cancellationToken);
+            var entity = _mapper.Map<Entities.Rental>(command.Rental);
+            await _rentalContext.Rentals.AddAsync(entity, cancellationToken);
             await _rentalContext.SaveChangesAsync(cancellationToken);
         }
     }

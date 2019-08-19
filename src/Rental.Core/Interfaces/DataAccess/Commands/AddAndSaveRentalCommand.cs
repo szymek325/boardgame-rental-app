@@ -1,15 +1,14 @@
-﻿using Rental.Core.Models;
-using Rental.CQRS;
+﻿using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Commands
 {
     public class AddAndSaveRentalCommand : ICommand
     {
-        public AddAndSaveRentalCommand(GameRental gameRental)
+        public AddAndSaveRentalCommand(Models.Rental rental)
         {
-            GameRental = gameRental;
+            Rental = rental;
         }
 
-        public GameRental GameRental { get; set; }
+        public Models.Rental Rental { get; set; }
     }
 }

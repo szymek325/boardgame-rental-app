@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rental.Core.Models;
 using Rental.CQRS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class GetAllRentalsForBoardGameQuery : IQuery<IList<GameRental>>
+    public class GetAllRentalsForBoardGameQuery : IQuery<IList<Models.Rental>>
     {
         public GetAllRentalsForBoardGameQuery(Guid boardGameId)
         {

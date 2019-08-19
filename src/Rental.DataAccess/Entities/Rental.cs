@@ -4,7 +4,7 @@ using Rental.Core.Models;
 
 namespace Rental.DataAccess.Entities
 {
-    internal class GameRental
+    internal class Rental
     {
         [Key]
         [Required]

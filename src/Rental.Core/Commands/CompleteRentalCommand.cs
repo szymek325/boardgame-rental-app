@@ -3,9 +3,9 @@ using Rental.CQRS;
 
 namespace Rental.Core.Commands
 {
-    internal class CompleteGameRentalCommand : ICommand
+    internal class CompleteRentalCommand : ICommand
     {
-        public CompleteGameRentalCommand(Guid gameRentalId, float paidMoney)
+        public CompleteRentalCommand(Guid gameRentalId, float paidMoney)
         {
             GameRentalId = gameRentalId;
             PaidMoney = paidMoney;

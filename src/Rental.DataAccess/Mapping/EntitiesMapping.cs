@@ -9,7 +9,8 @@ namespace Rental.DataAccess.Mapping
         {
             CreateMap<BoardGame, Entities.BoardGame>().ReverseMap();
             CreateMap<Client, Entities.Client>().ReverseMap();
-            CreateMap<GameRental, Entities.GameRental>().ReverseMap();
+            CreateMap<Core.Models.Rental, Entities.Rental>().ReverseMap();
+            CreateMap<RentalWithDetails, Entities.Rental>().ReverseMap();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Rental.WebApi.Controllers
         public async Task<IActionResult> Create(CreateRentalDto input)
         {
             var newGuid = Guid.NewGuid();
-            await _mediatorService.Send(new AddGameRentalCommand(newGuid, input.ClientGuid, input.BoardGameGuid,
+            await _mediatorService.Send(new AddRentalCommand(newGuid, input.ClientGuid, input.BoardGameGuid,
                 input.ChargedDeposit));
             return new OkObjectResult(new {newGuid});
         }

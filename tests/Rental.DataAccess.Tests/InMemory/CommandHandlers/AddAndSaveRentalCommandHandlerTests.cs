@@ -6,7 +6,6 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Commands;
-using Rental.Core.Models;
 using Rental.CQRS;
 using Rental.DataAccess.CommandHandlers;
 using Rental.DataAccess.Context;
@@ -33,12 +32,12 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public async Task Handle_Should_AddClientToDb_When_MethodCalled()
         {
-            var rental = new GameRental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
+            var rental = new Core.Models.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
             var input = new AddAndSaveRentalCommand(rental);
 
             await _sut.Handle(input, new CancellationToken());
 
-            var result = _rentalContext.GameRentals.FirstOrDefault(x => x.Id == rental.Id);
+            var result = _rentalContext.Rentals.FirstOrDefault(x => x.Id == rental.Id);
             result.BoardGameId.Should().Be(rental.BoardGameId);
             result.ClientId.Should().Be(rental.ClientId);
         }
@@ -46,13 +45,13 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         [Fact]
         public void Handle_Should_ThrowArgumentException_When_ElementWithThisIdExist()
         {
-            var rental = new GameRental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
+            var rental = new Core.Models.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
             var input = new AddAndSaveRentalCommand(rental);
-            var existingEntity = new Entities.GameRental
+            var existingEntity = new Entities.Rental
             {
                 Id = rental.Id
             };
-            _rentalContext.GameRentals.Add(existingEntity);
+            _rentalContext.Rentals.Add(existingEntity);
             _rentalContext.SaveChanges();
 
             Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());

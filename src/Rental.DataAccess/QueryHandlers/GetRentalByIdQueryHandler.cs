@@ -3,13 +3,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models;
 using Rental.CQRS;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
-    internal class GetRentalByIdQueryHandler : IQueryHandler<GetRentalByIdQuery, GameRental>
+    internal class GetRentalByIdQueryHandler : IQueryHandler<GetRentalByIdQuery, Core.Models.Rental>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -20,11 +19,11 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<GameRental> Handle(GetRentalByIdQuery query, CancellationToken cancellationToken)
+        public async Task<Core.Models.Rental> Handle(GetRentalByIdQuery query, CancellationToken cancellationToken)
         {
             var entity =
-                await _rentalContext.GameRentals.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
-            var mappedEntity = _mapper.Map<GameRental>(entity);
+                await _rentalContext.Rentals.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);
+            var mappedEntity = _mapper.Map<Core.Models.Rental>(entity);
             return mappedEntity;
         }
     }
