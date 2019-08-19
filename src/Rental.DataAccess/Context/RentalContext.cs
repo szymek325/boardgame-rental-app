@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using Faker;
 using FizzWare.NBuilder;
@@ -40,7 +39,7 @@ namespace Rental.DataAccess.Context
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
             modelBuilder.Entity<Client>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
-            FillData(modelBuilder);
+            //FillData(modelBuilder);
         }
 
         private static void FillData(ModelBuilder modelBuilder)
