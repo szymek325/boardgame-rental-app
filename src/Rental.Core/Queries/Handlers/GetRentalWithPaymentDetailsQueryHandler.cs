@@ -30,8 +30,8 @@ namespace Rental.Core.Queries.Handlers
             rentalWithPaymentDetails.RentalDays = await _mediatorService.Send(
                 new CalculateDailyRentalPaymentsQuery(rentalWithDetails.BoardGame.Price, rentalWithDetails.CreationTime),
                 cancellationToken);
-            rentalWithPaymentDetails.MoneyToPay = rentalWithPaymentDetails.RentalDays.Sum(x => x.AmountDue);
 
+            rentalWithPaymentDetails.MoneyToPay = rentalWithPaymentDetails.RentalDays.Sum(x => x.AmountDue);
             return rentalWithPaymentDetails;
         }
     }
