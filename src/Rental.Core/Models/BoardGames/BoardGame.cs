@@ -9,7 +9,6 @@ namespace Rental.Core.Models.BoardGames
             Id = id;
             Name = name;
             Price = price;
-            CreationTime = DateTime.UtcNow;
         }
 
         public Guid Id { get; set; }

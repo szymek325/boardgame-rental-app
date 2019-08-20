@@ -11,7 +11,6 @@ namespace Rental.Core.Models.Clients
             LastName = lastName;
             ContactNumber = contactNumber;
             EmailAddress = emailAddress;
-            CreationTime = DateTime.UtcNow;
         }
 
         public Guid Id { get; set; }
