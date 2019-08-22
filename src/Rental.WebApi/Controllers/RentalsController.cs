@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
+using Rental.Core.Queries;
 using Rental.CQRS;
 using Rental.WebApi.Dto;
 
@@ -32,6 +33,20 @@ namespace Rental.WebApi.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var result = await _mediatorService.Send(new GetRentalByIdQuery(id));
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> GetByIdWithPaymentDetails(Guid id)
+        {
+            var result = await _mediatorService.Send(new GetRentalWithPaymentDetailsQuery(id));
+            return new OkObjectResult(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _mediatorService.Send(new GetAllRentalsQuery());
             return new OkObjectResult(result);
         }
 
