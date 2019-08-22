@@ -5,15 +5,15 @@ using Rental.CQRS;
 
 namespace Rental.Core.Queries
 {
-    internal class CalculateDailyRentalPaymentsQuery : IQuery<IList<RentalDay>>
+    internal class GetRentalDaysQuery : IQuery<IList<RentalDay>>
     {
-        public CalculateDailyRentalPaymentsQuery(float boardGamePrice, DateTime rentStartDate)
+        public GetRentalDaysQuery(float boardGamePrice, DateTime rentStartDate)
         {
             BoardGamePrice = boardGamePrice;
             RentStartDate = rentStartDate;
         }
 
-        public CalculateDailyRentalPaymentsQuery(float boardGamePrice, DateTime rentStartDate, DateTime? rentFinishDate)
+        public GetRentalDaysQuery(float boardGamePrice, DateTime rentStartDate, DateTime? rentFinishDate)
         {
             BoardGamePrice = boardGamePrice;
             RentStartDate = rentStartDate;

@@ -28,7 +28,7 @@ namespace Rental.Core.Queries.Handlers
 
             var rentalWithPaymentDetails = _mapper.Map<RentalWithPaymentDetails>(rentalWithDetails);
             rentalWithPaymentDetails.RentalDays = await _mediatorService.Send(
-                new CalculateDailyRentalPaymentsQuery(rentalWithDetails.BoardGame.Price, rentalWithDetails.CreationTime),
+                new GetRentalDaysQuery(rentalWithDetails.BoardGame.Price, rentalWithDetails.CreationTime),
                 cancellationToken);
 
             rentalWithPaymentDetails.MoneyToPay = rentalWithPaymentDetails.RentalDays.Sum(x => x.AmountDue);

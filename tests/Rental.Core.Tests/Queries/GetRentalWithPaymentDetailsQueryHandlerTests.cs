@@ -59,7 +59,7 @@ namespace Rental.Core.Tests.Queries
             };
             _mediatorService
                 .Setup(x => x.Send(
-                    It.Is((CalculateDailyRentalPaymentsQuery q) =>
+                    It.Is((GetRentalDaysQuery q) =>
                         q.BoardGamePrice == rental.BoardGame.Price && q.RentStartDate == rental.CreationTime), _cancellationToken))
                 .ReturnsAsync(rentalDays);
 
@@ -84,7 +84,7 @@ namespace Rental.Core.Tests.Queries
             var exception = new ArgumentException("exception message long");
             _mediatorService
                 .Setup(x => x.Send(
-                    It.Is((CalculateDailyRentalPaymentsQuery q) =>
+                    It.Is((GetRentalDaysQuery q) =>
                         q.BoardGamePrice == rental.BoardGame.Price && q.RentStartDate == rental.CreationTime), _cancellationToken))
                 .ThrowsAsync(exception);
 
@@ -103,7 +103,7 @@ namespace Rental.Core.Tests.Queries
             _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id), _cancellationToken))
                 .ReturnsAsync(rental);
             _mapper.Setup(x => x.Map<RentalWithPaymentDetails>(rental)).Returns((RentalWithPaymentDetails) null);
-            _mediatorService.Setup(x => x.Send(It.IsAny<CalculateDailyRentalPaymentsQuery>(), _cancellationToken))
+            _mediatorService.Setup(x => x.Send(It.IsAny<GetRentalDaysQuery>(), _cancellationToken))
                 .ReturnsAsync(new List<RentalDay>());
 
             Func<Task> act = async () => await _sut.Handle(new GetRentalWithPaymentDetailsQuery(rental.Id), _cancellationToken);
