@@ -57,7 +57,8 @@ namespace Rental.Core.Tests.Queries
 
         [Theory]
         [MemberData(nameof(NumberOfDaysRange))]
-        public async Task Handle_Should_ReturnRentalDayForEachPassedDayUntilFinishDate_When_FinishDateIsPassed(int days)
+        public async Task Handle_Should_ReturnRentalDayForEachPassedDayWithoutFinishDate_When_FinishDayHasExactlyTheSameHourAndMinutes(
+            int days)
         {
             var finishDate = _actualTime;
             var startDate = finishDate.AddDays(-days);
@@ -69,6 +70,31 @@ namespace Rental.Core.Tests.Queries
             var result = await _sut.Handle(input, _cancellationToken);
 
             result.Count.Should().Be(days);
+            foreach (var rentalDay in result)
+            {
+                rentalDay.AmountDue.Should().Be(OneDayPrice);
+                rentalDay.DayName.Should().Be(rentalDay.Day.DayOfWeek.ToString());
+            }
+
+            result.First().Day.Should().Be(startDate.Date);
+            result.Last().Day.Should().Be(finishDate.Date.AddDays(-1));
+        }
+
+        [Theory]
+        [MemberData(nameof(NumberOfDaysRange))]
+        public async Task Handle_Should_ReturnRentalDayForEachPassedDayWithFinishDate_When_FinishDayIsBiggerByOneMinuteOrMore(int days)
+        {
+            var finishDate = _actualTime;
+            var startDate = finishDate.AddDays(-days);
+            finishDate = finishDate.AddMinutes(+1);
+            var input = new GetRentalDaysQuery(15, startDate, finishDate);
+            _mediatorService.Setup(x =>
+                    x.Send(It.Is<GetBoardGameRentDayPriceQuery>(x => x.BoardGamePrice == input.BoardGamePrice), _cancellationToken))
+                .ReturnsAsync(OneDayPrice);
+
+            var result = await _sut.Handle(input, _cancellationToken);
+
+            result.Count.Should().Be(days + 1);
             foreach (var rentalDay in result)
             {
                 rentalDay.AmountDue.Should().Be(OneDayPrice);
