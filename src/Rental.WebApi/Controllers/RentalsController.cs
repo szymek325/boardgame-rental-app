@@ -29,6 +29,13 @@ namespace Rental.WebApi.Controllers
             return new OkObjectResult(new {newGuid});
         }
 
+        [HttpPut("complete")]
+        public async Task<IActionResult> Complete(CompleteRentalDto input)
+        {
+            await _mediatorService.Send(new CompleteRentalCommand(input.RentalGuidId, input.PaidMoney));
+            return new OkResult();
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
