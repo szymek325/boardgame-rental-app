@@ -2,9 +2,9 @@
 
 namespace Rental.Core.Common.Exceptions
 {
-    internal class RentalNotFoundException : Exception
+    internal class RentalIsNotInProgressException : Exception
     {
-        public RentalNotFoundException(Guid guid) : base($"Rental with id {guid} was not found!")
+        public RentalIsNotInProgressException(Guid guid) : base($"Rental with id {guid} is not in progress status!")
         {
         }
     }
