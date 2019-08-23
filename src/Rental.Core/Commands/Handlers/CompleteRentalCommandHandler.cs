@@ -1,6 +1,9 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Rental.Core.Common.Exceptions;
+using Rental.Core.Interfaces.DataAccess.Commands;
+using Rental.Core.Interfaces.DataAccess.Queries;
+using Rental.Core.Models;
 using Rental.CQRS;
 
 namespace Rental.Core.Commands.Handlers
@@ -16,7 +19,16 @@ namespace Rental.Core.Commands.Handlers
 
         public async Task Handle(CompleteRentalCommand notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var rental = await _mediatorService.Send(new GetRentalByIdQuery(notification.GameRentalId), cancellationToken);
+            if (rental == null)
+                throw new RentalNotFoundException(notification.GameRentalId);
+            if (rental.Status != Status.InProgress)
+                throw new RentalIsNotInProgressException(notification.GameRentalId);
+
+            rental.Status = Status.Completed;
+            rental.PaidMoney = notification.PaidMoney;
+
+            await _mediatorService.Send(new UpdateAndSaveGameRentalCommand(rental), cancellationToken);
         }
     }
 }

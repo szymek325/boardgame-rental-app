@@ -38,20 +38,7 @@ namespace Rental.Core.Tests.Commands
 
             Func<Task> act = async () => await _sut.Handle(input, _cancellationToken);
 
-            act.Should().Throw<RentalNotFoundException>();
-        }
-
-        [Fact]
-        public void Handle_Should_ThrowRentalNotFoundException_When_RentalWithSpecifiedIdDoesNotExist()
-        {
-            var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
-            Models.Rentals.Rental rental = null;
-            _mediatorService.Setup(x => x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
-                .ReturnsAsync(rental);
-
-            Func<Task> act = async () => await _sut.Handle(input, _cancellationToken);
-
-            act.Should().Throw<RentalNotFoundException>();
+            act.Should().Throw<RentalIsNotInProgressException>();
         }
 
         [Fact]
@@ -67,8 +54,24 @@ namespace Rental.Core.Tests.Commands
 
             _mediatorService.Verify(
                 x => x.Send(
-                    It.Is<UpdateAndSaveGameRentalCommand>(c => c.Rental.Id == input.GameRentalId && c.Rental.Status == Status.Completed),
+                    It.Is<UpdateAndSaveGameRentalCommand>(c =>
+                        c.Rental.Id == input.GameRentalId && c.Rental.Status == Status.Completed && c.Rental.PaidMoney == input.PaidMoney),
                     _cancellationToken), Times.Once);
+            rental.Status.Should().Be(Status.Completed);
+            rental.PaidMoney.Should().Be(input.PaidMoney);
+        }
+
+        [Fact]
+        public void Handle_Should_ThrowRentalNotFoundException_When_RentalWithSpecifiedIdDoesNotExist()
+        {
+            var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
+            Models.Rentals.Rental rental = null;
+            _mediatorService.Setup(x => x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
+                .ReturnsAsync(rental);
+
+            Func<Task> act = async () => await _sut.Handle(input, _cancellationToken);
+
+            act.Should().Throw<RentalNotFoundException>();
         }
     }
 }
