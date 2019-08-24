@@ -9,7 +9,8 @@ namespace Rental.Core.Queries.Handlers
         //TODO get percent vlaue from config
         public Task<float> Handle(GetBoardGameRentDayPriceQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(7 / 100 * request.BoardGamePrice);
+            var dailyPrice =(float) 7 / 100 * request.BoardGamePrice;
+            return Task.FromResult(dailyPrice);
         }
     }
 }
