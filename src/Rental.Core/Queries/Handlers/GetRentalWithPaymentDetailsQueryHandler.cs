@@ -9,7 +9,9 @@ using Rental.CQS;
 
 namespace Rental.Core.Queries.Handlers
 {
-    internal class GetRentalWithPaymentDetailsQueryHandler : IQueryHandler<GetRentalWithPaymentDetailsQuery, RentalWithPaymentDetails>
+    internal class
+        GetRentalWithPaymentDetailsQueryHandler : IQueryHandler<GetRentalWithPaymentDetailsQuery,
+            RentalWithPaymentDetails>
     {
         private readonly IMapper _mapper;
         private readonly IMediatorService _mediatorService;
@@ -20,9 +22,11 @@ namespace Rental.Core.Queries.Handlers
             _mediatorService = mediatorService;
         }
 
-        public async Task<RentalWithPaymentDetails> Handle(GetRentalWithPaymentDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<RentalWithPaymentDetails> Handle(GetRentalWithPaymentDetailsQuery request,
+            CancellationToken cancellationToken)
         {
-            var rentalWithDetails = await _mediatorService.Send(new GetRentalWithDetailsQuery(request.RentalGuid), cancellationToken);
+            var rentalWithDetails =
+                await _mediatorService.Send(new GetRentalWithDetailsQuery(request.RentalGuid), cancellationToken);
             if (rentalWithDetails == null)
                 throw new RentalNotFoundException(request.RentalGuid);
 

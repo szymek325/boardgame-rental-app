@@ -19,7 +19,8 @@ namespace Rental.Core.Commands.Handlers
 
         public async Task Handle(CompleteRentalCommand notification, CancellationToken cancellationToken)
         {
-            var rental = await _mediatorService.Send(new GetRentalByIdQuery(notification.GameRentalId), cancellationToken);
+            var rental =
+                await _mediatorService.Send(new GetRentalByIdQuery(notification.GameRentalId), cancellationToken);
             if (rental == null)
                 throw new RentalNotFoundException(notification.GameRentalId);
             if (rental.Status != Status.InProgress)

@@ -39,8 +39,10 @@ namespace Rental.Core.Tests.Queries
             var rentDay = DateTime.UtcNow.AddDays(-2);
             var boardGame = new BoardGame(Guid.NewGuid(), "SuperGame", 100);
             var client = new Client(Guid.NewGuid(), "Tom", "hanks", "12415421", "email@google.com");
-            var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame, client);
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id), _cancellationToken))
+            var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame,
+                client);
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id),
+                    _cancellationToken))
                 .ReturnsAsync(rental);
             var rentalWithPaymentDetails = new RentalWithPaymentDetails
             {
@@ -60,7 +62,8 @@ namespace Rental.Core.Tests.Queries
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((GetRentalDaysQuery q) =>
-                        q.BoardGamePrice == rental.BoardGame.Price && q.RentStartDate == rental.CreationTime), _cancellationToken))
+                        q.BoardGamePrice == rental.BoardGame.Price && q.RentStartDate == rental.CreationTime),
+                    _cancellationToken))
                 .ReturnsAsync(rentalDays);
 
             var result = await _sut.Handle(new GetRentalWithPaymentDetailsQuery(rental.Id), _cancellationToken);
@@ -77,18 +80,23 @@ namespace Rental.Core.Tests.Queries
             var rentDay = DateTime.UtcNow.AddDays(-2);
             var boardGame = new BoardGame(Guid.NewGuid(), "SuperGame", 100);
             var client = new Client(Guid.NewGuid(), "Tom", "hanks", "12415421", "email@google.com");
-            var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame, client);
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id), _cancellationToken))
+            var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame,
+                client);
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id),
+                    _cancellationToken))
                 .ReturnsAsync(rental);
-            _mapper.Setup(x => x.Map<RentalWithPaymentDetails>(rental)).Returns(new RentalWithPaymentDetails {Id = rental.Id});
+            _mapper.Setup(x => x.Map<RentalWithPaymentDetails>(rental))
+                .Returns(new RentalWithPaymentDetails {Id = rental.Id});
             var exception = new ArgumentException("exception message long");
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((GetRentalDaysQuery q) =>
-                        q.BoardGamePrice == rental.BoardGame.Price && q.RentStartDate == rental.CreationTime), _cancellationToken))
+                        q.BoardGamePrice == rental.BoardGame.Price && q.RentStartDate == rental.CreationTime),
+                    _cancellationToken))
                 .ThrowsAsync(exception);
 
-            Func<Task> act = async () => await _sut.Handle(new GetRentalWithPaymentDetailsQuery(rental.Id), _cancellationToken);
+            Func<Task> act = async () =>
+                await _sut.Handle(new GetRentalWithPaymentDetailsQuery(rental.Id), _cancellationToken);
 
             act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
         }
@@ -99,14 +107,17 @@ namespace Rental.Core.Tests.Queries
             var rentDay = DateTime.UtcNow.AddDays(-2);
             var boardGame = new BoardGame(Guid.NewGuid(), "SuperGame", 100);
             var client = new Client(Guid.NewGuid(), "Tom", "hanks", "12415421", "email@google.com");
-            var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame, client);
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id), _cancellationToken))
+            var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame,
+                client);
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id),
+                    _cancellationToken))
                 .ReturnsAsync(rental);
             _mapper.Setup(x => x.Map<RentalWithPaymentDetails>(rental)).Returns((RentalWithPaymentDetails) null);
             _mediatorService.Setup(x => x.Send(It.IsAny<GetRentalDaysQuery>(), _cancellationToken))
                 .ReturnsAsync(new List<RentalDay>());
 
-            Func<Task> act = async () => await _sut.Handle(new GetRentalWithPaymentDetailsQuery(rental.Id), _cancellationToken);
+            Func<Task> act = async () =>
+                await _sut.Handle(new GetRentalWithPaymentDetailsQuery(rental.Id), _cancellationToken);
 
             act.Should().Throw<NullReferenceException>();
         }
@@ -116,10 +127,12 @@ namespace Rental.Core.Tests.Queries
         {
             var inputGuid = Guid.NewGuid();
             RentalWithDetails rental = null;
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == inputGuid), _cancellationToken))
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == inputGuid),
+                    _cancellationToken))
                 .ReturnsAsync(rental);
 
-            Func<Task> act = async () => await _sut.Handle(new GetRentalWithPaymentDetailsQuery(inputGuid), _cancellationToken);
+            Func<Task> act = async () =>
+                await _sut.Handle(new GetRentalWithPaymentDetailsQuery(inputGuid), _cancellationToken);
 
             act.Should().Throw<RentalNotFoundException>();
         }

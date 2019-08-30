@@ -6,7 +6,8 @@ namespace Rental.Core.Models.Rentals
 {
     public class RentalWithDetails
     {
-        public RentalWithDetails(Guid id, decimal chargedDeposit, decimal paidMoney, Status status, DateTime creationTime,
+        public RentalWithDetails(Guid id, decimal chargedDeposit, decimal paidMoney, Status status,
+            DateTime creationTime,
             DateTime? finishTime,
             BoardGame boardGame, Client client)
         {

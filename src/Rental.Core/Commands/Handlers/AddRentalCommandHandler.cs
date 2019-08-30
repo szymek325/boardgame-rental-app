@@ -23,7 +23,8 @@ namespace Rental.Core.Commands.Handlers
 
         public async Task Handle(AddRentalCommand command, CancellationToken cancellationToken)
         {
-            var newGameRental = new Models.Rentals.Rental(command.NewGameRentalGuid, command.ClientGuid, command.BoardGameGuid,
+            var newGameRental = new Models.Rentals.Rental(command.NewGameRentalGuid, command.ClientGuid,
+                command.BoardGameGuid,
                 command.ChargedDeposit)
             {
                 Status = Status.InProgress
@@ -40,7 +41,8 @@ namespace Rental.Core.Commands.Handlers
 
             var client = _mediatorService.Send(new GetClientByIdQuery(command.ClientGuid), cancellationToken);
             var boardGame = _mediatorService.Send(new GetBoardGameByIdQuery(command.BoardGameGuid), cancellationToken);
-            var canBeRented = _mediatorService.Send(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
+            var canBeRented = _mediatorService.Send(
+                new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
                 cancellationToken);
             await Task.WhenAll(client, boardGame, canBeRented);
 

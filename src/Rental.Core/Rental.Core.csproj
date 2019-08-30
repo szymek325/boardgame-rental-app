@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rental.CQRS\Rental.CQS.csproj" />
+    <ProjectReference Include="..\Rental.CQS\Rental.CQS.csproj" />
   </ItemGroup>
 
 </Project>

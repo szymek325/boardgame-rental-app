@@ -41,13 +41,15 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowBoardGameNotFoundException_When_ReturnedBoardGameIsNull(bool canBeRented)
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(
+                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
-                    cancellationToken)).ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
+                    cancellationToken))
+                .ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
             BoardGame boardGame = null;
             _mediatorService
                 .Setup(x => x.Send(
@@ -69,7 +71,8 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowClientNotFoundException_When_ReturnedClientIsNull(bool canBeRented)
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(
+                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             Client client = null;
@@ -95,13 +98,15 @@ namespace Rental.Core.Tests.Commands
         public async Task Handle_Should_AddAndSaveRental_When_ValidationIsPassedAndGameCanBeRented()
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(
+                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
-                    cancellationToken)).ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
+                    cancellationToken))
+                .ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
@@ -127,13 +132,15 @@ namespace Rental.Core.Tests.Commands
             Handle_Should_ThrowBoardGameHasOpenRentalException_When_ValidationIsPassedButBoardGameHasRentalInProgress()
         {
             _validator.Setup(
-                    x => x.Validate(It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                    x => x.Validate(
+                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
-                    cancellationToken)).ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
+                    cancellationToken))
+                .ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
             _mediatorService
                 .Setup(x => x.Send(
                     It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
@@ -157,7 +164,8 @@ namespace Rental.Core.Tests.Commands
                 new ValidationFailure("test", "test")
             };
             _validator.Setup(x =>
-                    x.Validate(It.Is((Models.Rentals.Rental gameRental) => gameRental.Id == _inputCommand.NewGameRentalGuid)))
+                    x.Validate(It.Is((Models.Rentals.Rental gameRental) =>
+                        gameRental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult(validationErrors));
             const string errorsMessage = "errors happened";
             var cancellationToken = new CancellationToken();

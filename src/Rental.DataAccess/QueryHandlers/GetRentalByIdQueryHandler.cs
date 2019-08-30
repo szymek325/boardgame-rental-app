@@ -19,7 +19,8 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<Core.Models.Rentals.Rental> Handle(GetRentalByIdQuery query, CancellationToken cancellationToken)
+        public async Task<Core.Models.Rentals.Rental> Handle(GetRentalByIdQuery query,
+            CancellationToken cancellationToken)
         {
             var entity =
                 await _rentalContext.Rentals.SingleOrDefaultAsync(x => x.Id == query.Id, cancellationToken);

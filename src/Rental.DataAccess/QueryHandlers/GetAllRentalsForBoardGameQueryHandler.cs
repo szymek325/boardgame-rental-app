@@ -11,7 +11,8 @@ using Rental.DataAccess.Context;
 namespace Rental.DataAccess.QueryHandlers
 {
     internal class
-        GetAllRentalsForBoardGameQueryHandler : IQueryHandler<GetAllRentalsForBoardGameQuery, IList<Core.Models.Rentals.Rental>>
+        GetAllRentalsForBoardGameQueryHandler : IQueryHandler<GetAllRentalsForBoardGameQuery,
+            IList<Core.Models.Rentals.Rental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;

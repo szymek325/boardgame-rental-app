@@ -20,7 +20,8 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<IList<Core.Models.Rentals.Rental>> Handle(GetAllRentalsQuery query, CancellationToken cancellationToken)
+        public async Task<IList<Core.Models.Rentals.Rental>> Handle(GetAllRentalsQuery query,
+            CancellationToken cancellationToken)
         {
             var entities = await _rentalContext.Rentals.ToListAsync(cancellationToken);
             var mappedRentals = _mapper.Map<IList<Core.Models.Rentals.Rental>>(entities);

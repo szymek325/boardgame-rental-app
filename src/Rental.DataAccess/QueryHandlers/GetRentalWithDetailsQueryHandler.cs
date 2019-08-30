@@ -21,7 +21,8 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<RentalWithDetails> Handle(GetRentalWithDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<RentalWithDetails> Handle(GetRentalWithDetailsQuery request,
+            CancellationToken cancellationToken)
         {
             var entity = await _rentalContext.Rentals
                 .Include(x => x.BoardGame)

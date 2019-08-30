@@ -23,7 +23,8 @@ namespace Rental.Core.Queries.Handlers
             if (request.RentFinishDate == null)
                 request.RentFinishDate = _dateTimeProvider.UtcNow;
 
-            var oneDayRentPrice = await _mediatorService.Send(new GetBoardGameRentDayPriceQuery(request.BoardGamePrice), cancellationToken);
+            var oneDayRentPrice = await _mediatorService.Send(new GetBoardGameRentDayPriceQuery(request.BoardGamePrice),
+                cancellationToken);
 
             var passedTime = request.RentFinishDate - request.RentStartDate;
             var passedDays = passedTime.Value.Days;

@@ -10,7 +10,9 @@ using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
-    internal class GetAllRentalsForClientQueryHandler : IQueryHandler<GetAllRentalsForClientQuery, IList<Core.Models.Rentals.Rental>>
+    internal class
+        GetAllRentalsForClientQueryHandler : IQueryHandler<GetAllRentalsForClientQuery,
+            IList<Core.Models.Rentals.Rental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
