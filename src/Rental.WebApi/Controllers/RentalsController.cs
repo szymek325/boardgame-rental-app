@@ -10,7 +10,8 @@ using Rental.WebApi.Dto;
 namespace Rental.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class RentalsController
     {
         private readonly IMediatorService _mediatorService;

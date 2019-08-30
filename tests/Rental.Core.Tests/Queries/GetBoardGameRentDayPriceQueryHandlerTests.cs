@@ -10,20 +10,20 @@ namespace Rental.Core.Tests.Queries
 {
     public class GetBoardGameRentDayPriceQueryHandlerTests
     {
-        private readonly IQueryHandler<GetBoardGameRentDayPriceQuery, float> _sut;
-        private readonly CancellationToken _cancellationToken = new CancellationToken();
-
         public GetBoardGameRentDayPriceQueryHandlerTests()
         {
             _sut = new GetBoardGameRentDayPriceQueryHandler();
         }
+
+        private readonly IQueryHandler<GetBoardGameRentDayPriceQuery, float> _sut;
+        private readonly CancellationToken _cancellationToken = new CancellationToken();
 
         [Fact]
         public async Task Handle_Should_Return_7_When_100()
         {
             var input = 100;
 
-            var result= await _sut.Handle(new GetBoardGameRentDayPriceQuery(input), _cancellationToken);
+            var result = await _sut.Handle(new GetBoardGameRentDayPriceQuery(input), _cancellationToken);
 
             result.Should().Be(7);
         }
