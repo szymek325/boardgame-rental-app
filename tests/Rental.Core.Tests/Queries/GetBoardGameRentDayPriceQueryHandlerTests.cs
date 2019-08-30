@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Rental.Core.Queries;
 using Rental.Core.Queries.Handlers;
-using Rental.CQRS;
+using Rental.CQS;
 using Xunit;
 
 namespace Rental.Core.Tests.Queries

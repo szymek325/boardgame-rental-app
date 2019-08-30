@@ -1,6 +1,6 @@
 ﻿using System;
 using Rental.Core.Models.BoardGames;
-using Rental.CQRS;
+using Rental.CQS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {

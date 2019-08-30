@@ -12,7 +12,7 @@ using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Models.Clients;
 using Rental.Core.Queries;
-using Rental.CQRS;
+using Rental.CQS;
 using Xunit;
 
 namespace Rental.Core.Tests.Commands

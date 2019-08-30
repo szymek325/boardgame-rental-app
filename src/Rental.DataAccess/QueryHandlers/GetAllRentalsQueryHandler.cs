@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.CQRS;
+using Rental.CQS;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers

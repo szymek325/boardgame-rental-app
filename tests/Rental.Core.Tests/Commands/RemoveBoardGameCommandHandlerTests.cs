@@ -9,7 +9,7 @@ using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.BoardGames;
-using Rental.CQRS;
+using Rental.CQS;
 using Xunit;
 
 namespace Rental.Core.Tests.Commands

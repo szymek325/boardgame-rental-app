@@ -6,7 +6,7 @@ using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.BoardGames;
 using Rental.Core.Queries;
-using Rental.CQRS;
+using Rental.CQS;
 
 namespace Rental.Core.Commands.Handlers
 {

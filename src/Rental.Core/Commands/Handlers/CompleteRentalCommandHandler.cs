@@ -4,7 +4,7 @@ using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
-using Rental.CQRS;
+using Rental.CQS;
 
 namespace Rental.Core.Commands.Handlers
 {

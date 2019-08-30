@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rental.Core.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.CQRS;
+using Rental.CQS;
 using Rental.WebApi.Dto;
 
 namespace Rental.WebApi.Controllers

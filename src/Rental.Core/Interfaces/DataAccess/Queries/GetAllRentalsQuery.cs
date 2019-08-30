@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Rental.CQRS;
+using Rental.CQS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {

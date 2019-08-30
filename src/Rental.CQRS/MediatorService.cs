@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Rental.CQRS
+namespace Rental.CQS
 {
     public interface IMediatorService
     {

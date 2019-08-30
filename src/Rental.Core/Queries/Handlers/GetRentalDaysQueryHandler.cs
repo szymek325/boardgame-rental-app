@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Rental.Core.Common.Helpers;
 using Rental.Core.Models.Rentals;
-using Rental.CQRS;
+using Rental.CQS;
 
 namespace Rental.Core.Queries.Handlers
 {

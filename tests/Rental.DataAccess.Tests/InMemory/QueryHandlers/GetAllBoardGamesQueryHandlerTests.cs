@@ -7,7 +7,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.BoardGames;
-using Rental.CQRS;
+using Rental.CQS;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Mapping;
 using Rental.DataAccess.QueryHandlers;

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Rental.CQRS
+namespace Rental.CQS
 {
     public interface IQuery<out T> : IRequest<T>
     {

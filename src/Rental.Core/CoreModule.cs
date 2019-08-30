@@ -5,7 +5,7 @@ using Rental.Core.Common.Helpers;
 using Rental.Core.Models.BoardGames;
 using Rental.Core.Models.Clients;
 using Rental.Core.Models.Validation;
-using Rental.CQRS;
+using Rental.CQS;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 [assembly: InternalsVisibleTo("Rental.Core.Tests")]

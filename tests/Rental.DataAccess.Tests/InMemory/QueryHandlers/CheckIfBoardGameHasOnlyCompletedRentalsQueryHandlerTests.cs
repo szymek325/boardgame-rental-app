@@ -6,7 +6,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models;
-using Rental.CQRS;
+using Rental.CQS;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.QueryHandlers;
 using Xunit;

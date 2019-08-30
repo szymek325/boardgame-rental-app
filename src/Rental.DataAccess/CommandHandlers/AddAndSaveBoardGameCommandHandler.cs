@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Rental.Core.Interfaces.DataAccess.Commands;
-using Rental.CQRS;
+using Rental.CQS;
 using Rental.DataAccess.Context;
 using Rental.DataAccess.Entities;
 

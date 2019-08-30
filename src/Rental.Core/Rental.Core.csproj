@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rental.CQRS\Rental.CQRS.csproj" />
+    <ProjectReference Include="..\Rental.CQRS\Rental.CQS.csproj" />
   </ItemGroup>
 
 </Project>

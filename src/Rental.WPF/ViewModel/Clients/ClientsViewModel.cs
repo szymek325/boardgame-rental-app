@@ -8,7 +8,7 @@ using System.Windows.Data;
 using AutoMapper;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.Clients;
-using Rental.CQRS;
+using Rental.CQS;
 using Rental.WPF.Command;
 using Rental.WPF.Events;
 using Rental.WPF.View.Clients;

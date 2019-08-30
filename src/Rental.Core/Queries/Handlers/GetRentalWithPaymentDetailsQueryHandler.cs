@@ -5,7 +5,7 @@ using AutoMapper;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.Core.Models.Rentals;
-using Rental.CQRS;
+using Rental.CQS;
 
 namespace Rental.Core.Queries.Handlers
 {

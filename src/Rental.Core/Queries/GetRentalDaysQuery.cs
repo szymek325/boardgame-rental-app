@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Rental.Core.Models.Rentals;
-using Rental.CQRS;
+using Rental.CQS;
 
 namespace Rental.Core.Queries
 {

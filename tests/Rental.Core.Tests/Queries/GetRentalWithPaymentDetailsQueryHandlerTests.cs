@@ -14,7 +14,7 @@ using Rental.Core.Models.Clients;
 using Rental.Core.Models.Rentals;
 using Rental.Core.Queries;
 using Rental.Core.Queries.Handlers;
-using Rental.CQRS;
+using Rental.CQS;
 using Xunit;
 
 namespace Rental.Core.Tests.Queries
