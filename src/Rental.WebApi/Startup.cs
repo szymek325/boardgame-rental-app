@@ -45,6 +45,8 @@ namespace Rental.WebApi
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
 
+            services.Configure<PricesConfiguration>(Configuration.GetSection(nameof(PricesConfiguration)));
+
             var connectionStrings = new ConnectionStrings();
             Configuration.GetSection(nameof(ConnectionStrings)).Bind(connectionStrings);
             services.AddCoreModule();

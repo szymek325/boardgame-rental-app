@@ -1,6 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.Extensions.Options;
+using Rental.Core.Common.Configuration;
 using Rental.Core.Queries;
 using Rental.Core.Queries.Handlers;
 using Rental.CQRS;
@@ -12,14 +14,20 @@ namespace Rental.Core.Tests.Queries
     {
         public GetBoardGameRentDayPriceQueryHandlerTests()
         {
-            _sut = new GetBoardGameRentDayPriceQueryHandler();
+            _pricesOptions = Options.Create(new PricesConfiguration
+            {
+                DailyRentPercent = 7,
+                DepositPercent = 50
+            });
+            _sut = new GetBoardGameRentDayPriceQueryHandler(_pricesOptions);
         }
 
+        private readonly IOptions<PricesConfiguration> _pricesOptions;
         private readonly IQueryHandler<GetBoardGameRentDayPriceQuery, decimal> _sut;
         private readonly CancellationToken _cancellationToken = new CancellationToken();
 
         [Fact]
-        public async Task Handle_Should_Return_7_When_100()
+        public async Task Handle_Should_Return_7PercentOfInputOfPrice()
         {
             var input = 100;
 
