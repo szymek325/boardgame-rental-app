@@ -1,15 +1,24 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using Rental.Core.Common.Configuration;
 using Rental.CQS;
 
 namespace Rental.Core.Queries.Handlers
 {
-    internal class GetBoardGameRentDayPriceQueryHandler : IQueryHandler<GetBoardGameRentDayPriceQuery, float>
+    internal class GetBoardGameRentDayPriceQueryHandler : IQueryHandler<GetBoardGameRentDayPriceQuery, decimal>
     {
-        //TODO get percent vlaue from config
-        public Task<float> Handle(GetBoardGameRentDayPriceQuery request, CancellationToken cancellationToken)
+        private readonly IOptions<PricesConfiguration> _pricesOptions;
+
+        public GetBoardGameRentDayPriceQueryHandler(IOptions<PricesConfiguration> pricesOptions)
         {
-            var dailyPrice =(float) 7 / 100 * request.BoardGamePrice;
+            _pricesOptions = pricesOptions;
+        }
+
+        public Task<decimal> Handle(GetBoardGameRentDayPriceQuery request, CancellationToken cancellationToken)
+        {
+            var percentValue = (decimal) _pricesOptions.Value.DailyRentPercent / 100;
+            var dailyPrice = percentValue * request.BoardGamePrice;
             return Task.FromResult(dailyPrice);
         }
     }

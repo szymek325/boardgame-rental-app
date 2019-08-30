@@ -5,14 +5,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
 using Rental.Core;
 using Rental.Core.Common.Configuration;
 using Rental.DataAccess;
 using Rental.WebApi.Middleware;
+using Rental.WebApi.SwaggerConfiguration;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Rental.WebApi
 {
@@ -30,7 +33,19 @@ namespace Rental.WebApi
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup), typeof(CoreModule), typeof(EntityFrameworkModule));
             services.AddMediatR(typeof(Startup), typeof(CoreModule), typeof(EntityFrameworkModule));
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo()); });
+
+            services.AddApiVersioning(
+                options => { options.ReportApiVersions = true; });
+            services.AddVersionedApiExplorer(
+                options =>
+                {
+                    options.GroupNameFormat = "'v'VVV";
+                    options.SubstituteApiVersionInUrl = true;
+                });
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen();
+
+            services.Configure<PricesConfiguration>(Configuration.GetSection(nameof(PricesConfiguration)));
 
             var connectionStrings = new ConnectionStrings();
             Configuration.GetSection(nameof(ConnectionStrings)).Bind(connectionStrings);
@@ -38,7 +53,8 @@ namespace Rental.WebApi
             services.AddDataAccessModule(connectionStrings);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger,
+            IApiVersionDescriptionProvider provider)
         {
             //if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
             app.UseExceptionHandler(errorApp =>
@@ -65,11 +81,15 @@ namespace Rental.WebApi
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
             app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.RoutePrefix = string.Empty;
-                c.SwaggerEndpoint("./swagger/v1/swagger.json", "My API V1");
-            });
+            app.UseSwaggerUI(
+                options =>
+                {
+                    options.RoutePrefix = "";
+                    foreach (var description in provider.ApiVersionDescriptions)
+                        options.SwaggerEndpoint(
+                            $"/swagger/{description.GroupName}/swagger.json",
+                            description.GroupName.ToUpperInvariant());
+                });
         }
     }
 }

@@ -6,6 +6,6 @@ namespace Rental.WebApi.Dto
     {
         public Guid BoardGameGuid { get; set; }
         public Guid ClientGuid { get; set; }
-        public float ChargedDeposit { get; set; }
+        public decimal ChargedDeposit { get; set; }
     }
 }

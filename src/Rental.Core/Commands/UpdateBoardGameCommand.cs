@@ -5,7 +5,7 @@ namespace Rental.Core.Commands
 {
     public class UpdateBoardGameCommand : ICommand
     {
-        public UpdateBoardGameCommand(Guid id, string name, float price)
+        public UpdateBoardGameCommand(Guid id, string name, decimal price)
         {
             Id = id;
             Name = name;
@@ -14,6 +14,6 @@ namespace Rental.Core.Commands
 
         public Guid Id { get; }
         public string Name { get; }
-        public float Price { get; }
+        public decimal Price { get; }
     }
 }

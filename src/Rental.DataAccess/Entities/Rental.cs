@@ -17,9 +17,9 @@ namespace Rental.DataAccess.Entities
         public Guid BoardGameId { get; set; }
 
         [Required]
-        public float ChargedDeposit { get; set; }
+        public decimal ChargedDeposit { get; set; }
 
-        public float PaidMoney { get; set; }
+        public decimal PaidMoney { get; set; }
 
         [Required]
         public DateTime CreationTime { get; set; }
