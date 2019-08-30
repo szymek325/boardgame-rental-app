@@ -4,12 +4,13 @@ using Rental.CQRS;
 
 namespace Rental.Core.Queries.Handlers
 {
-    internal class GetBoardGameRentDayPriceQueryHandler : IQueryHandler<GetBoardGameRentDayPriceQuery, float>
+    internal class GetBoardGameRentDayPriceQueryHandler : IQueryHandler<GetBoardGameRentDayPriceQuery, decimal>
     {
-        //TODO get percent vlaue from config
-        public Task<float> Handle(GetBoardGameRentDayPriceQuery request, CancellationToken cancellationToken)
+        //TODO get percent value from config
+        public Task<decimal> Handle(GetBoardGameRentDayPriceQuery request, CancellationToken cancellationToken)
         {
-            var dailyPrice = (float) 7 / 100 * request.BoardGamePrice;
+            var percentValue = (decimal) 7 / 10;
+            var dailyPrice = percentValue * request.BoardGamePrice;
             return Task.FromResult(dailyPrice);
         }
     }

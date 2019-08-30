@@ -6,7 +6,8 @@ namespace Rental.Core.Models.Rentals
 {
     public class RentalWithDetails
     {
-        public RentalWithDetails(Guid id, float chargedDeposit, float paidMoney, Status status, DateTime creationTime, DateTime? finishTime,
+        public RentalWithDetails(Guid id, decimal chargedDeposit, decimal paidMoney, Status status, DateTime creationTime,
+            DateTime? finishTime,
             BoardGame boardGame, Client client)
         {
             Id = id;
@@ -20,8 +21,8 @@ namespace Rental.Core.Models.Rentals
         }
 
         public Guid Id { get; set; }
-        public float ChargedDeposit { get; set; }
-        public float PaidMoney { get; set; }
+        public decimal ChargedDeposit { get; set; }
+        public decimal PaidMoney { get; set; }
         public Status Status { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime? FinishTime { get; set; }

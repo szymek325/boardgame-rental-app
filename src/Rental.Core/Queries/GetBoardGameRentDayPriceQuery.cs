@@ -2,13 +2,13 @@
 
 namespace Rental.Core.Queries
 {
-    internal class GetBoardGameRentDayPriceQuery : IQuery<float>
+    internal class GetBoardGameRentDayPriceQuery : IQuery<decimal>
     {
-        public GetBoardGameRentDayPriceQuery(float boardGamePrice)
+        public GetBoardGameRentDayPriceQuery(decimal boardGamePrice)
         {
             BoardGamePrice = boardGamePrice;
         }
 
-        public float BoardGamePrice { get; set; }
+        public decimal BoardGamePrice { get; set; }
     }
 }

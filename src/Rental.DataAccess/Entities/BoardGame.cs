@@ -14,7 +14,7 @@ namespace Rental.DataAccess.Entities
         public string Name { get; set; }
 
         [Required]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         public DateTime CreationTime { get; set; }

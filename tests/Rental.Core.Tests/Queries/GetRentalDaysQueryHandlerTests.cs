@@ -29,7 +29,7 @@ namespace Rental.Core.Tests.Queries
         private readonly Mock<IMediatorService> _mediatorService;
         private readonly CancellationToken _cancellationToken = new CancellationToken();
         private readonly IQueryHandler<GetRentalDaysQuery, IList<RentalDay>> _sut;
-        private const float OneDayPrice = (float) 10.5;
+        private const decimal OneDayPrice = (decimal) 10.5;
 
         public static IEnumerable<object[]> NumberOfDaysRange =>
             Enumerable.Range(1, 10).Select(x => new[] {(object) x}).ToList();

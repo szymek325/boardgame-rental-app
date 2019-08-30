@@ -15,7 +15,7 @@ namespace Rental.Core.Tests.Queries
             _sut = new GetBoardGameRentDayPriceQueryHandler();
         }
 
-        private readonly IQueryHandler<GetBoardGameRentDayPriceQuery, float> _sut;
+        private readonly IQueryHandler<GetBoardGameRentDayPriceQuery, decimal> _sut;
         private readonly CancellationToken _cancellationToken = new CancellationToken();
 
         [Fact]

@@ -5,13 +5,13 @@ namespace Rental.Core.Commands
 {
     public class CompleteRentalCommand : ICommand
     {
-        public CompleteRentalCommand(Guid gameRentalId, float paidMoney)
+        public CompleteRentalCommand(Guid gameRentalId, decimal paidMoney)
         {
             GameRentalId = gameRentalId;
             PaidMoney = paidMoney;
         }
 
         public Guid GameRentalId { get; }
-        public float PaidMoney { get; }
+        public decimal PaidMoney { get; }
     }
 }
