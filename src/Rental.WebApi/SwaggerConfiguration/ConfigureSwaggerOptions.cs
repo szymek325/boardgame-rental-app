@@ -24,9 +24,9 @@ namespace Rental.WebApi.SwaggerConfiguration
                     description.GroupName,
                     new OpenApiInfo
                     {
-                        Title = $"Incident Management API {description.ApiVersion}",
+                        Title = $"Rental Web API {description.ApiVersion}",
                         Version = description.ApiVersion.ToString(),
-                        Description = "Rest proxy to remedy WS.",
+                        Description = "Boardgame rental shop web api",
                         Contact = new OpenApiContact
                         {
                             Name = "Mateusz Szymkowiak",
