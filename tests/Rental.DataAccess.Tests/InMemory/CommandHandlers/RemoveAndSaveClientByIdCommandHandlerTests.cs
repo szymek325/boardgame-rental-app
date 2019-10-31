@@ -54,14 +54,14 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         }
 
         [Fact]
-        public void Handle_Should_ThrowDbUpdateConcurrencyException_When_ClientWithProvidedIdDoesNotExist()
+        public void Handle_Should_ThrowArgumentNullException_When_ClientWithProvidedIdDoesNotExist()
         {
             var input = Guid.NewGuid();
 
             Func<Task> act = async () =>
                 await _sut.Handle(new RemoveAndSaveClientByIdCommand(input), new CancellationToken());
 
-            act.Should().Throw<DbUpdateConcurrencyException>();
+            act.Should().Throw<ArgumentNullException>();
         }
     }
 }

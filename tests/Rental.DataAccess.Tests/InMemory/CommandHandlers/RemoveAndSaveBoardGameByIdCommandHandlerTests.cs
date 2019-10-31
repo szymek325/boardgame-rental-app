@@ -54,14 +54,14 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         }
 
         [Fact]
-        public void Handle_Should_ThrowDbUpdateConcurrencyException_When_BoardGameWithProvidedIdDoesNotExist()
+        public void Handle_Should_ThrowArgumentNullException_When_BoardGameWithProvidedIdDoesNotExist()
         {
             var input = Guid.NewGuid();
 
             Func<Task> act = async () =>
                 await _sut.Handle(new RemoveAndSaveBoardGameByIdCommand(input), new CancellationToken());
 
-            act.Should().Throw<DbUpdateConcurrencyException>();
+            act.Should().Throw<ArgumentNullException>();
         }
     }
 }
