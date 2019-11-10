@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Boardgame from './Boardgame'
 
 export class Boardgames extends Component {
     static displayName = Boardgames.name;
@@ -14,7 +15,7 @@ export class Boardgames extends Component {
 
     static renderForecastsTable(boardgames) {
         return (
-            <table className='table table-striped center' aria-labelledby="tabelLabel">
+            <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -24,13 +25,8 @@ export class Boardgames extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {boardgames.map((boardgame,i) =>
-                        <tr key={boardgame.id}>
-                            <td>{i+1}</td>
-                            <td>{boardgame.name}</td>
-                            <td>{boardgame.price}</td>
-                            <td>{boardgame.creationTime}</td>
-                        </tr>
+                    {boardgames.map((boardgame, i) =>
+                        <Boardgame key={boardgame.id} boardgame={boardgame} i={i}></Boardgame>
                     )}
                 </tbody>
             </table>
@@ -45,7 +41,7 @@ export class Boardgames extends Component {
         return (
             <div>
                 <h1 id="tabelLabel" >Boardgames</h1>
-                <p/>
+                <p />
                 {contents}
             </div>
         );
