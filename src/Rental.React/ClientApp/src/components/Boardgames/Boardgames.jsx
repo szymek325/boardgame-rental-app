@@ -22,6 +22,7 @@ export class Boardgames extends Component {
                         <th>Name</th>
                         <th>Price</th>
                         <th>CreationTime</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
