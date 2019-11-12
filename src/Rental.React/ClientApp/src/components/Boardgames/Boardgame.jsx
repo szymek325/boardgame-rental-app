@@ -30,11 +30,11 @@ export class Boardgame extends Component {
         this.setState({ inEditMode: false });
     }
 
-    updateRow = (boardgame) => {
+    updateRow = async (boardgame) => {
         boardgame.name = this.state.name;
         boardgame.price = this.state.price;
         boardgame.boardGameGuid = boardgame.id;
-        fetch('api/v1/BoardGame', {
+        await fetch('api/v1/BoardGame', {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -42,8 +42,19 @@ export class Boardgame extends Component {
             method: 'PUT',
             body: JSON.stringify(boardgame)
         })
-            .then(response => this.setState({ inEditMode: false, boardgame: boardgame }))
-            .catch(error => alert(error));
+            .then(async response => {
+                if (!response.ok) {
+                    await response.json().then(data => {
+                        throw new Error(data.Message)
+                    });
+                }
+                else {
+                    this.setState({ inEditMode: false, boardgame: boardgame })
+                }
+            })
+            .catch(error => {
+                alert(error.message)
+            });
     }
 
     render() {
@@ -63,7 +74,8 @@ export class Boardgame extends Component {
                 <BoardgameDisplay
                     boardgame={this.state.boardgame}
                     i={this.props.i}
-                    onButtonClick={this.editRow}>
+                    onButtonClick={this.editRow}
+                    onRemoveClick={this.props.deleteMethod}>
                 </BoardgameDisplay>
 
         return (component)
