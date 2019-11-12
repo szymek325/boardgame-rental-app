@@ -8,7 +8,7 @@ const BoardgameInEdit = (props) => {
             <td><input type="number" defaultValue={props.boardgame.price} onChange={props.onChangePrice}></input></td>
             <td>{props.boardgame.creationTime}</td>
             <td>
-                <button onClick={props.onButtonSave} className="btn btn-success">Save</button>
+                <button onClick={() => props.onButtonSave(props.boardgame)} className="btn btn-success">Save</button>
                 <button onClick={props.onButtonCancel} className="btn btn-warning">Cancel</button>
             </td>
         </tr >

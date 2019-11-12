@@ -7,6 +7,7 @@ export class Boardgame extends Component {
         super(props);
         this.state = {
             inEditMode: false,
+            boardgame: props.boardgame,
             name: props.boardgame.name,
             price: props.boardgame.price
         };
@@ -22,7 +23,6 @@ export class Boardgame extends Component {
     }
 
     editRow = () => {
-        console.log('dsadsadsa')
         this.setState({ inEditMode: true });
     }
 
@@ -30,12 +30,20 @@ export class Boardgame extends Component {
         this.setState({ inEditMode: false });
     }
 
-    updateRow = () => {
-        if (this.inEditMode)
-            console.log('updated')
-        this.setState({ inEditMode: false });
-        this.props.boardgame.name = this.state.name;
-        this.props.boardgame.price = this.state.price;
+    updateRow = (boardgame) => {
+        boardgame.name = this.state.name;
+        boardgame.price = this.state.price;
+        boardgame.boardGameGuid = boardgame.id;
+        fetch('api/v1/BoardGame', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify(boardgame)
+        })
+            .then(response => this.setState({ inEditMode: false, boardgame: boardgame }))
+            .catch(error => alert(error));
     }
 
     render() {
@@ -43,7 +51,7 @@ export class Boardgame extends Component {
         if (this.state.inEditMode)
             component =
                 <BoardgameInEdit
-                    boardgame={this.props.boardgame}
+                    boardgame={this.state.boardgame}
                     i={this.props.i}
                     onButtonSave={this.updateRow}
                     onButtonCancel={this.cancelRow}
@@ -53,7 +61,7 @@ export class Boardgame extends Component {
         else
             component =
                 <BoardgameDisplay
-                    boardgame={this.props.boardgame}
+                    boardgame={this.state.boardgame}
                     i={this.props.i}
                     onButtonClick={this.editRow}>
                 </BoardgameDisplay>

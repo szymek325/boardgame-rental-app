@@ -10,7 +10,14 @@ export class Boardgames extends Component {
     }
 
     componentDidMount() {
-        this.populateWeatherData();
+        this.populateBoardgamesData();
+    }
+
+    async populateBoardgamesData() {
+        await fetch('api/v1/BoardGame')
+            .then(response => response.json())
+            .then(data => this.setState({ boardgames: data, loading: false }))
+            .catch(error => alert('Exception occured when loading Boardgames data'));
     }
 
     static renderForecastsTable(boardgames) {
@@ -46,13 +53,5 @@ export class Boardgames extends Component {
                 {contents}
             </div>
         );
-    }
-
-    async populateWeatherData() {
-        const response = await fetch('api/v1/BoardGame');
-        console.log(response);
-        const data = await response.json();
-        console.log(data);
-        this.setState({ boardgames: data, loading: false });
     }
 }
