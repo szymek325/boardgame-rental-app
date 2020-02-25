@@ -58,14 +58,14 @@ namespace Rental.WebApi.Controllers
             return new OkObjectResult(result);
         }
 
-        [HttpGet("client/{id}")]
+        [HttpGet("client/{clientId}")]
         public async Task<IActionResult> GetAllForClient(Guid clientId)
         {
             var result = await _mediatorService.Send(new GetAllRentalsForClientQuery(clientId));
             return new OkObjectResult(result);
         }
 
-        [HttpGet("boardgame/{id}")]
+        [HttpGet("boardgame/{boardGameId}")]
         public async Task<IActionResult> GetAllForBoardGame(Guid boardGameId)
         {
             var result = await _mediatorService.Send(new GetAllRentalsForBoardGameQuery(boardGameId));

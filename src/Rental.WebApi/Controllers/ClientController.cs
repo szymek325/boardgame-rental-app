@@ -37,7 +37,7 @@ namespace Rental.WebApi.Controllers
             return new OkResult();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(Guid id)
         {
             await _mediatorService.Send(new RemoveClientCommand(id));
