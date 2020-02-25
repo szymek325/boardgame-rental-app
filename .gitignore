@@ -1,17 +1,37 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
+﻿*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
 
-/.vs/BoardGameRentalApp/v15/Server/sqlite3/storage.ide
-/.vs/BoardGameRentalApp/v15/Server/sqlite3/db.lock
-/.vs/slnx.sqlite
-/.vs/BoardGameRentalApp/v16
-/.vs
-/backend-on-micro/Clients.Api/BoardGames.db
-/backend-on-micro/Clients.Api/Clients.db
-/backend-on-micro/Games.Api/Games.db
-/tests/Rental.Core.Tests/bin/Debug/netcoreapp3.0
-/tests/Rental.Core.Tests/obj/Debug/netcoreapp3.0
-/tests/Rental.Core.Tests/obj
-/tests/Rental.DataAccess.Tests/bin/Debug/netcoreapp3.0
-/tests/Rental.DataAccess.Tests/obj
+# Visual Studio Code
+.vscode
+
+# Rider
+.idea
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
