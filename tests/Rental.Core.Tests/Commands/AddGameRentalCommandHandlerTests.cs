@@ -6,13 +6,13 @@ using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
 using Moq;
+using Playingo.Domain.BoardGames;
+using Playingo.Domain.Clients;
 using Rental.Core.Commands;
 using Rental.Core.Commands.Handlers;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models.BoardGames;
-using Rental.Core.Models.Clients;
 using Rental.Core.Queries;
 using Rental.CQS;
 using Xunit;
@@ -24,7 +24,7 @@ namespace Rental.Core.Tests.Commands
         public AddGameRentalCommandHandlerTests()
         {
             _mediatorService = new Mock<IMediatorService>(MockBehavior.Strict);
-            _validator = new Mock<IValidator<Models.Rentals.Rental>>(MockBehavior.Strict);
+            _validator = new Mock<IValidator<Playingo.Domain.Rentals.Rental>>(MockBehavior.Strict);
             _sut = new AddRentalCommandHandler(_mediatorService.Object, _validator.Object);
         }
 
@@ -33,7 +33,7 @@ namespace Rental.Core.Tests.Commands
 
         private readonly Mock<IMediatorService> _mediatorService;
         private readonly ICommandHandler<AddRentalCommand> _sut;
-        private readonly Mock<IValidator<Models.Rentals.Rental>> _validator;
+        private readonly Mock<IValidator<Playingo.Domain.Rentals.Rental>> _validator;
 
         [Theory]
         [InlineData(false)]
@@ -42,7 +42,7 @@ namespace Rental.Core.Tests.Commands
         {
             _validator.Setup(
                     x => x.Validate(
-                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                        It.Is((Playingo.Domain.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
@@ -72,7 +72,7 @@ namespace Rental.Core.Tests.Commands
         {
             _validator.Setup(
                     x => x.Validate(
-                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                        It.Is((Playingo.Domain.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             Client client = null;
@@ -99,7 +99,7 @@ namespace Rental.Core.Tests.Commands
         {
             _validator.Setup(
                     x => x.Validate(
-                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                        It.Is((Playingo.Domain.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
@@ -133,7 +133,7 @@ namespace Rental.Core.Tests.Commands
         {
             _validator.Setup(
                     x => x.Validate(
-                        It.Is((Models.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
+                        It.Is((Playingo.Domain.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             _mediatorService
@@ -164,7 +164,7 @@ namespace Rental.Core.Tests.Commands
                 new ValidationFailure("test", "test")
             };
             _validator.Setup(x =>
-                    x.Validate(It.Is((Models.Rentals.Rental gameRental) =>
+                    x.Validate(It.Is((Playingo.Domain.Rentals.Rental gameRental) =>
                         gameRental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult(validationErrors));
             const string errorsMessage = "errors happened";

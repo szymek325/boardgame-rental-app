@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Rental.Core.Models.Rentals
+namespace Playingo.Domain.Rentals
 {
     public class RentalWithPaymentDetails
     {

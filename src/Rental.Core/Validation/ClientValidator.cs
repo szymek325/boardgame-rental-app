@@ -1,9 +1,9 @@
 ﻿using System;
 using FluentValidation;
+using Playingo.Domain.Clients;
 using Rental.Core.Common.Extensions;
-using Rental.Core.Models.Clients;
 
-namespace Rental.Core.Models.Validation
+namespace Rental.Core.Validation
 {
     internal class ClientValidator : AbstractValidator<Client>
     {

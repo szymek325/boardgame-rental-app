@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 
-namespace Rental.Core.Models.Validation
+namespace Rental.Core.Validation
 {
-    internal class RentalValidator : AbstractValidator<Rentals.Rental>
+    internal class RentalValidator : AbstractValidator<Playingo.Domain.Rentals.Rental>
     {
         public RentalValidator()
         {

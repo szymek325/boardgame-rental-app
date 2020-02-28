@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Playingo.Domain.Rentals;
 using Rental.Core.Common.Helpers;
-using Rental.Core.Models.Rentals;
 using Rental.CQS;
 
 namespace Rental.Core.Queries.Handlers

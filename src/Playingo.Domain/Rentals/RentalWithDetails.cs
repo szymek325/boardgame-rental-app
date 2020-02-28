@@ -1,8 +1,8 @@
 ﻿using System;
-using Rental.Core.Models.BoardGames;
-using Rental.Core.Models.Clients;
+using Playingo.Domain.BoardGames;
+using Playingo.Domain.Clients;
 
-namespace Rental.Core.Models.Rentals
+namespace Playingo.Domain.Rentals
 {
     public class RentalWithDetails
     {

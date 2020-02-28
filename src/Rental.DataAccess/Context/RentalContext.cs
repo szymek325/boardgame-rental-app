@@ -3,7 +3,7 @@ using System.Linq;
 using Faker;
 using FizzWare.NBuilder;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Models;
+using Playingo.Domain;
 using Rental.DataAccess.Entities;
 
 namespace Rental.DataAccess.Context

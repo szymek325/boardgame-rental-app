@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using Playingo.Domain;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models;
 using Rental.Core.Queries;
 using Rental.CQS;
 
@@ -13,9 +13,9 @@ namespace Rental.Core.Commands.Handlers
     internal class AddRentalCommandHandler : ICommandHandler<AddRentalCommand>
     {
         private readonly IMediatorService _mediatorService;
-        private readonly IValidator<Models.Rentals.Rental> _validator;
+        private readonly IValidator<Playingo.Domain.Rentals.Rental> _validator;
 
-        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Models.Rentals.Rental> validator)
+        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Playingo.Domain.Rentals.Rental> validator)
         {
             _mediatorService = mediatorService;
             _validator = validator;
@@ -23,7 +23,7 @@ namespace Rental.Core.Commands.Handlers
 
         public async Task Handle(AddRentalCommand command, CancellationToken cancellationToken)
         {
-            var newGameRental = new Models.Rentals.Rental(command.NewGameRentalGuid, command.ClientGuid,
+            var newGameRental = new Playingo.Domain.Rentals.Rental(command.NewGameRentalGuid, command.ClientGuid,
                 command.BoardGameGuid,
                 command.ChargedDeposit)
             {

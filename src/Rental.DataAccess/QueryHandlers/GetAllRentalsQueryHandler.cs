@@ -9,7 +9,7 @@ using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers
 {
-    internal class GetAllRentalsQueryHandler : IQueryHandler<GetAllRentalsQuery, IList<Core.Models.Rentals.Rental>>
+    internal class GetAllRentalsQueryHandler : IQueryHandler<GetAllRentalsQuery, IList<Playingo.Domain.Rentals.Rental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -20,11 +20,11 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<IList<Core.Models.Rentals.Rental>> Handle(GetAllRentalsQuery query,
+        public async Task<IList<Playingo.Domain.Rentals.Rental>> Handle(GetAllRentalsQuery query,
             CancellationToken cancellationToken)
         {
             var entities = await _rentalContext.Rentals.ToListAsync(cancellationToken);
-            var mappedRentals = _mapper.Map<IList<Core.Models.Rentals.Rental>>(entities);
+            var mappedRentals = _mapper.Map<IList<Playingo.Domain.Rentals.Rental>>(entities);
             return mappedRentals;
         }
     }

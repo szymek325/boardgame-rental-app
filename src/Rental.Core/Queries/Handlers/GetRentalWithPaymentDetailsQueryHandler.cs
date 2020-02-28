@@ -2,9 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Playingo.Domain.Rentals;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models.Rentals;
 using Rental.CQS;
 
 namespace Rental.Core.Queries.Handlers

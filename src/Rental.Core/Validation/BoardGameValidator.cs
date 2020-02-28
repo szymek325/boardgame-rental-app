@@ -1,8 +1,8 @@
 ﻿using System;
 using FluentValidation;
-using Rental.Core.Models.BoardGames;
+using Playingo.Domain.BoardGames;
 
-namespace Rental.Core.Models.Validation
+namespace Rental.Core.Validation
 {
     internal class BoardGameValidator : AbstractValidator<BoardGame>
     {

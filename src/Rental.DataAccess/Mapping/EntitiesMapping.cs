@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Rental.Core.Models.BoardGames;
-using Rental.Core.Models.Clients;
-using Rental.Core.Models.Rentals;
+using Playingo.Domain.BoardGames;
+using Playingo.Domain.Clients;
+using Playingo.Domain.Rentals;
 
 namespace Rental.DataAccess.Mapping
 {
@@ -11,7 +11,7 @@ namespace Rental.DataAccess.Mapping
         {
             CreateMap<BoardGame, Entities.BoardGame>().ReverseMap();
             CreateMap<Client, Entities.Client>().ReverseMap();
-            CreateMap<Core.Models.Rentals.Rental, Entities.Rental>().ReverseMap();
+            CreateMap<Playingo.Domain.Rentals.Rental, Entities.Rental>().ReverseMap();
             CreateMap<RentalWithDetails, Entities.Rental>().ReverseMap();
         }
     }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Rental.Core.Models.Rentals;
+using Playingo.Domain.Rentals;
 
 namespace Rental.Core.Mapping
 {

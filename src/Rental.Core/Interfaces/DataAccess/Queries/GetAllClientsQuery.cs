@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Rental.Core.Models.Clients;
+using Playingo.Domain.Clients;
 using Rental.CQS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
