@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rental.Core.Models.BoardGames
+namespace Playingo.Domain.BoardGames
 {
     public class BoardGame
     {

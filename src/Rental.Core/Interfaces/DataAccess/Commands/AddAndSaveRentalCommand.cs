@@ -4,11 +4,11 @@ namespace Rental.Core.Interfaces.DataAccess.Commands
 {
     public class AddAndSaveRentalCommand : ICommand
     {
-        public AddAndSaveRentalCommand(Models.Rentals.Rental rental)
+        public AddAndSaveRentalCommand(Playingo.Domain.Rentals.Rental rental)
         {
             Rental = rental;
         }
 
-        public Models.Rentals.Rental Rental { get; set; }
+        public Playingo.Domain.Rentals.Rental Rental { get; set; }
     }
 }

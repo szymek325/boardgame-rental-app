@@ -3,12 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
+using Playingo.Domain;
 using Rental.Core.Commands;
 using Rental.Core.Commands.Handlers;
 using Rental.Core.Common.Exceptions;
 using Rental.Core.Interfaces.DataAccess.Commands;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models;
 using Rental.CQS;
 using Xunit;
 
@@ -32,7 +32,7 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowRentalIsNotInProgress_When_RentalStatusIsNotInProgress(Status status)
         {
             var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
-            var rental = new Models.Rentals.Rental(input.GameRentalId, Guid.NewGuid(), Guid.NewGuid(), 100)
+            var rental = new Playingo.Domain.Rentals.Rental(input.GameRentalId, Guid.NewGuid(), Guid.NewGuid(), 100)
                 {Status = status};
             _mediatorService.Setup(x =>
                     x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
@@ -47,7 +47,7 @@ namespace Rental.Core.Tests.Commands
         public async Task Handle_Should_ChangeStatusToCompletedAndUpdateAndSaveRental_When_StatusIsInProgress()
         {
             var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
-            var rental = new Models.Rentals.Rental(input.GameRentalId, Guid.NewGuid(), Guid.NewGuid(), 100)
+            var rental = new Playingo.Domain.Rentals.Rental(input.GameRentalId, Guid.NewGuid(), Guid.NewGuid(), 100)
                 {Status = Status.InProgress};
             _mediatorService.Setup(x =>
                     x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
@@ -70,7 +70,7 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowRentalNotFoundException_When_RentalWithSpecifiedIdDoesNotExist()
         {
             var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
-            Models.Rentals.Rental rental = null;
+            Playingo.Domain.Rentals.Rental rental = null;
             _mediatorService.Setup(x =>
                     x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
                 .ReturnsAsync(rental);

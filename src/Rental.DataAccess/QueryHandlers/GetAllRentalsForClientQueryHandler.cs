@@ -12,7 +12,7 @@ namespace Rental.DataAccess.QueryHandlers
 {
     internal class
         GetAllRentalsForClientQueryHandler : IQueryHandler<GetAllRentalsForClientQuery,
-            IList<Core.Models.Rentals.Rental>>
+            IList<Playingo.Domain.Rentals.Rental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -23,12 +23,12 @@ namespace Rental.DataAccess.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<IList<Core.Models.Rentals.Rental>> Handle(GetAllRentalsForClientQuery query,
+        public async Task<IList<Playingo.Domain.Rentals.Rental>> Handle(GetAllRentalsForClientQuery query,
             CancellationToken cancellationToken)
         {
             var entities = await _rentalContext.Rentals.Where(x => x.ClientId == query.ClientId)
                 .ToListAsync(cancellationToken);
-            var mappedRentals = _mapper.Map<IList<Core.Models.Rentals.Rental>>(entities);
+            var mappedRentals = _mapper.Map<IList<Playingo.Domain.Rentals.Rental>>(entities);
             return mappedRentals;
         }
     }

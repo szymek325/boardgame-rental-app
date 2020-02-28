@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rental.Core.Models.Rentals;
+using Playingo.Domain.Rentals;
 using Rental.CQS;
 
 namespace Rental.Core.Queries

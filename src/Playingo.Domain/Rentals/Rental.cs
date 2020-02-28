@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rental.Core.Models.Rentals
+namespace Playingo.Domain.Rentals
 {
     public class Rental
     {

@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Playingo.Domain.Clients;
 using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Models.Clients;
 using Rental.CQS;
 using Rental.DataAccess.Context;
 

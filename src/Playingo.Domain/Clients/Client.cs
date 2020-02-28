@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rental.Core.Models.Clients
+namespace Playingo.Domain.Clients
 {
     public class Client
     {

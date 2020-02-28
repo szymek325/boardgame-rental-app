@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Playingo.Domain\Playingo.Domain.csproj" />
     <ProjectReference Include="..\Rental.CQS\Rental.CQS.csproj" />
   </ItemGroup>
 

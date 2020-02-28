@@ -4,7 +4,7 @@ using Rental.CQS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class GetAllRentalsForClientQuery : IQuery<IList<Models.Rentals.Rental>>
+    public class GetAllRentalsForClientQuery : IQuery<IList<Playingo.Domain.Rentals.Rental>>
     {
         public GetAllRentalsForClientQuery(Guid clientId)
         {

@@ -3,7 +3,7 @@ using Rental.CQS;
 
 namespace Rental.Core.Interfaces.DataAccess.Queries
 {
-    public class GetRentalByIdQuery : IQuery<Models.Rentals.Rental>
+    public class GetRentalByIdQuery : IQuery<Playingo.Domain.Rentals.Rental>
     {
         public GetRentalByIdQuery(Guid id)
         {

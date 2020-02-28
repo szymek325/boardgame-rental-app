@@ -1,4 +1,4 @@
-﻿namespace Rental.Core.Models
+﻿namespace Playingo.Domain
 {
     public enum Status
     {
