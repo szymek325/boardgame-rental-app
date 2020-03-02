@@ -1,0 +1,29 @@
+﻿using System.Runtime.CompilerServices;
+using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
+using Playingo.Application.Common.Helpers;
+using Playingo.Application.Validation;
+using Playingo.Domain.BoardGames;
+using Playingo.Domain.Clients;
+using Rental.CQS;
+
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: InternalsVisibleTo("Rental.Core.Tests")]
+
+namespace Playingo.Application
+{
+    public static class CoreModule
+    {
+        public static IServiceCollection AddCoreModule(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<BoardGame>, BoardGameValidator>();
+            services.AddTransient<IValidator<Client>, ClientValidator>();
+            services.AddTransient<IValidator<Domain.Rentals.Rental>, RentalValidator>();
+            services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+
+            services.AddTransient<IMediatorService, MediatorService>();
+
+            return services;
+        }
+    }
+}

@@ -18,11 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rental.Core\Rental.Core.csproj" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Validators\" />
+    <ProjectReference Include="..\..\src\Playingo.Application\Playingo.Application.csproj" />
   </ItemGroup>
 
 </Project>

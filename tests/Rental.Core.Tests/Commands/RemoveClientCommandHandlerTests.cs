@@ -3,12 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
+using Playingo.Application.Clients;
+using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Interfaces.DataAccess.Commands;
+using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.Clients;
-using Rental.Core.Commands;
-using Rental.Core.Commands.Handlers;
-using Rental.Core.Common.Exceptions;
-using Rental.Core.Interfaces.DataAccess.Commands;
-using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.CQS;
 using Xunit;
 

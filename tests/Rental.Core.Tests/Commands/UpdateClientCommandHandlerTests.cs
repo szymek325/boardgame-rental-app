@@ -6,13 +6,12 @@ using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
 using Moq;
+using Playingo.Application.Clients;
+using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Interfaces.DataAccess.Commands;
+using Playingo.Application.Interfaces.DataAccess.Queries;
+using Playingo.Application.Queries;
 using Playingo.Domain.Clients;
-using Rental.Core.Commands;
-using Rental.Core.Commands.Handlers;
-using Rental.Core.Common.Exceptions;
-using Rental.Core.Interfaces.DataAccess.Commands;
-using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Queries;
 using Rental.CQS;
 using Xunit;
 

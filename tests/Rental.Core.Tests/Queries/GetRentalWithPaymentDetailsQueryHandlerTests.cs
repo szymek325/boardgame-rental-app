@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using Moq;
+using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Interfaces.DataAccess.Queries;
+using Playingo.Application.Rentals;
 using Playingo.Domain;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
 using Playingo.Domain.Rentals;
-using Rental.Core.Common.Exceptions;
-using Rental.Core.Interfaces.DataAccess.Queries;
-using Rental.Core.Queries;
-using Rental.Core.Queries.Handlers;
 using Rental.CQS;
 using Xunit;
 

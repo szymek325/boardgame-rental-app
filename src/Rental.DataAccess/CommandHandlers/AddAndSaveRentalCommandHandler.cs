@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Rental.Core.Interfaces.DataAccess.Commands;
+using Playingo.Application.Interfaces.DataAccess.Commands;
 using Rental.CQS;
 using Rental.DataAccess.Context;
 

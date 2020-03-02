@@ -4,8 +4,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation.Results;
-using Rental.Core.Queries;
-using Rental.Core.Queries.Handlers;
+using Playingo.Application.Queries;
+using Playingo.Application.Queries.Handlers;
 using Rental.CQS;
 using Xunit;
 
