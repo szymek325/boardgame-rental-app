@@ -13,10 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{53B68C94
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.DataAccess.Tests", "tests\Rental.DataAccess.Tests\Rental.DataAccess.Tests.csproj", "{4DC65A84-6A16-4CDA-8925-1146D0E97F24}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.CQS", "src\Rental.CQS\Rental.CQS.csproj", "{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{E8024DBB-5DCF-43EB-92E5-257A157BF2F1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.Core.Tests", "tests\Rental.Core.Tests\Rental.Core.Tests.csproj", "{FC348685-D1B2-4134-BEC1-14FA6153B83A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playingo.Domain", "src\Playingo.Domain\Playingo.Domain.csproj", "{A2F69692-D169-4D2C-A3C3-9067B443C60B}"
@@ -43,10 +39,6 @@ Global
 		{4DC65A84-6A16-4CDA-8925-1146D0E97F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DC65A84-6A16-4CDA-8925-1146D0E97F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DC65A84-6A16-4CDA-8925-1146D0E97F24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC348685-D1B2-4134-BEC1-14FA6153B83A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC348685-D1B2-4134-BEC1-14FA6153B83A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC348685-D1B2-4134-BEC1-14FA6153B83A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,7 +53,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4DC65A84-6A16-4CDA-8925-1146D0E97F24} = {53B68C94-BAC8-4F33-8936-0B1EF6ED677F}
-		{7A0F889B-00D5-4F6F-BFBD-D8EA0F7207FE} = {E8024DBB-5DCF-43EB-92E5-257A157BF2F1}
 		{FC348685-D1B2-4134-BEC1-14FA6153B83A} = {53B68C94-BAC8-4F33-8936-0B1EF6ED677F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -1,5 +1,5 @@
-﻿using Playingo.Domain.BoardGames;
-using Rental.CQS;
+﻿using Playingo.Application.Common.Mediator;
+using Playingo.Domain.BoardGames;
 
 namespace Playingo.Application.Interfaces.DataAccess.Commands
 {

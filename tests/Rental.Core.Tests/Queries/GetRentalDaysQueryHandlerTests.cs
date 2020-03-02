@@ -7,9 +7,9 @@ using FluentAssertions;
 using Moq;
 using Playingo.Application.BoardGames;
 using Playingo.Application.Common.Helpers;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Rentals;
 using Playingo.Domain.Rentals;
-using Rental.CQS;
 using Xunit;
 
 namespace Rental.Core.Tests.Queries

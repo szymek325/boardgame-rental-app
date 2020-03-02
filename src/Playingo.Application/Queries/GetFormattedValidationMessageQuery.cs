@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using FluentValidation.Results;
-using Rental.CQS;
+using Playingo.Application.Common.Mediator;
 
 namespace Playingo.Application.Queries
 {

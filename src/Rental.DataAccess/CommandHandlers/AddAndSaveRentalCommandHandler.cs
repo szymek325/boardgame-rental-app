@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
-using Rental.CQS;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.CommandHandlers

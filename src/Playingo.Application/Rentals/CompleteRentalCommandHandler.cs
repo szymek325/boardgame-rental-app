@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain;
-using Rental.CQS;
 
 namespace Playingo.Application.Rentals
 {

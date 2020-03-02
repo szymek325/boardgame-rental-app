@@ -2,10 +2,10 @@
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Playingo.Application.Common.Helpers;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
-using Rental.CQS;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 [assembly: InternalsVisibleTo("Rental.Core.Tests")]

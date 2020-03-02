@@ -8,10 +8,10 @@ using FluentValidation.Results;
 using Moq;
 using Playingo.Application.BoardGames;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Queries;
 using Playingo.Domain.BoardGames;
-using Rental.CQS;
 using Xunit;
 
 namespace Rental.Core.Tests.Commands

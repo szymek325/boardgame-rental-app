@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Rental.CQS
+namespace Playingo.Application.Common.Mediator
 {
     public interface IMediatorService
     {

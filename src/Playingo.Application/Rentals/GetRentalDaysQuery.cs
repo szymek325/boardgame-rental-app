@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Playingo.Application.Common.Mediator;
 using Playingo.Domain.Rentals;
-using Rental.CQS;
 
 namespace Playingo.Application.Rentals
 {

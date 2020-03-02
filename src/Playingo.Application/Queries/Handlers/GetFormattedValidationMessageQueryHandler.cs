@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Rental.CQS;
+using Playingo.Application.Common.Mediator;
 
 namespace Playingo.Application.Queries.Handlers
 {

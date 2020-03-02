@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Playingo.Application.BoardGames;
 using Playingo.Application.Common.Helpers;
+using Playingo.Application.Common.Mediator;
 using Playingo.Domain.Rentals;
-using Rental.CQS;
 
 namespace Playingo.Application.Rentals
 {
