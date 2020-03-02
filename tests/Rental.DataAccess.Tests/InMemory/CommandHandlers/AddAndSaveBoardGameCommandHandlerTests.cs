@@ -36,7 +36,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         {
             var boardGame = new BoardGame(Guid.NewGuid(), "test", 15);
             var input = new AddAndSaveBoardGameCommand(boardGame);
-            var entity = new Playingo.Infrastructure.Persistence.Entities.BoardGame()
+            var entity = new Playingo.Infrastructure.Persistence.Entities.BoardGame
             {
                 Id = boardGame.Id,
                 Name = boardGame.Name,

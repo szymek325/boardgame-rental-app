@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Domain.Clients;
 using Playingo.Infrastructure.Persistence.Context;
 
 namespace Playingo.Infrastructure.Persistence.Repositories
 {
-    internal class ClientRepository: IClientRepository
+    internal class ClientRepository : IClientRepository
     {
         private readonly RentalContext _context;
 
@@ -16,7 +17,7 @@ namespace Playingo.Infrastructure.Persistence.Repositories
 
         public Task AddASync(Client client)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

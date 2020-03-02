@@ -4,8 +4,18 @@ using Microsoft.Extensions.Options;
 using Playingo.Application.Common.Configuration;
 using Playingo.Application.Common.Mediator;
 
-namespace Playingo.Application.BoardGames
+namespace Playingo.Application.BoardGames.Commands
 {
+    internal class GetBoardGameRentDayPriceQuery : IQuery<decimal>
+    {
+        public GetBoardGameRentDayPriceQuery(decimal boardGamePrice)
+        {
+            BoardGamePrice = boardGamePrice;
+        }
+
+        public decimal BoardGamePrice { get; set; }
+    }
+
     internal class GetBoardGameRentDayPriceQueryHandler : IQueryHandler<GetBoardGameRentDayPriceQuery, decimal>
     {
         private readonly IOptions<PricesConfiguration> _pricesOptions;

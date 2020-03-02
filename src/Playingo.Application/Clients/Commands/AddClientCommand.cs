@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using Playingo.Application.Common.Exceptions;
@@ -7,8 +8,27 @@ using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.Clients;
 
-namespace Playingo.Application.Clients
+namespace Playingo.Application.Clients.Commands
 {
+    public class AddClientCommand : ICommand
+    {
+        public AddClientCommand(Guid newClientGuid, string firstName, string lastName, string contactNumber,
+            string emailAddress)
+        {
+            NewClientGuid = newClientGuid;
+            FirstName = firstName;
+            LastName = lastName;
+            ContactNumber = contactNumber;
+            EmailAddress = emailAddress;
+        }
+
+        public Guid NewClientGuid { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ContactNumber { get; set; }
+        public string EmailAddress { get; set; }
+    }
+
     internal class AddClientCommandHandler : ICommandHandler<AddClientCommand>
     {
         private readonly IMediatorService _mediatorService;

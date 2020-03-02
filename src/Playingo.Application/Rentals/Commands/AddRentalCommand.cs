@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using Playingo.Application.Common.Exceptions;
@@ -7,15 +8,32 @@ using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Application.Validation;
 using Playingo.Domain;
+using Playingo.Domain.Rentals;
 
-namespace Playingo.Application.Rentals
+namespace Playingo.Application.Rentals.Commands
 {
+    public class AddRentalCommand : ICommand
+    {
+        public AddRentalCommand(Guid newGameRentalGuid, Guid clientGuid, Guid boardGameGuid, decimal chargedDeposit)
+        {
+            NewGameRentalGuid = newGameRentalGuid;
+            ClientGuid = clientGuid;
+            BoardGameGuid = boardGameGuid;
+            ChargedDeposit = chargedDeposit;
+        }
+
+        public Guid NewGameRentalGuid { get; set; }
+        public Guid ClientGuid { get; }
+        public Guid BoardGameGuid { get; }
+        public decimal ChargedDeposit { get; }
+    }
+
     internal class AddRentalCommandHandler : ICommandHandler<AddRentalCommand>
     {
         private readonly IMediatorService _mediatorService;
-        private readonly IValidator<Domain.Rentals.Rental> _validator;
+        private readonly IValidator<Rental> _validator;
 
-        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Domain.Rentals.Rental> validator)
+        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Rental> validator)
         {
             _mediatorService = mediatorService;
             _validator = validator;
@@ -23,7 +41,7 @@ namespace Playingo.Application.Rentals
 
         public async Task Handle(AddRentalCommand command, CancellationToken cancellationToken)
         {
-            var newGameRental = new Domain.Rentals.Rental(command.NewGameRentalGuid, command.ClientGuid,
+            var newGameRental = new Rental(command.NewGameRentalGuid, command.ClientGuid,
                 command.BoardGameGuid,
                 command.ChargedDeposit)
             {

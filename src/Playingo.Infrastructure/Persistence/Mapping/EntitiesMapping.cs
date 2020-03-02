@@ -11,7 +11,7 @@ namespace Playingo.Infrastructure.Persistence.Mapping
         {
             CreateMap<BoardGame, Entities.BoardGame>().ReverseMap();
             CreateMap<Client, Entities.Client>().ReverseMap();
-            CreateMap<Playingo.Domain.Rentals.Rental, Entities.Rental>().ReverseMap();
+            CreateMap<Rental, Entities.Rental>().ReverseMap();
             CreateMap<RentalWithDetails, Entities.Rental>().ReverseMap();
         }
     }

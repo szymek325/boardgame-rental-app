@@ -6,13 +6,14 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Queries;
+using Playingo.Domain.Rentals;
 using Playingo.Infrastructure.Persistence.Context;
 
 namespace Playingo.Infrastructure.Persistence.QueryHandlers
 {
     internal class
         GetAllRentalsForClientQueryHandler : IQueryHandler<GetAllRentalsForClientQuery,
-            IList<Playingo.Domain.Rentals.Rental>>
+            IList<Rental>>
     {
         private readonly IMapper _mapper;
         private readonly RentalContext _rentalContext;
@@ -23,12 +24,12 @@ namespace Playingo.Infrastructure.Persistence.QueryHandlers
             _rentalContext = rentalContext;
         }
 
-        public async Task<IList<Playingo.Domain.Rentals.Rental>> Handle(GetAllRentalsForClientQuery query,
+        public async Task<IList<Rental>> Handle(GetAllRentalsForClientQuery query,
             CancellationToken cancellationToken)
         {
             var entities = await _rentalContext.Rentals.Where(x => x.ClientId == query.ClientId)
                 .ToListAsync(cancellationToken);
-            var mappedRentals = _mapper.Map<IList<Playingo.Domain.Rentals.Rental>>(entities);
+            var mappedRentals = _mapper.Map<IList<Rental>>(entities);
             return mappedRentals;
         }
     }

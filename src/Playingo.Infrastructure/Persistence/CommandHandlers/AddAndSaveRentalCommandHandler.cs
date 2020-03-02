@@ -4,6 +4,7 @@ using AutoMapper;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Entities;
 
 namespace Playingo.Infrastructure.Persistence.CommandHandlers
 {
@@ -20,7 +21,7 @@ namespace Playingo.Infrastructure.Persistence.CommandHandlers
 
         public async Task Handle(AddAndSaveRentalCommand command, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<Entities.Rental>(command.Rental);
+            var entity = _mapper.Map<Rental>(command.Rental);
             await _rentalContext.Rentals.AddAsync(entity, cancellationToken);
             await _rentalContext.SaveChangesAsync(cancellationToken);
         }

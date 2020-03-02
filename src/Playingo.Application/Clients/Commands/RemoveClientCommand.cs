@@ -1,12 +1,23 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 
-namespace Playingo.Application.Clients
+namespace Playingo.Application.Clients.Commands
 {
+    public class RemoveClientCommand : ICommand
+    {
+        public RemoveClientCommand(Guid id)
+        {
+            Id = id;
+        }
+
+        public Guid Id { get; }
+    }
+
     internal class RemoveClientCommandHandler : ICommandHandler<RemoveClientCommand>
     {
         private readonly IMediatorService _mediatorService;

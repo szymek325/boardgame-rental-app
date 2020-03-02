@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Playingo.Application.BoardGames;
+using Playingo.Application.BoardGames.Commands;
 using Playingo.Application.Common.Helpers;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Rentals;
+using Playingo.Application.Rentals.Queries;
 using Playingo.Domain.Rentals;
 using Xunit;
 

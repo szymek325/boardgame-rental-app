@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
+using Playingo.Domain.Rentals;
 
 namespace Playingo.Application.Validation
 {
-    internal class RentalValidator : AbstractValidator<Domain.Rentals.Rental>
+    internal class RentalValidator : AbstractValidator<Rental>
     {
         public RentalValidator()
         {

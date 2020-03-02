@@ -25,4 +25,9 @@
     <ProjectReference Include="..\Playingo.Domain\Playingo.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BoardGames\Queries" />
+    <Folder Include="Clients\Queries" />
+  </ItemGroup>
+
 </Project>

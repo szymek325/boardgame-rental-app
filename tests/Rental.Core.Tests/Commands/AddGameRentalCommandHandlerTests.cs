@@ -11,6 +11,7 @@ using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Application.Rentals;
+using Playingo.Application.Rentals.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
