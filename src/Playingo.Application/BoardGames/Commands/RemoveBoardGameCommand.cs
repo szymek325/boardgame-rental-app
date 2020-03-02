@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Playingo.Application.BoardGames.Queries;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
-using Playingo.Application.Interfaces.DataAccess.Queries;
 
 namespace Playingo.Application.BoardGames.Commands
 {

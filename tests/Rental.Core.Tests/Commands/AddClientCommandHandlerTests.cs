@@ -6,7 +6,6 @@ using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
 using Moq;
-using Playingo.Application.Clients;
 using Playingo.Application.Clients.Commands;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;

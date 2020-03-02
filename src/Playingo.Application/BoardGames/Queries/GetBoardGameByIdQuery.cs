@@ -2,7 +2,7 @@
 using Playingo.Application.Common.Mediator;
 using Playingo.Domain.BoardGames;
 
-namespace Playingo.Application.Interfaces.DataAccess.Queries
+namespace Playingo.Application.BoardGames.Queries
 {
     public class GetBoardGameByIdQuery : IQuery<BoardGame>
     {

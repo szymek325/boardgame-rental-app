@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
-using Playingo.Application.BoardGames;
 using Playingo.Application.BoardGames.Commands;
 using Playingo.Application.Common.Configuration;
 using Playingo.Application.Common.Mediator;

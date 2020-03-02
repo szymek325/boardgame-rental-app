@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Playingo.Application.Clients.Queries;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.Clients;
 using Playingo.Infrastructure.Persistence.Context;
 

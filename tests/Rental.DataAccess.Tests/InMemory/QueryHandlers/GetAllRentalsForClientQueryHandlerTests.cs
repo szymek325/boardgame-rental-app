@@ -6,7 +6,7 @@ using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Queries;
+using Playingo.Application.Rentals.Queries;
 using Playingo.Infrastructure.Persistence.Context;
 using Playingo.Infrastructure.Persistence.Mapping;
 using Playingo.Infrastructure.Persistence.QueryHandlers;

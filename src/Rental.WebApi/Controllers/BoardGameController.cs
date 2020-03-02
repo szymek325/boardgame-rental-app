@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Playingo.Application.BoardGames;
 using Playingo.Application.BoardGames.Commands;
+using Playingo.Application.BoardGames.Queries;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Queries;
 using Rental.WebApi.Dto;
 
 namespace Rental.WebApi.Controllers

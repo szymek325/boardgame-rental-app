@@ -2,7 +2,7 @@
 using Playingo.Application.Common.Mediator;
 using Playingo.Domain.Rentals;
 
-namespace Playingo.Application.Interfaces.DataAccess.Queries
+namespace Playingo.Application.Rentals.Queries
 {
     public class GetAllRentalsQuery : IQuery<IList<Rental>>
     {
