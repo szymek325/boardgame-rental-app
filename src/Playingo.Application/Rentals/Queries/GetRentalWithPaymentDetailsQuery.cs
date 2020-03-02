@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -7,8 +8,18 @@ using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.Rentals;
 
-namespace Playingo.Application.Rentals
+namespace Playingo.Application.Rentals.Queries
 {
+    public class GetRentalWithPaymentDetailsQuery : IQuery<RentalWithPaymentDetails>
+    {
+        public GetRentalWithPaymentDetailsQuery(Guid rentalGuid)
+        {
+            RentalGuid = rentalGuid;
+        }
+
+        public Guid RentalGuid { get; set; }
+    }
+
     internal class
         GetRentalWithPaymentDetailsQueryHandler : IQueryHandler<GetRentalWithPaymentDetailsQuery,
             RentalWithPaymentDetails>

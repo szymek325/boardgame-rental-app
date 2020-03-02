@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using Playingo.Application.Common.Exceptions;
@@ -8,8 +9,22 @@ using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 
-namespace Playingo.Application.BoardGames
+namespace Playingo.Application.BoardGames.Commands
 {
+    public class UpdateBoardGameCommand : ICommand
+    {
+        public UpdateBoardGameCommand(Guid id, string name, decimal price)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+        }
+
+        public Guid Id { get; }
+        public string Name { get; }
+        public decimal Price { get; }
+    }
+
     internal class UpdateBoardGameCommandHandler : ICommandHandler<UpdateBoardGameCommand>
     {
         private readonly IMediatorService _mediatorService;

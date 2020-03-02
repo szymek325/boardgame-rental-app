@@ -22,7 +22,7 @@ namespace Playingo.Infrastructure.Persistence.Context
 
         public DbSet<BoardGame> BoardGames { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Entities.Rental> Rentals { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,8 +31,8 @@ namespace Playingo.Infrastructure.Persistence.Context
             modelBuilder.Entity<BoardGame>().HasKey(x => x.Id);
             modelBuilder.Entity<BoardGame>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
-            modelBuilder.Entity<Entities.Rental>().HasKey(x => x.Id);
-            modelBuilder.Entity<Entities.Rental>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
+            modelBuilder.Entity<Rental>().HasKey(x => x.Id);
+            modelBuilder.Entity<Rental>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
             modelBuilder.Entity<Client>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
@@ -61,7 +61,7 @@ namespace Playingo.Infrastructure.Persistence.Context
             modelBuilder.Entity<BoardGame>().HasData(boardGames);
 
             var rnd = new Random();
-            var rentals = Builder<Entities.Rental>.CreateListOfSize(100)
+            var rentals = Builder<Rental>.CreateListOfSize(100)
                 .All()
                 .With(c => c.Id = Guid.NewGuid())
                 .With(c => c.ClientId = client.OrderBy(x => Guid.NewGuid()).First().Id)
@@ -69,7 +69,7 @@ namespace Playingo.Infrastructure.Persistence.Context
                 .With(c => c.ChargedDeposit = 15)
                 .With(c => c.Status = (Status) rnd.Next(1, 2))
                 .Build();
-            modelBuilder.Entity<Entities.Rental>().HasData(rentals);
+            modelBuilder.Entity<Rental>().HasData(rentals);
         }
     }
 }

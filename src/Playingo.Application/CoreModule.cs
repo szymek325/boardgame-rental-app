@@ -6,6 +6,7 @@ using Playingo.Application.Common.Mediator;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
+using Playingo.Domain.Rentals;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 [assembly: InternalsVisibleTo("Rental.Core.Tests")]
@@ -18,7 +19,7 @@ namespace Playingo.Application
         {
             services.AddTransient<IValidator<BoardGame>, BoardGameValidator>();
             services.AddTransient<IValidator<Client>, ClientValidator>();
-            services.AddTransient<IValidator<Domain.Rentals.Rental>, RentalValidator>();
+            services.AddTransient<IValidator<Rental>, RentalValidator>();
             services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
             services.AddTransient<IMediatorService, MediatorService>();

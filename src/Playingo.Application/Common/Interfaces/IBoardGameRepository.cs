@@ -7,6 +7,4 @@ namespace Playingo.Application.Common.Interfaces
     {
         Task AddAsync(BoardGame boardGame);
     }
-    
-    
 }

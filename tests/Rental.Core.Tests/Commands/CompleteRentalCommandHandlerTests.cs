@@ -8,6 +8,7 @@ using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Application.Rentals;
+using Playingo.Application.Rentals.Commands;
 using Playingo.Domain;
 using Xunit;
 

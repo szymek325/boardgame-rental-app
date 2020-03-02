@@ -7,6 +7,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Moq;
 using Playingo.Application.BoardGames;
+using Playingo.Application.BoardGames.Commands;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
