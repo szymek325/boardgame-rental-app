@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rental.CQS;
+using Playingo.Application.Common.Mediator;
 
 namespace Playingo.Application.Interfaces.DataAccess.Queries
 {

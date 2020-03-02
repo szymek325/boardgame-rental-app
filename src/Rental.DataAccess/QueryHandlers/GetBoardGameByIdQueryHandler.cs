@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.BoardGames;
-using Rental.CQS;
 using Rental.DataAccess.Context;
 
 namespace Rental.DataAccess.QueryHandlers

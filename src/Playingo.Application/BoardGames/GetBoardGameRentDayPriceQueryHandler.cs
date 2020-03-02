@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Playingo.Application.Common.Configuration;
-using Rental.CQS;
+using Playingo.Application.Common.Mediator;
 
 namespace Playingo.Application.BoardGames
 {

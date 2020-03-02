@@ -7,13 +7,13 @@ using AutoMapper;
 using FluentAssertions;
 using Moq;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Application.Rentals;
 using Playingo.Domain;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
 using Playingo.Domain.Rentals;
-using Rental.CQS;
 using Xunit;
 
 namespace Rental.Core.Tests.Queries

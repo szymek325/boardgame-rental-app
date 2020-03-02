@@ -14,6 +14,7 @@
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="FluentValidation" Version="8.6.1" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.2" />
@@ -22,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Playingo.Domain\Playingo.Domain.csproj" />
-    <ProjectReference Include="..\Rental.CQS\Rental.CQS.csproj" />
   </ItemGroup>
 
 </Project>

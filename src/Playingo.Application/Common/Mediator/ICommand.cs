@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Rental.CQS
+namespace Playingo.Application.Common.Mediator
 {
     public interface ICommand : INotification
     {

@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Playingo.Application.BoardGames;
 using Playingo.Application.Common.Configuration;
-using Rental.CQS;
+using Playingo.Application.Common.Mediator;
 using Xunit;
 
 namespace Rental.Core.Tests.Queries
