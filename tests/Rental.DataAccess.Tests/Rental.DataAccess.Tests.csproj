@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rental.DataAccess\Rental.DataAccess.csproj" />
+    <ProjectReference Include="..\..\src\Playingo.Infrastructure\Playingo.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

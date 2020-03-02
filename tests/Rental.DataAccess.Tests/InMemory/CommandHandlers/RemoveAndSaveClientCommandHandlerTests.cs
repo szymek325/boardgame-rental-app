@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Domain.Clients;
-using Rental.DataAccess.CommandHandlers;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.Mapping;
+using Playingo.Infrastructure.Persistence.CommandHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Mapping;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
@@ -35,14 +35,14 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         public async Task Handle_Should_RemoveClientFromDb_When_ClientExists()
         {
             var client = new Client(Guid.NewGuid(), "First", "Last", "number", "email");
-            var entities = new List<Entities.Client>
+            var entities = new List<Playingo.Infrastructure.Persistence.Entities.Client>
             {
-                new Entities.Client
+                new Playingo.Infrastructure.Persistence.Entities.Client
                 {
                     Id = client.Id,
                     FirstName = "test1"
                 },
-                new Entities.Client
+                new Playingo.Infrastructure.Persistence.Entities.Client
                 {
                     Id = Guid.NewGuid(),
                     FirstName = "test2"

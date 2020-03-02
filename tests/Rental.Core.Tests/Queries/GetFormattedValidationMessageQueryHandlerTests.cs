@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation.Results;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Queries;
-using Playingo.Application.Queries.Handlers;
+using Playingo.Application.Validation;
 using Xunit;
 
 namespace Rental.Core.Tests.Queries

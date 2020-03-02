@@ -7,9 +7,9 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Queries;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.Mapping;
-using Rental.DataAccess.QueryHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Mapping;
+using Playingo.Infrastructure.Persistence.QueryHandlers;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
@@ -32,17 +32,17 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         public async Task Handle_Should_ReturnElementWithSpecificId()
         {
             var inputId = Guid.NewGuid();
-            var entity1 = new Entities.Rental
+            var entity1 = new Playingo.Infrastructure.Persistence.Entities.Rental
             {
                 Id = inputId,
                 PaidMoney = 10
             };
-            var entity2 = new Entities.Rental
+            var entity2 = new Playingo.Infrastructure.Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 PaidMoney = 20
             };
-            var entities = new List<Entities.Rental> {entity1, entity2};
+            var entities = new List<Playingo.Infrastructure.Persistence.Entities.Rental> {entity1, entity2};
             await _rentalContext.Rentals.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 
@@ -56,17 +56,17 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         [Fact]
         public async Task Handle_Should_ReturnNull_When_NoMatchingElementsFound()
         {
-            var entity1 = new Entities.Rental
+            var entity1 = new Playingo.Infrastructure.Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 PaidMoney = 10
             };
-            var entity2 = new Entities.Rental
+            var entity2 = new Playingo.Infrastructure.Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 PaidMoney = 20
             };
-            var entities = new List<Entities.Rental> {entity1, entity2};
+            var entities = new List<Playingo.Infrastructure.Persistence.Entities.Rental> {entity1, entity2};
             await _rentalContext.Rentals.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 

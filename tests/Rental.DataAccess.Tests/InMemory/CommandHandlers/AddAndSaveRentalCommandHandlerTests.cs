@@ -7,9 +7,9 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
-using Rental.DataAccess.CommandHandlers;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.Mapping;
+using Playingo.Infrastructure.Persistence.CommandHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Mapping;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
@@ -47,7 +47,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         {
             var rental = new Playingo.Domain.Rentals.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
             var input = new AddAndSaveRentalCommand(rental);
-            var existingEntity = new Entities.Rental
+            var existingEntity = new Playingo.Infrastructure.Persistence.Entities.Rental
             {
                 Id = rental.Id
             };

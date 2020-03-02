@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Playingo.Application\Playingo.Application.csproj" />
-    <ProjectReference Include="..\Rental.DataAccess\Rental.DataAccess.csproj" />
+    <ProjectReference Include="..\Playingo.Infrastructure\Playingo.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
