@@ -8,9 +8,9 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
-using Rental.DataAccess.CommandHandlers;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.Mapping;
+using Playingo.Infrastructure.Persistence.CommandHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Mapping;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
@@ -45,14 +45,14 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         public async Task Handle_Should_UpdateEntity_When_ItExists()
         {
             var input = new Playingo.Domain.Rentals.Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
-            var entities = new List<Entities.Rental>
+            var entities = new List<Playingo.Infrastructure.Persistence.Entities.Rental>
             {
-                new Entities.Rental
+                new Playingo.Infrastructure.Persistence.Entities.Rental
                 {
                     Id = input.Id,
                     ClientId = Guid.NewGuid()
                 },
-                new Entities.Rental
+                new Playingo.Infrastructure.Persistence.Entities.Rental
                 {
                     Id = Guid.NewGuid(),
                     ClientId = Guid.NewGuid()

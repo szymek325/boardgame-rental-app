@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Domain.BoardGames;
-using Rental.DataAccess.CommandHandlers;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.Mapping;
+using Playingo.Infrastructure.Persistence.CommandHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Mapping;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
@@ -36,7 +36,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         {
             var boardGame = new BoardGame(Guid.NewGuid(), "test", 15);
             var input = new AddAndSaveBoardGameCommand(boardGame);
-            var entity = new Entities.BoardGame
+            var entity = new Playingo.Infrastructure.Persistence.Entities.BoardGame()
             {
                 Id = boardGame.Id,
                 Name = boardGame.Name,
@@ -54,7 +54,7 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         {
             var boardGame = new BoardGame(Guid.NewGuid(), "test", 15);
             var input = new AddAndSaveBoardGameCommand(boardGame);
-            var existingEntity = new Entities.BoardGame
+            var existingEntity = new Playingo.Infrastructure.Persistence.Entities.BoardGame
             {
                 Id = boardGame.Id
             };

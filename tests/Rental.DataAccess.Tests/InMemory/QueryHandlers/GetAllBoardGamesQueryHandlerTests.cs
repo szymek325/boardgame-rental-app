@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.BoardGames;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.Mapping;
-using Rental.DataAccess.QueryHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Mapping;
+using Playingo.Infrastructure.Persistence.QueryHandlers;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
@@ -41,15 +41,15 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         [Fact]
         public async Task Handle_Should_ReturnMappedListOfGameBoards_When_SomeExist()
         {
-            var entity1 = new Entities.BoardGame
+            var entity1 = new Playingo.Infrastructure.Persistence.Entities.BoardGame
             {
                 Id = Guid.NewGuid()
             };
-            var entity2 = new Entities.BoardGame
+            var entity2 = new Playingo.Infrastructure.Persistence.Entities.BoardGame
             {
                 Id = Guid.NewGuid()
             };
-            var entities = new List<Entities.BoardGame> {entity1, entity2};
+            var entities = new List<Playingo.Infrastructure.Persistence.Entities.BoardGame> {entity1, entity2};
             await _rentalContext.BoardGames.AddRangeAsync(entities);
             await _rentalContext.SaveChangesAsync();
 

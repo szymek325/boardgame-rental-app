@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Domain.BoardGames;
-using Rental.DataAccess.CommandHandlers;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.Mapping;
+using Playingo.Infrastructure.Persistence.CommandHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.Mapping;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
@@ -46,14 +46,14 @@ namespace Rental.DataAccess.Tests.InMemory.CommandHandlers
         public async Task Handle_Should_UpdateEntity_When_ItExists()
         {
             var input = new BoardGame(Guid.NewGuid(), "Test Updated", 20);
-            var entities = new List<Entities.BoardGame>
+            var entities = new List<Playingo.Infrastructure.Persistence.Entities.BoardGame>
             {
-                new Entities.BoardGame
+                new Playingo.Infrastructure.Persistence.Entities.BoardGame
                 {
                     Id = input.Id,
                     Name = "test1"
                 },
-                new Entities.BoardGame
+                new Playingo.Infrastructure.Persistence.Entities.BoardGame
                 {
                     Id = Guid.NewGuid(),
                     Name = "test2"

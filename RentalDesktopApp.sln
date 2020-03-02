@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29123.89
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playingo.Application", "src\Playingo.Application\Playingo.Application.csproj", "{14D1A0EE-3EF6-4226-8B2B-40A219ED1D06}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.DataAccess", "src\Rental.DataAccess\Rental.DataAccess.csproj", "{6959C936-DF0C-4267-B7CF-9352695761D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playingo.Infrastructure", "src\Playingo.Infrastructure\Playingo.Infrastructure.csproj", "{6959C936-DF0C-4267-B7CF-9352695761D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.WebApi", "src\Rental.WebApi\Rental.WebApi.csproj", "{019AA7BD-7578-47D6-BC98-AFD1E3B53AF9}"
 EndProject

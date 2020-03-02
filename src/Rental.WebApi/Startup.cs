@@ -12,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Playingo.Application;
 using Playingo.Application.Common.Configuration;
-using Rental.DataAccess;
+using Playingo.Infrastructure;
 using Rental.WebApi.Middleware;
 using Rental.WebApi.SwaggerConfiguration;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -31,8 +31,8 @@ namespace Rental.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddAutoMapper(typeof(Startup), typeof(CoreModule), typeof(EntityFrameworkModule));
-            services.AddMediatR(typeof(Startup), typeof(CoreModule), typeof(EntityFrameworkModule));
+            services.AddAutoMapper(typeof(Startup), typeof(CoreModule), typeof(InfrastructureModule));
+            services.AddMediatR(typeof(Startup), typeof(CoreModule), typeof(InfrastructureModule));
 
             services.AddApiVersioning(
                 options => { options.ReportApiVersions = true; });

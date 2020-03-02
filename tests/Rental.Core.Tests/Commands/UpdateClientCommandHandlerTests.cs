@@ -11,7 +11,7 @@ using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Interfaces.DataAccess.Queries;
-using Playingo.Application.Queries;
+using Playingo.Application.Validation;
 using Playingo.Domain.Clients;
 using Xunit;
 

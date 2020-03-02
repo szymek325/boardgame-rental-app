@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain;
-using Rental.DataAccess.Context;
-using Rental.DataAccess.QueryHandlers;
+using Playingo.Infrastructure.Persistence.Context;
+using Playingo.Infrastructure.Persistence.QueryHandlers;
 using Xunit;
 
 namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
@@ -32,14 +32,14 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         {
             var clientId = Guid.NewGuid();
             var input = new CheckIfClientHasOnlyCompletedRentalsQuery(clientId);
-            var rentals = new List<Entities.Rental>
+            var rentals = new List<Playingo.Infrastructure.Persistence.Entities.Rental>
             {
-                new Entities.Rental
+                new Playingo.Infrastructure.Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.InProgress
                 },
-                new Entities.Rental
+                new Playingo.Infrastructure.Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.Completed
@@ -69,14 +69,14 @@ namespace Rental.DataAccess.Tests.InMemory.QueryHandlers
         {
             var clientId = Guid.NewGuid();
             var input = new CheckIfClientHasOnlyCompletedRentalsQuery(clientId);
-            var rentals = new List<Entities.Rental>
+            var rentals = new List<Playingo.Infrastructure.Persistence.Entities.Rental>
             {
-                new Entities.Rental
+                new Playingo.Infrastructure.Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.Completed
                 },
-                new Entities.Rental
+                new Playingo.Infrastructure.Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.Completed
