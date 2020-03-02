@@ -17,9 +17,9 @@ namespace Playingo.Infrastructure
         public static IServiceCollection AddDataAccessModule(this IServiceCollection services,
             ConnectionStrings connectionStrings)
         {
-            services.AddDbContext<RentalContext>(options => options.UseSqlite(connectionStrings.SqLite,
+            services.AddDbContext<PlayingoContext>(options => options.UseSqlite(connectionStrings.SqLite,
                 migrationsOptions =>
-                    migrationsOptions.MigrationsAssembly(typeof(RentalContext).GetTypeInfo().Assembly
+                    migrationsOptions.MigrationsAssembly(typeof(PlayingoContext).GetTypeInfo().Assembly
                         .GetName()
                         .Name)));
             services.AddTransient<IUnitOfWork, UnitOfWork>();

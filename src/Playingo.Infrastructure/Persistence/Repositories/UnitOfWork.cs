@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Infrastructure.Persistence.Context;
@@ -7,43 +8,43 @@ namespace Playingo.Infrastructure.Persistence.Repositories
 {
     internal class UnitOfWork : IUnitOfWork
     {
-        private readonly RentalContext _context;
         private readonly IMapper _mapper;
+        private readonly PlayingoContext _playingoContext;
 
         private IBoardGameRepository _boardGameRepository;
         private IClientRepository _clientRepository;
         private IRentalRepository _rentalRepository;
 
-        public UnitOfWork(RentalContext context, IMapper mapper)
+        public UnitOfWork(PlayingoContext playingoContext, IMapper mapper)
         {
-            _context = context;
+            _playingoContext = playingoContext;
             _mapper = mapper;
         }
 
 
         public IBoardGameRepository BoardGameRepository
         {
-            get { return _boardGameRepository ??= new BoardGameRepository(_context, _mapper); }
+            get { return _boardGameRepository ??= new BoardGameRepository(_playingoContext, _mapper); }
         }
 
         public IClientRepository ClientRepository
         {
-            get { return _clientRepository ??= new ClientRepository(_context, _mapper); }
+            get { return _clientRepository ??= new ClientRepository(_playingoContext, _mapper); }
         }
 
         public IRentalRepository RentalRepository
         {
-            get { return _rentalRepository ??= new RentalRepository(_context, _mapper); }
+            get { return _rentalRepository ??= new RentalRepository(_playingoContext, _mapper); }
         }
 
         public void SaveChanges()
         {
-            _context.SaveChanges();
+            _playingoContext.SaveChanges();
         }
 
-        public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
-            await _context.SaveChangesAsync();
+            await _playingoContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

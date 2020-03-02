@@ -7,20 +7,20 @@ using Playingo.Application.Common.Configuration;
 
 namespace Playingo.Infrastructure.Persistence.Context
 {
-    internal class RentalContextFactory : IDesignTimeDbContextFactory<RentalContext>
+    internal class PlayingoContextFactory : IDesignTimeDbContextFactory<PlayingoContext>
     {
-        public RentalContext CreateDbContext(string[] args)
+        public PlayingoContext CreateDbContext(string[] args)
         {
             var connectionStrings = GetConnectionString();
-            var builder = new DbContextOptionsBuilder<RentalContext>();
+            var builder = new DbContextOptionsBuilder<PlayingoContext>();
 
             builder.UseSqlite(connectionStrings.SqLite,
                 migrationsOptions =>
-                    migrationsOptions.MigrationsAssembly(typeof(RentalContext).GetTypeInfo().Assembly
+                    migrationsOptions.MigrationsAssembly(typeof(PlayingoContext).GetTypeInfo().Assembly
                         .GetName()
                         .Name));
 
-            return new RentalContext(builder.Options);
+            return new PlayingoContext(builder.Options);
         }
 
         private static ConnectionStrings GetConnectionString()
