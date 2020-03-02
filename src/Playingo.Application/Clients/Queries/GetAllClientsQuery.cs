@@ -2,7 +2,7 @@
 using Playingo.Application.Common.Mediator;
 using Playingo.Domain.Clients;
 
-namespace Playingo.Application.Interfaces.DataAccess.Queries
+namespace Playingo.Application.Clients.Queries
 {
     public class GetAllClientsQuery : IQuery<IList<Client>>
     {

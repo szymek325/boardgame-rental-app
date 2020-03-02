@@ -3,12 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
-using Playingo.Application.Clients;
 using Playingo.Application.Clients.Commands;
+using Playingo.Application.Clients.Queries;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
-using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.Clients;
 using Xunit;
 

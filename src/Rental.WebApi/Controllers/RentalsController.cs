@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Queries;
-using Playingo.Application.Rentals;
 using Playingo.Application.Rentals.Commands;
 using Playingo.Application.Rentals.Queries;
 using Rental.WebApi.Dto;

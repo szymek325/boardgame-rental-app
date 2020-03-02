@@ -3,12 +3,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
-using Playingo.Application.BoardGames;
 using Playingo.Application.BoardGames.Commands;
+using Playingo.Application.BoardGames.Queries;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
-using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.BoardGames;
 using Xunit;
 

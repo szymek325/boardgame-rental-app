@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain.Rentals;
 
 namespace Playingo.Application.Rentals.Queries

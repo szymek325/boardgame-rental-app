@@ -1,7 +1,7 @@
 ﻿using System;
 using Playingo.Application.Common.Mediator;
 
-namespace Playingo.Application.Interfaces.DataAccess.Queries
+namespace Playingo.Application.BoardGames.Queries
 {
     public class CheckIfBoardGameHasOnlyCompletedRentalsQuery : IQuery<bool>
     {

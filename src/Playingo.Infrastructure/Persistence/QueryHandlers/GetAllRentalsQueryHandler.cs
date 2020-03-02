@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Queries;
+using Playingo.Application.Rentals.Queries;
 using Playingo.Domain.Rentals;
 using Playingo.Infrastructure.Persistence.Context;
 

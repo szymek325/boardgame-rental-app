@@ -2,10 +2,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using Playingo.Application.BoardGames.Queries;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Interfaces.DataAccess.Commands;
-using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 
