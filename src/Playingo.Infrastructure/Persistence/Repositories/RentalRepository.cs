@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -13,79 +14,81 @@ namespace Playingo.Infrastructure.Persistence.Repositories
 {
     internal class RentalRepository : IRentalRepository
     {
-        private readonly RentalContext _context;
         private readonly IMapper _mapper;
+        private readonly PlayingoContext _playingoContext;
 
-        public RentalRepository(RentalContext context, IMapper mapper)
+        public RentalRepository(PlayingoContext playingoContext, IMapper mapper)
         {
-            _context = context;
+            _playingoContext = playingoContext;
             _mapper = mapper;
         }
 
-        public async Task<bool> IsThereInProgressForBoardGameAsync(Guid id)
+        public async Task<bool> AreAllCompletedForBoardGameAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var areAllCompleted = await _context.Rentals
+            var areAllCompleted = await _playingoContext.Rentals
                 .Where(x => x.BoardGameId == id)
-                .AllAsync(x => x.Status == Status.Completed);
+                .AllAsync(x => x.Status == Status.Completed, cancellationToken);
             return areAllCompleted;
         }
 
-        public async Task<bool> IsThereInProgressForClient(Guid id)
+        public async Task<bool> AreAllCompletedForClientAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var areAllCompleted = await _context.Rentals
+            var areAllCompleted = await _playingoContext.Rentals
                 .Where(x => x.ClientId == id)
-                .AllAsync(x => x.Status == Status.Completed);
+                .AllAsync(x => x.Status == Status.Completed, cancellationToken);
             return areAllCompleted;
         }
 
-        public async Task<IList<Rental>> GetAllForBoardGame(Guid id)
+        public async Task<IList<Rental>> GetAllForBoardGameAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var entities = await _context.Rentals.Where(x => x.BoardGameId == id).ToListAsync();
+            var entities = await _playingoContext.Rentals.Where(x => x.BoardGameId == id)
+                .ToListAsync(cancellationToken);
             var mappedRentals = _mapper.Map<IList<Rental>>(entities);
             return mappedRentals;
         }
 
-        public async Task<IList<Rental>> GetAllForClient(Guid id)
+        public async Task<IList<Rental>> GetAllForClientAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var entities = await _context.Rentals.Where(x => x.ClientId == id).ToListAsync();
+            var entities = await _playingoContext.Rentals.Where(x => x.ClientId == id).ToListAsync(cancellationToken);
             var mappedRentals = _mapper.Map<IList<Rental>>(entities);
             return mappedRentals;
         }
 
-        public async Task<IList<Rental>> GetAll()
+        public async Task<IList<Rental>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            var entities = await _context.Rentals.ToListAsync();
+            var entities = await _playingoContext.Rentals.ToListAsync(cancellationToken);
             var mappedRentals = _mapper.Map<IList<Rental>>(entities);
             return mappedRentals;
         }
 
-        public async Task<Rental> GetById(Guid id)
+        public async Task<Rental> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            var entity = await _context.Rentals.SingleOrDefaultAsync(x => x.Id == id);
+            var entity = await _playingoContext.Rentals.SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             var mappedEntity = _mapper.Map<Rental>(entity);
             return mappedEntity;
         }
 
-        public async Task<RentalWithDetails> GetWithDetailsById(Guid id)
+        public async Task<RentalWithDetails> GetWithDetailsByIdAsync(Guid id,
+            CancellationToken cancellationToken = default)
         {
-            var entity = await _context.Rentals
+            var entity = await _playingoContext.Rentals
                 .Include(x => x.BoardGame)
                 .Include(x => x.Client)
-                .SingleOrDefaultAsync(x => x.Id == id);
+                .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
             var mappedEntity = _mapper.Map<RentalWithDetails>(entity);
             return mappedEntity;
         }
 
-        public async Task AddAsync(Rental rental)
+        public async Task AddAsync(Rental rental, CancellationToken cancellationToken = default)
         {
             var entity = _mapper.Map<Entities.Rental>(rental);
-            await _context.Rentals.AddAsync(entity);
+            await _playingoContext.Rentals.AddAsync(entity, cancellationToken);
         }
 
         public Task Update(Rental rental)
         {
             var entity = _mapper.Map<Entities.Rental>(rental);
-            _context.Rentals.Update(entity);
+            _playingoContext.Rentals.Update(entity);
             return Task.CompletedTask;
         }
     }

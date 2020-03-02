@@ -8,14 +8,14 @@ using Playingo.Infrastructure.Persistence.Entities;
 
 namespace Playingo.Infrastructure.Persistence.Context
 {
-    internal class RentalContext : DbContext
+    internal class PlayingoContext : DbContext
     {
         // required for Mock of context
-        internal RentalContext()
+        internal PlayingoContext()
         {
         }
 
-        public RentalContext(DbContextOptions options) : base(options)
+        public PlayingoContext(DbContextOptions options) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }

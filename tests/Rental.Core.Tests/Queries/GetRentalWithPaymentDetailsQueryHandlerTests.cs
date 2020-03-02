@@ -39,7 +39,7 @@ namespace Rental.Core.Tests.Queries
             var client = new Client(Guid.NewGuid(), "Tom", "hanks", "12415421", "email@google.com");
             var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame,
                 client);
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id),
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.RentalGuid == rental.Id),
                     _cancellationToken))
                 .ReturnsAsync(rental);
             var rentalWithPaymentDetails = new RentalWithPaymentDetails
@@ -80,7 +80,7 @@ namespace Rental.Core.Tests.Queries
             var client = new Client(Guid.NewGuid(), "Tom", "hanks", "12415421", "email@google.com");
             var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame,
                 client);
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id),
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.RentalGuid == rental.Id),
                     _cancellationToken))
                 .ReturnsAsync(rental);
             _mapper.Setup(x => x.Map<RentalWithPaymentDetails>(rental))
@@ -107,7 +107,7 @@ namespace Rental.Core.Tests.Queries
             var client = new Client(Guid.NewGuid(), "Tom", "hanks", "12415421", "email@google.com");
             var rental = new RentalWithDetails(Guid.NewGuid(), 15, 0, Status.InProgress, rentDay, null, boardGame,
                 client);
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == rental.Id),
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.RentalGuid == rental.Id),
                     _cancellationToken))
                 .ReturnsAsync(rental);
             _mapper.Setup(x => x.Map<RentalWithPaymentDetails>(rental)).Returns((RentalWithPaymentDetails) null);
@@ -125,7 +125,7 @@ namespace Rental.Core.Tests.Queries
         {
             var inputGuid = Guid.NewGuid();
             RentalWithDetails rental = null;
-            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.GameRentalGuid == inputGuid),
+            _mediatorService.Setup(x => x.Send(It.Is((GetRentalWithDetailsQuery q) => q.RentalGuid == inputGuid),
                     _cancellationToken))
                 .ReturnsAsync(rental);
 

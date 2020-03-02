@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 
@@ -27,11 +27,13 @@ namespace Playingo.Application.BoardGames.Commands
     internal class AddBoardGameCommandHandler : ICommandHandler<AddBoardGameCommand>
     {
         private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IValidator<BoardGame> _validator;
 
-        public AddBoardGameCommandHandler(IMediatorService mediatorService, IValidator<BoardGame> validator)
+        public AddBoardGameCommandHandler(IMediatorService mediatorService, IUnitOfWork unitOfWork, IValidator<BoardGame> validator)
         {
             _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
             _validator = validator;
         }
 
@@ -43,7 +45,8 @@ namespace Playingo.Application.BoardGames.Commands
 
             if (validationResult.IsValid)
             {
-                await _mediatorService.Send(new AddAndSaveBoardGameCommand(newBoardGame), cancellationToken);
+                await _unitOfWork.BoardGameRepository.AddAsync(newBoardGame,cancellationToken);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
             else
             {

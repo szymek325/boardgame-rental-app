@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Playingo.Application.Common.Interfaces
 {
@@ -8,6 +9,6 @@ namespace Playingo.Application.Common.Interfaces
         IClientRepository ClientRepository { get; }
         IRentalRepository RentalRepository { get; }
         void SaveChanges();
-        Task SaveChangesAsync();
+        Task SaveChangesAsync(CancellationToken cancellationToken=default);
     }
 }
