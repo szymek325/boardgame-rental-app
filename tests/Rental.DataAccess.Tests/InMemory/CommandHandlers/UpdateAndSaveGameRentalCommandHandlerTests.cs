@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.Commands;
+using Playingo.Application.Interfaces.DataAccess.Commands;
 using Rental.CQS;
 using Rental.DataAccess.CommandHandlers;
 using Rental.DataAccess.Context;

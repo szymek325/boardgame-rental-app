@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Rental.Core.Interfaces.DataAccess.Queries;
+using Playingo.Application.Interfaces.DataAccess.Queries;
 using Rental.CQS;
 using Rental.DataAccess.Context;
 

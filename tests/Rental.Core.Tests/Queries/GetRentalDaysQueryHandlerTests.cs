@@ -5,10 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
+using Playingo.Application.BoardGames;
+using Playingo.Application.Common.Helpers;
+using Playingo.Application.Rentals;
 using Playingo.Domain.Rentals;
-using Rental.Core.Common.Helpers;
-using Rental.Core.Queries;
-using Rental.Core.Queries.Handlers;
 using Rental.CQS;
 using Xunit;
 

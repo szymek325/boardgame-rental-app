@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Rental.Core.Commands;
-using Rental.Core.Interfaces.DataAccess.Queries;
+using Playingo.Application.Clients;
+using Playingo.Application.Interfaces.DataAccess.Queries;
 using Rental.CQS;
 using Rental.WebApi.Dto;
 

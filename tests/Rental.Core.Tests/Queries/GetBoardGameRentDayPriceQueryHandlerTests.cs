@@ -2,9 +2,8 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
-using Rental.Core.Common.Configuration;
-using Rental.Core.Queries;
-using Rental.Core.Queries.Handlers;
+using Playingo.Application.BoardGames;
+using Playingo.Application.Common.Configuration;
 using Rental.CQS;
 using Xunit;
 

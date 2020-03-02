@@ -3,7 +3,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Rental.Core.Common.Configuration;
+using Playingo.Application.Common.Configuration;
 
 namespace Rental.DataAccess.Context
 {

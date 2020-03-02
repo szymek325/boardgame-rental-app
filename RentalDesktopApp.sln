@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.89
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.Core", "src\Rental.Core\Rental.Core.csproj", "{14D1A0EE-3EF6-4226-8B2B-40A219ED1D06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Playingo.Application", "src\Playingo.Application\Playingo.Application.csproj", "{14D1A0EE-3EF6-4226-8B2B-40A219ED1D06}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rental.DataAccess", "src\Rental.DataAccess\Rental.DataAccess.csproj", "{6959C936-DF0C-4267-B7CF-9352695761D0}"
 EndProject

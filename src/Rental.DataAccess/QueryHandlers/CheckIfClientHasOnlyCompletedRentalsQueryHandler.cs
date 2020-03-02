@@ -2,8 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Playingo.Application.Interfaces.DataAccess.Queries;
 using Playingo.Domain;
-using Rental.Core.Interfaces.DataAccess.Queries;
 using Rental.CQS;
 using Rental.DataAccess.Context;
 
