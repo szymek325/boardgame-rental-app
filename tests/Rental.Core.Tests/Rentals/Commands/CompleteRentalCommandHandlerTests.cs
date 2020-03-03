@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Rentals.Commands;
-using Playingo.Application.Rentals.Queries;
 using Playingo.Domain;
 using Xunit;
 
@@ -17,11 +16,11 @@ namespace Rental.Core.Tests.Rentals.Commands
     {
         public CompleteRentalCommandHandlerTests()
         {
-            _mediatorService = new Mock<IMediatorService>();
-            _sut = new CompleteRentalCommandHandler(_mediatorService.Object);
+            _unitOfWork = new Mock<IUnitOfWork>(MockBehavior.Strict);
+            _sut = new CompleteRentalCommandHandler(_unitOfWork.Object);
         }
 
-        private readonly Mock<IMediatorService> _mediatorService;
+        private readonly Mock<IUnitOfWork> _unitOfWork;
         private readonly ICommandHandler<CompleteRentalCommand> _sut;
         private readonly CancellationToken _cancellationToken = new CancellationToken();
 
@@ -33,8 +32,8 @@ namespace Rental.Core.Tests.Rentals.Commands
             var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
             var rental = new Playingo.Domain.Rentals.Rental(input.GameRentalId, Guid.NewGuid(), Guid.NewGuid(), 100)
                 {Status = status};
-            _mediatorService.Setup(x =>
-                    x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
+            _unitOfWork.Setup(x =>
+                    x.RentalRepository.GetByIdAsync(input.GameRentalId, _cancellationToken))
                 .ReturnsAsync(rental);
 
             Func<Task> act = async () => await _sut.Handle(input, _cancellationToken);
@@ -48,19 +47,16 @@ namespace Rental.Core.Tests.Rentals.Commands
             var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
             var rental = new Playingo.Domain.Rentals.Rental(input.GameRentalId, Guid.NewGuid(), Guid.NewGuid(), 100)
                 {Status = Status.InProgress};
-            _mediatorService.Setup(x =>
-                    x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
+            _unitOfWork.Setup(x =>
+                    x.RentalRepository.GetByIdAsync(input.GameRentalId, _cancellationToken))
                 .ReturnsAsync(rental);
-            _mediatorService.Setup(x => x.Send(It.IsAny<UpdateAndSaveGameRentalCommand>(), _cancellationToken));
+            _unitOfWork.Setup(x => x.RentalRepository.Update(rental)).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x => x.SaveChangesAsync(_cancellationToken)).Returns(Task.CompletedTask);
 
             await _sut.Handle(input, _cancellationToken);
 
-            _mediatorService.Verify(
-                x => x.Send(
-                    It.Is<UpdateAndSaveGameRentalCommand>(c =>
-                        c.Rental.Id == input.GameRentalId && c.Rental.Status == Status.Completed &&
-                        c.Rental.PaidMoney == input.PaidMoney),
-                    _cancellationToken), Times.Once);
+            _unitOfWork.Verify(x => x.RentalRepository.Update(rental), Times.Once);
+            _unitOfWork.Verify(x => x.SaveChangesAsync(_cancellationToken), Times.Once);
             rental.Status.Should().Be(Status.Completed);
             rental.PaidMoney.Should().Be(input.PaidMoney);
         }
@@ -70,8 +66,8 @@ namespace Rental.Core.Tests.Rentals.Commands
         {
             var input = new CompleteRentalCommand(Guid.NewGuid(), 15);
             Playingo.Domain.Rentals.Rental rental = null;
-            _mediatorService.Setup(x =>
-                    x.Send(It.Is<GetRentalByIdQuery>(q => q.Id == input.GameRentalId), _cancellationToken))
+            _unitOfWork.Setup(x =>
+                    x.RentalRepository.GetByIdAsync(input.GameRentalId, _cancellationToken))
                 .ReturnsAsync(rental);
 
             Func<Task> act = async () => await _sut.Handle(input, _cancellationToken);

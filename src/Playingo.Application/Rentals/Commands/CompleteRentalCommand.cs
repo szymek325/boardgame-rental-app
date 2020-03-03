@@ -2,9 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
-using Playingo.Application.Rentals.Queries;
 using Playingo.Domain;
 
 namespace Playingo.Application.Rentals.Commands
@@ -23,26 +22,26 @@ namespace Playingo.Application.Rentals.Commands
 
     internal class CompleteRentalCommandHandler : ICommandHandler<CompleteRentalCommand>
     {
-        private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public CompleteRentalCommandHandler(IMediatorService mediatorService)
+        public CompleteRentalCommandHandler(IUnitOfWork unitOfWork)
         {
-            _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(CompleteRentalCommand notification, CancellationToken cancellationToken)
+        public async Task Handle(CompleteRentalCommand command, CancellationToken cancellationToken)
         {
-            var rental =
-                await _mediatorService.Send(new GetRentalByIdQuery(notification.GameRentalId), cancellationToken);
+            var rental = await _unitOfWork.RentalRepository.GetByIdAsync(command.GameRentalId, cancellationToken);
             if (rental == null)
-                throw new RentalNotFoundException(notification.GameRentalId);
+                throw new RentalNotFoundException(command.GameRentalId);
             if (rental.Status != Status.InProgress)
-                throw new RentalIsNotInProgressException(notification.GameRentalId);
+                throw new RentalIsNotInProgressException(command.GameRentalId);
 
             rental.Status = Status.Completed;
-            rental.PaidMoney = notification.PaidMoney;
+            rental.PaidMoney = command.PaidMoney;
 
-            await _mediatorService.Send(new UpdateAndSaveGameRentalCommand(rental), cancellationToken);
+            await _unitOfWork.RentalRepository.Update(rental);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -25,8 +25,4 @@
     <ProjectReference Include="..\Playingo.Domain\Playingo.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\DataAccess" />
-  </ItemGroup>
-
 </Project>
