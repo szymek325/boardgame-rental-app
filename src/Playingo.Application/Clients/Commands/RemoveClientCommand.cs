@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Playingo.Application.Clients.Queries;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
@@ -29,7 +28,7 @@ namespace Playingo.Application.Clients.Commands
 
         public async Task Handle(RemoveClientCommand command, CancellationToken cancellationToken)
         {
-            var client = await _unitOfWork.ClientRepository.GetByIdAsync( command.Id, cancellationToken);
+            var client = await _unitOfWork.ClientRepository.GetByIdAsync(command.Id, cancellationToken);
             if (client == null)
                 throw new ClientNotFoundException(command.Id);
 
@@ -38,7 +37,7 @@ namespace Playingo.Application.Clients.Commands
             if (!hasOnlyCompletedRentals)
                 throw new ClientHasOpenRentalException(command.Id);
 
-            await _unitOfWork.ClientRepository.RemoveByIdAsync(command.Id,cancellationToken);
+            await _unitOfWork.ClientRepository.RemoveByIdAsync(command.Id, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
