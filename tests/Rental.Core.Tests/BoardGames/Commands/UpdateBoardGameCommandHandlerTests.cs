@@ -21,7 +21,6 @@ namespace Rental.Core.Tests.BoardGames.Commands
         public UpdateBoardGameCommandHandlerTests()
         {
             _validator = new Mock<IValidator<BoardGame>>(MockBehavior.Strict);
-
             _unitOfWork = new Mock<IUnitOfWork>(MockBehavior.Strict);
             _validationMessageBuilder = new Mock<IValidationMessageBuilder>(MockBehavior.Strict);
             _sut = new UpdateBoardGameCommandHandler(_unitOfWork.Object, _validationMessageBuilder.Object,
@@ -87,6 +86,7 @@ namespace Rental.Core.Tests.BoardGames.Commands
                     It.Is((BoardGame c) =>
                         c.Id == _inputCommand.Id && c.Name == _inputCommand.Name &&
                         c.Price == _inputCommand.Price)), Times.Once());
+            _unitOfWork.Verify(x => x.SaveChangesAsync(_token), Times.Once);
         }
     }
 }
