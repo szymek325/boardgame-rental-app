@@ -8,8 +8,8 @@ using FluentValidation.Results;
 using Moq;
 using Playingo.Application.BoardGames.Commands;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 using Xunit;
@@ -22,30 +22,34 @@ namespace Rental.Core.Tests.Commands
         {
             _mediatorService = new Mock<IMediatorService>(MockBehavior.Strict);
             _validator = new Mock<IValidator<BoardGame>>(MockBehavior.Strict);
-            _sut = new AddBoardGameCommandHandler(_mediatorService.Object, _validator.Object);
+            _unitOfWork = new Mock<IUnitOfWork>(MockBehavior.Strict);
+            _sut = new AddBoardGameCommandHandler(_mediatorService.Object, _unitOfWork.Object, _validator.Object);
         }
 
         private readonly Mock<IMediatorService> _mediatorService;
         private readonly Mock<IValidator<BoardGame>> _validator;
+        private readonly Mock<IUnitOfWork> _unitOfWork;
         private readonly ICommandHandler<AddBoardGameCommand> _sut;
 
         [Fact]
-        public async Task Handle_Should_SendAddAndSaveCommand_When_ValidationIsPassed()
+        public async Task Handle_Should_SaveBoardGame_When_ValidationIsPassed()
         {
             var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
             _validator.Setup(x => x.Validate(It.Is((BoardGame game) =>
                     game.Id == input.NewBoardGameGuid && game.Name == input.Name && game.Price == input.Price)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
-            _mediatorService.Setup(x =>
-                x.Send(It.Is((AddAndSaveBoardGameCommand c) => c.BoardGame.Id == input.NewBoardGameGuid),
-                    It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x =>
+                x.BoardGameRepository.AddAsync(It.Is((BoardGame b) => b.Id == input.NewBoardGameGuid),
+                    cancellationToken)).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x => x.SaveChangesAsync(cancellationToken)).Returns(Task.CompletedTask);
 
             await _sut.Handle(input, cancellationToken);
 
-            _mediatorService.Verify(x =>
-                x.Send(It.Is((AddAndSaveBoardGameCommand c) => c.BoardGame.Id == input.NewBoardGameGuid),
-                    cancellationToken));
+            _unitOfWork.Verify(
+                x => x.BoardGameRepository.AddAsync(It.Is((BoardGame b) => b.Id == input.NewBoardGameGuid),
+                    cancellationToken), Times.Once);
+            _unitOfWork.Verify(x => x.SaveChangesAsync(cancellationToken), Times.Once);
         }
 
         [Fact]
@@ -72,20 +76,6 @@ namespace Rental.Core.Tests.Commands
         }
 
         [Fact]
-        public void Handle_Should_ThrowException_When_AddAndSaveBoardGameThrows()
-        {
-            var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
-            var exception = new ArgumentException("test");
-            _validator.Setup(x => x.Validate(It.IsAny<BoardGame>())).Returns(new ValidationResult());
-            _mediatorService.Setup(x => x.Send(It.IsAny<AddAndSaveBoardGameCommand>(), It.IsAny<CancellationToken>()))
-                .Throws(exception);
-
-            Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
-
-            act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
-        }
-
-        [Fact]
         public void Handle_Should_ThrowException_When_GetFormattedValidationMessageQueryThrows()
         {
             var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
@@ -100,6 +90,23 @@ namespace Rental.Core.Tests.Commands
                 .Throws(exception);
 
             Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
+
+            act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
+        }
+
+        [Fact]
+        public void Handle_Should_ThrowException_When_SaveThrows()
+        {
+            var input = new AddBoardGameCommand(Guid.NewGuid(), "name", 15);
+            var exception = new ArgumentException("test");
+            var cancellationToken = new CancellationToken();
+            _validator.Setup(x => x.Validate(It.IsAny<BoardGame>())).Returns(new ValidationResult());
+            _unitOfWork.Setup(x =>
+                x.BoardGameRepository.AddAsync(It.Is((BoardGame b) => b.Id == input.NewBoardGameGuid),
+                    cancellationToken)).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x => x.SaveChangesAsync(cancellationToken)).Throws(exception);
+
+            Func<Task> act = async () => await _sut.Handle(input, cancellationToken);
 
             act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
         }

@@ -10,7 +10,7 @@ namespace Playingo.Application.Common.Interfaces
     {
         Task<IList<Client>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<Client> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
-        Task AddASync(Client client, CancellationToken cancellationToken = default);
+        Task AddAsync(Client client, CancellationToken cancellationToken = default);
         Task RemoveByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task Update(Client client);
     }

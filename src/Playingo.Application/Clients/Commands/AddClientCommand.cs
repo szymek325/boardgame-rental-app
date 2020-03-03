@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.Clients;
 
@@ -32,13 +32,17 @@ namespace Playingo.Application.Clients.Commands
     internal class AddClientCommandHandler : ICommandHandler<AddClientCommand>
     {
         private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IValidator<Client> _validator;
 
-        public AddClientCommandHandler(IMediatorService mediatorService, IValidator<Client> validator)
+        public AddClientCommandHandler(IMediatorService mediatorService, IUnitOfWork unitOfWork,
+            IValidator<Client> validator)
         {
             _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
             _validator = validator;
         }
+
 
         public async Task Handle(AddClientCommand command, CancellationToken cancellationToken)
         {
@@ -49,7 +53,8 @@ namespace Playingo.Application.Clients.Commands
 
             if (validationResult.IsValid)
             {
-                await _mediatorService.Send(new AddAndSaveClientCommand(newClient), cancellationToken);
+                await _unitOfWork.ClientRepository.AddAsync(newClient, cancellationToken);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
             else
             {

@@ -2,11 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
-using Playingo.Application.BoardGames.Queries;
-using Playingo.Application.Clients.Queries;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain;
 using Playingo.Domain.Rentals;
@@ -31,12 +29,15 @@ namespace Playingo.Application.Rentals.Commands
 
     internal class AddRentalCommandHandler : ICommandHandler<AddRentalCommand>
     {
-        private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidationMessageBuilder _validationMessageBuilder;
         private readonly IValidator<Rental> _validator;
 
-        public AddRentalCommandHandler(IMediatorService mediatorService, IValidator<Rental> validator)
+        public AddRentalCommandHandler(IUnitOfWork unitOfWork, IValidationMessageBuilder validationMessageBuilder,
+            IValidator<Rental> validator)
         {
-            _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
+            _validationMessageBuilder = validationMessageBuilder;
             _validator = validator;
         }
 
@@ -52,17 +53,14 @@ namespace Playingo.Application.Rentals.Commands
 
             if (!validationResult.IsValid)
             {
-                var validationMessage =
-                    await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
-                        cancellationToken);
+                var validationMessage = _validationMessageBuilder.CreateMessage(validationResult.Errors);
                 throw new CustomValidationException(validationMessage);
             }
 
-            var client = _mediatorService.Send(new GetClientByIdQuery(command.ClientGuid), cancellationToken);
-            var boardGame = _mediatorService.Send(new GetBoardGameByIdQuery(command.BoardGameGuid), cancellationToken);
-            var canBeRented = _mediatorService.Send(
-                new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.BoardGameGuid),
-                cancellationToken);
+            var client = _unitOfWork.ClientRepository.GetByIdAsync(command.ClientGuid, cancellationToken);
+            var boardGame = _unitOfWork.BoardGameRepository.GetByIdAsync(command.BoardGameGuid, cancellationToken);
+            var canBeRented =
+                _unitOfWork.RentalRepository.AreAllCompletedForBoardGameAsync(command.BoardGameGuid, cancellationToken);
             await Task.WhenAll(client, boardGame, canBeRented);
 
             if (client.Result == null)
@@ -72,7 +70,8 @@ namespace Playingo.Application.Rentals.Commands
             if (!canBeRented.Result)
                 throw new BoardGameHasOpenRentalException(command.BoardGameGuid);
 
-            await _mediatorService.Send(new AddAndSaveRentalCommand(newGameRental), cancellationToken);
+            await _unitOfWork.RentalRepository.AddAsync(newGameRental, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }
