@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Playingo.Application.BoardGames.Queries;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 
 namespace Playingo.Application.BoardGames.Commands
 {
@@ -20,26 +19,26 @@ namespace Playingo.Application.BoardGames.Commands
 
     internal class RemoveBoardGameCommandHandler : ICommandHandler<RemoveBoardGameCommand>
     {
-        private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RemoveBoardGameCommandHandler(IMediatorService mediatorService)
+        public RemoveBoardGameCommandHandler(IUnitOfWork unitOfWork)
         {
-            _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Handle(RemoveBoardGameCommand command, CancellationToken cancellationToken)
         {
-            var boardGame = await _mediatorService.Send(new GetBoardGameByIdQuery(command.Id), cancellationToken);
+            var boardGame = await _unitOfWork.BoardGameRepository.GetByIdAsync(command.Id, cancellationToken);
             if (boardGame == null)
                 throw new BoardGameNotFoundException(command.Id);
 
             var hasOnlyCompletedRentals =
-                await _mediatorService.Send(new CheckIfBoardGameHasOnlyCompletedRentalsQuery(command.Id),
-                    cancellationToken);
+                await _unitOfWork.RentalRepository.AreAllCompletedForBoardGameAsync(command.Id, cancellationToken);
             if (!hasOnlyCompletedRentals)
                 throw new BoardGameHasOpenRentalException(command.Id);
 
-            await _mediatorService.Send(new RemoveAndSaveBoardGameByIdCommand(command.Id), cancellationToken);
+            await _unitOfWork.BoardGameRepository.RemoveByIdAsync(command.Id, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }
