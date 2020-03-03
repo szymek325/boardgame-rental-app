@@ -2,10 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
-using Playingo.Application.Clients.Queries;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.Clients;
 
@@ -32,18 +31,21 @@ namespace Playingo.Application.Clients.Commands
 
     internal class UpdateClientCommandHandler : ICommandHandler<UpdateClientCommand>
     {
-        private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidationMessageBuilder _validationMessageBuilder;
         private readonly IValidator<Client> _validator;
 
-        public UpdateClientCommandHandler(IMediatorService mediatorService, IValidator<Client> validator)
+        public UpdateClientCommandHandler(IUnitOfWork unitOfWork, IValidationMessageBuilder validationMessageBuilder,
+            IValidator<Client> validator)
         {
-            _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
+            _validationMessageBuilder = validationMessageBuilder;
             _validator = validator;
         }
 
         public async Task Handle(UpdateClientCommand command, CancellationToken cancellationToken)
         {
-            var client = await _mediatorService.Send(new GetClientByIdQuery(command.Id), cancellationToken);
+            var client = await _unitOfWork.ClientRepository.GetByIdAsync(command.Id, cancellationToken);
             if (client == null)
                 throw new ClientNotFoundException(command.Id);
 
@@ -55,13 +57,12 @@ namespace Playingo.Application.Clients.Commands
 
             if (validationResult.IsValid)
             {
-                await _mediatorService.Send(new UpdateAndSaveClientCommand(client), cancellationToken);
+                await _unitOfWork.ClientRepository.Update(client);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
             else
             {
-                var validationMessage =
-                    await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
-                        cancellationToken);
+                var validationMessage = _validationMessageBuilder.CreateMessage(validationResult.Errors);
                 throw new CustomValidationException(validationMessage);
             }
         }
