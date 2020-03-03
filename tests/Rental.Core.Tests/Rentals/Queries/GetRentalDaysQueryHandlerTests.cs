@@ -12,7 +12,7 @@ using Playingo.Application.Rentals.Queries;
 using Playingo.Domain.Rentals;
 using Xunit;
 
-namespace Rental.Core.Tests.Queries
+namespace Rental.Core.Tests.Rentals.Queries
 {
     public class GetRentalDaysQueryHandlerTests
     {

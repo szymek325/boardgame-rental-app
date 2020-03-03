@@ -11,7 +11,7 @@ using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Domain.Clients;
 using Xunit;
 
-namespace Rental.Core.Tests.Commands
+namespace Rental.Core.Tests.Clients.Commands
 {
     public class RemoveClientCommandHandlerTests
     {

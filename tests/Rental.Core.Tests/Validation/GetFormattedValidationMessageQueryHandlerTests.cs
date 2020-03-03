@@ -1,29 +1,33 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation.Results;
+using Playingo.Application.Common.Mediator;
 using Playingo.Application.Validation;
 using Xunit;
 
 namespace Rental.Core.Tests.Validation
 {
-    public class ValidationMessageBuilderTests
+    public class GetFormattedValidationMessageQueryHandlerTests
     {
-        public ValidationMessageBuilderTests()
+        public GetFormattedValidationMessageQueryHandlerTests()
         {
-            sut = new ValidationMessageBuilder();
+            sut = new GetFormattedValidationMessageQueryHandler();
         }
 
-        private readonly IValidationMessageBuilder sut;
+        private readonly IQueryHandler<GetFormattedValidationMessageQuery, string> sut;
 
         [Fact]
-        public void Handle_Should_ContainEachFailure_When_SomeFailuresArePassed()
+        public async Task Handle_Should_ContainEachFailure_When_SomeFailuresArePassed()
         {
             var failure1 = new ValidationFailure("test1", "failure on something");
             var failure2 = new ValidationFailure("test2", "failure on something else");
             var input = new List<ValidationFailure> {failure1, failure2};
 
-            var result = sut.CreateMessage(input);
+            var result = await sut.Handle(new GetFormattedValidationMessageQuery(input),
+                new CancellationToken());
 
             result.Should().Contain($"{failure1.PropertyName}- {failure1.ErrorMessage}");
             result.Should().Contain($"{failure2.PropertyName}- {failure2.ErrorMessage}");
@@ -31,11 +35,12 @@ namespace Rental.Core.Tests.Validation
 
 
         [Fact]
-        public void Handle_Should_ReturnEmptyMessage_When_ListIsEmpty()
+        public async Task Handle_Should_ReturnEmptyMessage_When_ListIsEmpty()
         {
             var input = new List<ValidationFailure>();
 
-            var result = sut.CreateMessage(input);
+            var result = await sut.Handle(new GetFormattedValidationMessageQuery(input),
+                new CancellationToken());
 
             result.Should().BeNullOrEmpty();
         }
@@ -45,7 +50,8 @@ namespace Rental.Core.Tests.Validation
         {
             List<ValidationFailure> input = null;
 
-            Action act = () => sut.CreateMessage(input);
+            Func<Task> act = async () => await sut.Handle(new GetFormattedValidationMessageQuery(input),
+                new CancellationToken());
 
             act.Should().Throw<NullReferenceException>();
         }

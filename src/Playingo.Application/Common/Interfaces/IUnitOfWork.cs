@@ -9,6 +9,6 @@ namespace Playingo.Application.Common.Interfaces
         IClientRepository ClientRepository { get; }
         IRentalRepository RentalRepository { get; }
         void SaveChanges();
-        Task SaveChangesAsync(CancellationToken cancellationToken=default);
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
