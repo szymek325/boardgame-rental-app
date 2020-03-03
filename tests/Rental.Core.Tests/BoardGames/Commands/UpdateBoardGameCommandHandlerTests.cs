@@ -15,7 +15,7 @@ using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 using Xunit;
 
-namespace Rental.Core.Tests.Commands
+namespace Rental.Core.Tests.BoardGames.Commands
 {
     public class UpdateBoardGameCommandHandlerTests
     {

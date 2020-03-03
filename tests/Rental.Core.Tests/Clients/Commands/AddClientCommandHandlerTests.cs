@@ -14,7 +14,7 @@ using Playingo.Application.Validation;
 using Playingo.Domain.Clients;
 using Xunit;
 
-namespace Rental.Core.Tests.Commands
+namespace Rental.Core.Tests.Clients.Commands
 {
     public class AddClientCommandHandlerTests
     {

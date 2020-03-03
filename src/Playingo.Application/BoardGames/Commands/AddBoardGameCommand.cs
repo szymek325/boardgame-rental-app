@@ -30,7 +30,8 @@ namespace Playingo.Application.BoardGames.Commands
         private readonly IUnitOfWork _unitOfWork;
         private readonly IValidator<BoardGame> _validator;
 
-        public AddBoardGameCommandHandler(IMediatorService mediatorService, IUnitOfWork unitOfWork, IValidator<BoardGame> validator)
+        public AddBoardGameCommandHandler(IMediatorService mediatorService, IUnitOfWork unitOfWork,
+            IValidator<BoardGame> validator)
         {
             _mediatorService = mediatorService;
             _unitOfWork = unitOfWork;
@@ -45,7 +46,7 @@ namespace Playingo.Application.BoardGames.Commands
 
             if (validationResult.IsValid)
             {
-                await _unitOfWork.BoardGameRepository.AddAsync(newBoardGame,cancellationToken);
+                await _unitOfWork.BoardGameRepository.AddAsync(newBoardGame, cancellationToken);
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
             else

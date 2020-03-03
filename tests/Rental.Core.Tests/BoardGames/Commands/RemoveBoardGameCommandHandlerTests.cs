@@ -11,7 +11,7 @@ using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Domain.BoardGames;
 using Xunit;
 
-namespace Rental.Core.Tests.Commands
+namespace Rental.Core.Tests.BoardGames.Commands
 {
     public class RemoveBoardGameCommandHandlerTests
     {

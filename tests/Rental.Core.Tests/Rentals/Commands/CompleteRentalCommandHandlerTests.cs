@@ -11,7 +11,7 @@ using Playingo.Application.Rentals.Queries;
 using Playingo.Domain;
 using Xunit;
 
-namespace Rental.Core.Tests.Commands
+namespace Rental.Core.Tests.Rentals.Commands
 {
     public class CompleteRentalCommandHandlerTests
     {

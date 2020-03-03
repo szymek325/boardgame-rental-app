@@ -7,7 +7,7 @@ using Playingo.Application.Common.Configuration;
 using Playingo.Application.Common.Mediator;
 using Xunit;
 
-namespace Rental.Core.Tests.Queries
+namespace Rental.Core.Tests.BoardGames.Queries
 {
     public class GetBoardGameRentDayPriceQueryHandlerTests
     {

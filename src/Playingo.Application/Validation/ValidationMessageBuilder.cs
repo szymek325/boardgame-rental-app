@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using FluentValidation.Results;
 
 namespace Playingo.Application.Validation

@@ -15,7 +15,7 @@ using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
 using Xunit;
 
-namespace Rental.Core.Tests.Commands
+namespace Rental.Core.Tests.Rentals.Commands
 {
     public class AddGameRentalCommandHandlerTests
     {
