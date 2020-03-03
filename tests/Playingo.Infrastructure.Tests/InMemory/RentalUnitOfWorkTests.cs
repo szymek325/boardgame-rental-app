@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -7,8 +8,8 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Domain;
+using Playingo.Domain.Rentals;
 using Playingo.Infrastructure.Persistence.Context;
-using Playingo.Infrastructure.Persistence.Entities;
 using Playingo.Infrastructure.Persistence.Mapping;
 using Playingo.Infrastructure.Persistence.Repositories;
 using Xunit;
@@ -23,33 +24,66 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _playingoContext = new PlayingoContext(contextOptions);
-            _sut = new UnitOfWork(_playingoContext, mapper);
+            _testSetupContext = new PlayingoContext(contextOptions);
+            _sut = new UnitOfWork(new PlayingoContext(contextOptions), mapper);
         }
 
-        private readonly PlayingoContext _playingoContext;
+        private readonly PlayingoContext _testSetupContext;
         private readonly IUnitOfWork _sut;
         private readonly CancellationToken _cancellationToken = CancellationToken.None;
+
+        [Fact]
+        public async Task AddAsync_Should_AddClientToDb_When_MethodCalled()
+        {
+            var rental = new Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
+
+            await _sut.RentalRepository.AddAsync(rental, _cancellationToken);
+            await _sut.SaveChangesAsync(_cancellationToken);
+
+            var result = _testSetupContext.Rentals.FirstOrDefault(x => x.Id == rental.Id);
+            result.BoardGameId.Should().Be(rental.BoardGameId);
+            result.ClientId.Should().Be(rental.ClientId);
+        }
+
+        [Fact]
+        public void AddAsync_Should_ThrowArgumentException_When_ElementWithThisIdExist()
+        {
+            var rental = new Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
+            var existingEntity = new Persistence.Entities.Rental
+            {
+                Id = rental.Id
+            };
+            _testSetupContext.Rentals.Add(existingEntity);
+            _testSetupContext.SaveChanges();
+
+            Func<Task> act = async () =>
+            {
+                await _sut.RentalRepository.AddAsync(rental, _cancellationToken);
+                await _sut.SaveChangesAsync(_cancellationToken);
+            };
+
+            act.Should().Throw<ArgumentException>();
+        }
 
         [Fact]
         public async Task AreAllCompletedForBoardGameAsync_Should_ReturnFalse_When_ThereIsAnInProgressRental()
         {
             var boardGameId = Guid.NewGuid();
-            var rentals = new List<Rental>
+            var rentals = new List<Persistence.Entities.Rental>
             {
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.InProgress
                 },
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.Completed
                 }
             };
-            await _playingoContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var response =
                 await _sut.RentalRepository.AreAllCompletedForBoardGameAsync(boardGameId, _cancellationToken);
@@ -72,21 +106,21 @@ namespace Playingo.Infrastructure.Tests.InMemory
         public async Task AreAllCompletedForBoardGameAsync_Should_ReturnTrue_When_ThereAreOnlyCompletedRentals()
         {
             var boardGameId = Guid.NewGuid();
-            var rentals = new List<Rental>
+            var rentals = new List<Persistence.Entities.Rental>
             {
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.Completed
                 },
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     BoardGameId = boardGameId,
                     Status = Status.Completed
                 }
             };
-            await _playingoContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var response =
                 await _sut.RentalRepository.AreAllCompletedForBoardGameAsync(boardGameId, _cancellationToken);
@@ -98,21 +132,21 @@ namespace Playingo.Infrastructure.Tests.InMemory
         public async Task AreAllCompletedForClientAsync_Should_ReturnFalse_When_ClientHasInProgressRental()
         {
             var clientId = Guid.NewGuid();
-            var rentals = new List<Rental>
+            var rentals = new List<Persistence.Entities.Rental>
             {
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.InProgress
                 },
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.Completed
                 }
             };
-            await _playingoContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var response = await _sut.RentalRepository.AreAllCompletedForClientAsync(clientId, _cancellationToken);
 
@@ -134,21 +168,21 @@ namespace Playingo.Infrastructure.Tests.InMemory
         {
             var clientId = Guid.NewGuid();
 
-            var rentals = new List<Rental>
+            var rentals = new List<Persistence.Entities.Rental>
             {
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.Completed
                 },
-                new Rental
+                new Persistence.Entities.Rental
                 {
                     ClientId = clientId,
                     Status = Status.Completed
                 }
             };
-            await _playingoContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var response = await _sut.RentalRepository.AreAllCompletedForClientAsync(clientId, _cancellationToken);
 
@@ -167,23 +201,23 @@ namespace Playingo.Infrastructure.Tests.InMemory
         public async Task GetAllAsync_Should_ReturnMappedListOfGameRentals_When_TheyHaveCorrectBoardGameId()
         {
             var inputBoardGameIdGuid = Guid.NewGuid();
-            var entity1 = new Rental
+            var entity1 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 BoardGameId = inputBoardGameIdGuid
             };
-            var entity2 = new Rental
+            var entity2 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 ClientId = inputBoardGameIdGuid
             };
-            var entities = new List<Rental> {entity1, entity2};
-            await _playingoContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
+            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetAllAsync(_cancellationToken);
 
-            result.Should().BeOfType<List<Domain.Rentals.Rental>>();
+            result.Should().BeOfType<List<Rental>>();
             result.Count.Should().Be(entities.Count);
         }
 
@@ -201,23 +235,23 @@ namespace Playingo.Infrastructure.Tests.InMemory
         public async Task GetAllForBoardGameAsync_Should_ReturnMappedListOfGameRentals_When_TheyHaveCorrectBoardGameId()
         {
             var inputBoardGameIdGuid = Guid.NewGuid();
-            var entity1 = new Rental
+            var entity1 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 BoardGameId = inputBoardGameIdGuid
             };
-            var entity2 = new Rental
+            var entity2 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 ClientId = inputBoardGameIdGuid
             };
-            var entities = new List<Rental> {entity1, entity2};
-            await _playingoContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
+            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetAllForBoardGameAsync(inputBoardGameIdGuid, _cancellationToken);
 
-            result.Should().BeOfType<List<Domain.Rentals.Rental>>();
+            result.Should().BeOfType<List<Rental>>();
             result.Should().Contain(x => x.Id == entity1.Id);
             result.Should().NotContain(x => x.Id == entity2.Id);
             result.Count.Should().Be(1);
@@ -237,23 +271,23 @@ namespace Playingo.Infrastructure.Tests.InMemory
         public async Task GetAllForClientAsync_Should_ReturnMappedListOfGameRentals_When_TheyHaveCorrectBoardGameId()
         {
             var inputClientId = Guid.NewGuid();
-            var entity1 = new Rental
+            var entity1 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 BoardGameId = inputClientId
             };
-            var entity2 = new Rental
+            var entity2 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 ClientId = inputClientId
             };
-            var entities = new List<Rental> {entity1, entity2};
-            await _playingoContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
+            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetAllForClientAsync(inputClientId, _cancellationToken);
 
-            result.Should().BeOfType<List<Domain.Rentals.Rental>>();
+            result.Should().BeOfType<List<Rental>>();
             result.Should().NotContain(x => x.Id == entity1.Id);
             result.Should().Contain(x => x.Id == entity2.Id);
             result.Count.Should().Be(1);
@@ -263,43 +297,43 @@ namespace Playingo.Infrastructure.Tests.InMemory
         public async Task GetByIdAsync_Should_ReturnElementWithSpecificId()
         {
             var inputId = Guid.NewGuid();
-            var entity1 = new Rental
+            var entity1 = new Persistence.Entities.Rental
             {
                 Id = inputId,
                 PaidMoney = 10
             };
-            var entity2 = new Rental
+            var entity2 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 PaidMoney = 20
             };
-            var entities = new List<Rental> {entity1, entity2};
-            await _playingoContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
+            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetByIdAsync(inputId, _cancellationToken);
 
             result.Id.Should().Be(inputId);
             result.PaidMoney.Should().Be(entity1.PaidMoney);
-            result.Should().BeOfType<Domain.Rentals.Rental>();
+            result.Should().BeOfType<Rental>();
         }
 
         [Fact]
         public async Task GetByIdAsync_Should_ReturnNull_When_NoMatchingElementsFound()
         {
-            var entity1 = new Rental
+            var entity1 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 PaidMoney = 10
             };
-            var entity2 = new Rental
+            var entity2 = new Persistence.Entities.Rental
             {
                 Id = Guid.NewGuid(),
                 PaidMoney = 20
             };
-            var entities = new List<Rental> {entity1, entity2};
-            await _playingoContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _playingoContext.SaveChangesAsync(_cancellationToken);
+            var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
+            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testSetupContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetByIdAsync(Guid.NewGuid(), _cancellationToken);
 
