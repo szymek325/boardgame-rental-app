@@ -8,7 +8,7 @@ using Playingo.Infrastructure.Persistence.Context;
 using Playingo.Infrastructure.Persistence.Repositories;
 
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
-[assembly: InternalsVisibleTo("Rental.DataAccess.Tests")]
+[assembly: InternalsVisibleTo("Playingo.Infrastructure.Tests")]
 
 namespace Playingo.Infrastructure
 {
