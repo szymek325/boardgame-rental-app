@@ -35,7 +35,7 @@ namespace Playingo.Infrastructure.Persistence.Repositories
             return result;
         }
 
-        public async Task AddASync(Client client, CancellationToken cancellationToken = default)
+        public async Task AddAsync(Client client, CancellationToken cancellationToken = default)
         {
             var entity = _mapper.Map<Entities.Client>(client);
             await _playingoContext.AddAsync(entity, cancellationToken);

@@ -8,8 +8,8 @@ using FluentValidation.Results;
 using Moq;
 using Playingo.Application.Clients.Commands;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.Clients;
 using Xunit;
@@ -22,12 +22,14 @@ namespace Rental.Core.Tests.Commands
         {
             _mediatorService = new Mock<IMediatorService>(MockBehavior.Strict);
             _validator = new Mock<IValidator<Client>>(MockBehavior.Strict);
-            _sut = new AddClientCommandHandler(_mediatorService.Object, _validator.Object);
+            _unitOfWork = new Mock<IUnitOfWork>(MockBehavior.Strict);
+            _sut = new AddClientCommandHandler(_mediatorService.Object, _unitOfWork.Object, _validator.Object);
         }
 
         private readonly Mock<IMediatorService> _mediatorService;
         private readonly ICommandHandler<AddClientCommand> _sut;
         private readonly Mock<IValidator<Client>> _validator;
+        private readonly Mock<IUnitOfWork> _unitOfWork;
 
         private readonly AddClientCommand _inputCommand =
             new AddClientCommand(Guid.NewGuid(), "First Name", "Last Name", "123456", "email.google.pl");
@@ -38,15 +40,17 @@ namespace Rental.Core.Tests.Commands
             _validator.Setup(x => x.Validate(It.Is((Client client) => client.Id == _inputCommand.NewClientGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
-            _mediatorService.Setup(x =>
-                x.Send(It.Is((AddAndSaveClientCommand c) => c.Client.Id == _inputCommand.NewClientGuid),
-                    It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x =>
+                x.ClientRepository.AddAsync(It.Is((Client b) => b.Id == _inputCommand.NewClientGuid),
+                    cancellationToken)).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x => x.SaveChangesAsync(cancellationToken)).Returns(Task.CompletedTask);
 
             await _sut.Handle(_inputCommand, cancellationToken);
 
-            _mediatorService.Verify(x =>
-                x.Send(It.Is((AddAndSaveClientCommand c) => c.Client.Id == _inputCommand.NewClientGuid),
-                    cancellationToken));
+            _unitOfWork.Verify(
+                x => x.ClientRepository.AddAsync(It.Is((Client b) => b.Id == _inputCommand.NewClientGuid),
+                    cancellationToken), Times.Once);
+            _unitOfWork.Verify(x => x.SaveChangesAsync(cancellationToken), Times.Once);
         }
 
         [Fact]
@@ -74,9 +78,12 @@ namespace Rental.Core.Tests.Commands
         public void Handle_Should_ThrowException_When_AddAndSaveClientThrows()
         {
             var exception = new ArgumentException("test");
+            var cancellationToken = new CancellationToken();
             _validator.Setup(x => x.Validate(It.IsAny<Client>())).Returns(new ValidationResult());
-            _mediatorService.Setup(x => x.Send(It.IsAny<AddAndSaveClientCommand>(), It.IsAny<CancellationToken>()))
-                .Throws(exception);
+            _unitOfWork.Setup(x =>
+                x.ClientRepository.AddAsync(It.Is((Client b) => b.Id == _inputCommand.NewClientGuid),
+                    cancellationToken)).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x => x.SaveChangesAsync(cancellationToken)).Throws(exception);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, new CancellationToken());
 

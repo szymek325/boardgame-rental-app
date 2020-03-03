@@ -6,11 +6,9 @@ using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
 using Moq;
-using Playingo.Application.BoardGames.Queries;
-using Playingo.Application.Clients.Queries;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Rentals.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
@@ -23,17 +21,19 @@ namespace Rental.Core.Tests.Commands
     {
         public AddGameRentalCommandHandlerTests()
         {
-            _mediatorService = new Mock<IMediatorService>(MockBehavior.Strict);
             _validator = new Mock<IValidator<Playingo.Domain.Rentals.Rental>>(MockBehavior.Strict);
-            _sut = new AddRentalCommandHandler(_mediatorService.Object, _validator.Object);
+            _validationMessageBuilder = new Mock<IValidationMessageBuilder>(MockBehavior.Strict);
+            _unitOfWork = new Mock<IUnitOfWork>(MockBehavior.Strict);
+            _sut = new AddRentalCommandHandler(_unitOfWork.Object, _validationMessageBuilder.Object, _validator.Object);
         }
 
         private readonly AddRentalCommand _inputCommand =
             new AddRentalCommand(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 15);
 
-        private readonly Mock<IMediatorService> _mediatorService;
         private readonly ICommandHandler<AddRentalCommand> _sut;
         private readonly Mock<IValidator<Playingo.Domain.Rentals.Rental>> _validator;
+        private readonly Mock<IUnitOfWork> _unitOfWork;
+        private readonly Mock<IValidationMessageBuilder> _validationMessageBuilder;
 
         [Theory]
         [InlineData(false)]
@@ -45,19 +45,15 @@ namespace Rental.Core.Tests.Commands
                         It.Is((Playingo.Domain.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
-                    cancellationToken))
+            _unitOfWork
+                .Setup(x => x.ClientRepository.GetByIdAsync(_inputCommand.ClientGuid, cancellationToken))
                 .ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
             BoardGame boardGame = null;
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
-                    cancellationToken)).ReturnsAsync(boardGame);
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
+            _unitOfWork
+                .Setup(x => x.BoardGameRepository.GetByIdAsync(_inputCommand.BoardGameGuid, cancellationToken))
+                .ReturnsAsync(boardGame);
+            _unitOfWork
+                .Setup(x => x.RentalRepository.AreAllCompletedForBoardGameAsync(_inputCommand.BoardGameGuid,
                     cancellationToken)).ReturnsAsync(canBeRented);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
@@ -76,17 +72,14 @@ namespace Rental.Core.Tests.Commands
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
             Client client = null;
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
-                    cancellationToken)).ReturnsAsync(client);
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
-                    cancellationToken)).ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
+            _unitOfWork
+                .Setup(x => x.ClientRepository.GetByIdAsync(_inputCommand.ClientGuid, cancellationToken))
+                .ReturnsAsync(client);
+            _unitOfWork
+                .Setup(x => x.BoardGameRepository.GetByIdAsync(_inputCommand.BoardGameGuid, cancellationToken))
+                .ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
+            _unitOfWork
+                .Setup(x => x.RentalRepository.AreAllCompletedForBoardGameAsync(_inputCommand.BoardGameGuid,
                     cancellationToken)).ReturnsAsync(canBeRented);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
@@ -102,29 +95,28 @@ namespace Rental.Core.Tests.Commands
                         It.Is((Playingo.Domain.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
-                    cancellationToken))
+            _unitOfWork
+                .Setup(x => x.ClientRepository.GetByIdAsync(_inputCommand.ClientGuid, cancellationToken))
                 .ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
-                    cancellationToken)).ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
+            _unitOfWork
+                .Setup(x => x.BoardGameRepository.GetByIdAsync(_inputCommand.BoardGameGuid, cancellationToken))
+                .ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
             const bool canBeRented = true;
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
+            _unitOfWork
+                .Setup(x => x.RentalRepository.AreAllCompletedForBoardGameAsync(_inputCommand.BoardGameGuid,
                     cancellationToken)).ReturnsAsync(canBeRented);
-            _mediatorService.Setup(x =>
-                x.Send(It.Is((AddAndSaveRentalCommand c) => c.Rental.Id == _inputCommand.NewGameRentalGuid),
-                    cancellationToken)).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x => x.RentalRepository.AddAsync(
+                It.Is((Playingo.Domain.Rentals.Rental c) =>
+                    c.Id == _inputCommand.NewGameRentalGuid && c.ClientId == _inputCommand.ClientGuid &&
+                    c.BoardGameId == _inputCommand.BoardGameGuid), cancellationToken)).Returns(Task.CompletedTask);
+            _unitOfWork.Setup(x => x.SaveChangesAsync(cancellationToken)).Returns(Task.CompletedTask);
 
             await _sut.Handle(_inputCommand, cancellationToken);
 
-            _mediatorService.Verify(x =>
-                x.Send(It.Is((AddAndSaveRentalCommand c) => c.Rental.Id == _inputCommand.NewGameRentalGuid),
-                    cancellationToken));
+            _unitOfWork.Verify(
+                x => x.RentalRepository.AddAsync(It.IsAny<Playingo.Domain.Rentals.Rental>(), cancellationToken),
+                Times.Once);
+            _unitOfWork.Verify(x => x.SaveChangesAsync(cancellationToken), Times.Once);
         }
 
         [Fact]
@@ -136,19 +128,15 @@ namespace Rental.Core.Tests.Commands
                         It.Is((Playingo.Domain.Rentals.Rental rental) => rental.Id == _inputCommand.NewGameRentalGuid)))
                 .Returns(new ValidationResult());
             var cancellationToken = new CancellationToken();
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetClientByIdQuery q) => q.Id == _inputCommand.ClientGuid),
-                    cancellationToken))
+            _unitOfWork
+                .Setup(x => x.ClientRepository.GetByIdAsync(_inputCommand.ClientGuid, cancellationToken))
                 .ReturnsAsync(new Client(_inputCommand.ClientGuid, "First", "Last", "1234", "email"));
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((GetBoardGameByIdQuery q) => q.Id == _inputCommand.BoardGameGuid),
-                    cancellationToken)).ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
+            _unitOfWork
+                .Setup(x => x.BoardGameRepository.GetByIdAsync(_inputCommand.BoardGameGuid, cancellationToken))
+                .ReturnsAsync(new BoardGame(_inputCommand.BoardGameGuid, "test", 15));
             const bool canBeRented = false;
-            _mediatorService
-                .Setup(x => x.Send(
-                    It.Is((CheckIfBoardGameHasOnlyCompletedRentalsQuery q) => q.Id == _inputCommand.BoardGameGuid),
+            _unitOfWork
+                .Setup(x => x.RentalRepository.AreAllCompletedForBoardGameAsync(_inputCommand.BoardGameGuid,
                     cancellationToken)).ReturnsAsync(canBeRented);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
@@ -169,10 +157,7 @@ namespace Rental.Core.Tests.Commands
                 .Returns(new ValidationResult(validationErrors));
             const string errorsMessage = "errors happened";
             var cancellationToken = new CancellationToken();
-            _mediatorService.Setup(x =>
-                x.Send(It.Is((GetFormattedValidationMessageQuery query) =>
-                        query.ValidationErrors.Count.Equals(validationErrors.Count)),
-                    cancellationToken)).Returns(Task.FromResult(errorsMessage));
+            _validationMessageBuilder.Setup(x => x.CreateMessage(validationErrors)).Returns(errorsMessage);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
 
