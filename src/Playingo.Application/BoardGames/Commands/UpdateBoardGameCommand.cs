@@ -2,10 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
-using Playingo.Application.BoardGames.Queries;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 
@@ -27,18 +26,21 @@ namespace Playingo.Application.BoardGames.Commands
 
     internal class UpdateBoardGameCommandHandler : ICommandHandler<UpdateBoardGameCommand>
     {
-        private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidationMessageBuilder _validationMessageBuilder;
         private readonly IValidator<BoardGame> _validator;
 
-        public UpdateBoardGameCommandHandler(IMediatorService mediatorService, IValidator<BoardGame> validator)
+        public UpdateBoardGameCommandHandler(IUnitOfWork unitOfWork, IValidationMessageBuilder validationMessageBuilder,
+            IValidator<BoardGame> validator)
         {
-            _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
+            _validationMessageBuilder = validationMessageBuilder;
             _validator = validator;
         }
 
         public async Task Handle(UpdateBoardGameCommand command, CancellationToken cancellationToken)
         {
-            var boardGame = await _mediatorService.Send(new GetBoardGameByIdQuery(command.Id), cancellationToken);
+            var boardGame = await _unitOfWork.BoardGameRepository.GetByIdAsync(command.Id, cancellationToken);
             if (boardGame == null)
                 throw new BoardGameNotFoundException(command.Id);
 
@@ -48,13 +50,12 @@ namespace Playingo.Application.BoardGames.Commands
 
             if (validationResult.IsValid)
             {
-                await _mediatorService.Send(new UpdateAndSaveBoardGameCommand(boardGame), cancellationToken);
+                await _unitOfWork.BoardGameRepository.Update(boardGame);
+                await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
             else
             {
-                var validationMessage =
-                    await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
-                        cancellationToken);
+                var validationMessage = _validationMessageBuilder.CreateMessage(validationResult.Errors);
                 throw new CustomValidationException(validationMessage);
             }
         }

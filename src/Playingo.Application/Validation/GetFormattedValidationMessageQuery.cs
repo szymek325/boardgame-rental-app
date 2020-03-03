@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Playingo.Application.Common.Mediator;
 
 namespace Playingo.Application.Validation
 {
+    [Obsolete("To be removed soon")]
     internal class GetFormattedValidationMessageQuery : IQuery<string>
     {
         public GetFormattedValidationMessageQuery(IList<ValidationFailure> validationErrors)

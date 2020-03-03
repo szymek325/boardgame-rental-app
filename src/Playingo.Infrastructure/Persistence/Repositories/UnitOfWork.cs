@@ -21,7 +21,6 @@ namespace Playingo.Infrastructure.Persistence.Repositories
             _mapper = mapper;
         }
 
-
         public IBoardGameRepository BoardGameRepository
         {
             get { return _boardGameRepository ??= new BoardGameRepository(_playingoContext, _mapper); }
@@ -35,11 +34,6 @@ namespace Playingo.Infrastructure.Persistence.Repositories
         public IRentalRepository RentalRepository
         {
             get { return _rentalRepository ??= new RentalRepository(_playingoContext, _mapper); }
-        }
-
-        public void SaveChanges()
-        {
-            _playingoContext.SaveChanges();
         }
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken)

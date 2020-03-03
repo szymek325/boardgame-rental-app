@@ -3,8 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Playingo.Application.Clients.Queries;
 using Playingo.Application.Common.Exceptions;
+using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Interfaces.DataAccess.Commands;
 
 namespace Playingo.Application.Clients.Commands
 {
@@ -20,26 +20,26 @@ namespace Playingo.Application.Clients.Commands
 
     internal class RemoveClientCommandHandler : ICommandHandler<RemoveClientCommand>
     {
-        private readonly IMediatorService _mediatorService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RemoveClientCommandHandler(IMediatorService mediatorService)
+        public RemoveClientCommandHandler(IUnitOfWork unitOfWork)
         {
-            _mediatorService = mediatorService;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task Handle(RemoveClientCommand command, CancellationToken cancellationToken)
         {
-            var client = await _mediatorService.Send(new GetClientByIdQuery(command.Id), cancellationToken);
+            var client = await _unitOfWork.ClientRepository.GetByIdAsync( command.Id, cancellationToken);
             if (client == null)
                 throw new ClientNotFoundException(command.Id);
 
             var hasOnlyCompletedRentals =
-                await _mediatorService.Send(new CheckIfClientHasOnlyCompletedRentalsQuery(command.Id),
-                    cancellationToken);
+                await _unitOfWork.RentalRepository.AreAllCompletedForClientAsync(command.Id, cancellationToken);
             if (!hasOnlyCompletedRentals)
                 throw new ClientHasOpenRentalException(command.Id);
 
-            await _mediatorService.Send(new RemoveAndSaveClientByIdCommand(command.Id), cancellationToken);
+            await _unitOfWork.ClientRepository.RemoveByIdAsync(command.Id,cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }
