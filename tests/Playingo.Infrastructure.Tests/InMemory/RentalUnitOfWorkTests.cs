@@ -24,11 +24,11 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _testSetupContext = new PlayingoContext(contextOptions);
+            _testContext = new PlayingoContext(contextOptions);
             _sut = new UnitOfWork(new PlayingoContext(contextOptions), mapper);
         }
 
-        private readonly PlayingoContext _testSetupContext;
+        private readonly PlayingoContext _testContext;
         private readonly IUnitOfWork _sut;
         private readonly CancellationToken _cancellationToken = CancellationToken.None;
 
@@ -40,7 +40,7 @@ namespace Playingo.Infrastructure.Tests.InMemory
             await _sut.RentalRepository.AddAsync(rental, _cancellationToken);
             await _sut.SaveChangesAsync(_cancellationToken);
 
-            var result = _testSetupContext.Rentals.FirstOrDefault(x => x.Id == rental.Id);
+            var result = _testContext.Rentals.FirstOrDefault(x => x.Id == rental.Id);
             result.BoardGameId.Should().Be(rental.BoardGameId);
             result.ClientId.Should().Be(rental.ClientId);
         }
@@ -53,8 +53,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
             {
                 Id = rental.Id
             };
-            _testSetupContext.Rentals.Add(existingEntity);
-            _testSetupContext.SaveChanges();
+            _testContext.Rentals.Add(existingEntity);
+            _testContext.SaveChanges();
 
             Func<Task> act = async () =>
             {
@@ -82,8 +82,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                     Status = Status.Completed
                 }
             };
-            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var response =
                 await _sut.RentalRepository.AreAllCompletedForBoardGameAsync(boardGameId, _cancellationToken);
@@ -119,8 +119,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                     Status = Status.Completed
                 }
             };
-            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var response =
                 await _sut.RentalRepository.AreAllCompletedForBoardGameAsync(boardGameId, _cancellationToken);
@@ -145,8 +145,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                     Status = Status.Completed
                 }
             };
-            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var response = await _sut.RentalRepository.AreAllCompletedForClientAsync(clientId, _cancellationToken);
 
@@ -181,8 +181,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                     Status = Status.Completed
                 }
             };
-            await _testSetupContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(rentals, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var response = await _sut.RentalRepository.AreAllCompletedForClientAsync(clientId, _cancellationToken);
 
@@ -212,8 +212,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 ClientId = inputBoardGameIdGuid
             };
             var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
-            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetAllAsync(_cancellationToken);
 
@@ -246,8 +246,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 ClientId = inputBoardGameIdGuid
             };
             var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
-            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetAllForBoardGameAsync(inputBoardGameIdGuid, _cancellationToken);
 
@@ -282,8 +282,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 ClientId = inputClientId
             };
             var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
-            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetAllForClientAsync(inputClientId, _cancellationToken);
 
@@ -308,8 +308,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 PaidMoney = 20
             };
             var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
-            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetByIdAsync(inputId, _cancellationToken);
 
@@ -332,12 +332,55 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 PaidMoney = 20
             };
             var entities = new List<Persistence.Entities.Rental> {entity1, entity2};
-            await _testSetupContext.Rentals.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.RentalRepository.GetByIdAsync(Guid.NewGuid(), _cancellationToken);
 
             result.Should().BeNull();
+        }
+
+        [Fact]
+        public void Update_Should_Throw_When_EntityDoesNotExist()
+        {
+            var input = new Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
+
+            Func<Task> act = async () =>
+            {
+                await _sut.RentalRepository.Update(input);
+                await _sut.SaveChangesAsync(_cancellationToken);
+            };
+
+            act.Should().Throw<DbUpdateConcurrencyException>();
+        }
+
+        [Fact]
+        public async Task Update_Should_UpdateEntity_When_ItExists()
+        {
+            var input = new Rental(Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), 10);
+            var entities = new List<Persistence.Entities.Rental>
+            {
+                new Persistence.Entities.Rental
+                {
+                    Id = input.Id,
+                    ClientId = Guid.NewGuid()
+                },
+                new Persistence.Entities.Rental
+                {
+                    Id = Guid.NewGuid(),
+                    ClientId = Guid.NewGuid()
+                }
+            };
+            await _testContext.Rentals.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
+
+            await _sut.RentalRepository.Update(input);
+            await _sut.SaveChangesAsync(_cancellationToken);
+
+            _testContext.Rentals.Count().Should().Be(entities.Count);
+            var result = _testContext.Rentals.FirstOrDefault(x => x.Id == input.Id);
+            result.ClientId.Should().Be(input.ClientId);
+            result.BoardGameId.Should().Be(input.BoardGameId);
         }
     }
 }

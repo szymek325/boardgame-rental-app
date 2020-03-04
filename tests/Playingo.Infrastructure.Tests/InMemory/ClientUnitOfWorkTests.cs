@@ -23,11 +23,11 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
             IMapper mapper = new Mapper(new MapperConfiguration(cfg => { cfg.AddProfile<EntitiesMapping>(); }));
-            _testSetupContext = new PlayingoContext(contextOptions);
+            _testContext = new PlayingoContext(contextOptions);
             _sut = new UnitOfWork(new PlayingoContext(contextOptions), mapper);
         }
 
-        private readonly PlayingoContext _testSetupContext;
+        private readonly PlayingoContext _testContext;
         private readonly IUnitOfWork _sut;
         private readonly CancellationToken _cancellationToken = CancellationToken.None;
 
@@ -39,7 +39,7 @@ namespace Playingo.Infrastructure.Tests.InMemory
 
             await _sut.SaveChangesAsync(_cancellationToken);
 
-            var result = _testSetupContext.Clients.FirstOrDefault(x => x.Id == client.Id);
+            var result = _testContext.Clients.FirstOrDefault(x => x.Id == client.Id);
             result.ContactNumber.Should().Be(client.ContactNumber);
             result.EmailAddress.Should().Be(client.EmailAddress);
             result.FirstName.Should().Be(client.FirstName);
@@ -54,8 +54,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
             {
                 Id = client.Id
             };
-            _testSetupContext.Clients.Add(existingEntity);
-            _testSetupContext.SaveChanges();
+            _testContext.Clients.Add(existingEntity);
+            _testContext.SaveChanges();
 
             Func<Task> act = async () =>
             {
@@ -86,8 +86,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 Id = Guid.NewGuid()
             };
             var entities = new List<Persistence.Entities.Client> {entity1, entity2};
-            await _testSetupContext.Clients.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Clients.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.ClientRepository.GetAllAsync(_cancellationToken);
 
@@ -110,8 +110,8 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 FirstName = "test2"
             };
             var entities = new List<Persistence.Entities.Client> {entity1, entity2};
-            await _testSetupContext.Clients.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Clients.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.ClientRepository.GetByIdAsync(inputId, _cancellationToken);
 
@@ -135,12 +135,97 @@ namespace Playingo.Infrastructure.Tests.InMemory
                 FirstName = "test2"
             };
             var entities = new List<Persistence.Entities.Client> {entity1, entity2};
-            await _testSetupContext.Clients.AddRangeAsync(entities, _cancellationToken);
-            await _testSetupContext.SaveChangesAsync(_cancellationToken);
+            await _testContext.Clients.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
 
             var result = await _sut.ClientRepository.GetByIdAsync(Guid.NewGuid(), _cancellationToken);
 
             result.Should().BeNull();
+        }
+
+        [Fact]
+        public async Task RemoveById_Should_RemoveClientFromDb_When_ClientExists()
+        {
+            var inputId = Guid.NewGuid();
+            var entities = new List<Persistence.Entities.Client>
+            {
+                new Persistence.Entities.Client
+                {
+                    Id = inputId,
+                    FirstName = "test1"
+                },
+                new Persistence.Entities.Client
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "test2"
+                }
+            };
+            await _testContext.Clients.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
+
+            await _sut.ClientRepository.RemoveByIdAsync(inputId, _cancellationToken);
+            await _sut.SaveChangesAsync(_cancellationToken);
+
+            _testContext.Clients.FirstOrDefault(x => x.Id == inputId).Should().BeNull();
+        }
+
+        [Fact]
+        public void RemoveById_Should_ThrowArgumentNullException_When_ClientWithProvidedIdDoesNotExist()
+        {
+            var input = Guid.NewGuid();
+
+            Func<Task> act = async () =>
+            {
+                await _sut.ClientRepository.RemoveByIdAsync(input, _cancellationToken);
+                await _sut.SaveChangesAsync(_cancellationToken);
+            };
+
+            act.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Update_Should_Throw_When_EntityDoesNotExist()
+        {
+            var input = new Client(Guid.NewGuid(), "mat", "szym", "123456", "test@test.pl");
+
+            Func<Task> act = async () =>
+            {
+                await _sut.ClientRepository.Update(input);
+                await _sut.SaveChangesAsync(_cancellationToken);
+            };
+
+            act.Should().Throw<DbUpdateConcurrencyException>();
+        }
+
+        [Fact]
+        public async Task Update_Should_UpdateEntity_When_ItExists()
+        {
+            var input = new Client(Guid.NewGuid(), "mat", "szym", "123456", "test@test.pl");
+            var entities = new List<Persistence.Entities.Client>
+            {
+                new Persistence.Entities.Client
+                {
+                    Id = input.Id,
+                    FirstName = "test1"
+                },
+                new Persistence.Entities.Client
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "test2"
+                }
+            };
+            await _testContext.Clients.AddRangeAsync(entities, _cancellationToken);
+            await _testContext.SaveChangesAsync(_cancellationToken);
+
+            await _sut.ClientRepository.Update(input);
+            await _sut.SaveChangesAsync(_cancellationToken);
+
+            _testContext.Clients.Count().Should().Be(entities.Count);
+            var result = _testContext.Clients.FirstOrDefault(x => x.Id == input.Id);
+            result.FirstName.Should().Be(input.FirstName);
+            result.LastName.Should().Be(input.LastName);
+            result.ContactNumber.Should().Be(input.ContactNumber);
+            result.EmailAddress.Should().Be(input.EmailAddress);
         }
     }
 }
