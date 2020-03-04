@@ -50,7 +50,7 @@ namespace Playingo.Infrastructure.Persistence.Repositories
         public Task Update(Client client)
         {
             var entity = _mapper.Map<Entities.Client>(client);
-            _playingoContext.Clients.Remove(entity);
+            _playingoContext.Clients.Update(entity);
             return Task.CompletedTask;
         }
     }
