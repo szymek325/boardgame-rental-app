@@ -5,7 +5,7 @@ using FluentValidation;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Validation;
+using Playingo.Application.Common.Validation;
 using Playingo.Domain.BoardGames;
 
 namespace Playingo.Application.BoardGames.Commands

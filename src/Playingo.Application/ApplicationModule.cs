@@ -1,9 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Playingo.Application.BoardGames.Validation;
+using Playingo.Application.Clients.Validation;
 using Playingo.Application.Common.Helpers;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Validation;
+using Playingo.Application.Rentals.Validation;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
 using Playingo.Domain.Rentals;
@@ -20,6 +22,7 @@ namespace Playingo.Application
             services.AddTransient<IValidator<BoardGame>, BoardGameValidator>();
             services.AddTransient<IValidator<Client>, ClientValidator>();
             services.AddTransient<IValidator<Rental>, RentalValidator>();
+
             services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
             services.AddTransient<IMediatorService, MediatorService>();

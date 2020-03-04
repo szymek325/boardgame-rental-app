@@ -10,7 +10,7 @@ using Playingo.Application.Clients.Commands;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Validation;
+using Playingo.Application.Common.Validation;
 using Playingo.Domain.Clients;
 using Xunit;
 
@@ -20,16 +20,16 @@ namespace Playingo.Application.Tests.Clients.Commands
     {
         public AddClientCommandHandlerTests()
         {
-            _mediatorService = new Mock<IMediatorService>(MockBehavior.Strict);
             _validator = new Mock<IValidator<Client>>(MockBehavior.Strict);
+            _validationMessageBuilder = new Mock<IValidationMessageBuilder>(MockBehavior.Strict);
             _unitOfWork = new Mock<IUnitOfWork>(MockBehavior.Strict);
-            _sut = new AddClientCommandHandler(_mediatorService.Object, _unitOfWork.Object, _validator.Object);
+            _sut = new AddClientCommandHandler(_unitOfWork.Object, _validationMessageBuilder.Object, _validator.Object);
         }
 
-        private readonly Mock<IMediatorService> _mediatorService;
-        private readonly ICommandHandler<AddClientCommand> _sut;
         private readonly Mock<IValidator<Client>> _validator;
         private readonly Mock<IUnitOfWork> _unitOfWork;
+        private readonly Mock<IValidationMessageBuilder> _validationMessageBuilder;
+        private readonly ICommandHandler<AddClientCommand> _sut;
 
         private readonly AddClientCommand _inputCommand =
             new AddClientCommand(Guid.NewGuid(), "First Name", "Last Name", "123456", "email.google.pl");
@@ -63,11 +63,7 @@ namespace Playingo.Application.Tests.Clients.Commands
             _validator.Setup(x => x.Validate(It.Is((Client client) => client.Id == _inputCommand.NewClientGuid)))
                 .Returns(new ValidationResult(validationErrors));
             const string errorsMessage = "errors happened";
-            _mediatorService.Setup(x =>
-                x.Send(
-                    It.Is((GetFormattedValidationMessageQuery query) =>
-                        query.ValidationErrors.Count.Equals(validationErrors.Count)),
-                    It.IsAny<CancellationToken>())).Returns(Task.FromResult(errorsMessage));
+            _validationMessageBuilder.Setup(x => x.CreateMessage(validationErrors)).Returns(errorsMessage);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, new CancellationToken());
 
@@ -99,8 +95,7 @@ namespace Playingo.Application.Tests.Clients.Commands
                 {
                     new ValidationFailure("test", "test")
                 }));
-            _mediatorService.Setup(x =>
-                    x.Send(It.IsAny<GetFormattedValidationMessageQuery>(), It.IsAny<CancellationToken>()))
+            _validationMessageBuilder.Setup(x => x.CreateMessage(It.IsAny<IList<ValidationFailure>>()))
                 .Throws(exception);
 
             Func<Task> act = async () => await _sut.Handle(_inputCommand, new CancellationToken());

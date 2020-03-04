@@ -2,16 +2,16 @@
 using System.Text;
 using FluentValidation.Results;
 
-namespace Playingo.Application.Validation
+namespace Playingo.Application.Common.Validation
 {
     internal interface IValidationMessageBuilder
     {
-        string CreateMessage(IList<ValidationFailure> validationErrors);
+        string CreateMessage(IEnumerable<ValidationFailure> validationErrors);
     }
 
     public class ValidationMessageBuilder : IValidationMessageBuilder
     {
-        public string CreateMessage(IList<ValidationFailure> validationErrors)
+        public string CreateMessage(IEnumerable<ValidationFailure> validationErrors)
         {
             var builder = new StringBuilder();
             foreach (var validationFailure in validationErrors)
