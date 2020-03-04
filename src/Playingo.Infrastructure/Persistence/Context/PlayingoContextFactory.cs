@@ -31,7 +31,7 @@ namespace Playingo.Infrastructure.Persistence.Context
             return connectionStrings;
         }
 
-        public static IConfigurationRoot GetConfig()
+        private static IConfigurationRoot GetConfig()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var projectPath =

@@ -3,7 +3,7 @@ using FluentValidation;
 using Playingo.Application.Common.Extensions;
 using Playingo.Domain.Clients;
 
-namespace Playingo.Application.Validation
+namespace Playingo.Application.Clients.Validation
 {
     internal class ClientValidator : AbstractValidator<Client>
     {

@@ -5,7 +5,7 @@ using FluentValidation;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Validation;
+using Playingo.Application.Common.Validation;
 using Playingo.Domain.BoardGames;
 
 namespace Playingo.Application.BoardGames.Commands
@@ -19,22 +19,22 @@ namespace Playingo.Application.BoardGames.Commands
             Price = price;
         }
 
-        public Guid NewBoardGameGuid { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
+        public Guid NewBoardGameGuid { get; }
+        public string Name { get; }
+        public decimal Price { get; }
     }
 
     internal class AddBoardGameCommandHandler : ICommandHandler<AddBoardGameCommand>
     {
-        private readonly IMediatorService _mediatorService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidationMessageBuilder _validationMessageBuilder;
         private readonly IValidator<BoardGame> _validator;
 
-        public AddBoardGameCommandHandler(IMediatorService mediatorService, IUnitOfWork unitOfWork,
+        public AddBoardGameCommandHandler(IUnitOfWork unitOfWork, IValidationMessageBuilder validationMessageBuilder,
             IValidator<BoardGame> validator)
         {
-            _mediatorService = mediatorService;
             _unitOfWork = unitOfWork;
+            _validationMessageBuilder = validationMessageBuilder;
             _validator = validator;
         }
 
@@ -51,9 +51,7 @@ namespace Playingo.Application.BoardGames.Commands
             }
             else
             {
-                var validationMessage =
-                    await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
-                        cancellationToken);
+                var validationMessage = _validationMessageBuilder.CreateMessage(validationResult.Errors);
                 throw new CustomValidationException(validationMessage);
             }
         }

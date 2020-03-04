@@ -10,7 +10,7 @@ using Playingo.Application.Clients.Commands;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Validation;
+using Playingo.Application.Common.Validation;
 using Playingo.Domain.Clients;
 using Xunit;
 

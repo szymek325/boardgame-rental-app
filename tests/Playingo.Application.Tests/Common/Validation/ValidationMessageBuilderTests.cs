@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using FluentValidation.Results;
-using Playingo.Application.Validation;
+using Playingo.Application.Common.Validation;
 using Xunit;
 
-namespace Playingo.Application.Tests.Validation
+namespace Playingo.Application.Tests.Common.Validation
 {
     public class ValidationMessageBuilderTests
     {

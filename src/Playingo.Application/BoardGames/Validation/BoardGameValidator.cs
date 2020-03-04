@@ -2,7 +2,7 @@
 using FluentValidation;
 using Playingo.Domain.BoardGames;
 
-namespace Playingo.Application.Validation
+namespace Playingo.Application.BoardGames.Validation
 {
     internal class BoardGameValidator : AbstractValidator<BoardGame>
     {

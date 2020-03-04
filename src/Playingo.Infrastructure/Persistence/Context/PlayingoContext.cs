@@ -37,7 +37,7 @@ namespace Playingo.Infrastructure.Persistence.Context
             modelBuilder.Entity<Client>().HasKey(x => x.Id);
             modelBuilder.Entity<Client>().Property(x => x.CreationTime).HasDefaultValue(DateTime.UtcNow);
 
-            //FillData(modelBuilder);
+            // FillData(modelBuilder);
         }
 
         private static void FillData(ModelBuilder modelBuilder)

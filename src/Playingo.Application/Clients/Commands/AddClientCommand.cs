@@ -5,7 +5,7 @@ using FluentValidation;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Validation;
+using Playingo.Application.Common.Validation;
 using Playingo.Domain.Clients;
 
 namespace Playingo.Application.Clients.Commands
@@ -22,24 +22,24 @@ namespace Playingo.Application.Clients.Commands
             EmailAddress = emailAddress;
         }
 
-        public Guid NewClientGuid { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string ContactNumber { get; set; }
-        public string EmailAddress { get; set; }
+        public Guid NewClientGuid { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string ContactNumber { get; }
+        public string EmailAddress { get; }
     }
 
     internal class AddClientCommandHandler : ICommandHandler<AddClientCommand>
     {
-        private readonly IMediatorService _mediatorService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidationMessageBuilder _validationMessageBuilder;
         private readonly IValidator<Client> _validator;
 
-        public AddClientCommandHandler(IMediatorService mediatorService, IUnitOfWork unitOfWork,
+        public AddClientCommandHandler(IUnitOfWork unitOfWork, IValidationMessageBuilder validationMessageBuilder,
             IValidator<Client> validator)
         {
-            _mediatorService = mediatorService;
             _unitOfWork = unitOfWork;
+            _validationMessageBuilder = validationMessageBuilder;
             _validator = validator;
         }
 
@@ -58,9 +58,7 @@ namespace Playingo.Application.Clients.Commands
             }
             else
             {
-                var validationMessage =
-                    await _mediatorService.Send(new GetFormattedValidationMessageQuery(validationResult.Errors),
-                        cancellationToken);
+                var validationMessage = _validationMessageBuilder.CreateMessage(validationResult.Errors);
                 throw new CustomValidationException(validationMessage);
             }
         }

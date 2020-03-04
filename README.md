@@ -11,3 +11,9 @@ Application built for management of BoardGames, Clients and Rentals in boardgame
 * .NET Core 3
 * MediatR
 * SqLite
+
+## Create migration and update db
+dotnet tool install --global dotnet-ef --version 3.1.1
+dotnet ef migrations add InitDb --project ./src/Playingo.Infrastructure/Playingo.Infrastructure.csproj --output-dir ./Persistence/Migrations --startup-project ./src/Playingo.WebApi/Playingo.WebApi.csproj
+dotnet ef database update --project ./src/Playingo.Infrastructure/Playingo.Infrastructure.csproj --startup-project ./src/Playingo.WebApi/Playingo.WebApi.csproj
+

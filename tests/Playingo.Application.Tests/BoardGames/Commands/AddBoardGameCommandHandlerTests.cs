@@ -10,7 +10,7 @@ using Playingo.Application.BoardGames.Commands;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
-using Playingo.Application.Validation;
+using Playingo.Application.Common.Validation;
 using Playingo.Domain.BoardGames;
 using Xunit;
 
@@ -20,15 +20,16 @@ namespace Playingo.Application.Tests.BoardGames.Commands
     {
         public AddBoardGameCommandHandlerTests()
         {
-            _mediatorService = new Mock<IMediatorService>(MockBehavior.Strict);
             _validator = new Mock<IValidator<BoardGame>>(MockBehavior.Strict);
+            _validationMessageBuilder = new Mock<IValidationMessageBuilder>(MockBehavior.Strict);
             _unitOfWork = new Mock<IUnitOfWork>(MockBehavior.Strict);
-            _sut = new AddBoardGameCommandHandler(_mediatorService.Object, _unitOfWork.Object, _validator.Object);
+            _sut = new AddBoardGameCommandHandler(_unitOfWork.Object, _validationMessageBuilder.Object,
+                _validator.Object);
         }
 
-        private readonly Mock<IMediatorService> _mediatorService;
         private readonly Mock<IValidator<BoardGame>> _validator;
         private readonly Mock<IUnitOfWork> _unitOfWork;
+        private readonly Mock<IValidationMessageBuilder> _validationMessageBuilder;
         private readonly ICommandHandler<AddBoardGameCommand> _sut;
 
         [Fact]
@@ -64,11 +65,7 @@ namespace Playingo.Application.Tests.BoardGames.Commands
                     game.Id == input.NewBoardGameGuid && game.Name == input.Name && game.Price == input.Price)))
                 .Returns(new ValidationResult(validationErrors));
             const string errorsMessage = "errors happened";
-            _mediatorService.Setup(x =>
-                x.Send(
-                    It.Is((GetFormattedValidationMessageQuery query) =>
-                        query.ValidationErrors.Count.Equals(validationErrors.Count)),
-                    It.IsAny<CancellationToken>())).Returns(Task.FromResult(errorsMessage));
+            _validationMessageBuilder.Setup(x => x.CreateMessage(validationErrors)).Returns(errorsMessage);
 
             Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());
 
@@ -85,8 +82,7 @@ namespace Playingo.Application.Tests.BoardGames.Commands
                 {
                     new ValidationFailure("test", "test")
                 }));
-            _mediatorService.Setup(x =>
-                    x.Send(It.IsAny<GetFormattedValidationMessageQuery>(), It.IsAny<CancellationToken>()))
+            _validationMessageBuilder.Setup(x => x.CreateMessage(It.IsAny<IList<ValidationFailure>>()))
                 .Throws(exception);
 
             Func<Task> act = async () => await _sut.Handle(input, new CancellationToken());

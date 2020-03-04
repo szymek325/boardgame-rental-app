@@ -9,8 +9,8 @@ using Moq;
 using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
+using Playingo.Application.Common.Validation;
 using Playingo.Application.Rentals.Commands;
-using Playingo.Application.Validation;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
 using Playingo.Domain.Rentals;
@@ -163,6 +163,23 @@ namespace Playingo.Application.Tests.Rentals.Commands
             Func<Task> act = async () => await _sut.Handle(_inputCommand, cancellationToken);
 
             act.Should().Throw<CustomValidationException>().WithMessage(errorsMessage);
+        }
+
+        [Fact]
+        public void Handle_Should_ThrowException_When_GetFormattedValidationMessageQueryThrows()
+        {
+            var exception = new ArgumentException("test");
+            _validator.Setup(x => x.Validate(It.IsAny<Rental>())).Returns(new ValidationResult(
+                new List<ValidationFailure>
+                {
+                    new ValidationFailure("test", "test")
+                }));
+            _validationMessageBuilder.Setup(x => x.CreateMessage(It.IsAny<IList<ValidationFailure>>()))
+                .Throws(exception);
+
+            Func<Task> act = async () => await _sut.Handle(_inputCommand, new CancellationToken());
+
+            act.Should().Throw<ArgumentException>().WithMessage(exception.Message);
         }
     }
 }
