@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Playingo.Application.Common.Exceptions
+namespace Playingo.Domain.Rentals.Exceptions
 {
-    internal class RentalNotFoundException : Exception
+    public class RentalNotFoundException : Exception
     {
         public RentalNotFoundException(Guid guid) : base($"Rental with id {guid} was not found!")
         {

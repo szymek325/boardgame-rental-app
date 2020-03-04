@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Playingo.Application.Common.Interfaces;
 using Playingo.Domain;
 using Playingo.Domain.Rentals;
 using Playingo.Infrastructure.Persistence.Context;

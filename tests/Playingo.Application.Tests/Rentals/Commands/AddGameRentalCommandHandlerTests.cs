@@ -12,7 +12,9 @@ using Playingo.Application.Common.Mediator;
 using Playingo.Application.Common.Validation;
 using Playingo.Application.Rentals.Commands;
 using Playingo.Domain.BoardGames;
+using Playingo.Domain.BoardGames.Exceptions;
 using Playingo.Domain.Clients;
+using Playingo.Domain.Clients.Exceptions;
 using Playingo.Domain.Rentals;
 using Xunit;
 

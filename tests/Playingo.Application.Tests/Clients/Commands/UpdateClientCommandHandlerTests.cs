@@ -12,6 +12,7 @@ using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Common.Validation;
 using Playingo.Domain.Clients;
+using Playingo.Domain.Clients.Exceptions;
 using Xunit;
 
 namespace Playingo.Application.Tests.Clients.Commands

@@ -7,6 +7,7 @@ using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Common.Validation;
 using Playingo.Domain.Clients;
+using Playingo.Domain.Clients.Exceptions;
 
 namespace Playingo.Application.Clients.Commands
 {

@@ -13,7 +13,7 @@ namespace Playingo.Application.BoardGames.Commands
             BoardGamePrice = boardGamePrice;
         }
 
-        public decimal BoardGamePrice { get; set; }
+        public decimal BoardGamePrice { get; }
     }
 
     internal class GetBoardGameRentDayPriceQueryHandler : IQueryHandler<GetBoardGameRentDayPriceQuery, decimal>

@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Playingo.Application.Common.Interfaces;
 using Playingo.Domain.Clients;
 using Playingo.Infrastructure.Persistence.Context;
 

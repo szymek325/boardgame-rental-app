@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Playingo.Domain.Clients;
 
-namespace Playingo.Application.Common.Interfaces
+namespace Playingo.Domain.Clients
 {
     public interface IClientRepository
     {

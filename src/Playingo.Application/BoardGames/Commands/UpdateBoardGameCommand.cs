@@ -7,6 +7,7 @@ using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Common.Validation;
 using Playingo.Domain.BoardGames;
+using Playingo.Domain.BoardGames.Exceptions;
 
 namespace Playingo.Application.BoardGames.Commands
 {

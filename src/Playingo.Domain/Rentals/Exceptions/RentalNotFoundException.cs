@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Playingo.Application.Common.Exceptions
+namespace Playingo.Domain.Rentals.Exceptions
 {
-    internal class RentalIsNotInProgressException : Exception
+    public class RentalIsNotInProgressException : Exception
     {
         public RentalIsNotInProgressException(Guid guid) : base($"Rental with id {guid} is not in progress status!")
         {

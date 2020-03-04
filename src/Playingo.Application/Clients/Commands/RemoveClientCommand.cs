@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
+using Playingo.Domain.Clients.Exceptions;
 
 namespace Playingo.Application.Clients.Commands
 {

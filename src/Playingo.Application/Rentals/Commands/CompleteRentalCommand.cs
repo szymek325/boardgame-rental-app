@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
 using Playingo.Domain;
+using Playingo.Domain.Rentals.Exceptions;
 
 namespace Playingo.Application.Rentals.Commands
 {

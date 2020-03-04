@@ -24,9 +24,9 @@ namespace Playingo.Application.Rentals.Queries
             RentFinishDate = rentFinishDate;
         }
 
-        public decimal BoardGamePrice { get; set; }
-        public DateTime RentStartDate { get; set; }
-        public DateTime? RentFinishDate { get; set; }
+        public decimal BoardGamePrice { get; }
+        public DateTime RentStartDate { get; }
+        public DateTime? RentFinishDate { get; }
     }
 
     internal class GetRentalDaysQueryHandler : IQueryHandler<GetRentalDaysQuery, IList<RentalDay>>
@@ -42,15 +42,14 @@ namespace Playingo.Application.Rentals.Queries
 
         public async Task<IList<RentalDay>> Handle(GetRentalDaysQuery request, CancellationToken cancellationToken)
         {
-            if (request.RentFinishDate == null)
-                request.RentFinishDate = _dateTimeProvider.UtcNow;
+            var rentFinishDate = request.RentFinishDate ?? _dateTimeProvider.UtcNow;
 
             var oneDayRentPrice = await _mediatorService.Send(new GetBoardGameRentDayPriceQuery(request.BoardGamePrice),
                 cancellationToken);
 
-            var passedTime = request.RentFinishDate - request.RentStartDate;
-            var passedDays = passedTime.Value.Days;
-            if (passedTime.Value.Minutes >= 1)
+            var passedTime = rentFinishDate - request.RentStartDate;
+            var passedDays = passedTime.Days;
+            if (passedTime.Minutes >= 1)
                 passedDays++;
 
             IList<RentalDay> rentDays = new List<RentalDay>();

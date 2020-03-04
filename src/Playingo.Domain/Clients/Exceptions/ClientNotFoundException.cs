@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Playingo.Application.Common.Exceptions
+namespace Playingo.Domain.Clients.Exceptions
 {
-    internal class ClientNotFoundException : Exception
+    public class ClientNotFoundException : Exception
     {
         public ClientNotFoundException(Guid guid) : base($"Client with id {guid} was not found!")
         {

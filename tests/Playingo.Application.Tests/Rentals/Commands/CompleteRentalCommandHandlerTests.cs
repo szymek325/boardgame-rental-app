@@ -3,12 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
-using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Rentals.Commands;
 using Playingo.Domain;
 using Playingo.Domain.Rentals;
+using Playingo.Domain.Rentals.Exceptions;
 using Xunit;
 
 namespace Playingo.Application.Tests.Rentals.Commands

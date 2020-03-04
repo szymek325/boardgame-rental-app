@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentAssertions;
 using Moq;
-using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Rentals.Queries;
 using Playingo.Domain;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
 using Playingo.Domain.Rentals;
+using Playingo.Domain.Rentals.Exceptions;
 using Xunit;
 
 namespace Playingo.Application.Tests.Rentals.Queries

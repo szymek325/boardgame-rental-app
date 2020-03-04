@@ -24,7 +24,7 @@ namespace Playingo.Application
             services.AddTransient<IValidator<Client>, ClientValidator>();
             services.AddTransient<IValidator<Rental>, RentalValidator>();
             services.AddTransient<IValidationMessageBuilder, ValidationMessageBuilder>();
-            
+
             services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
             services.AddTransient<IMediatorService, MediatorService>();

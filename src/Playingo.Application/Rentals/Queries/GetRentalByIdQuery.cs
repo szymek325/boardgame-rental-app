@@ -14,7 +14,7 @@ namespace Playingo.Application.Rentals.Queries
             Id = id;
         }
 
-        public Guid Id { get; set; }
+        public Guid Id { get; }
     }
 
     internal class GetRentalByIdQueryHandler : IQueryHandler<GetRentalByIdQuery, Rental>

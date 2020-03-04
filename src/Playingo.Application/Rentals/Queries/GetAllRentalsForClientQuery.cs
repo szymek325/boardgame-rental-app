@@ -15,7 +15,7 @@ namespace Playingo.Application.Rentals.Queries
             ClientId = clientId;
         }
 
-        public Guid ClientId { get; set; }
+        public Guid ClientId { get; }
     }
 
     internal class

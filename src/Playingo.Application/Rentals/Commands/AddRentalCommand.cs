@@ -7,6 +7,8 @@ using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
 using Playingo.Application.Common.Validation;
 using Playingo.Domain;
+using Playingo.Domain.BoardGames.Exceptions;
+using Playingo.Domain.Clients.Exceptions;
 using Playingo.Domain.Rentals;
 
 namespace Playingo.Application.Rentals.Commands
@@ -21,7 +23,7 @@ namespace Playingo.Application.Rentals.Commands
             ChargedDeposit = chargedDeposit;
         }
 
-        public Guid NewGameRentalGuid { get; set; }
+        public Guid NewGameRentalGuid { get; }
         public Guid ClientGuid { get; }
         public Guid BoardGameGuid { get; }
         public decimal ChargedDeposit { get; }

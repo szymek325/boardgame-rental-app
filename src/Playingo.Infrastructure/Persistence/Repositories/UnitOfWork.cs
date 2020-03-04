@@ -2,6 +2,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Playingo.Application.Common.Interfaces;
+using Playingo.Domain.BoardGames;
+using Playingo.Domain.Clients;
+using Playingo.Domain.Rentals;
 using Playingo.Infrastructure.Persistence.Context;
 
 namespace Playingo.Infrastructure.Persistence.Repositories

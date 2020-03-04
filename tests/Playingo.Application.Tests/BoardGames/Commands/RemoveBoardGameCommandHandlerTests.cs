@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
 using Playingo.Application.BoardGames.Commands;
-using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Interfaces;
 using Playingo.Application.Common.Mediator;
 using Playingo.Domain.BoardGames;
+using Playingo.Domain.BoardGames.Exceptions;
 using Xunit;
 
 namespace Playingo.Application.Tests.BoardGames.Commands

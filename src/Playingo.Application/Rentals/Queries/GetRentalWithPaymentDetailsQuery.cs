@@ -3,9 +3,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Playingo.Application.Common.Exceptions;
 using Playingo.Application.Common.Mediator;
 using Playingo.Domain.Rentals;
+using Playingo.Domain.Rentals.Exceptions;
 
 namespace Playingo.Application.Rentals.Queries
 {
@@ -16,7 +16,7 @@ namespace Playingo.Application.Rentals.Queries
             RentalGuid = rentalGuid;
         }
 
-        public Guid RentalGuid { get; set; }
+        public Guid RentalGuid { get; }
     }
 
     internal class

@@ -15,7 +15,7 @@ namespace Playingo.Application.Rentals.Queries
             BoardGameId = boardGameId;
         }
 
-        public Guid BoardGameId { get; set; }
+        public Guid BoardGameId { get; }
     }
 
     internal class
