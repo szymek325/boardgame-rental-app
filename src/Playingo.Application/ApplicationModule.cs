@@ -5,6 +5,7 @@ using Playingo.Application.BoardGames.Validation;
 using Playingo.Application.Clients.Validation;
 using Playingo.Application.Common.Helpers;
 using Playingo.Application.Common.Mediator;
+using Playingo.Application.Common.Validation;
 using Playingo.Application.Rentals.Validation;
 using Playingo.Domain.BoardGames;
 using Playingo.Domain.Clients;
@@ -22,7 +23,8 @@ namespace Playingo.Application
             services.AddTransient<IValidator<BoardGame>, BoardGameValidator>();
             services.AddTransient<IValidator<Client>, ClientValidator>();
             services.AddTransient<IValidator<Rental>, RentalValidator>();
-
+            services.AddTransient<IValidationMessageBuilder, ValidationMessageBuilder>();
+            
             services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
             services.AddTransient<IMediatorService, MediatorService>();
